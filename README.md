@@ -1,18 +1,18 @@
 <div align="center">
   <br>
   <img alt="Open Sauced" src="https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png" width="300px">
-  <h1>🍕 Pizza CLI 🍕</h1>
+  <h1>🍕 Go API Client 🍕</h1>
   <strong>The generated Go OpenSauced API client</strong>
   <br>
 </div>
 <br>
 <p align="center">
-  <img src="https://img.shields.io/github/languages/code-size/open-sauced/pizza" alt="GitHub code size in bytes">
-  <a href="https://github.com/open-sauced/pizza/issues">
-    <img src="https://img.shields.io/github/issues/open-sauced/pizza" alt="GitHub issues">
+  <img src="https://img.shields.io/github/languages/code-size/open-sauced/go-api" alt="GitHub code size in bytes">
+  <a href="https://github.com/open-sauced/go-api/issues">
+    <img src="https://img.shields.io/github/issues/open-sauced/go-api" alt="GitHub issues">
   </a>
-  <a href="https://github.com/open-sauced/api.opensauced.pizza/releases">
-    <img src="https://img.shields.io/github/v/release/open-sauced/pizza.svg?style=flat" alt="GitHub Release">
+  <a href="https://github.com/open-sauced/go-api/releases">
+    <img src="https://img.shields.io/github/v/release/open-sauced/go-api.svg?style=flat" alt="GitHub Release">
   </a>
   <a href="https://discord.gg/U2peSNf23P">
     <img src="https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" alt="Discord">
@@ -22,11 +22,10 @@
   </a>
 </p>
 
-# Go OpenSauced API client
-
 This is a [generated OpenAPI client](https://openapi-generator.tech/)
 for the [OpenSauced API](https://github.com/open-sauced/api)
 which uses the [Swagger doc for the defined API](https://github.com/open-sauced/api/blob/beta/swagger.yaml).
+It can be used as a canonical and versioned source to interface with the OpenSauced API using Go.
 
 ### 🔧 Versioning
 
