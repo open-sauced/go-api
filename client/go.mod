@@ -1,4 +1,4 @@
-module github.com/open-sauced/go-api
+module github.com/open-sauced/go-api/client
 
 go 1.18
 

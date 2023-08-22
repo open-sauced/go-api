@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
-Testing HealthCheckServiceAPIService
+Testing ContributionServiceAPIService
 
 */
 
@@ -11,22 +11,26 @@ package client
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/open-sauced/go-api/client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/open-sauced/go-api"
 )
 
-func Test_openapi_HealthCheckServiceAPIService(t *testing.T) {
+func Test_openapi_ContributionServiceAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test HealthCheckServiceAPIService HealthStatusService", func(t *testing.T) {
+	t.Run("Test ContributionServiceAPIService FindAllByOwnerAndRepo", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.HealthCheckServiceAPI.HealthStatusService(context.Background()).Execute()
+		var owner string
+		var repo string
+
+		resp, httpRes, err := apiClient.ContributionServiceAPI.FindAllByOwnerAndRepo(context.Background(), owner, repo).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -34,11 +38,13 @@ func Test_openapi_HealthCheckServiceAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test HealthCheckServiceAPIService HealthStatusWeb", func(t *testing.T) {
+	t.Run("Test ContributionServiceAPIService FindAllByRepoId", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.HealthCheckServiceAPI.HealthStatusWeb(context.Background()).Execute()
+		var id float32
+
+		resp, httpRes, err := apiClient.ContributionServiceAPI.FindAllByRepoId(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

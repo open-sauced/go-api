@@ -45,7 +45,7 @@ import (
         "fmt"
         "os"
 
-        client "github.com/open-sauced/go-api"
+        client "github.com/open-sauced/go-api/client"
 )
 
 func main() {
@@ -65,7 +65,7 @@ func main() {
 }
 ```
 
-Explore the generated docs within `generated/docs` and `generated/README.md` to learn more about how this client works.
+Explore the generated docs within `client/docs` and `generated/README.md` to learn more about how this client works.
 
 ### 🚜 Generating the client
 

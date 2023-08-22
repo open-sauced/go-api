@@ -1,6 +1,6 @@
 # \PullRequestsServiceAPI
 
-All URIs are relative to *https://api.opensauced.pizza*
+All URIs are relative to *http://localhost:3001*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

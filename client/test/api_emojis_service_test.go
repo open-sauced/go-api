@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
-Testing UserRecommendationsServiceAPIService
+Testing EmojisServiceAPIService
 
 */
 
@@ -11,24 +11,26 @@ package client
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/open-sauced/go-api/client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/open-sauced/go-api"
 )
 
-func Test_openapi_UserRecommendationsServiceAPIService(t *testing.T) {
+func Test_openapi_EmojisServiceAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test UserRecommendationsServiceAPIService FindUserRepoRecommendations", func(t *testing.T) {
+	t.Run("Test EmojisServiceAPIService FindAllEmojis", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.UserRecommendationsServiceAPI.FindUserRepoRecommendations(context.Background()).Execute()
+		resp, httpRes, err := apiClient.EmojisServiceAPI.FindAllEmojis(context.Background()).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

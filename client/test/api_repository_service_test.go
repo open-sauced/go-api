@@ -13,7 +13,7 @@ import (
 	"context"
 	"testing"
 
-	openapiclient "github.com/open-sauced/go-api"
+	openapiclient "github.com/open-sauced/go-api/client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

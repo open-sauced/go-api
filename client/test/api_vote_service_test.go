@@ -11,10 +11,11 @@ package client
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/open-sauced/go-api/client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/open-sauced/go-api"
 )
 
 func Test_openapi_VoteServiceAPIService(t *testing.T) {

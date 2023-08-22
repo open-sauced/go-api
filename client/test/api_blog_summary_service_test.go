@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
-Testing StripeServiceAPIService
+Testing BlogSummaryServiceAPIService
 
 */
 
@@ -11,22 +11,23 @@ package client
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/open-sauced/go-api/client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/open-sauced/go-api"
 )
 
-func Test_openapi_StripeServiceAPIService(t *testing.T) {
+func Test_openapi_BlogSummaryServiceAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test StripeServiceAPIService HandleStripeWebhook", func(t *testing.T) {
+	t.Run("Test BlogSummaryServiceAPIService GenerateBlogSummary", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.StripeServiceAPI.HandleStripeWebhook(context.Background()).Execute()
+		httpRes, err := apiClient.BlogSummaryServiceAPI.GenerateBlogSummary(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
