@@ -1,0 +1,6818 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: hello@opensauced.pizza
+    name: Open Sauced
+    url: https://opensauced.pizza
+  description: |2-
+
+    ## Swagger-UI API Documentation
+
+    This REST API can be used to create, read, update or delete data from the Open Sauced community platform.
+    The Swagger-UI provides useful information to get started and an overview of all available resources.
+    Each API route is clickable and has their own detailed description on how to use it.
+    The base URL for the API is [http:/http:///localhost](https://http:/http:///localhost).
+
+    [comment]: # (TODO: add bearer auth information)
+
+    ## Rate limiting
+
+    Every IP address is allowed to perform 5000 requests per hour.
+    This is measured by saving the date of the initial request and counting all requests in the next hour.
+    When an IP address goes over the limit, HTTP status code 429 is returned.
+    The returned HTTP headers of any API request show the current rate limit status:
+
+    header | description
+    --- | ---
+    `X-RateLimit-Limit` | The maximum number of requests allowed per hour
+    `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window
+    `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)
+
+    [comment]: # (TODO: add pagination information)
+
+    ## Common response codes
+
+    Each route shows for each method which data they expect and which they will respond when the call succeeds.
+    The table below shows most common response codes you can receive from our endpoints.
+
+    code | condition
+    --- | ---
+    [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data.
+    [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data.
+    [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally.
+    [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information.
+    [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information.
+    [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information.
+    [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information.
+    [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.
+
+    ## Additional links
+  license:
+    name: The MIT License
+    url: https://opensource.org/licenses/mit
+  termsOfService: https://github.com/open-sauced/code-of-conduct
+  title: '@open-sauced/api.opensauced.pizza'
+  version: "1"
+servers:
+- description: Development
+  url: http://localhost:3001
+- description: Production
+  url: https://api.opensauced.pizza
+- description: Beta
+  url: https://beta.api.opensauced.pizza
+- description: Alpha
+  url: https://alpha.api.opensauced.pizza
+paths:
+  /v1/auth/session:
+    get:
+      operationId: checkAuthSession
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupabaseAuthDto'
+          description: ""
+      security:
+      - bearer: []
+      summary: Get authenticated session information
+      tags:
+      - Authentication service
+  /v1/auth/onboarding:
+    post:
+      operationId: postOnboarding
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserOnboardingDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupabaseAuthDto'
+          description: ""
+        "201":
+          description: ""
+        "404":
+          description: Unable to update onboarding information for the user
+      security:
+      - bearer: []
+      summary: Updates onboarding information for user
+      tags:
+      - Authentication service
+  /v1/auth/waitlist:
+    post:
+      operationId: postWaitlist
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupabaseAuthDto'
+          description: ""
+        "201":
+          description: ""
+        "404":
+          description: Unable to update waitlist information for the user
+      security:
+      - bearer: []
+      summary: Updates waitlist information for user
+      tags:
+      - Authentication service
+  /v1/auth/checkout/session:
+    post:
+      operationId: postCreateCheckoutSession
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupabaseAuthDto'
+          description: ""
+        "201":
+          description: ""
+        "404":
+          description: Unable to create checkout session
+      security:
+      - bearer: []
+      summary: Creates a new checkout session for the user
+      tags:
+      - Authentication service
+  /v1/auth/profile:
+    patch:
+      operationId: updateProfileForUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUser'
+          description: ""
+        "404":
+          description: Unable to update user profile
+      security:
+      - bearer: []
+      summary: Updates the profile for the authenticated user
+      tags:
+      - Authentication service
+  /v1/auth/profile/interests:
+    patch:
+      operationId: updateInterestsForUserProfile
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserProfileInterestsDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUser'
+          description: ""
+        "404":
+          description: Unable to update interests for the user profile
+      security:
+      - bearer: []
+      summary: Updates the interests for the authenticated user profile
+      tags:
+      - Authentication service
+  /v1/auth/profile/email:
+    patch:
+      operationId: updateEmailPreferencesForUserProfile
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserEmailPreferencesDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUser'
+          description: ""
+        "404":
+          description: Unable to update email preferences for the user profile
+      security:
+      - bearer: []
+      summary: Updates the email preferences for the authenticated user profile
+      tags:
+      - Authentication service
+  /v1/users/{username}:
+    get:
+      operationId: findOneUserByUserame
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUser'
+          description: ""
+        "404":
+          description: User not found
+      summary: Finds a user by :username
+      tags:
+      - User service
+  /v1/users/{username}/prs:
+    get:
+      operationId: findContributorPullRequests
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findContributorPullRequests_200_response'
+          description: Successfully received model list
+        "404":
+          description: User not found
+      summary: Finds pull requests by :username
+      tags:
+      - User service
+  /v1/users/{username}/highlights:
+    get:
+      operationId: findAllHighlightsByUsername
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllHighlightsByUsername_200_response'
+          description: Successfully received model list
+        "404":
+          description: Highlights not found
+      summary: Listing all Highlights for a user and paginate them
+      tags:
+      - User service
+  /v1/users/{username}/top-repos:
+    get:
+      operationId: findAllTopReposByUsername
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+        "404":
+          description: Top repos not found
+      summary: Listing all Top Repos for a user and paginate them
+      tags:
+      - User service
+  /v1/users/top:
+    get:
+      operationId: getTop10Highlights
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbTopUser'
+          description: ""
+      summary: List top users
+      tags:
+      - User service
+  /v1/user/highlights:
+    post:
+      operationId: addHighlightForUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserHighlightDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OmitTypeClass'
+          description: ""
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to add user highlight
+      security:
+      - bearer: []
+      summary: Adds a new highlight for the authenticated user
+      tags:
+      - User Highlights service
+  /v1/user/highlights/{id}:
+    delete:
+      operationId: deleteHighlightForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to delete user highlight
+      security:
+      - bearer: []
+      summary: Deletes the highlight for the authenticated user
+      tags:
+      - User Highlights service
+    get:
+      operationId: getUserHighlight
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to get user highlight
+      summary: Retrieves a highlight
+      tags:
+      - User Highlights service
+    patch:
+      operationId: updateHighlightForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserHighlightDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to update user highlight
+      security:
+      - bearer: []
+      summary: Updates the highlight for the authenticated user
+      tags:
+      - User Highlights service
+  /v1/user/highlights/{id}/reactions:
+    get:
+      operationId: getAllHighlightUserReactions
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlightReactionResponse'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to get user highlight reactions
+      security:
+      - bearer: []
+      summary: Retrieves a highlight reactions for the authenticated user
+      tags:
+      - User Highlights service
+  /v1/user/highlights/{id}/reactions/{emojiId}:
+    delete:
+      operationId: deleteHighlightReactionForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      - explode: false
+        in: path
+        name: emojiId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to delete user highlight reaction
+      security:
+      - bearer: []
+      summary: Deletes the highlight reaction for the authenticated user
+      tags:
+      - User Highlights service
+    post:
+      operationId: addHighlightReactionForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      - explode: false
+        in: path
+        name: emojiId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlightReaction'
+          description: ""
+        "201":
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Highlight does not exist
+        "409":
+          description: Unable to add user highlight reaction
+      security:
+      - bearer: []
+      summary: Adds a new highlight reaction for the authenticated user
+      tags:
+      - User Highlights service
+  /v1/user/highlights/following:
+    get:
+      operationId: getFollowingHighlights
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - description: Highlight Repo Filter
+        example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlight'
+          description: ""
+      security:
+      - bearer: []
+      summary: Fetches highlights for users the authenticated user follows
+      tags:
+      - User Highlights service
+  /v1/user/highlights/following/repos:
+    get:
+      operationId: getFollowingHighlightRepos
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - description: Highlight Repo Filter
+        example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlightRepo'
+          description: ""
+        "400":
+          description: Invalid request
+      security:
+      - bearer: []
+      summary: Fetches highlight repos for users the authenticated user follows
+      tags:
+      - User Highlights service
+  /v1/users/{username}/follow:
+    delete:
+      operationId: unfollowUserByUsername
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserToUserFollows'
+          description: Returns the user follow
+        "404":
+          description: User not found
+        "409":
+          description: You are now following this user
+      security:
+      - bearer: []
+      summary: Unfollows a user by username
+      tags:
+      - User service
+    get:
+      operationId: getFollowStatusByUsername
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserToUserFollows'
+          description: ""
+        "404":
+          description: User follow not found
+      security:
+      - bearer: []
+      summary: Checks if the authenticated user follows the provided username
+      tags:
+      - User service
+    put:
+      operationId: followUserById
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserToUserFollows'
+          description: ""
+        "404":
+          description: User not found
+        "409":
+          description: You have already followed this user
+      security:
+      - bearer: []
+      summary: Follows a user by username
+      tags:
+      - User service
+  /v1/user/notifications:
+    get:
+      operationId: getUserNotifications
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OmitTypeClass'
+          description: ""
+        "404":
+          description: Unable to get user notifications
+      security:
+      - bearer: []
+      summary: Retrieves notifications for the authenticated user
+      tags:
+      - User service
+  /v1/user/collaborations:
+    get:
+      operationId: findAllUserCollaborations
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCollaborations_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Listing all collaborations for the authenticated user
+      tags:
+      - User Collaborations service
+    post:
+      operationId: addUserCollaboration
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserCollaborationDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserCollaboration'
+          description: ""
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserCollaboration'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to add user collaboration
+        "409":
+          description: The requested user is not accepting collaboration requests
+      security:
+      - bearer: []
+      summary: Adds a new collaboration request for the user
+      tags:
+      - User Collaborations service
+  /v1/user/collaborations/{id}:
+    delete:
+      operationId: removeUserCollaborationById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to remove user collaboration
+      security:
+      - bearer: []
+      summary: Removes the user collaboration request
+      tags:
+      - User Collaborations service
+    patch:
+      operationId: updateUserCollaboration
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserCollaborationDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserCollaboration'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to find user collaboration
+      security:
+      - bearer: []
+      summary: Updates a user collaboration
+      tags:
+      - User Collaborations service
+  /v1/user/endorsements/created:
+    get:
+      operationId: findAllUserCreatedEndorsements
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCreatedEndorsements_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Finds all endorsements created by the authenticated user and paginates
+        them
+      tags:
+      - Endorsements service
+  /v1/user/endorsements/received:
+    get:
+      operationId: findAllUserReceivedEndorsements
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCreatedEndorsements_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Finds all endorsements received by the authenticated user and paginates
+        them
+      tags:
+      - Endorsements service
+  /v1/user/recommendations/repos:
+    get:
+      operationId: findUserRepoRecommendations
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      security:
+      - bearer: []
+      summary: Listing recommended repos for the authenticated user
+      tags:
+      - User Recommendations service
+  /v1/prs/list:
+    get:
+      operationId: listAllPullRequests
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findContributorPullRequests_200_response'
+          description: Successfully received model list
+      summary: Finds all pull requests and paginates them
+      tags:
+      - Pull Requests service
+  /v1/prs/search:
+    get:
+      operationId: searchAllPullRequests
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/PullRequestOrderFieldsEnum'
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/InsightFilterFieldsEnum'
+        style: form
+      - example: javascript
+        explode: true
+        in: query
+        name: topic
+        required: false
+        schema:
+          type: string
+        style: form
+      - example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/PullRequestStatusEnum'
+        style: form
+      - example: bdougie
+        explode: true
+        in: query
+        name: contributor
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findContributorPullRequests_200_response'
+          description: Successfully received model list
+      summary: Searches pull requests using filters and paginates them
+      tags:
+      - Pull Requests service
+  /v1/prs/insights:
+    get:
+      operationId: getPullRequestInsights
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/InsightFilterFieldsEnum'
+        style: form
+      - explode: true
+        in: query
+        name: topic
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DbPRInsight'
+                type: array
+          description: ""
+      summary: Find pull request insights over the last 2 months
+      tags:
+      - Pull Requests service
+  /v1/prs/description/generate:
+    post:
+      operationId: generatePRDescription
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneratePullRequestDescriptionDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "400":
+          description: Invalid request
+      security:
+      - bearer: []
+      summary: Generates a PR description based on the provided information
+      tags:
+      - Pull Requests service
+  /v1/prs/suggestion/generate:
+    post:
+      operationId: generateCodeRefactor
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateCodeRefactorSuggestionDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "400":
+          description: Invalid request
+      security:
+      - bearer: []
+      summary: Generates a refactor suggestion based on the provided code
+      tags:
+      - Pull Requests service
+  /v1/prs/test/generate:
+    post:
+      operationId: generateCodeTest
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateCodeTestSuggestionDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "400":
+          description: Invalid request
+      security:
+      - bearer: []
+      summary: Generates a test for the provided code
+      tags:
+      - Pull Requests service
+  /v1/prs/explanation/generate:
+    post:
+      operationId: generateCodeExplanation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateCodeExplanationDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "400":
+          description: Invalid request
+      security:
+      - bearer: []
+      summary: Generates an explanation for the provided code
+      tags:
+      - Pull Requests service
+  /v1/repos/{id}:
+    get:
+      operationId: findOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepo'
+          description: ""
+        "404":
+          description: Repository not found
+      summary: Finds a repo by :id
+      tags:
+      - Repository service
+  /v1/repos/{owner}/{repo}:
+    get:
+      operationId: findOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepo'
+          description: ""
+        "404":
+          description: Repository not found
+      summary: Finds a repo by :owner and :repo
+      tags:
+      - Repository service
+  /v1/repos/list:
+    get:
+      operationId: findAll
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+      summary: Finds all repos and paginates them
+      tags:
+      - Repository service
+  /v1/repos/search:
+    get:
+      operationId: findAllReposWithFilters
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/InsightFilterFieldsEnum'
+        style: form
+      - explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: topic
+        required: false
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+      summary: Finds all repos using filters and paginates them
+      tags:
+      - Repository service
+  /v1/health/service:
+    get:
+      operationId: healthStatusService
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthStatusService_200_response'
+          description: The Health Check is successful
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthStatusService_503_response'
+          description: The Health Check is not successful
+      summary: Check the health of Open Sauced service endpoints
+      tags:
+      - Health check service
+  /v1/health/web:
+    get:
+      operationId: healthStatusWeb
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthStatusService_200_response'
+          description: The Health Check is successful
+        "503":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/healthStatusService_503_response'
+          description: The Health Check is not successful
+      summary: Check the health of Open Sauced web endpoints
+      tags:
+      - Health check service
+  /v1/repos/listUserVoted:
+    get:
+      operationId: findAllUserVoted
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Finds all repos voted by authenticated user and paginates them
+      tags:
+      - Repository service guarded
+      - Vote service
+  /v1/repos/{repoId}/vote:
+    get:
+      operationId: findOneByRepoId
+      parameters:
+      - explode: false
+        in: path
+        name: repoId
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VotedRepoDto'
+          description: Returns if authenticated user has voted for it
+      security:
+      - bearer: []
+      summary: Finds a repo by :repoId and returns if authenticated user has voted
+        for it
+      tags:
+      - Repository service guarded
+      - Vote service
+  /v1/repos/{id}/vote:
+    delete:
+      operationId: downVoteOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserVotes'
+          description: Returns the repo vote
+        "404":
+          description: Repo or vote not found
+        "409":
+          description: You have already removed your vote
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and removes existing vote
+      tags:
+      - Repository service guarded
+      - Vote service
+    put:
+      operationId: voteOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserVotes'
+          description: Returns the repo vote
+        "404":
+          description: Repo or vote not found
+        "409":
+          description: You have already voted for this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and adds a vote
+      tags:
+      - Repository service guarded
+      - Vote service
+  /v1/repos/{owner}/{repo}/vote:
+    delete:
+      operationId: downVoteOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserVotes'
+          description: Returns the repo vote
+        "404":
+          description: Repo or vote not found
+        "409":
+          description: You have already removed your vote
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and removes existing vote
+      tags:
+      - Repository service guarded
+      - Vote service
+    put:
+      operationId: voteOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserVotes'
+          description: Returns the repo vote
+        "404":
+          description: Repo or vote not found
+        "409":
+          description: You have already voted for this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and adds a vote
+      tags:
+      - Repository service guarded
+      - Vote service
+  /v1/repos/listUserStarred:
+    get:
+      operationId: findAllUserStarred
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Finds all repos starred by authenticated user and paginates them
+      tags:
+      - Repository service guarded
+      - Star service
+  /v1/repos/{id}/star:
+    delete:
+      operationId: downStarOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStars'
+          description: Returns the repo star
+        "404":
+          description: Repo or star not found
+        "409":
+          description: You have already removed your star
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and removes existing star
+      tags:
+      - Repository service guarded
+      - Star service
+    put:
+      operationId: starOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStars'
+          description: Returns the repo star
+        "404":
+          description: Repo or star not found
+        "409":
+          description: You have already starred this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and adds a star
+      tags:
+      - Repository service guarded
+      - Star service
+  /v1/repos/{owner}/{repo}/star:
+    delete:
+      operationId: downStarOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStars'
+          description: Returns the repo star
+        "404":
+          description: Repo or star not found
+        "409":
+          description: You have already removed your star
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and removes existing star
+      tags:
+      - Repository service guarded
+      - Star service
+    put:
+      operationId: starOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStars'
+          description: Returns the repo star
+        "404":
+          description: Repo or star not found
+        "409":
+          description: You have already starred this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and adds a star
+      tags:
+      - Repository service guarded
+      - Star service
+  /v1/repos/listUserStargazed:
+    get:
+      operationId: findAllUserStargazed
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Finds all repos followed by authenticated user and paginates them
+      tags:
+      - Repository service guarded
+      - Stargaze service
+  /v1/repos/{id}/stargaze:
+    delete:
+      operationId: downStargazeOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStargazers'
+          description: Returns the repo follow
+        "404":
+          description: Repo or follow not found
+        "409":
+          description: You have already unfollowed this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and unfollows
+      tags:
+      - Repository service guarded
+      - Stargaze service
+    put:
+      operationId: stargazeOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStargazers'
+          description: Returns the repo follow
+        "404":
+          description: Repo or follow not found
+        "409":
+          description: You have already followed this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and follows
+      tags:
+      - Repository service guarded
+      - Stargaze service
+  /v1/repos/{owner}/{repo}/stargaze:
+    delete:
+      operationId: downStargazeOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStargazers'
+          description: Returns the repo follow
+        "404":
+          description: Repo or stargaze not found
+        "409":
+          description: You have already unfollowed this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and unfollows
+      tags:
+      - Repository service guarded
+      - Stargaze service
+    put:
+      operationId: stargazeOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserStargazers'
+          description: Returns the repo follow
+        "404":
+          description: Repo or follow not found
+        "409":
+          description: You have already followed this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and follows
+      tags:
+      - Repository service guarded
+      - Stargaze service
+  /v1/repos/listUserSubmitted:
+    get:
+      operationId: findAllUserSubmitted
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Finds all repos submitted by authenticated user and paginates them
+      tags:
+      - Repository service guarded
+      - Submit service
+  /v1/repos/{id}/submit:
+    delete:
+      operationId: downSubmitOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserSubmissions'
+          description: Returns the repo submission
+        "404":
+          description: Repo or submission not found
+        "409":
+          description: You have already removed your submission
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and removes existing submission
+      tags:
+      - Repository service guarded
+      - Submit service
+    put:
+      operationId: submitOneById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserSubmissions'
+          description: Returns the repo submission
+        "404":
+          description: Repo or submission not found
+        "409":
+          description: You have already submitted this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :id and adds a submission
+      tags:
+      - Repository service guarded
+      - Submit service
+  /v1/repos/{owner}/{repo}/submit:
+    delete:
+      operationId: downSubmitOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserSubmissions'
+          description: Returns the repo submission
+        "404":
+          description: Repo or submission not found
+        "409":
+          description: You have already removed your submission
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and removes existing submission
+      tags:
+      - Repository service guarded
+      - Submit service
+    put:
+      operationId: submitOneByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoToUserSubmissions'
+          description: Returns the repo submission
+        "404":
+          description: Repo or submission not found
+        "409":
+          description: You have already submitted this repo
+      security:
+      - bearer: []
+      summary: Finds a repo by :owner and :repo and adds a submission
+      tags:
+      - Repository service guarded
+      - Submit service
+  /v1/repos/{id}/contributions:
+    get:
+      operationId: findAllByRepoId
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllByRepoId_200_response'
+          description: Successfully received model list
+        "404":
+          description: Repo not found
+      summary: Find a repo by :id listing all contributions and paginating them
+      tags:
+      - Repository service
+      - Contribution service
+  /v1/repos/{owner}/{repo}/contributions:
+    get:
+      operationId: findAllByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderBy
+        required: false
+        schema:
+          $ref: '#/components/schemas/RepoOrderFieldsEnum'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllByRepoId_200_response'
+          description: Successfully received model list
+        "404":
+          description: Repo not found
+      summary: Finds a repo by :owner and :repo listing all contributions and paginating
+        them
+      tags:
+      - Repository service
+      - Contribution service
+  /v1/insights/{id}:
+    delete:
+      operationId: removeInsightForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInsightDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to remove user insight
+      security:
+      - bearer: []
+      summary: Removes an insight page for the authenticated user
+      tags:
+      - Insights service
+    get:
+      operationId: findInsightPageById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsight'
+          description: ""
+        "401":
+          description: Not Authorized to view this Insight
+        "404":
+          description: Insight page not found
+      summary: Finds a insight page by :id
+      tags:
+      - Insights service
+  /v1/user/insights:
+    get:
+      operationId: findAllInsightsByUserId
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllInsightsByUserId_200_response'
+          description: Successfully received model list
+        "404":
+          description: Insights not found
+      security:
+      - bearer: []
+      summary: Listing all insights for a user and paginate them
+      tags:
+      - Insights service
+    post:
+      operationId: addInsightForUser
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInsightDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsight'
+          description: ""
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to add user insight
+      security:
+      - bearer: []
+      summary: Adds a new insight page for the authenticated user
+      tags:
+      - Insights service
+  /v1/user/insights/{id}:
+    patch:
+      operationId: updateInsightForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInsightDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to update user insight
+        "422":
+          description: Unable to unable insight repos
+      security:
+      - bearer: []
+      summary: Updates an insight page for the authenticated user
+      tags:
+      - Insights service
+  /v1/user/insights/{id}/members:
+    get:
+      operationId: findAllInsightMembers
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllInsightMembers_200_response'
+          description: Successfully received model list
+        "404":
+          description: Insight not found
+      security:
+      - bearer: []
+      summary: Listing all members for an insight and paginate them
+      tags:
+      - Insights service
+    post:
+      operationId: addMemberForInsight
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInsightMemberDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsightMember'
+          description: ""
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsightMember'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to add insight member
+      security:
+      - bearer: []
+      summary: Adds a new member for the insight
+      tags:
+      - Insights service
+  /v1/user/insights/{id}/members/{memberId}:
+    delete:
+      operationId: removeInsightMemberById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      - explode: false
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to remove insight member
+      security:
+      - bearer: []
+      summary: Removes a member from an insight
+      tags:
+      - Insights service
+    patch:
+      operationId: updateInsightMember
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      - explode: false
+        in: path
+        name: memberId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInsightMemberDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbInsight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to find insight member
+        "422":
+          description: Unable to unable insight member
+      security:
+      - bearer: []
+      summary: Updates an insight member information
+      tags:
+      - Insights service
+  /v1/issues/summary/generate:
+    post:
+      operationId: generateIssueSummary
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIssueSummaryDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "400":
+          description: Invalid request
+      security:
+      - bearer: []
+      summary: Generate a summary for an issue
+      tags:
+      - Issue summary service
+  /v1/blogs/summary/generate:
+    post:
+      operationId: generateBlogSummary
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBlogSummaryDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "400":
+          description: Invalid request
+      security:
+      - bearer: []
+      summary: Generate a summary for a markdown supported blog
+      tags:
+      - Blog summary service
+  /v1/stripe/webhooks:
+    post:
+      operationId: handleStripeWebhook
+      parameters: []
+      responses:
+        "200":
+          description: ""
+        "201":
+          description: ""
+      tags:
+      - Stripe service
+  /v1/highlights/list:
+    get:
+      operationId: findAllHighlights
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - description: Highlight Repo Filter
+        example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllHighlightsByUsername_200_response'
+          description: Successfully received model list
+      summary: Finds all highlights and paginates them
+      tags:
+      - Highlights service
+  /v1/highlights/featured:
+    get:
+      operationId: findAllFeaturedHighlights
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - description: Highlight Repo Filter
+        example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllHighlightsByUsername_200_response'
+          description: Successfully received model list
+      summary: Finds all featured highlights and paginates them
+      tags:
+      - Highlights service
+  /v1/highlights/{id}/featured:
+    delete:
+      operationId: removeAFeaturedHighlight
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlight'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to find highlight
+      security:
+      - bearer: []
+      summary: Remove a highlight from the featured list
+      tags:
+      - Highlights service
+    post:
+      operationId: addAFeaturedHighlight
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlight'
+          description: ""
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to find highlight
+      security:
+      - bearer: []
+      summary: Add a highlight to the featured list
+      tags:
+      - Highlights service
+  /v1/highlights/repos/list:
+    get:
+      operationId: findAllHighlightRepos
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllHighlightRepos_200_response'
+          description: Successfully received model list
+      summary: Finds all highlight repos and paginates them
+      tags:
+      - Highlights service
+  /v1/highlights/{id}/reactions:
+    get:
+      operationId: getAllHighlightReactions
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserHighlightReactionResponse'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to get user highlight reactions
+      summary: Retrieves total reactions for a highlight
+      tags:
+      - Highlights service
+  /v1/highlights/top:
+    get:
+      operationId: findTopHighlights
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllHighlightsByUsername_200_response'
+          description: Successfully received model list
+      summary: Finds top highlights for the day range and paginates them
+      tags:
+      - Highlights service
+  /v1/emojis:
+    get:
+      operationId: findAllEmojis
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllEmojis_200_response'
+          description: Successfully received model list
+        "404":
+          description: Emojis not found
+      summary: Listing all emojis and paginates them
+      tags:
+      - Emojis service
+  /v1/endorsements:
+    get:
+      operationId: findAllEndorsements
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCreatedEndorsements_200_response'
+          description: Successfully received model list
+      summary: Finds all endorsements and paginates them
+      tags:
+      - Endorsements service
+    post:
+      operationId: createEndorsement
+      parameters:
+      - explode: false
+        in: header
+        name: X-OpenSauced-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEndorsementDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbEndorsement'
+          description: ""
+        "201":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+      summary: Creates a new endorsement record
+      tags:
+      - Endorsements service
+  /v1/endorsements/repos/{repoOwnerOrUser}:
+    get:
+      operationId: findAllByRepoOwnerOrUsername
+      parameters:
+      - explode: false
+        in: path
+        name: repoOwnerOrUser
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCreatedEndorsements_200_response'
+          description: Successfully received model list
+      summary: Finds all endorsements by repo org or username and paginates them
+      tags:
+      - Endorsements service
+  /v1/endorsements/repos/{owner}/{repo}:
+    get:
+      operationId: findAllEndorsementsByRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCreatedEndorsements_200_response'
+          description: Successfully received model list
+      summary: Finds all endorsements by repo owner or username and paginates them
+      tags:
+      - Endorsements service
+  /v1/endorsements/{id}:
+    delete:
+      operationId: deleteEndoresementById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "404":
+          description: Endorsement not found
+      summary: Finds ands deletes the endorsement by ID
+      tags:
+      - Endorsements service
+    get:
+      description: |-
+        operationId: "findAllEndorsementsByRepoByUser",
+        summary: "Finds all endorsements by repo owner grouped by user",
+        })
+
+        async findAllEndorsementsByRepoByUser (
+
+
+
+        ) {
+        return this.endorsementService.findAllEndorsementsByRepoByUser(owner, repo, pageOptionsDto);
+        }
+      operationId: findEndorsementById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbEndorsement'
+          description: ""
+        "404":
+          description: Endorsement not found
+      summary: Retrieves the endorsement based on ID
+      tags:
+      - Endorsements service
+  /v1/endorsements/user/{username}/created:
+    get:
+      operationId: findAllUserReceivedEndorsements
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCreatedEndorsements_200_response'
+          description: Successfully received model list
+      summary: Finds all endorsements received by the user and paginates them
+      tags:
+      - Endorsements service
+  /v1/endorsements/user/{username}/received:
+    get:
+      operationId: findAllUserReceivedEndorsements
+      parameters:
+      - explode: false
+        in: path
+        name: username
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllUserCreatedEndorsements_200_response'
+          description: Successfully received model list
+      summary: Finds all endorsements received by the user and paginates them
+      tags:
+      - Endorsements service
+  /v1/contributors/search:
+    get:
+      operationId: searchAllPullRequestContributors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/InsightFilterFieldsEnum'
+        style: form
+      - example: javascript
+        explode: true
+        in: query
+        name: topic
+        required: false
+        schema:
+          type: string
+        style: form
+      - example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchAllPullRequestContributors_200_response'
+          description: Successfully received model list
+      summary: Searches contributors from pull requests using filters and paginates
+        them
+      tags:
+      - Contributors service
+  /v1/contributors/insights/new:
+    get:
+      operationId: newPullRequestContributors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/InsightFilterFieldsEnum'
+        style: form
+      - example: javascript
+        explode: true
+        in: query
+        name: topic
+        required: false
+        schema:
+          type: string
+        style: form
+      - example: open-sauced/insights
+        explode: true
+        in: query
+        name: repo
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchAllPullRequestContributors_200_response'
+          description: Successfully received model list
+      summary: Gets new contributors given a date range for repo IDs
+      tags:
+      - Contributors service
+  /v1/contributors/insights/recent:
+    get:
+      operationId: findAllRecentPullRequestContributors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchAllPullRequestContributors_200_response'
+          description: Successfully received model list
+      summary: Gets all recent contributors for the last 30 days based on repo IDs
+      tags:
+      - Contributors service
+  /v1/contributors/insights/churn:
+    get:
+      operationId: findAllChurnPullRequestContributors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchAllPullRequestContributors_200_response'
+          description: Successfully received model list
+      summary: Gets all recent churned contributors for the last 30 days based on
+        repo IDs
+      tags:
+      - Contributors service
+  /v1/contributors/insights/repeat:
+    get:
+      operationId: findAllRepeatPullRequestContributors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: repoIds
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchAllPullRequestContributors_200_response'
+          description: Successfully received model list
+      summary: Gets all recent repeat contributors for the last 30 days based on repo
+        IDs
+      tags:
+      - Contributors service
+  /v1/bake:
+    post:
+      operationId: Bake a repository with the pizza oven microservice
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BakeRepoDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "202":
+          description: ""
+        "400":
+          description: Invalid request
+      summary: postToPizzaOvenService
+      tags:
+      - Pizza oven service
+  /v1/bake/repos/{id}:
+    get:
+      operationId: findBakedRepoById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbBakedRepo'
+          description: ""
+        "404":
+          description: Baked repository not found
+      summary: Finds a baked repo by :id
+      tags:
+      - Pizza oven service
+  /v1/bake/repos/list:
+    get:
+      operationId: listAllBakedRepos
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllBakedRepos_200_response'
+          description: Successfully received model list
+      summary: Finds all baked repos and paginates them
+      tags:
+      - Pizza oven service
+  /v1/bake/commit-authors/{id}:
+    get:
+      operationId: findCommitAuthorById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbCommitAuthors'
+          description: ""
+        "404":
+          description: Commit author not found
+      summary: Finds a commit author by :id
+      tags:
+      - Pizza oven service
+  /v1/bake/commit-authors/list:
+    get:
+      operationId: listAllCommitAuthors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllCommitAuthors_200_response'
+          description: Successfully received model list
+      summary: Finds all commit authors and paginates them
+      tags:
+      - Pizza oven service
+  /v1/bake/commits/{id}:
+    get:
+      operationId: findCommitById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbCommits'
+          description: ""
+        "404":
+          description: Commit not found
+      summary: Finds a commit by :id
+      tags:
+      - Pizza oven service
+  /v1/bake/commits/list/repo/{id}:
+    get:
+      operationId: listAllCommitsByBakedRepoId
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllCommitsByBakedRepoId_200_response'
+          description: Successfully received model list
+      summary: Finds all commits by baked repo :id and paginates them
+      tags:
+      - Pizza oven service
+  /v1/bake/commits/list/commit-author/{id}:
+    get:
+      operationId: listAllCommitsByCommitAuthorId
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: number
+        style: form
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: number
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllCommitsByBakedRepoId_200_response'
+          description: Successfully received model list
+      summary: Finds all commits by commit author :id and paginates them
+      tags:
+      - Pizza oven service
+components:
+  schemas:
+    SupabaseAuthDto:
+      example:
+        role: authenticated
+        user_name: 0-vortex
+        twitter_username: saucedopen
+        created_at: 2016-10-19 13:24:51.000000
+        bio: OpenSauced User
+        github_sponsors_url: https://github.com/sponsors/open-sauced
+        insights_role: 10
+        notification_count: 5
+        discord_url: https://discord.gg/opensauced
+        url: https://opensauced.pizza
+        display_local_time: false
+        is_onboarded: false
+        last_sign_in_at: 2016-10-19 13:24:51.000000
+        updated_at: 2016-10-19 13:24:51.000000
+        is_waitlisted: false
+        name: MrPizza
+        company: OpenSauced
+        location: "San Francisco, CA"
+        id: "237133"
+        linkedin_url: https://www.linkedin.com/in/brianldouglas
+        confirmed_at: 2016-10-19 13:24:51.000000
+        email: vortex@opensauced.pizza
+      properties:
+        id:
+          description: Supabase authenticated unique user identifier
+          example: "237133"
+          type: string
+        user_name:
+          description: Supabase authenticated user login name
+          example: 0-vortex
+          type: string
+        role:
+          description: Supabase authenticated user role
+          example: authenticated
+          type: string
+        email:
+          description: Supabase authenticated user email
+          example: vortex@opensauced.pizza
+          type: string
+        confirmed_at:
+          description: Timestamp representing supabase user registration confirmation
+          example: 2016-10-19 13:24:51.000000
+          type: string
+        last_sign_in_at:
+          description: Timestamp representing supabase user last sign in
+          example: 2016-10-19 13:24:51.000000
+          type: string
+        created_at:
+          description: Timestamp representing supabase user creation
+          example: 2016-10-19 13:24:51.000000
+          type: string
+        updated_at:
+          description: Timestamp representing supabase user last update
+          example: 2016-10-19 13:24:51.000000
+          type: string
+        is_onboarded:
+          description: Flag indicated whether the user is onboarded
+          example: false
+          type: boolean
+        is_waitlisted:
+          description: Flag indicated whether the user is waitlisted
+          example: false
+          type: boolean
+        insights_role:
+          description: Authenticated User's Insights Role
+          example: 10
+          type: number
+        bio:
+          description: User bio information
+          example: OpenSauced User
+          type: string
+        name:
+          description: User name information
+          example: MrPizza
+          type: string
+        url:
+          description: User website
+          example: https://opensauced.pizza
+          type: string
+        twitter_username:
+          description: User Twitter information
+          example: saucedopen
+          type: string
+        company:
+          description: User company information
+          example: OpenSauced
+          type: string
+        location:
+          description: User location information
+          example: "San Francisco, CA"
+          type: string
+        display_local_time:
+          description: User display local time information
+          example: false
+          type: boolean
+        linkedin_url:
+          description: LinkedIn URL
+          example: https://www.linkedin.com/in/brianldouglas
+          type: string
+        github_sponsors_url:
+          description: GitHub Sponsors URL
+          example: https://github.com/sponsors/open-sauced
+          type: string
+        discord_url:
+          description: Discord URL
+          example: https://discord.gg/opensauced
+          type: string
+        notification_count:
+          description: Unread User Notification Count
+          example: 5
+          type: number
+      required:
+      - id
+      type: object
+    UserOnboardingDto:
+      example:
+        timezone: UTC-5
+        interests:
+        - javascript
+        - react
+      properties:
+        interests:
+          description: An array of interests
+          example:
+          - javascript
+          - react
+          items:
+            type: array
+          type: array
+        timezone:
+          description: User timezone in UTC
+          example: UTC-5
+          type: string
+      required:
+      - interests
+      - timezone
+      type: object
+    UpdateUserDto:
+      example:
+        display_local_time: false
+        timezone: UTC-5
+        name: Pizza Maker
+        twitter_username: saucedopen
+        bio: I make the pizza
+        github_sponsors_url: https://github.com/sponsors/open-sauced
+        company: OpenSauced
+        location: OpenSauced
+        linkedin_url: https://www.linkedin.com/in/brianldouglas
+        discord_url: https://discord.gg/opensauced
+        email: hello@opensauced.pizza
+        url: https://opensauced.pizza
+      properties:
+        name:
+          description: User Profile Name
+          example: Pizza Maker
+          type: string
+        email:
+          description: User Profile Email
+          example: hello@opensauced.pizza
+          type: string
+        bio:
+          description: User Profile Bio
+          example: I make the pizza
+          type: string
+        url:
+          description: User Profile URL
+          example: https://opensauced.pizza
+          type: string
+        twitter_username:
+          description: User Profile Twitter Username
+          example: saucedopen
+          type: string
+        company:
+          description: User Profile Company
+          example: OpenSauced
+          type: string
+        location:
+          description: User Profile Location
+          example: OpenSauced
+          type: string
+        display_local_time:
+          description: Display user local time in profile
+          example: false
+          type: boolean
+        timezone:
+          description: User timezone in UTC
+          example: UTC-5
+          type: string
+        linkedin_url:
+          description: LinkedIn URL
+          example: https://www.linkedin.com/in/brianldouglas
+          type: string
+        github_sponsors_url:
+          description: GitHub Sponsors URL
+          example: https://github.com/sponsors/open-sauced
+          type: string
+        discord_url:
+          description: Discord URL
+          example: https://discord.gg/opensauced
+          type: string
+      required:
+      - email
+      - name
+      type: object
+    DbUser:
+      example:
+        is_private: false
+        is_open_sauced_member: false
+        first_opened_pr_at: 2000-01-23T04:56:07.000+00:00
+        role: 10
+        timezone: UTC-5
+        highlights_count: 0
+        twitter_username: saucedopen
+        created_at: 2000-01-23T04:56:07.000+00:00
+        bio: OpenSauced User
+        receive_collaboration: false
+        connected_at: 2000-01-23T04:56:07.000+00:00
+        login: 0-vortex
+        blog: https://opensauced.pizza/blog
+        type: User
+        discord_url: https://discord.gg/opensauced
+        display_local_time: false
+        is_onboarded: false
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        is_waitlisted: false
+        display_email: false
+        company: OpenSauced
+        id: 237133
+        public_repos: 0
+        recent_pull_request_velocity_count: 0
+        gravatar_id: ""
+        email: hello@opensauced.pizza
+        first_pushed_commit_at: 2000-01-23T04:56:07.000+00:00
+        hireable: false
+        languages: "{ TypeScript: 33128, HTML: 453, JavaScript: 90, CSS: 80 }"
+        github_sponsors_url: https://github.com/sponsors/open-sauced
+        notification_count: 0
+        recent_pull_requests_count: 0
+        public_gists: 0
+        url: https://api.github.com/users/0-vortex
+        is_maintainer: true
+        followers: 0
+        avatar_url: https://avatars.githubusercontent.com/u/237133?v=4
+        following_count: 0
+        following: 0
+        followers_count: 0
+        name: MrPizza
+        location: "San Francisco, CA"
+        linkedin_url: https://www.linkedin.com/in/brianldouglas
+        open_issues: 498
+        interests: javascript
+        node_id: MDQ6VXNlcjIzNzEzMw==
+      properties:
+        id:
+          description: User identifier
+          example: 237133
+          type: number
+        open_issues:
+          description: Total number of open issues user has across public activity
+          example: 498
+          type: number
+        created_at:
+          description: Timestamp representing user creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing user last update
+          format: date-time
+          type: string
+        first_opened_pr_at:
+          description: Timestamp representing user first open PR
+          format: date-time
+          type: string
+        first_pushed_commit_at:
+          description: Timestamp representing user first commit push
+          format: date-time
+          type: string
+        connected_at:
+          description: Timestamp representing user logging in to open sauced for the
+            first time
+          format: date-time
+          type: string
+        node_id:
+          description: User GitHub node id
+          example: MDQ6VXNlcjIzNzEzMw==
+          type: string
+        avatar_url:
+          description: User GitHub avatar URL
+          example: https://avatars.githubusercontent.com/u/237133?v=4
+          type: string
+        gravatar_id:
+          description: User GitHub gravatar URL
+          example: ""
+          type: string
+        url:
+          description: User GitHub profile URL
+          example: https://api.github.com/users/0-vortex
+          type: string
+        login:
+          description: User unique login name
+          example: 0-vortex
+          type: string
+        email:
+          description: User email address
+          example: hello@opensauced.pizza
+          type: string
+        is_private:
+          default: false
+          description: Flag indicating whether user opted to have a private profile
+            (beta feature
+          example: false
+          type: boolean
+        is_open_sauced_member:
+          default: false
+          description: Flag indicating app.opensauced user status
+          example: false
+          type: boolean
+        is_onboarded:
+          default: false
+          description: Flag indicating user's onboarding status
+          example: false
+          type: boolean
+        is_waitlisted:
+          default: false
+          description: Flag indicating user's waitlist status
+          example: false
+          type: boolean
+        role:
+          default: 10
+          description: Insights Role
+          example: 10
+          type: number
+        bio:
+          description: User bio information
+          example: OpenSauced User
+          type: string
+        blog:
+          description: GitHub blog information
+          example: https://opensauced.pizza/blog
+          type: string
+        name:
+          description: User name information
+          example: MrPizza
+          type: string
+        twitter_username:
+          description: User Twitter information
+          example: saucedopen
+          type: string
+        linkedin_url:
+          description: LinkedIn URL
+          example: https://www.linkedin.com/in/brianldouglas
+          type: string
+        github_sponsors_url:
+          description: GitHub Sponsors URL
+          example: https://github.com/sponsors/open-sauced
+          type: string
+        discord_url:
+          description: Discord URL
+          example: https://discord.gg/opensauced
+          type: string
+        company:
+          description: User company information
+          example: OpenSauced
+          type: string
+        location:
+          description: User location information
+          example: "San Francisco, CA"
+          type: string
+        display_local_time:
+          description: User display local time information
+          example: false
+          type: boolean
+        interests:
+          description: User topic interests
+          example: javascript
+          type: string
+        hireable:
+          description: GitHub user hireable status
+          example: false
+          type: boolean
+        public_repos:
+          description: GitHub user public repos number
+          example: 0
+          type: number
+        public_gists:
+          description: GitHub user public gists number
+          example: 0
+          type: number
+        followers:
+          description: GitHub user public followers number
+          example: 0
+          type: number
+        following:
+          description: GitHub user public following number
+          example: 0
+          type: number
+        type:
+          default: User
+          description: GitHub user type
+          example: User
+          type: string
+        display_email:
+          description: User display public email
+          example: false
+          type: boolean
+        receive_collaboration:
+          description: User receives collaboration requests
+          example: false
+          type: boolean
+        timezone:
+          description: User timezone in UTC
+          example: UTC-5
+          type: string
+        languages:
+          description: GitHub top languages
+          example: "{ TypeScript: 33128, HTML: 453, JavaScript: 90, CSS: 80 }"
+          type: object
+        notification_count:
+          description: User notification count
+          example: 0
+          type: number
+        highlights_count:
+          description: User highlights count
+          example: 0
+          type: number
+        following_count:
+          description: User following count
+          example: 0
+          type: number
+        followers_count:
+          description: User followers count
+          example: 0
+          type: number
+        recent_pull_requests_count:
+          description: Count of user pull requests within the last 30 days
+          example: 0
+          type: number
+        recent_pull_request_velocity_count:
+          description: User average pull request velocity in days over the last 30
+            days
+          example: 0
+          type: number
+        is_maintainer:
+          description: Flag to indicate if user is a maintainer of any repos
+          example: true
+          type: boolean
+      required:
+      - avatar_url
+      - email
+      - followers
+      - followers_count
+      - following
+      - following_count
+      - highlights_count
+      - id
+      - is_maintainer
+      - is_onboarded
+      - is_open_sauced_member
+      - is_private
+      - is_waitlisted
+      - languages
+      - login
+      - node_id
+      - notification_count
+      - open_issues
+      - public_gists
+      - public_repos
+      - recent_pull_request_velocity_count
+      - recent_pull_requests_count
+      - role
+      - type
+      type: object
+    UpdateUserProfileInterestsDto:
+      example:
+        interests:
+        - javascript
+        - react
+      properties:
+        interests:
+          description: An array of interests
+          example:
+          - javascript
+          - react
+          items:
+            type: array
+          type: array
+      required:
+      - interests
+      type: object
+    UpdateUserEmailPreferencesDto:
+      example:
+        display_email: false
+        receive_collaboration: false
+      properties:
+        display_email:
+          description: User Display Public Email
+          example: false
+          type: boolean
+        receive_collaboration:
+          description: User Recieve Collaboration Requests
+          example: false
+          type: boolean
+      required:
+      - display_email
+      - receive_collaboration
+      type: object
+    PageMetaDto:
+      properties:
+        page:
+          description: The current page
+          example: 1
+          type: number
+        limit:
+          description: The number of items per page
+          example: 10
+          type: number
+        itemCount:
+          description: The number of items in the collection
+          example: 100
+          type: number
+        pageCount:
+          description: The number of pages in the collection
+          example: 10
+          type: number
+        hasPreviousPage:
+          description: Flag indicating if there is a previous page
+          example: false
+          type: boolean
+        hasNextPage:
+          description: Flag indicating if there is a next page
+          example: true
+          type: boolean
+      required:
+      - hasNextPage
+      - hasPreviousPage
+      - itemCount
+      - limit
+      - page
+      - pageCount
+      type: object
+    PageDto:
+      properties:
+        data:
+          items:
+            type: array
+          type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+      type: object
+    DbPullRequest:
+      properties:
+        id:
+          description: Pull request identifier
+          example: 1045024650
+          type: number
+        number:
+          description: Pull request number
+          example: 612
+          type: number
+        state:
+          description: Pull request state
+          example: closed
+          type: string
+        draft:
+          description: Pull request is draft
+          example: false
+          type: boolean
+        merged:
+          description: Pull request is merged
+          example: false
+          type: boolean
+        mergeable:
+          description: Pull request is mergeable
+          example: false
+          type: boolean
+        rebaseable:
+          description: Pull request is rebaseable
+          example: false
+          type: boolean
+        title:
+          description: Pull request title
+          example: "fix(cli): arg tags value with equal sign"
+          type: string
+        source_label:
+          description: Pull request source ref
+          example: Th3nn3ss:cli_split_kwargs
+          type: string
+        target_label:
+          description: Pull request target ref
+          example: aws:main
+          type: string
+        source_branch:
+          description: Pull request source branch
+          example: main
+          type: string
+        target_branch:
+          description: Pull request target branch
+          example: cli_split_kwargs
+          type: string
+        labels:
+          description: Pull request labels
+          example: |-
+            [
+                  {
+                    "id": 4456742596,
+                    "url": "https://api.github.com/repos/denoland/fresh/labels/showcase",
+                    "name": "showcase",
+                    "color": "0e8a16",
+                    "default": false,
+                    "node_id": "LA_kwDOFcV7488AAAABCaR-xA",
+                    "description": ""
+                  }
+                ]
+          type: string
+        label_names:
+          description: Pull request label names
+          example: showcase
+          items:
+            type: string
+          type: array
+        author_login:
+          description: Pull request author username
+          example: Th3nn3ss
+          type: string
+        author_avatar:
+          description: Pull request author avatar
+          example: https://avatars.githubusercontent.com/u/25160953?v=4
+          type: string
+        assignee_login:
+          description: Pull request assignee username
+          type: string
+          example: null
+        assignee_avatar:
+          description: Pull request assignee avatar
+          type: string
+          example: null
+        created_at:
+          description: Timestamp representing pr creation date
+          format: date-time
+          type: string
+        closed_at:
+          description: Timestamp representing pr close date
+          format: date-time
+          type: string
+        merged_at:
+          description: Timestamp representing pr merge date
+          format: date-time
+          type: string
+        merged_by_login:
+          description: Pull request merged by username
+          example: bdougie
+          type: string
+        updated_at:
+          description: Timestamp representing repository last update
+          format: date-time
+          type: string
+        last_updated_at:
+          description: Timestamp representing internal last update
+          format: date-time
+          type: string
+        comments:
+          description: PR comments
+          example: 0
+          type: number
+        additions:
+          description: PR lines added
+          example: 10
+          type: number
+        deletions:
+          description: PR lines deleted
+          example: 5
+          type: number
+        changed_files:
+          description: PR files changed
+          example: 5
+          type: number
+        full_name:
+          description: Pull request repo full name
+          example: open-sauced/insights
+          type: string
+      required:
+      - author_avatar
+      - author_login
+      - draft
+      - id
+      - mergeable
+      - merged
+      - number
+      - rebaseable
+      - state
+      - title
+      type: object
+    OrderDirectionEnum:
+      enum:
+      - ASC
+      - DESC
+      type: string
+    DbUserHighlight:
+      example:
+        pinned: false
+        featured: false
+        shipped_at: 2000-01-23T04:56:07.000+00:00
+        created_at: 2000-01-23T04:56:07.000+00:00
+        title: My First PR!
+        type: pull_request
+        login: bdougie
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        url: github.com/open-sauced/insights/pull/1
+        highlight: |2-
+
+              I made my first open source pull request!
+
+              github.com/open-sauced/insights/pull/1
+        full_name: open-sauced/insights
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        name: Brian Douglas
+        tagged_repos:
+        - - open-sauced/insights
+          - open-sauced/ai
+        - - open-sauced/insights
+          - open-sauced/ai
+        id: 237133
+      properties:
+        id:
+          description: User Highlight identifier
+          example: 237133
+          type: number
+        user_id:
+          description: User identifier
+          example: 237133
+          type: number
+        url:
+          description: Highlight Pull Request URL
+          example: github.com/open-sauced/insights/pull/1
+          type: string
+        title:
+          description: Highlight Title
+          example: My First PR!
+          type: string
+        highlight:
+          description: Highlight Text
+          example: |2-
+
+                I made my first open source pull request!
+
+                github.com/open-sauced/insights/pull/1
+          type: string
+        type:
+          description: Highlight type
+          example: pull_request
+          type: string
+        pinned:
+          description: Whether the highlight is pinned to the top
+          example: false
+          type: boolean
+        featured:
+          description: Whether the highlight is featured or not
+          example: false
+          type: boolean
+        created_at:
+          description: Timestamp representing highlight creation date
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing highlight updated date
+          format: date-time
+          type: string
+        deleted_at:
+          description: Timestamp representing highlight deletion date
+          format: date-time
+          type: string
+        shipped_at:
+          description: Timestamp representing highlight shipped date
+          format: date-time
+          type: string
+        full_name:
+          description: Highlight Repo Full Name
+          example: open-sauced/insights
+          type: string
+        name:
+          description: Highlight User Full Name
+          example: Brian Douglas
+          type: string
+        login:
+          description: Highlight User Login
+          example: bdougie
+          type: string
+        tagged_repos:
+          items:
+            description: An array of full-names of tagged repositories
+            example:
+            - open-sauced/insights
+            - open-sauced/ai
+            items:
+              type: string
+            type: array
+          type: array
+      required:
+      - highlight
+      - id
+      - tagged_repos
+      - type
+      - user_id
+      type: object
+    DbRepo:
+      example:
+        is_private: false
+        has_downloads: false
+        is_template: false
+        pushed_at: 2000-01-23T04:56:07.000+00:00
+        spam_prs_count: 2
+        watchers: 5473
+        created_at: 2000-01-23T04:56:07.000+00:00
+        description: 🍕This is a project to identify your next open source contribution!
+          🍕
+        language: JavaScript
+        open_prs_count: 5
+        draft_prs_count: 2
+        issues: 274
+        network: 4
+        has_projects: false
+        has_wiki: false
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        merged_prs_count: 276
+        svn_url: https://github.com/open-sauced/insights
+        pr_velocity_count: 0
+        id: 71359796
+        git_url: git://github.com/open-sauced/insights.git
+        has_discussions: false
+        has_pages: false
+        forks: 1
+        is_fork: false
+        subscribers: 11756
+        topics:
+        - open-sauced
+        - open-source
+        - github
+        is_disabled: false
+        ssh_url: git@github.com:open-sauced/insights.git
+        stars: 5
+        pr_active_count: 0
+        has_issues: false
+        url: https://api.github.com/repos/open-sauced/insights
+        mirror_url: mirror_url
+        license: MIT
+        full_name: open-sauced/insights
+        size: 274322
+        is_archived: false
+        user_id: 57568598
+        clone_url: https://github.com/open-sauced/insights.git
+        name: open-sauced
+        default_branch: main
+        closed_prs_count: 173
+        node_id: MDEwOlJlcG9zaXRvcnk3MTM1OTc5Ng==
+        homepage: https://app.opensauced.pizza
+      properties:
+        id:
+          description: Repository identifier
+          example: 71359796
+          type: number
+        user_id:
+          description: Owner user identifier
+          example: 57568598
+          type: number
+        size:
+          description: Total size in bytes
+          example: 274322
+          type: number
+        issues:
+          description: Total number of issues
+          example: 274
+          type: number
+        stars:
+          description: Total number of stars
+          example: 5
+          type: number
+        forks:
+          description: Total number of forks
+          example: 1
+          type: number
+        watchers:
+          description: Total number of watchers
+          example: 5473
+          type: number
+        subscribers:
+          description: Total number of subscribers
+          example: 11756
+          type: number
+        network:
+          description: Total number of network usages
+          example: 4
+          type: number
+        is_fork:
+          description: Flag indicating repo is a fork
+          example: false
+          type: boolean
+        is_private:
+          description: Flag indicating repo is private
+          example: false
+          type: boolean
+        is_template:
+          description: Flag indicating repo is a template
+          example: false
+          type: boolean
+        is_archived:
+          description: Flag indicating repo is archived
+          example: false
+          type: boolean
+        is_disabled:
+          description: Flag indicating repo is disabled
+          example: false
+          type: boolean
+        has_issues:
+          description: Flag indicating repo has issues enabled
+          example: false
+          type: boolean
+        has_projects:
+          description: Flag indicating repo has projects enabled
+          example: false
+          type: boolean
+        has_downloads:
+          description: Flag indicating repo has downloads enabled
+          example: false
+          type: boolean
+        has_wiki:
+          description: Flag indicating repo has wiki enabled
+          example: false
+          type: boolean
+        has_pages:
+          description: Flag indicating repo has pages enabled
+          example: false
+          type: boolean
+        has_discussions:
+          description: Flag indicating repo has discussions enabled
+          example: false
+          type: boolean
+        created_at:
+          description: Timestamp representing repository creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing repository last update
+          format: date-time
+          type: string
+        pushed_at:
+          description: Timestamp representing repository last push
+          format: date-time
+          type: string
+        default_branch:
+          description: Repository default branch
+          example: main
+          type: string
+        node_id:
+          description: Repository GQL node id
+          example: MDEwOlJlcG9zaXRvcnk3MTM1OTc5Ng==
+          type: string
+        git_url:
+          description: Repository git url
+          example: git://github.com/open-sauced/insights.git
+          type: string
+        ssh_url:
+          description: Repository ssh url
+          example: git@github.com:open-sauced/insights.git
+          type: string
+        clone_url:
+          description: Repository clone url
+          example: https://github.com/open-sauced/insights.git
+          type: string
+        svn_url:
+          description: Repository svn url
+          example: https://github.com/open-sauced/insights
+          type: string
+        mirror_url:
+          description: Repository mirror url
+          type: string
+          example: null
+        name:
+          description: Repository unique name
+          example: open-sauced
+          type: string
+        full_name:
+          description: Repository full name
+          example: open-sauced/insights
+          type: string
+        description:
+          description: Repository short description
+          example: 🍕This is a project to identify your next open source contribution!
+            🍕
+          type: string
+        language:
+          description: Repository programming language
+          example: JavaScript
+          type: string
+        license:
+          description: Repository SPDX license
+          example: MIT
+          type: string
+        url:
+          description: Repository GitHub linked URL
+          example: https://api.github.com/repos/open-sauced/insights
+          type: string
+        homepage:
+          description: Repository GitHub homepage
+          example: https://app.opensauced.pizza
+          type: string
+        topics:
+          description: Repository GitHub topics
+          example:
+          - open-sauced
+          - open-source
+          - github
+          items:
+            type: string
+          type: array
+        open_prs_count:
+          description: Repository number of open PRs
+          example: 5
+          type: number
+        closed_prs_count:
+          description: Repository number of closed PRs
+          example: 173
+          type: number
+        merged_prs_count:
+          description: Repository number of merged PRs
+          example: 276
+          type: number
+        draft_prs_count:
+          description: Repository number of draft PRs
+          example: 2
+          type: number
+        spam_prs_count:
+          description: Repository number of spam PRs
+          example: 2
+          type: number
+        pr_velocity_count:
+          description: Repository average open/close time for PRs
+          example: 0
+          type: number
+        pr_active_count:
+          description: Number of non-closed PRs updated within the day range
+          example: 0
+          type: number
+      required:
+      - clone_url
+      - default_branch
+      - description
+      - forks
+      - full_name
+      - git_url
+      - has_discussions
+      - has_downloads
+      - has_issues
+      - has_pages
+      - has_projects
+      - has_wiki
+      - homepage
+      - id
+      - is_archived
+      - is_disabled
+      - is_fork
+      - is_private
+      - is_template
+      - issues
+      - language
+      - license
+      - name
+      - network
+      - node_id
+      - size
+      - ssh_url
+      - stars
+      - subscribers
+      - svn_url
+      - topics
+      - url
+      - user_id
+      - watchers
+      type: object
+    DbTopUser:
+      example:
+        login: bdougie
+      properties:
+        login:
+          description: Top User Login
+          example: bdougie
+          type: string
+      type: object
+    CreateUserHighlightDto:
+      example:
+        highlight: My first PR to Open Sauced!
+        shipped_at: 2023-01-19 13:24:51.000000
+        taggedRepos:
+        - open-sauced/insights
+        - open-sauced/ai
+        title: My first PR!
+        type: pull_request
+        url: github.com/open-sauced/insights/pull/1
+      properties:
+        url:
+          description: Highlight PR URL
+          example: github.com/open-sauced/insights/pull/1
+          type: string
+        title:
+          description: Highlight Title
+          example: My first PR!
+          type: string
+        highlight:
+          description: Highlight Text
+          example: My first PR to Open Sauced!
+          type: string
+        shipped_at:
+          description: Shipped Date
+          example: 2023-01-19 13:24:51.000000
+          type: string
+        type:
+          default: pull_request
+          description: Highlight type
+          example: pull_request
+          type: string
+        taggedRepos:
+          description: An array of full-names of tagged repositories
+          example:
+          - open-sauced/insights
+          - open-sauced/ai
+          items:
+            type: array
+          type: array
+      required:
+      - highlight
+      - taggedRepos
+      - type
+      - url
+      type: object
+    OmitTypeClass:
+      example:
+        user_id: 498
+        meta_id: "133"
+        id: 237133
+        notified_at: 2000-01-23T04:56:07.000+00:00
+        type: welcome
+        message: bdougie followed you
+        from_user_id: 43311
+      properties:
+        id:
+          description: Notification identifier
+          example: 237133
+          type: number
+        user_id:
+          description: User ID
+          example: 498
+          type: number
+        from_user_id:
+          description: From User ID
+          example: 43311
+          type: number
+        type:
+          description: User notification type
+          example: welcome
+          type: string
+        message:
+          description: User notification message
+          example: bdougie followed you
+          type: string
+        notified_at:
+          description: Timestamp representing db-user-notification creation
+          format: date-time
+          type: string
+        meta_id:
+          description: "Notification Source ID (highlight, user, invite)"
+          example: "133"
+          type: string
+      required:
+      - id
+      - type
+      - user_id
+      type: object
+    DbUserHighlightReactionResponse:
+      example:
+        emoji_id: uuid-v4
+        reaction_count: 0.8008281904610115
+      properties:
+        emoji_id:
+          description: Emoji identifier
+          example: uuid-v4
+          type: string
+        reaction_count:
+          type: number
+      required:
+      - emoji_id
+      type: object
+    DbUserHighlightReaction:
+      example:
+        highlight_id: 71359796
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        created_at: 2000-01-23T04:56:07.000+00:00
+        emoji_id: uuid-v4
+        id: uuid-v4
+        reaction_count: 0.8008281904610115
+      properties:
+        id:
+          description: Reaction identifier
+          example: uuid-v4
+          type: string
+        highlight_id:
+          description: Highlight identifier
+          example: 71359796
+          type: number
+        user_id:
+          description: User identifier
+          example: 237133
+          type: number
+        emoji_id:
+          description: Emoji identifier
+          example: uuid-v4
+          type: string
+        created_at:
+          description: Timestamp representing highlight reaction creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing highlight reaction last update
+          format: date-time
+          type: string
+        reaction_count:
+          type: number
+      required:
+      - emoji_id
+      - highlight_id
+      - id
+      - user_id
+      type: object
+    DbUserHighlightRepo:
+      example:
+        full_name: open-sauced/insights
+      properties:
+        full_name:
+          description: Highlight Repo Full Name
+          example: open-sauced/insights
+          type: string
+      type: object
+    DbUserToUserFollows:
+      example:
+        following_user_id: 71359796
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 196
+      properties:
+        id:
+          description: User Follow identifier
+          example: 196
+          type: number
+        user_id:
+          description: User identifier
+          example: 237133
+          type: number
+        following_user_id:
+          description: User follower identifier
+          example: 71359796
+          type: number
+        created_at:
+          description: Timestamp representing user follow creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing user follow last update
+          format: date-time
+          type: string
+      required:
+      - following_user_id
+      - id
+      - user_id
+      type: object
+    DbUserCollaboration:
+      example:
+        request_emailed_at: 2000-01-23T04:56:07.000+00:00
+        collaboration_emailed_at: 2000-01-23T04:56:07.000+00:00
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: uuid-v4
+        message: "Hey, are you up for collaborating on this cool project?"
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        request_user_id: 31333
+        status: pending
+      properties:
+        id:
+          description: User Collaboration identifier
+          example: uuid-v4
+          type: string
+        user_id:
+          description: Collaboration Receipient User ID
+          example: 237133
+          type: number
+        request_user_id:
+          description: Collaboration Request User ID
+          example: 31333
+          type: number
+        message:
+          description: Collaboration Request Message
+          example: "Hey, are you up for collaborating on this cool project?"
+          type: string
+        status:
+          description: Collaboration Status
+          example: pending
+          type: string
+        created_at:
+          description: Timestamp representing user collaboration creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing user collaboration last updated
+          format: date-time
+          type: string
+        deleted_at:
+          description: Timestamp representing user collaboration deletion
+          format: date-time
+          type: string
+        request_emailed_at:
+          description: Timestamp representing collaboration request email sent date
+          format: date-time
+          type: string
+        collaboration_emailed_at:
+          description: Timestamp representing collaboration acceptance email sent
+            date
+          format: date-time
+          type: string
+      required:
+      - id
+      - message
+      - status
+      type: object
+    CreateUserCollaborationDto:
+      example:
+        message: Come collaborate on a cool project
+        username: bdougie
+      properties:
+        username:
+          description: Collaboration Recipient Username
+          example: bdougie
+          type: string
+        message:
+          description: Collaboration Request Message
+          example: Come collaborate on a cool project
+          type: string
+      required:
+      - message
+      - username
+      type: object
+    UpdateUserCollaborationDto:
+      example:
+        status: accept
+      properties:
+        status:
+          description: Collaboration Request Status
+          example: accept
+          type: string
+      required:
+      - status
+      type: object
+    DbEndorsement:
+      example:
+        creator_user_id: 237133
+        recipient_user_id: 31333
+        source_comment_url: source_comment_url
+        repo_id: 78133
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: uuid-v4
+        type: doc
+        source_context_url: source_context_url
+      properties:
+        id:
+          description: Endorsement identifier
+          example: uuid-v4
+          type: string
+        creator_user_id:
+          description: Endorsement Creator User ID
+          example: 237133
+          type: number
+        recipient_user_id:
+          description: Endorsement Recipient User ID
+          example: 31333
+          type: number
+        repo_id:
+          description: Repository ID
+          example: 78133
+          type: number
+        source_comment_url:
+          description: Endorsement Source Comment URL
+          type: string
+        source_context_url:
+          description: Endorsement Source Context URL
+          type: string
+        type:
+          description: Endorsement Type
+          example: doc
+          type: string
+        created_at:
+          description: Timestamp representing endorsement creation
+          format: date-time
+          type: string
+      required:
+      - id
+      - repo_id
+      - source_context_url
+      - type
+      type: object
+    PullRequestOrderFieldsEnum:
+      enum:
+      - created_at
+      - closed_at
+      - merged_at
+      - updated_at
+      type: string
+    InsightFilterFieldsEnum:
+      enum:
+      - recent
+      - top-100-repos
+      - minimum-5-contributors
+      - most-active
+      - most-spammed
+      type: string
+    PullRequestStatusEnum:
+      enum:
+      - open
+      - closed
+      type: string
+    DbPRInsight:
+      example:
+        all_prs: 287
+        interval: 1
+        id: 71359796
+        accepted_prs: 287
+        day: 0.8008281904610115
+        spam_prs: 287
+      properties:
+        id:
+          description: Repository identifier
+          example: 71359796
+          type: number
+        interval:
+          default: 0
+          description: "Selected interval in numerical days, goes back with number,\
+            \ 0 means today"
+          example: 1
+          type: number
+        day:
+          description: Selected interval computed date in human readable format
+          type: number
+        all_prs:
+          description: "PR Type: all requests count"
+          example: 287
+          type: number
+        accepted_prs:
+          description: "PR Type: accepted requests count"
+          example: 287
+          type: number
+        spam_prs:
+          description: "PR Type: spam requests count"
+          example: 287
+          type: number
+      required:
+      - accepted_prs
+      - all_prs
+      - day
+      - id
+      - interval
+      - spam_prs
+      type: object
+    GeneratePullRequestDescriptionDto:
+      example:
+        tone: formal
+        temperature: 7
+        language: english
+        diff: diff
+        commitMessages:
+        - "chore: fixed a bug with the UI"
+        - "style: added some rounded corners to some boxes"
+        descriptionLength: 250
+      properties:
+        descriptionLength:
+          description: Description Length
+          example: 250
+          type: number
+        temperature:
+          description: Description Temperature
+          example: 7
+          type: number
+        tone:
+          description: Description Tone
+          example: formal
+          type: string
+        language:
+          default: english
+          description: Description Language
+          example: english
+          type: string
+        diff:
+          description: PR Diff
+          type: string
+        commitMessages:
+          description: PR Commit Messages
+          example:
+          - "chore: fixed a bug with the UI"
+          - "style: added some rounded corners to some boxes"
+          items:
+            type: string
+          type: array
+      required:
+      - descriptionLength
+      - language
+      - temperature
+      - tone
+      type: object
+    GenerateCodeRefactorSuggestionDto:
+      example:
+        code: code
+        temperature: 7
+        language: english
+        descriptionLength: 250
+      properties:
+        descriptionLength:
+          description: Suggestion Length
+          example: 250
+          type: number
+        temperature:
+          description: Description Temperature
+          example: 7
+          type: number
+        language:
+          default: english
+          description: Suggestion Language
+          example: english
+          type: string
+        code:
+          description: Code
+          type: string
+      required:
+      - code
+      - descriptionLength
+      - language
+      - temperature
+      type: object
+    GenerateCodeTestSuggestionDto:
+      example:
+        code: code
+        temperature: 7
+        descriptionLength: 250
+      properties:
+        descriptionLength:
+          description: Suggestion Length
+          example: 250
+          type: number
+        temperature:
+          description: Description Temperature
+          example: 7
+          type: number
+        code:
+          description: Code
+          type: string
+      required:
+      - code
+      - descriptionLength
+      - temperature
+      type: object
+    GenerateCodeExplanationDto:
+      example:
+        code: code
+        temperature: 7
+        language: english
+        descriptionLength: 250
+      properties:
+        descriptionLength:
+          description: Description Length
+          example: 250
+          type: number
+        temperature:
+          description: Description Temperature
+          example: 7
+          type: number
+        language:
+          default: english
+          description: Description Language
+          example: english
+          type: string
+        code:
+          description: Code
+          type: string
+      required:
+      - code
+      - descriptionLength
+      - language
+      - temperature
+      type: object
+    RepoOrderFieldsEnum:
+      enum:
+      - issues
+      - stars
+      - watchers
+      - subscribers
+      - created_at
+      - updated_at
+      - name
+      - contributionsCount
+      - votesCount
+      - submissionsCount
+      - stargazersCount
+      - starsCount
+      type: string
+    DbRepoToUserVotes:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        repo_id: 71359796
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 196
+      properties:
+        id:
+          description: Vote identifier
+          example: 196
+          type: number
+        user_id:
+          description: User identifier
+          example: 237133
+          type: number
+        repo_id:
+          description: Repository identifier
+          example: 71359796
+          type: number
+        created_at:
+          description: Timestamp representing vote creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing vote last update
+          format: date-time
+          type: string
+      required:
+      - id
+      - repo_id
+      - user_id
+      type: object
+    VotedRepoDto:
+      example:
+        data: ""
+        voted: true
+      properties:
+        voted:
+          description: If the user has voted for the repo
+          example: true
+          type: boolean
+        data:
+          allOf:
+          - $ref: '#/components/schemas/DbRepoToUserVotes'
+          nullable: true
+      required:
+      - data
+      - voted
+      type: object
+    DbRepoToUserStars:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        repo_id: 71359796
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 196
+      properties:
+        id:
+          description: Star identifier
+          example: 196
+          type: number
+        user_id:
+          description: User identifier
+          example: 237133
+          type: number
+        repo_id:
+          description: Repository identifier
+          example: 71359796
+          type: number
+        created_at:
+          description: Timestamp representing star creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing star last update
+          format: date-time
+          type: string
+      required:
+      - id
+      - repo_id
+      - user_id
+      type: object
+    DbRepoToUserStargazers:
+      example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        repo_id: 71359796
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 196
+      properties:
+        id:
+          description: Stargaze identifier
+          example: 196
+          type: number
+        user_id:
+          description: User identifier
+          example: 237133
+          type: number
+        repo_id:
+          description: Repository identifier
+          example: 71359796
+          type: number
+        created_at:
+          description: Timestamp representing stargaze creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing stargaze last update
+          format: date-time
+          type: string
+      required:
+      - id
+      - repo_id
+      - user_id
+      type: object
+    DbRepoToUserSubmissions:
+      example:
+        is_accepted: false
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        repo_id: 71359796
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 196
+      properties:
+        id:
+          description: Submission identifier
+          example: 196
+          type: number
+        user_id:
+          description: User identifier
+          example: 237133
+          type: number
+        repo_id:
+          description: Repository identifier
+          example: 71359796
+          type: number
+        is_accepted:
+          description: Flag representing if the submission is approved by open sauced
+            staff
+          example: false
+          type: boolean
+        created_at:
+          description: Timestamp representing submission creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing submission last update
+          format: date-time
+          type: string
+      required:
+      - id
+      - repo_id
+      - user_id
+      type: object
+    DbContribution:
+      properties:
+        id:
+          description: Contribution identifier
+          example: 12237133
+          type: number
+        repo_id:
+          description: Repository identifier
+          example: 71359796
+          type: number
+        count:
+          description: Total number of contributed pull requests
+          example: 15
+          type: number
+        last_merged_at:
+          description: Timestamp representing last contribution merge to the default
+            branch
+          format: date-time
+          type: string
+        created_at:
+          description: Timestamp representing contribution creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing contribution last update
+          format: date-time
+          type: string
+        contributor:
+          description: Contributor unique user name
+          example: 0-vortex
+          type: string
+        url:
+          description: Contribution GitHub origin URL
+          example: https://github.com/open-sauced/hot/pull/320
+          type: string
+      required:
+      - contributor
+      - count
+      - id
+      - last_merged_at
+      - repo_id
+      - url
+      type: object
+    DbInsight:
+      example:
+        is_favorite: false
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        name: Open Sauced Team
+        is_public: false
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: 237133
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+        short_code: Insight Page Short Code
+      properties:
+        id:
+          description: Insight identifier
+          example: 237133
+          type: number
+        user_id:
+          description: User ID
+          example: 237133
+          type: number
+        name:
+          description: Insight Page Name
+          example: Open Sauced Team
+          type: string
+        is_public:
+          description: Flag indicating insight visibility
+          example: false
+          type: boolean
+        is_favorite:
+          description: Flag indicating insight favorite
+          example: false
+          type: boolean
+        short_code:
+          description: Title
+          example: Insight Page Short Code
+          type: string
+        created_at:
+          description: Timestamp representing insight creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing insight last updated
+          format: date-time
+          type: string
+        deleted_at:
+          description: Timestamp representing insight deletion
+          format: date-time
+          type: string
+      required:
+      - id
+      - is_favorite
+      - is_public
+      - name
+      - short_code
+      - user_id
+      type: object
+    RepoInfo:
+      properties:
+        id:
+          description: Repo ID
+          example: 234343
+          type: number
+        fullName:
+          description: Repo Full Name
+          example: open-sauced/insights
+          type: string
+      required:
+      - fullName
+      - id
+      type: object
+    UpdateInsightDto:
+      example:
+        repos:
+        - id: 797
+          full_name: open-sauced/insights
+        name: My Team
+        is_public: false
+      properties:
+        name:
+          description: Insight Page Name
+          example: My Team
+          type: string
+        is_public:
+          description: Insight Page Visibility
+          example: false
+          type: boolean
+        repos:
+          description: An array of repository information objects
+          example:
+          - id: 797
+            full_name: open-sauced/insights
+          items:
+            $ref: '#/components/schemas/RepoInfo'
+          type: array
+      required:
+      - is_public
+      - name
+      - repos
+      type: object
+    CreateInsightDto:
+      example:
+        repos:
+        - id: 797
+          full_name: open-sauced/insights
+        name: My Team
+        is_public: false
+      properties:
+        name:
+          description: Insight Page Name
+          example: My Team
+          type: string
+        is_public:
+          description: Insight Page Visibility
+          example: false
+          type: boolean
+        repos:
+          description: An array of repository information objects
+          example:
+          - id: 797
+            full_name: open-sauced/insights
+          items:
+            $ref: '#/components/schemas/RepoInfo'
+          type: array
+      required:
+      - is_public
+      - name
+      - repos
+      type: object
+    DbInsightMember:
+      example:
+        access: pending
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        invitation_email: hello@opensauced.pizza
+        user_id: 237133
+        name: Brian Douglas
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: uuid-v4
+        invitation_emailed_at: 2000-01-23T04:56:07.000+00:00
+        insight_id: 237133
+        deleted_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          description: Insight Member identifier
+          example: uuid-v4
+          type: string
+        insight_id:
+          description: Insight ID
+          example: 237133
+          type: number
+        user_id:
+          description: User ID
+          example: 237133
+          type: number
+        name:
+          description: User's Name
+          example: Brian Douglas
+          type: string
+        access:
+          description: Insight Member Access
+          example: pending
+          type: string
+        created_at:
+          description: Timestamp representing team member creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing team member last updated
+          format: date-time
+          type: string
+        deleted_at:
+          description: Timestamp representing team member deletion
+          format: date-time
+          type: string
+        invitation_emailed_at:
+          description: Timestamp representing team member invitation email sent date
+          format: date-time
+          type: string
+        invitation_email:
+          description: Team Member Invitation Email
+          example: hello@opensauced.pizza
+          type: string
+      required:
+      - access
+      - id
+      - insight_id
+      type: object
+    CreateInsightMemberDto:
+      example:
+        email: hello@opensauced.pizza
+      properties:
+        email:
+          description: Insight Team Member Invite Email
+          example: hello@opensauced.pizza
+          type: string
+      required:
+      - email
+      type: object
+    UpdateInsightMemberDto:
+      example:
+        access: view
+      properties:
+        access:
+          description: Insight Member Access
+          example: view
+          type: string
+      required:
+      - access
+      type: object
+    CreateIssueSummaryDto:
+      example:
+        tone: formal
+        summaryLength: 250
+        issueTitle: issueTitle
+        issueComments: issueComments
+        temperature: 7
+        language: english
+        issueDescription: issueDescription
+      properties:
+        summaryLength:
+          description: Summary Length
+          example: 250
+          type: number
+        temperature:
+          description: Summary Temperature
+          example: 7
+          type: number
+        tone:
+          description: Summary Tone
+          example: formal
+          type: string
+        language:
+          default: english
+          description: Summary Language
+          example: english
+          type: string
+        issueTitle:
+          description: Issue Title
+          type: string
+        issueDescription:
+          description: Issue Description
+          type: string
+        issueComments:
+          description: Issue Comments
+          type: string
+      required:
+      - issueComments
+      - issueDescription
+      - issueTitle
+      - language
+      - summaryLength
+      - temperature
+      - tone
+      type: object
+    CreateBlogSummaryDto:
+      example:
+        tone: formal
+        summaryLength: 250
+        temperature: 7
+        language: english
+        blogMarkdown: blogMarkdown
+        blogTitle: blogTitle
+      properties:
+        summaryLength:
+          description: Summary Length
+          example: 250
+          type: number
+        temperature:
+          description: Summary Temperature
+          example: 7
+          type: number
+        tone:
+          description: Summary Tone
+          example: formal
+          type: string
+        language:
+          default: english
+          description: Summary Language
+          example: english
+          type: string
+        blogTitle:
+          description: Blog Title
+          type: string
+        blogMarkdown:
+          description: Blog Markdown
+          type: string
+      required:
+      - blogMarkdown
+      - blogTitle
+      - language
+      - summaryLength
+      - temperature
+      - tone
+      type: object
+    DbEmoji:
+      properties:
+        id:
+          description: Emoji identifier
+          example: uuid-v4
+          type: string
+        name:
+          description: Emoji Name
+          example: "100"
+          type: string
+        url:
+          description: Emoji URL
+          example: https://github.githubassets.com/images/icons/emoji/unicode/1f4af.png?v8
+          type: string
+        display_order:
+          description: Emoji display order
+          example: 1
+          type: number
+        created_at:
+          description: Timestamp representing highlight reaction creation
+          format: date-time
+          type: string
+        updated_at:
+          description: Timestamp representing highlight reaction last update
+          format: date-time
+          type: string
+      required:
+      - display_order
+      - id
+      - name
+      - url
+      type: object
+    CreateEndorsementDto:
+      example:
+        creator_user_id: 42211
+        recipient_user_id: 5736810
+        source_comment_url: source_comment_url
+        repo_id: 78133
+        type: doc
+        source_context_url: https://github.com/open-sauced/insights/pulls
+      properties:
+        creator_user_id:
+          description: Endorsement Creator User ID
+          example: 42211
+          type: number
+        recipient_user_id:
+          description: Endorsement Recipient User ID
+          example: 5736810
+          type: number
+        repo_id:
+          description: Repository ID
+          example: 78133
+          type: number
+        source_comment_url:
+          default: ""
+          description: Endorsement Source Comment URL
+          type: string
+        source_context_url:
+          description: Endorsement Source Context URL
+          example: https://github.com/open-sauced/insights/pulls
+          type: string
+        type:
+          description: Endorsement Type
+          example: doc
+          type: string
+      required:
+      - creator_user_id
+      - recipient_user_id
+      - repo_id
+      - source_context_url
+      - type
+      type: object
+    DbPullRequestContributor:
+      properties:
+        author_login:
+          description: Pull request author username
+          example: Th3nn3ss
+          type: string
+        updated_at:
+          description: Timestamp representing pr last update
+          format: date-time
+          type: string
+      required:
+      - author_login
+      type: object
+    BakeRepoDto:
+      example:
+        wait: "false"
+        url: https://github.com/open-sauced/insights
+      properties:
+        url:
+          description: Repo clone URL
+          example: https://github.com/open-sauced/insights
+          type: string
+        wait:
+          description: Option to wait for Pizza service to finish baking repo
+          example: "false"
+          type: string
+      required:
+      - url
+      - wait
+      type: object
+    DbBakedRepo:
+      example:
+        repo_id: 12345678
+        clone_url: https://github.com/open-sauced/insights.git
+        id: 71359796
+      properties:
+        id:
+          description: Baked repository identifier
+          example: 71359796
+          type: number
+        clone_url:
+          description: Repository clone url
+          example: https://github.com/open-sauced/insights.git
+          type: string
+        repo_id:
+          description: Repository identifier
+          example: 12345678
+          type: number
+      required:
+      - clone_url
+      - id
+      - repo_id
+      type: object
+    DbCommitAuthors:
+      example:
+        id: 71359796
+      properties:
+        id:
+          description: Commit author identifier
+          example: 71359796
+          type: number
+      required:
+      - id
+      type: object
+    DbCommits:
+      example:
+        commit_date: 5e7c6c7af42d38c57f363c564c58007da448c443
+        commit_author_id: 9876543
+        baked_repo_id: 57568598
+        id: 71359796
+        commit_hash: 5e7c6c7af42d38c57f363c564c58007da448c443
+      properties:
+        id:
+          description: Commit identifier
+          example: 71359796
+          type: number
+        commit_hash:
+          description: Hash for the commit
+          example: 5e7c6c7af42d38c57f363c564c58007da448c443
+          type: string
+        commit_date:
+          description: Date for the commit
+          example: 5e7c6c7af42d38c57f363c564c58007da448c443
+          type: string
+        baked_repo_id:
+          description: Baked repo identifier
+          example: 57568598
+          type: number
+        commit_author_id:
+          description: Commit author identifier
+          example: 9876543
+          type: number
+      required:
+      - baked_repo_id
+      - commit_author_id
+      - commit_date
+      - commit_hash
+      - id
+      type: object
+    findContributorPullRequests_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbPullRequest'
+            type: array
+    findAllHighlightsByUsername_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbUserHighlight'
+            type: array
+    findAllTopReposByUsername_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbRepo'
+            type: array
+    findAllUserCollaborations_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbUserCollaboration'
+            type: array
+    findAllUserCreatedEndorsements_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbEndorsement'
+            type: array
+    healthStatusService_200_response_info_value:
+      additionalProperties:
+        type: string
+      properties:
+        status:
+          type: string
+      type: object
+    healthStatusService_200_response:
+      example:
+        details:
+          database:
+            status: up
+        error: {}
+        status: ok
+        info:
+          database:
+            status: up
+      properties:
+        status:
+          example: ok
+          type: string
+        info:
+          additionalProperties:
+            $ref: '#/components/schemas/healthStatusService_200_response_info_value'
+          example:
+            database:
+              status: up
+          nullable: true
+          type: object
+        error:
+          additionalProperties:
+            $ref: '#/components/schemas/healthStatusService_200_response_info_value'
+          example: {}
+          nullable: true
+          type: object
+        details:
+          additionalProperties:
+            $ref: '#/components/schemas/healthStatusService_200_response_info_value'
+          example:
+            database:
+              status: up
+          type: object
+      type: object
+    healthStatusService_503_response:
+      properties:
+        status:
+          example: error
+          type: string
+        info:
+          additionalProperties:
+            $ref: '#/components/schemas/healthStatusService_200_response_info_value'
+          example:
+            database:
+              status: up
+          nullable: true
+          type: object
+        error:
+          additionalProperties:
+            $ref: '#/components/schemas/healthStatusService_200_response_info_value'
+          example:
+            redis:
+              status: down
+              message: Could not connect
+          nullable: true
+          type: object
+        details:
+          additionalProperties:
+            $ref: '#/components/schemas/healthStatusService_200_response_info_value'
+          example:
+            database:
+              status: up
+            redis:
+              status: down
+              message: Could not connect
+          type: object
+      type: object
+    findAllByRepoId_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbContribution'
+            type: array
+    findAllInsightsByUserId_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbInsight'
+            type: array
+    findAllInsightMembers_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbInsightMember'
+            type: array
+    findAllHighlightRepos_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbUserHighlightRepo'
+            type: array
+    findAllEmojis_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbEmoji'
+            type: array
+    searchAllPullRequestContributors_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbPullRequestContributor'
+            type: array
+    listAllBakedRepos_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbBakedRepo'
+            type: array
+    listAllCommitAuthors_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbCommitAuthors'
+            type: array
+    listAllCommitsByBakedRepoId_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbCommits'
+            type: array
+  securitySchemes:
+    bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http

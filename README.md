@@ -1,1 +1,85 @@
-🚧  _There's not alot here right now ... come back soon!!_  🚧
+<div align="center">
+  <br>
+  <img alt="Open Sauced" src="https://i.ibb.co/7jPXt0Z/logo1-92f1a87f.png" width="300px">
+  <h1>🍕 Pizza CLI 🍕</h1>
+  <strong>The generated Go OpenSauced API client</strong>
+  <br>
+</div>
+<br>
+<p align="center">
+  <img src="https://img.shields.io/github/languages/code-size/open-sauced/pizza" alt="GitHub code size in bytes">
+  <a href="https://github.com/open-sauced/pizza/issues">
+    <img src="https://img.shields.io/github/issues/open-sauced/pizza" alt="GitHub issues">
+  </a>
+  <a href="https://github.com/open-sauced/api.opensauced.pizza/releases">
+    <img src="https://img.shields.io/github/v/release/open-sauced/pizza.svg?style=flat" alt="GitHub Release">
+  </a>
+  <a href="https://discord.gg/U2peSNf23P">
+    <img src="https://img.shields.io/discord/714698561081704529.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" alt="Discord">
+  </a>
+  <a href="https://twitter.com/saucedopen">
+    <img src="https://img.shields.io/twitter/follow/saucedopen?label=Follow&style=social" alt="Twitter">
+  </a>
+</p>
+
+# Go OpenSauced API client
+
+This is a [generated OpenAPI client](https://openapi-generator.tech/)
+for the [OpenSauced API](https://github.com/open-sauced/api)
+which uses the [Swagger doc for the defined API](https://github.com/open-sauced/api/blob/beta/swagger.yaml).
+
+### 🔧 Versioning
+
+The version of the client corresponds _directly_ withe the version of the API.
+See the [OpenSauced API release notes](https://github.com/open-sauced/api/releases) for breaking changes, new features, etc.
+
+### 🏗️ Usage
+
+Here's a sample Go program that uses the client to get all pull requests
+
+```go
+package main
+
+import (
+        "context"
+        "fmt"
+        "os"
+
+        client "github.com/open-sauced/go-api"
+)
+
+func main() {
+    configuration := client.NewConfiguration()
+    apiClient := client.NewAPIClient(configuration)
+
+    // The prod server is at index 1
+    ctx := context.WithValue(context.Background(), client.ContextServerIndex, 1)
+
+    resp, r, err := apiClient.PullRequestsServiceAPI.ListAllPullRequests(ctx).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PullRequestsServiceAPI.GenerateCodeExplanation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+
+    fmt.Printf("Responses: %v", resp)
+}
+```
+
+Explore the generated docs within `generated/docs` and `generated/README.md` to learn more about how this client works.
+
+### 🚜 Generating the client
+
+```bash
+make generate-client
+```
+
+There are some rough edges when generating the OpenAPI client that you'll want to keep in mind:
+
+- Duplicate `type` structs may be defined (especially for endpoints that utilize dependent Dtos)
+  - Remove duplicate `type` structs that don't correspond to the right API endpoint.
+    Always refer to the API's swagger doc for the canonical source of truth.
+  - Also remove the corresponding documentation bits.
+- The tests may not have correctly generated struct member func names.
+  - Either remove those generated tests or find the correct struct member func and make the correct change.
+- In general, it's a good idea to view the diff and run `go test ./...` before committing new changes.
+
