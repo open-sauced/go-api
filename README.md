@@ -35,6 +35,12 @@ See the [OpenSauced API release notes](https://github.com/open-sauced/api/releas
 
 ### 🏗️ Usage
 
+Add the client as a dependency in your project:
+
+```
+go get github.com/open-sauced/go-api/client
+```
+
 Here's a sample Go program that uses the client to get all pull requests
 
 ```go
