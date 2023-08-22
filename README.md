@@ -63,7 +63,7 @@ func main() {
 
     resp, r, err := apiClient.PullRequestsServiceAPI.ListAllPullRequests(ctx).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PullRequestsServiceAPI.GenerateCodeExplanation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PullRequestsServiceAPI.ListAllPullRequests``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 
