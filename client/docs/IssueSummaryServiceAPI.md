@@ -1,6 +1,6 @@
 # \IssueSummaryServiceAPI
 
-All URIs are relative to *https://api.opensauced.pizza*
+All URIs are relative to *http://localhost:3001*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -23,11 +23,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    createIssueSummaryDto := *openapiclient.NewCreateIssueSummaryDto(float32(250), float32(7), "formal", "english", "IssueTitle_example", "IssueDescription_example", "IssueComments_example") // CreateIssueSummaryDto | 
+    createIssueSummaryDto := *openapiclient.NewCreateIssueSummaryDto(int32(250), int32(7), "formal", "english", "IssueTitle_example", "IssueDescription_example", "IssueComments_example") // CreateIssueSummaryDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

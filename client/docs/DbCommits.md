@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Commit identifier | 
+**Id** | **int32** | Commit identifier | 
 **CommitHash** | **string** | Hash for the commit | 
 **CommitDate** | **string** | Date for the commit | 
-**BakedRepoId** | **float32** | Baked repo identifier | 
-**CommitAuthorId** | **float32** | Commit author identifier | 
+**BakedRepoId** | **int32** | Baked repo identifier | 
+**CommitAuthorId** | **int32** | Commit author identifier | 
 
 ## Methods
 
 ### NewDbCommits
 
-`func NewDbCommits(id float32, commitHash string, commitDate string, bakedRepoId float32, commitAuthorId float32, ) *DbCommits`
+`func NewDbCommits(id int32, commitHash string, commitDate string, bakedRepoId int32, commitAuthorId int32, ) *DbCommits`
 
 NewDbCommits instantiates a new DbCommits object
 This constructor will assign default values to properties that have it defined,
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbCommits) GetId() float32`
+`func (o *DbCommits) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbCommits) GetIdOk() (*float32, bool)`
+`func (o *DbCommits) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbCommits) SetId(v float32)`
+`func (o *DbCommits) SetId(v int32)`
 
 SetId sets Id field to given value.
 
@@ -91,40 +91,40 @@ SetCommitDate sets CommitDate field to given value.
 
 ### GetBakedRepoId
 
-`func (o *DbCommits) GetBakedRepoId() float32`
+`func (o *DbCommits) GetBakedRepoId() int32`
 
 GetBakedRepoId returns the BakedRepoId field if non-nil, zero value otherwise.
 
 ### GetBakedRepoIdOk
 
-`func (o *DbCommits) GetBakedRepoIdOk() (*float32, bool)`
+`func (o *DbCommits) GetBakedRepoIdOk() (*int32, bool)`
 
 GetBakedRepoIdOk returns a tuple with the BakedRepoId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBakedRepoId
 
-`func (o *DbCommits) SetBakedRepoId(v float32)`
+`func (o *DbCommits) SetBakedRepoId(v int32)`
 
 SetBakedRepoId sets BakedRepoId field to given value.
 
 
 ### GetCommitAuthorId
 
-`func (o *DbCommits) GetCommitAuthorId() float32`
+`func (o *DbCommits) GetCommitAuthorId() int32`
 
 GetCommitAuthorId returns the CommitAuthorId field if non-nil, zero value otherwise.
 
 ### GetCommitAuthorIdOk
 
-`func (o *DbCommits) GetCommitAuthorIdOk() (*float32, bool)`
+`func (o *DbCommits) GetCommitAuthorIdOk() (*int32, bool)`
 
 GetCommitAuthorIdOk returns a tuple with the CommitAuthorId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCommitAuthorId
 
-`func (o *DbCommits) SetCommitAuthorId(v float32)`
+`func (o *DbCommits) SetCommitAuthorId(v int32)`
 
 SetCommitAuthorId sets CommitAuthorId field to given value.
 

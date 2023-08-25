@@ -25,9 +25,9 @@ func Test_openapi_StargazeServiceAPIService(t *testing.T) {
 
 	t.Run("Test StargazeServiceAPIService DownStargazeOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.StargazeServiceAPI.DownStargazeOneById(context.Background(), id).Execute()
 
@@ -39,7 +39,7 @@ func Test_openapi_StargazeServiceAPIService(t *testing.T) {
 
 	t.Run("Test StargazeServiceAPIService DownStargazeOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string
@@ -54,7 +54,7 @@ func Test_openapi_StargazeServiceAPIService(t *testing.T) {
 
 	t.Run("Test StargazeServiceAPIService FindAllUserStargazed", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.StargazeServiceAPI.FindAllUserStargazed(context.Background()).Execute()
 
@@ -66,9 +66,9 @@ func Test_openapi_StargazeServiceAPIService(t *testing.T) {
 
 	t.Run("Test StargazeServiceAPIService StargazeOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.StargazeServiceAPI.StargazeOneById(context.Background(), id).Execute()
 
@@ -80,7 +80,7 @@ func Test_openapi_StargazeServiceAPIService(t *testing.T) {
 
 	t.Run("Test StargazeServiceAPIService StargazeOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string

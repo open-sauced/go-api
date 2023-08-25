@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DescriptionLength** | **float32** | Description Length | 
-**Temperature** | **float32** | Description Temperature | 
+**DescriptionLength** | **int32** | Description Length | 
+**Temperature** | **int32** | Description Temperature | 
 **Language** | **string** | Description Language | [default to "english"]
 **Code** | **string** | Code | 
 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewGenerateCodeExplanationDto
 
-`func NewGenerateCodeExplanationDto(descriptionLength float32, temperature float32, language string, code string, ) *GenerateCodeExplanationDto`
+`func NewGenerateCodeExplanationDto(descriptionLength int32, temperature int32, language string, code string, ) *GenerateCodeExplanationDto`
 
 NewGenerateCodeExplanationDto instantiates a new GenerateCodeExplanationDto object
 This constructor will assign default values to properties that have it defined,
@@ -30,40 +30,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDescriptionLength
 
-`func (o *GenerateCodeExplanationDto) GetDescriptionLength() float32`
+`func (o *GenerateCodeExplanationDto) GetDescriptionLength() int32`
 
 GetDescriptionLength returns the DescriptionLength field if non-nil, zero value otherwise.
 
 ### GetDescriptionLengthOk
 
-`func (o *GenerateCodeExplanationDto) GetDescriptionLengthOk() (*float32, bool)`
+`func (o *GenerateCodeExplanationDto) GetDescriptionLengthOk() (*int32, bool)`
 
 GetDescriptionLengthOk returns a tuple with the DescriptionLength field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescriptionLength
 
-`func (o *GenerateCodeExplanationDto) SetDescriptionLength(v float32)`
+`func (o *GenerateCodeExplanationDto) SetDescriptionLength(v int32)`
 
 SetDescriptionLength sets DescriptionLength field to given value.
 
 
 ### GetTemperature
 
-`func (o *GenerateCodeExplanationDto) GetTemperature() float32`
+`func (o *GenerateCodeExplanationDto) GetTemperature() int32`
 
 GetTemperature returns the Temperature field if non-nil, zero value otherwise.
 
 ### GetTemperatureOk
 
-`func (o *GenerateCodeExplanationDto) GetTemperatureOk() (*float32, bool)`
+`func (o *GenerateCodeExplanationDto) GetTemperatureOk() (*int32, bool)`
 
 GetTemperatureOk returns a tuple with the Temperature field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTemperature
 
-`func (o *GenerateCodeExplanationDto) SetTemperature(v float32)`
+`func (o *GenerateCodeExplanationDto) SetTemperature(v int32)`
 
 SetTemperature sets Temperature field to given value.
 

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Url** | **string** | Repo clone URL | 
-**Wait** | **string** | Option to wait for Pizza service to finish baking repo | 
+**Wait** | **bool** | Option to wait for Pizza service to finish baking repo | 
 
 ## Methods
 
 ### NewBakeRepoDto
 
-`func NewBakeRepoDto(url string, wait string, ) *BakeRepoDto`
+`func NewBakeRepoDto(url string, wait bool, ) *BakeRepoDto`
 
 NewBakeRepoDto instantiates a new BakeRepoDto object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetUrl sets Url field to given value.
 
 ### GetWait
 
-`func (o *BakeRepoDto) GetWait() string`
+`func (o *BakeRepoDto) GetWait() bool`
 
 GetWait returns the Wait field if non-nil, zero value otherwise.
 
 ### GetWaitOk
 
-`func (o *BakeRepoDto) GetWaitOk() (*string, bool)`
+`func (o *BakeRepoDto) GetWaitOk() (*bool, bool)`
 
 GetWaitOk returns a tuple with the Wait field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWait
 
-`func (o *BakeRepoDto) SetWait(v string)`
+`func (o *BakeRepoDto) SetWait(v bool)`
 
 SetWait sets Wait field to given value.
 

@@ -25,7 +25,7 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService AddInsightForUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.AddInsightForUser(context.Background()).Execute()
 
@@ -37,9 +37,9 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService AddMemberForInsight", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.AddMemberForInsight(context.Background(), id).Execute()
 
@@ -51,9 +51,9 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService FindAllInsightMembers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.FindAllInsightMembers(context.Background(), id).Execute()
 
@@ -65,7 +65,7 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService FindAllInsightsByUserId", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.FindAllInsightsByUserId(context.Background()).Execute()
 
@@ -77,9 +77,9 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService FindInsightPageById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.FindInsightPageById(context.Background(), id).Execute()
 
@@ -91,9 +91,9 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService RemoveInsightForUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.RemoveInsightForUser(context.Background(), id).Execute()
 
@@ -105,9 +105,9 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService RemoveInsightMemberById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 		var memberId string
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.RemoveInsightMemberById(context.Background(), id, memberId).Execute()
@@ -120,9 +120,9 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService UpdateInsightForUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.UpdateInsightForUser(context.Background(), id).Execute()
 
@@ -134,9 +134,9 @@ func Test_openapi_InsightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test InsightsServiceAPIService UpdateInsightMember", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 		var memberId string
 
 		resp, httpRes, err := apiClient.InsightsServiceAPI.UpdateInsightMember(context.Background(), id, memberId).Execute()

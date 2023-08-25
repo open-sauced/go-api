@@ -25,7 +25,7 @@ func Test_openapi_BlogSummaryServiceAPIService(t *testing.T) {
 
 	t.Run("Test BlogSummaryServiceAPIService GenerateBlogSummary", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.BlogSummaryServiceAPI.GenerateBlogSummary(context.Background()).Execute()
 

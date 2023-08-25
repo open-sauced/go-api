@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Interests** | [**[]Array**](Array.md) | An array of interests | 
+**Interests** | **[]string** | An array of interests | 
 
 ## Methods
 
 ### NewUpdateUserProfileInterestsDto
 
-`func NewUpdateUserProfileInterestsDto(interests []Array, ) *UpdateUserProfileInterestsDto`
+`func NewUpdateUserProfileInterestsDto(interests []string, ) *UpdateUserProfileInterestsDto`
 
 NewUpdateUserProfileInterestsDto instantiates a new UpdateUserProfileInterestsDto object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetInterests
 
-`func (o *UpdateUserProfileInterestsDto) GetInterests() []Array`
+`func (o *UpdateUserProfileInterestsDto) GetInterests() []string`
 
 GetInterests returns the Interests field if non-nil, zero value otherwise.
 
 ### GetInterestsOk
 
-`func (o *UpdateUserProfileInterestsDto) GetInterestsOk() (*[]Array, bool)`
+`func (o *UpdateUserProfileInterestsDto) GetInterestsOk() (*[]string, bool)`
 
 GetInterestsOk returns a tuple with the Interests field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInterests
 
-`func (o *UpdateUserProfileInterestsDto) SetInterests(v []Array)`
+`func (o *UpdateUserProfileInterestsDto) SetInterests(v []string)`
 
 SetInterests sets Interests field to given value.
 

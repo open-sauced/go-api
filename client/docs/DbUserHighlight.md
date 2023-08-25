@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | User Highlight identifier | 
-**UserId** | **float32** | User identifier | 
+**Id** | **int32** | User Highlight identifier | 
+**UserId** | **int32** | User identifier | 
 **Url** | Pointer to **string** | Highlight Pull Request URL | [optional] 
 **Title** | Pointer to **string** | Highlight Title | [optional] 
 **Highlight** | **string** | Highlight Text | 
@@ -19,13 +19,13 @@ Name | Type | Description | Notes
 **FullName** | Pointer to **string** | Highlight Repo Full Name | [optional] 
 **Name** | Pointer to **string** | Highlight User Full Name | [optional] 
 **Login** | Pointer to **string** | Highlight User Login | [optional] 
-**TaggedRepos** | **[][]string** |  | 
+**TaggedRepos** | **[]string** | An array of full-names of tagged repositories | 
 
 ## Methods
 
 ### NewDbUserHighlight
 
-`func NewDbUserHighlight(id float32, userId float32, highlight string, type_ string, taggedRepos [][]string, ) *DbUserHighlight`
+`func NewDbUserHighlight(id int32, userId int32, highlight string, type_ string, taggedRepos []string, ) *DbUserHighlight`
 
 NewDbUserHighlight instantiates a new DbUserHighlight object
 This constructor will assign default values to properties that have it defined,
@@ -42,40 +42,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbUserHighlight) GetId() float32`
+`func (o *DbUserHighlight) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbUserHighlight) GetIdOk() (*float32, bool)`
+`func (o *DbUserHighlight) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbUserHighlight) SetId(v float32)`
+`func (o *DbUserHighlight) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetUserId
 
-`func (o *DbUserHighlight) GetUserId() float32`
+`func (o *DbUserHighlight) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbUserHighlight) GetUserIdOk() (*float32, bool)`
+`func (o *DbUserHighlight) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbUserHighlight) SetUserId(v float32)`
+`func (o *DbUserHighlight) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
@@ -397,20 +397,20 @@ HasLogin returns a boolean if a field has been set.
 
 ### GetTaggedRepos
 
-`func (o *DbUserHighlight) GetTaggedRepos() [][]string`
+`func (o *DbUserHighlight) GetTaggedRepos() []string`
 
 GetTaggedRepos returns the TaggedRepos field if non-nil, zero value otherwise.
 
 ### GetTaggedReposOk
 
-`func (o *DbUserHighlight) GetTaggedReposOk() (*[][]string, bool)`
+`func (o *DbUserHighlight) GetTaggedReposOk() (*[]string, bool)`
 
 GetTaggedReposOk returns a tuple with the TaggedRepos field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTaggedRepos
 
-`func (o *DbUserHighlight) SetTaggedRepos(v [][]string)`
+`func (o *DbUserHighlight) SetTaggedRepos(v []string)`
 
 SetTaggedRepos sets TaggedRepos field to given value.
 

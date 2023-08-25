@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,14 +20,13 @@ import (
 	"strings"
 )
 
-
 // SubmitServiceAPIService SubmitServiceAPI service
 type SubmitServiceAPIService service
 
 type ApiDownSubmitOneByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SubmitServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiDownSubmitOneByIdRequest) Execute() (*DbRepoToUserSubmissions, *http.Response, error) {
@@ -37,26 +36,27 @@ func (r ApiDownSubmitOneByIdRequest) Execute() (*DbRepoToUserSubmissions, *http.
 /*
 DownSubmitOneById Finds a repo by :id and removes existing submission
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiDownSubmitOneByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiDownSubmitOneByIdRequest
 */
-func (a *SubmitServiceAPIService) DownSubmitOneById(ctx context.Context, id float32) ApiDownSubmitOneByIdRequest {
+func (a *SubmitServiceAPIService) DownSubmitOneById(ctx context.Context, id int32) ApiDownSubmitOneByIdRequest {
 	return ApiDownSubmitOneByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserSubmissions
+//
+//	@return DbRepoToUserSubmissions
 func (a *SubmitServiceAPIService) DownSubmitOneByIdExecute(r ApiDownSubmitOneByIdRequest) (*DbRepoToUserSubmissions, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserSubmissions
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserSubmissions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubmitServiceAPIService.DownSubmitOneById")
@@ -126,10 +126,10 @@ func (a *SubmitServiceAPIService) DownSubmitOneByIdExecute(r ApiDownSubmitOneByI
 }
 
 type ApiDownSubmitOneByOwnerAndRepoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SubmitServiceAPIService
-	owner string
-	repo string
+	owner      string
+	repo       string
 }
 
 func (r ApiDownSubmitOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserSubmissions, *http.Response, error) {
@@ -139,28 +139,29 @@ func (r ApiDownSubmitOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserSubmissio
 /*
 DownSubmitOneByOwnerAndRepo Finds a repo by :owner and :repo and removes existing submission
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiDownSubmitOneByOwnerAndRepoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiDownSubmitOneByOwnerAndRepoRequest
 */
 func (a *SubmitServiceAPIService) DownSubmitOneByOwnerAndRepo(ctx context.Context, owner string, repo string) ApiDownSubmitOneByOwnerAndRepoRequest {
 	return ApiDownSubmitOneByOwnerAndRepoRequest{
 		ApiService: a,
-		ctx: ctx,
-		owner: owner,
-		repo: repo,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserSubmissions
+//
+//	@return DbRepoToUserSubmissions
 func (a *SubmitServiceAPIService) DownSubmitOneByOwnerAndRepoExecute(r ApiDownSubmitOneByOwnerAndRepoRequest) (*DbRepoToUserSubmissions, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserSubmissions
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserSubmissions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubmitServiceAPIService.DownSubmitOneByOwnerAndRepo")
@@ -231,21 +232,21 @@ func (a *SubmitServiceAPIService) DownSubmitOneByOwnerAndRepoExecute(r ApiDownSu
 }
 
 type ApiFindAllUserSubmittedRequest struct {
-	ctx context.Context
-	ApiService *SubmitServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *SubmitServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	orderBy *RepoOrderFieldsEnum
+	range_         *int32
+	orderBy        *RepoOrderFieldsEnum
 }
 
-func (r ApiFindAllUserSubmittedRequest) Page(page float32) ApiFindAllUserSubmittedRequest {
+func (r ApiFindAllUserSubmittedRequest) Page(page int32) ApiFindAllUserSubmittedRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllUserSubmittedRequest) Limit(limit float32) ApiFindAllUserSubmittedRequest {
+func (r ApiFindAllUserSubmittedRequest) Limit(limit int32) ApiFindAllUserSubmittedRequest {
 	r.limit = &limit
 	return r
 }
@@ -256,7 +257,7 @@ func (r ApiFindAllUserSubmittedRequest) OrderDirection(orderDirection OrderDirec
 }
 
 // Range in days
-func (r ApiFindAllUserSubmittedRequest) Range_(range_ float32) ApiFindAllUserSubmittedRequest {
+func (r ApiFindAllUserSubmittedRequest) Range_(range_ int32) ApiFindAllUserSubmittedRequest {
 	r.range_ = &range_
 	return r
 }
@@ -273,24 +274,25 @@ func (r ApiFindAllUserSubmittedRequest) Execute() (*FindAllTopReposByUsername200
 /*
 FindAllUserSubmitted Finds all repos submitted by authenticated user and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllUserSubmittedRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllUserSubmittedRequest
 */
 func (a *SubmitServiceAPIService) FindAllUserSubmitted(ctx context.Context) ApiFindAllUserSubmittedRequest {
 	return ApiFindAllUserSubmittedRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllTopReposByUsername200Response
+//
+//	@return FindAllTopReposByUsername200Response
 func (a *SubmitServiceAPIService) FindAllUserSubmittedExecute(r ApiFindAllUserSubmittedRequest) (*FindAllTopReposByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllTopReposByUsername200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllTopReposByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubmitServiceAPIService.FindAllUserSubmitted")
@@ -374,9 +376,9 @@ func (a *SubmitServiceAPIService) FindAllUserSubmittedExecute(r ApiFindAllUserSu
 }
 
 type ApiSubmitOneByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SubmitServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiSubmitOneByIdRequest) Execute() (*DbRepoToUserSubmissions, *http.Response, error) {
@@ -386,26 +388,27 @@ func (r ApiSubmitOneByIdRequest) Execute() (*DbRepoToUserSubmissions, *http.Resp
 /*
 SubmitOneById Finds a repo by :id and adds a submission
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiSubmitOneByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiSubmitOneByIdRequest
 */
-func (a *SubmitServiceAPIService) SubmitOneById(ctx context.Context, id float32) ApiSubmitOneByIdRequest {
+func (a *SubmitServiceAPIService) SubmitOneById(ctx context.Context, id int32) ApiSubmitOneByIdRequest {
 	return ApiSubmitOneByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserSubmissions
+//
+//	@return DbRepoToUserSubmissions
 func (a *SubmitServiceAPIService) SubmitOneByIdExecute(r ApiSubmitOneByIdRequest) (*DbRepoToUserSubmissions, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserSubmissions
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserSubmissions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubmitServiceAPIService.SubmitOneById")
@@ -475,10 +478,10 @@ func (a *SubmitServiceAPIService) SubmitOneByIdExecute(r ApiSubmitOneByIdRequest
 }
 
 type ApiSubmitOneByOwnerAndRepoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SubmitServiceAPIService
-	owner string
-	repo string
+	owner      string
+	repo       string
 }
 
 func (r ApiSubmitOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserSubmissions, *http.Response, error) {
@@ -488,28 +491,29 @@ func (r ApiSubmitOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserSubmissions, 
 /*
 SubmitOneByOwnerAndRepo Finds a repo by :owner and :repo and adds a submission
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiSubmitOneByOwnerAndRepoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiSubmitOneByOwnerAndRepoRequest
 */
 func (a *SubmitServiceAPIService) SubmitOneByOwnerAndRepo(ctx context.Context, owner string, repo string) ApiSubmitOneByOwnerAndRepoRequest {
 	return ApiSubmitOneByOwnerAndRepoRequest{
 		ApiService: a,
-		ctx: ctx,
-		owner: owner,
-		repo: repo,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserSubmissions
+//
+//	@return DbRepoToUserSubmissions
 func (a *SubmitServiceAPIService) SubmitOneByOwnerAndRepoExecute(r ApiSubmitOneByOwnerAndRepoRequest) (*DbRepoToUserSubmissions, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserSubmissions
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserSubmissions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SubmitServiceAPIService.SubmitOneByOwnerAndRepo")

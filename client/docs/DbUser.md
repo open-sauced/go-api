@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | User identifier | 
-**OpenIssues** | **float32** | Total number of open issues user has across public activity | 
+**Id** | **int32** | User identifier | 
+**OpenIssues** | **int32** | Total number of open issues user has across public activity | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing user creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing user last update | [optional] 
 **FirstOpenedPrAt** | Pointer to **time.Time** | Timestamp representing user first open PR | [optional] 
@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **IsOpenSaucedMember** | **bool** | Flag indicating app.opensauced user status | [default to false]
 **IsOnboarded** | **bool** | Flag indicating user&#39;s onboarding status | [default to false]
 **IsWaitlisted** | **bool** | Flag indicating user&#39;s waitlist status | [default to false]
-**Role** | **float32** | Insights Role | [default to 10]
+**Role** | **int32** | Insights Role | [default to 10]
 **Bio** | Pointer to **string** | User bio information | [optional] 
 **Blog** | Pointer to **string** | GitHub blog information | [optional] 
 **Name** | Pointer to **string** | User name information | [optional] 
@@ -34,28 +34,28 @@ Name | Type | Description | Notes
 **DisplayLocalTime** | Pointer to **bool** | User display local time information | [optional] 
 **Interests** | Pointer to **string** | User topic interests | [optional] 
 **Hireable** | Pointer to **bool** | GitHub user hireable status | [optional] 
-**PublicRepos** | **float32** | GitHub user public repos number | 
-**PublicGists** | **float32** | GitHub user public gists number | 
-**Followers** | **float32** | GitHub user public followers number | 
-**Following** | **float32** | GitHub user public following number | 
+**PublicRepos** | **int32** | GitHub user public repos number | 
+**PublicGists** | **int32** | GitHub user public gists number | 
+**Followers** | **int32** | GitHub user public followers number | 
+**Following** | **int32** | GitHub user public following number | 
 **Type** | **string** | GitHub user type | [default to "User"]
 **DisplayEmail** | Pointer to **bool** | User display public email | [optional] 
 **ReceiveCollaboration** | Pointer to **bool** | User receives collaboration requests | [optional] 
 **Timezone** | Pointer to **string** | User timezone in UTC | [optional] 
-**Languages** | **map[string]interface{}** | GitHub top languages | 
-**NotificationCount** | **float32** | User notification count | 
-**HighlightsCount** | **float32** | User highlights count | 
-**FollowingCount** | **float32** | User following count | 
-**FollowersCount** | **float32** | User followers count | 
-**RecentPullRequestsCount** | **float32** | Count of user pull requests within the last 30 days | 
-**RecentPullRequestVelocityCount** | **float32** | User average pull request velocity in days over the last 30 days | 
+**Languages** | **map[string]interface{}** | GitHub top languages | [default to {}]
+**NotificationCount** | **int32** | User notification count | 
+**HighlightsCount** | **int32** | User highlights count | 
+**FollowingCount** | **int32** | User following count | 
+**FollowersCount** | **int32** | User followers count | 
+**RecentPullRequestsCount** | **int32** | Count of user pull requests within the last 30 days | 
+**RecentPullRequestVelocityCount** | **int32** | User average pull request velocity in days over the last 30 days | 
 **IsMaintainer** | **bool** | Flag to indicate if user is a maintainer of any repos | 
 
 ## Methods
 
 ### NewDbUser
 
-`func NewDbUser(id float32, openIssues float32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role float32, publicRepos float32, publicGists float32, followers float32, following float32, type_ string, languages map[string]interface{}, notificationCount float32, highlightsCount float32, followingCount float32, followersCount float32, recentPullRequestsCount float32, recentPullRequestVelocityCount float32, isMaintainer bool, ) *DbUser`
+`func NewDbUser(id int32, openIssues int32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role int32, publicRepos int32, publicGists int32, followers int32, following int32, type_ string, languages map[string]interface{}, notificationCount int32, highlightsCount int32, followingCount int32, followersCount int32, recentPullRequestsCount int32, recentPullRequestVelocityCount int32, isMaintainer bool, ) *DbUser`
 
 NewDbUser instantiates a new DbUser object
 This constructor will assign default values to properties that have it defined,
@@ -72,40 +72,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbUser) GetId() float32`
+`func (o *DbUser) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbUser) GetIdOk() (*float32, bool)`
+`func (o *DbUser) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbUser) SetId(v float32)`
+`func (o *DbUser) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetOpenIssues
 
-`func (o *DbUser) GetOpenIssues() float32`
+`func (o *DbUser) GetOpenIssues() int32`
 
 GetOpenIssues returns the OpenIssues field if non-nil, zero value otherwise.
 
 ### GetOpenIssuesOk
 
-`func (o *DbUser) GetOpenIssuesOk() (*float32, bool)`
+`func (o *DbUser) GetOpenIssuesOk() (*int32, bool)`
 
 GetOpenIssuesOk returns a tuple with the OpenIssues field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOpenIssues
 
-`func (o *DbUser) SetOpenIssues(v float32)`
+`func (o *DbUser) SetOpenIssues(v int32)`
 
 SetOpenIssues sets OpenIssues field to given value.
 
@@ -447,20 +447,20 @@ SetIsWaitlisted sets IsWaitlisted field to given value.
 
 ### GetRole
 
-`func (o *DbUser) GetRole() float32`
+`func (o *DbUser) GetRole() int32`
 
 GetRole returns the Role field if non-nil, zero value otherwise.
 
 ### GetRoleOk
 
-`func (o *DbUser) GetRoleOk() (*float32, bool)`
+`func (o *DbUser) GetRoleOk() (*int32, bool)`
 
 GetRoleOk returns a tuple with the Role field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRole
 
-`func (o *DbUser) SetRole(v float32)`
+`func (o *DbUser) SetRole(v int32)`
 
 SetRole sets Role field to given value.
 
@@ -767,80 +767,80 @@ HasHireable returns a boolean if a field has been set.
 
 ### GetPublicRepos
 
-`func (o *DbUser) GetPublicRepos() float32`
+`func (o *DbUser) GetPublicRepos() int32`
 
 GetPublicRepos returns the PublicRepos field if non-nil, zero value otherwise.
 
 ### GetPublicReposOk
 
-`func (o *DbUser) GetPublicReposOk() (*float32, bool)`
+`func (o *DbUser) GetPublicReposOk() (*int32, bool)`
 
 GetPublicReposOk returns a tuple with the PublicRepos field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPublicRepos
 
-`func (o *DbUser) SetPublicRepos(v float32)`
+`func (o *DbUser) SetPublicRepos(v int32)`
 
 SetPublicRepos sets PublicRepos field to given value.
 
 
 ### GetPublicGists
 
-`func (o *DbUser) GetPublicGists() float32`
+`func (o *DbUser) GetPublicGists() int32`
 
 GetPublicGists returns the PublicGists field if non-nil, zero value otherwise.
 
 ### GetPublicGistsOk
 
-`func (o *DbUser) GetPublicGistsOk() (*float32, bool)`
+`func (o *DbUser) GetPublicGistsOk() (*int32, bool)`
 
 GetPublicGistsOk returns a tuple with the PublicGists field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPublicGists
 
-`func (o *DbUser) SetPublicGists(v float32)`
+`func (o *DbUser) SetPublicGists(v int32)`
 
 SetPublicGists sets PublicGists field to given value.
 
 
 ### GetFollowers
 
-`func (o *DbUser) GetFollowers() float32`
+`func (o *DbUser) GetFollowers() int32`
 
 GetFollowers returns the Followers field if non-nil, zero value otherwise.
 
 ### GetFollowersOk
 
-`func (o *DbUser) GetFollowersOk() (*float32, bool)`
+`func (o *DbUser) GetFollowersOk() (*int32, bool)`
 
 GetFollowersOk returns a tuple with the Followers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFollowers
 
-`func (o *DbUser) SetFollowers(v float32)`
+`func (o *DbUser) SetFollowers(v int32)`
 
 SetFollowers sets Followers field to given value.
 
 
 ### GetFollowing
 
-`func (o *DbUser) GetFollowing() float32`
+`func (o *DbUser) GetFollowing() int32`
 
 GetFollowing returns the Following field if non-nil, zero value otherwise.
 
 ### GetFollowingOk
 
-`func (o *DbUser) GetFollowingOk() (*float32, bool)`
+`func (o *DbUser) GetFollowingOk() (*int32, bool)`
 
 GetFollowingOk returns a tuple with the Following field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFollowing
 
-`func (o *DbUser) SetFollowing(v float32)`
+`func (o *DbUser) SetFollowing(v int32)`
 
 SetFollowing sets Following field to given value.
 
@@ -962,120 +962,120 @@ SetLanguages sets Languages field to given value.
 
 ### GetNotificationCount
 
-`func (o *DbUser) GetNotificationCount() float32`
+`func (o *DbUser) GetNotificationCount() int32`
 
 GetNotificationCount returns the NotificationCount field if non-nil, zero value otherwise.
 
 ### GetNotificationCountOk
 
-`func (o *DbUser) GetNotificationCountOk() (*float32, bool)`
+`func (o *DbUser) GetNotificationCountOk() (*int32, bool)`
 
 GetNotificationCountOk returns a tuple with the NotificationCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotificationCount
 
-`func (o *DbUser) SetNotificationCount(v float32)`
+`func (o *DbUser) SetNotificationCount(v int32)`
 
 SetNotificationCount sets NotificationCount field to given value.
 
 
 ### GetHighlightsCount
 
-`func (o *DbUser) GetHighlightsCount() float32`
+`func (o *DbUser) GetHighlightsCount() int32`
 
 GetHighlightsCount returns the HighlightsCount field if non-nil, zero value otherwise.
 
 ### GetHighlightsCountOk
 
-`func (o *DbUser) GetHighlightsCountOk() (*float32, bool)`
+`func (o *DbUser) GetHighlightsCountOk() (*int32, bool)`
 
 GetHighlightsCountOk returns a tuple with the HighlightsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHighlightsCount
 
-`func (o *DbUser) SetHighlightsCount(v float32)`
+`func (o *DbUser) SetHighlightsCount(v int32)`
 
 SetHighlightsCount sets HighlightsCount field to given value.
 
 
 ### GetFollowingCount
 
-`func (o *DbUser) GetFollowingCount() float32`
+`func (o *DbUser) GetFollowingCount() int32`
 
 GetFollowingCount returns the FollowingCount field if non-nil, zero value otherwise.
 
 ### GetFollowingCountOk
 
-`func (o *DbUser) GetFollowingCountOk() (*float32, bool)`
+`func (o *DbUser) GetFollowingCountOk() (*int32, bool)`
 
 GetFollowingCountOk returns a tuple with the FollowingCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFollowingCount
 
-`func (o *DbUser) SetFollowingCount(v float32)`
+`func (o *DbUser) SetFollowingCount(v int32)`
 
 SetFollowingCount sets FollowingCount field to given value.
 
 
 ### GetFollowersCount
 
-`func (o *DbUser) GetFollowersCount() float32`
+`func (o *DbUser) GetFollowersCount() int32`
 
 GetFollowersCount returns the FollowersCount field if non-nil, zero value otherwise.
 
 ### GetFollowersCountOk
 
-`func (o *DbUser) GetFollowersCountOk() (*float32, bool)`
+`func (o *DbUser) GetFollowersCountOk() (*int32, bool)`
 
 GetFollowersCountOk returns a tuple with the FollowersCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFollowersCount
 
-`func (o *DbUser) SetFollowersCount(v float32)`
+`func (o *DbUser) SetFollowersCount(v int32)`
 
 SetFollowersCount sets FollowersCount field to given value.
 
 
 ### GetRecentPullRequestsCount
 
-`func (o *DbUser) GetRecentPullRequestsCount() float32`
+`func (o *DbUser) GetRecentPullRequestsCount() int32`
 
 GetRecentPullRequestsCount returns the RecentPullRequestsCount field if non-nil, zero value otherwise.
 
 ### GetRecentPullRequestsCountOk
 
-`func (o *DbUser) GetRecentPullRequestsCountOk() (*float32, bool)`
+`func (o *DbUser) GetRecentPullRequestsCountOk() (*int32, bool)`
 
 GetRecentPullRequestsCountOk returns a tuple with the RecentPullRequestsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRecentPullRequestsCount
 
-`func (o *DbUser) SetRecentPullRequestsCount(v float32)`
+`func (o *DbUser) SetRecentPullRequestsCount(v int32)`
 
 SetRecentPullRequestsCount sets RecentPullRequestsCount field to given value.
 
 
 ### GetRecentPullRequestVelocityCount
 
-`func (o *DbUser) GetRecentPullRequestVelocityCount() float32`
+`func (o *DbUser) GetRecentPullRequestVelocityCount() int32`
 
 GetRecentPullRequestVelocityCount returns the RecentPullRequestVelocityCount field if non-nil, zero value otherwise.
 
 ### GetRecentPullRequestVelocityCountOk
 
-`func (o *DbUser) GetRecentPullRequestVelocityCountOk() (*float32, bool)`
+`func (o *DbUser) GetRecentPullRequestVelocityCountOk() (*int32, bool)`
 
 GetRecentPullRequestVelocityCountOk returns a tuple with the RecentPullRequestVelocityCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRecentPullRequestVelocityCount
 
-`func (o *DbUser) SetRecentPullRequestVelocityCount(v float32)`
+`func (o *DbUser) SetRecentPullRequestVelocityCount(v int32)`
 
 SetRecentPullRequestVelocityCount sets RecentPullRequestVelocityCount field to given value.
 

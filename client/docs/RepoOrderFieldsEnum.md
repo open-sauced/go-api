@@ -11,9 +11,9 @@
 
 * `SUBSCRIBERS` (value: `"subscribers"`)
 
-* `REPO_CREATED_AT` (value: `"created_at"`)
+* `CREATED_AT` (value: `"created_at"`)
 
-* `REPO_UPDATED_AT` (value: `"updated_at"`)
+* `UPDATED_AT` (value: `"updated_at"`)
 
 * `NAME` (value: `"name"`)
 

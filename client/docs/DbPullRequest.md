@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Pull request identifier | 
-**Number** | **float32** | Pull request number | 
+**Id** | **int32** | Pull request identifier | 
+**Number** | **int32** | Pull request number | 
 **State** | **string** | Pull request state | 
 **Draft** | **bool** | Pull request is draft | 
 **Merged** | **bool** | Pull request is merged | 
@@ -28,17 +28,17 @@ Name | Type | Description | Notes
 **MergedByLogin** | Pointer to **string** | Pull request merged by username | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing repository last update | [optional] 
 **LastUpdatedAt** | Pointer to **time.Time** | Timestamp representing internal last update | [optional] 
-**Comments** | Pointer to **float32** | PR comments | [optional] 
-**Additions** | Pointer to **float32** | PR lines added | [optional] 
-**Deletions** | Pointer to **float32** | PR lines deleted | [optional] 
-**ChangedFiles** | Pointer to **float32** | PR files changed | [optional] 
+**Comments** | Pointer to **int32** | PR comments | [optional] 
+**Additions** | Pointer to **int32** | PR lines added | [optional] 
+**Deletions** | Pointer to **int32** | PR lines deleted | [optional] 
+**ChangedFiles** | Pointer to **int32** | PR files changed | [optional] 
 **FullName** | Pointer to **string** | Pull request repo full name | [optional] 
 
 ## Methods
 
 ### NewDbPullRequest
 
-`func NewDbPullRequest(id float32, number float32, state string, draft bool, merged bool, mergeable bool, rebaseable bool, title string, authorLogin string, authorAvatar string, ) *DbPullRequest`
+`func NewDbPullRequest(id int32, number int32, state string, draft bool, merged bool, mergeable bool, rebaseable bool, title string, authorLogin string, authorAvatar string, ) *DbPullRequest`
 
 NewDbPullRequest instantiates a new DbPullRequest object
 This constructor will assign default values to properties that have it defined,
@@ -55,40 +55,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbPullRequest) GetId() float32`
+`func (o *DbPullRequest) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbPullRequest) GetIdOk() (*float32, bool)`
+`func (o *DbPullRequest) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbPullRequest) SetId(v float32)`
+`func (o *DbPullRequest) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetNumber
 
-`func (o *DbPullRequest) GetNumber() float32`
+`func (o *DbPullRequest) GetNumber() int32`
 
 GetNumber returns the Number field if non-nil, zero value otherwise.
 
 ### GetNumberOk
 
-`func (o *DbPullRequest) GetNumberOk() (*float32, bool)`
+`func (o *DbPullRequest) GetNumberOk() (*int32, bool)`
 
 GetNumberOk returns a tuple with the Number field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNumber
 
-`func (o *DbPullRequest) SetNumber(v float32)`
+`func (o *DbPullRequest) SetNumber(v int32)`
 
 SetNumber sets Number field to given value.
 
@@ -605,20 +605,20 @@ HasLastUpdatedAt returns a boolean if a field has been set.
 
 ### GetComments
 
-`func (o *DbPullRequest) GetComments() float32`
+`func (o *DbPullRequest) GetComments() int32`
 
 GetComments returns the Comments field if non-nil, zero value otherwise.
 
 ### GetCommentsOk
 
-`func (o *DbPullRequest) GetCommentsOk() (*float32, bool)`
+`func (o *DbPullRequest) GetCommentsOk() (*int32, bool)`
 
 GetCommentsOk returns a tuple with the Comments field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComments
 
-`func (o *DbPullRequest) SetComments(v float32)`
+`func (o *DbPullRequest) SetComments(v int32)`
 
 SetComments sets Comments field to given value.
 
@@ -630,20 +630,20 @@ HasComments returns a boolean if a field has been set.
 
 ### GetAdditions
 
-`func (o *DbPullRequest) GetAdditions() float32`
+`func (o *DbPullRequest) GetAdditions() int32`
 
 GetAdditions returns the Additions field if non-nil, zero value otherwise.
 
 ### GetAdditionsOk
 
-`func (o *DbPullRequest) GetAdditionsOk() (*float32, bool)`
+`func (o *DbPullRequest) GetAdditionsOk() (*int32, bool)`
 
 GetAdditionsOk returns a tuple with the Additions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAdditions
 
-`func (o *DbPullRequest) SetAdditions(v float32)`
+`func (o *DbPullRequest) SetAdditions(v int32)`
 
 SetAdditions sets Additions field to given value.
 
@@ -655,20 +655,20 @@ HasAdditions returns a boolean if a field has been set.
 
 ### GetDeletions
 
-`func (o *DbPullRequest) GetDeletions() float32`
+`func (o *DbPullRequest) GetDeletions() int32`
 
 GetDeletions returns the Deletions field if non-nil, zero value otherwise.
 
 ### GetDeletionsOk
 
-`func (o *DbPullRequest) GetDeletionsOk() (*float32, bool)`
+`func (o *DbPullRequest) GetDeletionsOk() (*int32, bool)`
 
 GetDeletionsOk returns a tuple with the Deletions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDeletions
 
-`func (o *DbPullRequest) SetDeletions(v float32)`
+`func (o *DbPullRequest) SetDeletions(v int32)`
 
 SetDeletions sets Deletions field to given value.
 
@@ -680,20 +680,20 @@ HasDeletions returns a boolean if a field has been set.
 
 ### GetChangedFiles
 
-`func (o *DbPullRequest) GetChangedFiles() float32`
+`func (o *DbPullRequest) GetChangedFiles() int32`
 
 GetChangedFiles returns the ChangedFiles field if non-nil, zero value otherwise.
 
 ### GetChangedFilesOk
 
-`func (o *DbPullRequest) GetChangedFilesOk() (*float32, bool)`
+`func (o *DbPullRequest) GetChangedFilesOk() (*int32, bool)`
 
 GetChangedFilesOk returns a tuple with the ChangedFiles field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChangedFiles
 
-`func (o *DbPullRequest) SetChangedFiles(v float32)`
+`func (o *DbPullRequest) SetChangedFiles(v int32)`
 
 SetChangedFiles sets ChangedFiles field to given value.
 

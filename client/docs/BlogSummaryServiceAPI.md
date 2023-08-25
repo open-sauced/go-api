@@ -1,6 +1,6 @@
 # \BlogSummaryServiceAPI
 
-All URIs are relative to *https://api.opensauced.pizza*
+All URIs are relative to *http://localhost:3001*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -23,11 +23,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    createBlogSummaryDto := *openapiclient.NewCreateBlogSummaryDto(float32(250), float32(7), "formal", "english", "BlogTitle_example", "BlogMarkdown_example") // CreateBlogSummaryDto | 
+    createBlogSummaryDto := *openapiclient.NewCreateBlogSummaryDto(int32(250), int32(7), "formal", "english", "BlogTitle_example", "BlogMarkdown_example") // CreateBlogSummaryDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

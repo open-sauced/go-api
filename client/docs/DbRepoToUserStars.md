@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Star identifier | 
-**UserId** | **float32** | User identifier | 
-**RepoId** | **float32** | Repository identifier | 
+**Id** | **int32** | Star identifier | 
+**UserId** | **int32** | User identifier | 
+**RepoId** | **int32** | Repository identifier | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing star creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing star last update | [optional] 
 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewDbRepoToUserStars
 
-`func NewDbRepoToUserStars(id float32, userId float32, repoId float32, ) *DbRepoToUserStars`
+`func NewDbRepoToUserStars(id int32, userId int32, repoId int32, ) *DbRepoToUserStars`
 
 NewDbRepoToUserStars instantiates a new DbRepoToUserStars object
 This constructor will assign default values to properties that have it defined,
@@ -31,60 +31,60 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbRepoToUserStars) GetId() float32`
+`func (o *DbRepoToUserStars) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbRepoToUserStars) GetIdOk() (*float32, bool)`
+`func (o *DbRepoToUserStars) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbRepoToUserStars) SetId(v float32)`
+`func (o *DbRepoToUserStars) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetUserId
 
-`func (o *DbRepoToUserStars) GetUserId() float32`
+`func (o *DbRepoToUserStars) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbRepoToUserStars) GetUserIdOk() (*float32, bool)`
+`func (o *DbRepoToUserStars) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbRepoToUserStars) SetUserId(v float32)`
+`func (o *DbRepoToUserStars) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
 
 ### GetRepoId
 
-`func (o *DbRepoToUserStars) GetRepoId() float32`
+`func (o *DbRepoToUserStars) GetRepoId() int32`
 
 GetRepoId returns the RepoId field if non-nil, zero value otherwise.
 
 ### GetRepoIdOk
 
-`func (o *DbRepoToUserStars) GetRepoIdOk() (*float32, bool)`
+`func (o *DbRepoToUserStars) GetRepoIdOk() (*int32, bool)`
 
 GetRepoIdOk returns a tuple with the RepoId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepoId
 
-`func (o *DbRepoToUserStars) SetRepoId(v float32)`
+`func (o *DbRepoToUserStars) SetRepoId(v int32)`
 
 SetRepoId sets RepoId field to given value.
 

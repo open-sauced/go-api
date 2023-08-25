@@ -1,6 +1,6 @@
 # \UserServiceAPI
 
-All URIs are relative to *https://api.opensauced.pizza*
+All URIs are relative to *http://localhost:3001*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -31,15 +31,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
     username := "username_example" // string | 
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -69,10 +69,10 @@ Other parameters are passed through a pointer to a apiFindAllHighlightsByUsernam
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -107,15 +107,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
     username := "username_example" // string | 
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -145,10 +145,10 @@ Other parameters are passed through a pointer to a apiFindAllTopReposByUsernameR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -183,15 +183,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
     username := "username_example" // string | 
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -221,10 +221,10 @@ Other parameters are passed through a pointer to a apiFindContributorPullRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -259,7 +259,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
@@ -327,7 +327,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
@@ -395,7 +395,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
@@ -450,7 +450,7 @@ Name | Type | Description  | Notes
 
 ## GetTop10Highlights
 
-> DbTopUser GetTop10Highlights(ctx).Page(page).Limit(limit).Execute()
+> DbTopUser GetTop10Highlights(ctx).Page(page).UserId(userId).Limit(limit).Execute()
 
 List top users
 
@@ -463,16 +463,17 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    userId := int32(56) // int32 | User ID to filter followings from the list (optional) (default to 0)
+    limit := int32(56) // int32 |  (optional) (default to 10)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserServiceAPI.GetTop10Highlights(context.Background()).Page(page).Limit(limit).Execute()
+    resp, r, err := apiClient.UserServiceAPI.GetTop10Highlights(context.Background()).Page(page).UserId(userId).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.GetTop10Highlights``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -493,8 +494,9 @@ Other parameters are passed through a pointer to a apiGetTop10HighlightsRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **userId** | **int32** | User ID to filter followings from the list | [default to 0]
+ **limit** | **int32** |  | [default to 10]
 
 ### Return type
 
@@ -529,14 +531,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -561,10 +563,10 @@ Other parameters are passed through a pointer to a apiGetUserNotificationsReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -599,7 +601,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {

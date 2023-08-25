@@ -29,11 +29,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    generateCodeExplanationDto := *openapiclient.NewGenerateCodeExplanationDto(float32(250), float32(7), "english", "Code_example") // GenerateCodeExplanationDto | 
+    generateCodeExplanationDto := *openapiclient.NewGenerateCodeExplanationDto(int32(250), int32(7), "english", "Code_example") // GenerateCodeExplanationDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -91,11 +91,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    generateCodeRefactorSuggestionDto := *openapiclient.NewGenerateCodeRefactorSuggestionDto(float32(250), float32(7), "english", "Code_example") // GenerateCodeRefactorSuggestionDto | 
+    generateCodeRefactorSuggestionDto := *openapiclient.NewGenerateCodeRefactorSuggestionDto(int32(250), int32(7), "english", "Code_example") // GenerateCodeRefactorSuggestionDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -153,11 +153,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    generateCodeTestSuggestionDto := *openapiclient.NewGenerateCodeTestSuggestionDto(float32(250), float32(7), "Code_example") // GenerateCodeTestSuggestionDto | 
+    generateCodeTestSuggestionDto := *openapiclient.NewGenerateCodeTestSuggestionDto(int32(250), int32(7), "Code_example") // GenerateCodeTestSuggestionDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -215,11 +215,11 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    generatePullRequestDescriptionDto := *openapiclient.NewGeneratePullRequestDescriptionDto(float32(250), float32(7), "formal", "english") // GeneratePullRequestDescriptionDto | 
+    generatePullRequestDescriptionDto := *openapiclient.NewGeneratePullRequestDescriptionDto(int32(250), int32(7), "formal", "english") // GeneratePullRequestDescriptionDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -277,14 +277,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
     filter := openapiclient.InsightFilterFieldsEnum("recent") // InsightFilterFieldsEnum |  (optional)
     topic := "topic_example" // string |  (optional) (default to "")
     repo := "open-sauced/insights" // string |  (optional)
@@ -313,10 +313,10 @@ Other parameters are passed through a pointer to a apiGetPullRequestInsightsRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
  **filter** | [**InsightFilterFieldsEnum**](InsightFilterFieldsEnum.md) |  | 
  **topic** | **string** |  | [default to &quot;&quot;]
  **repo** | **string** |  | 
@@ -355,14 +355,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -387,10 +387,10 @@ Other parameters are passed through a pointer to a apiListAllPullRequestsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -425,14 +425,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
     orderBy := openapiclient.PullRequestOrderFieldsEnum("created_at") // PullRequestOrderFieldsEnum |  (optional)
     filter := openapiclient.InsightFilterFieldsEnum("recent") // InsightFilterFieldsEnum |  (optional)
     topic := "javascript" // string |  (optional)
@@ -464,10 +464,10 @@ Other parameters are passed through a pointer to a apiSearchAllPullRequestsReque
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
  **orderBy** | [**PullRequestOrderFieldsEnum**](PullRequestOrderFieldsEnum.md) |  | 
  **filter** | [**InsightFilterFieldsEnum**](InsightFilterFieldsEnum.md) |  | 
  **topic** | **string** |  | 

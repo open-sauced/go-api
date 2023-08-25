@@ -25,9 +25,9 @@ func Test_openapi_HighlightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test HighlightsServiceAPIService AddAFeaturedHighlight", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.HighlightsServiceAPI.AddAFeaturedHighlight(context.Background(), id).Execute()
 
@@ -39,7 +39,7 @@ func Test_openapi_HighlightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test HighlightsServiceAPIService FindAllFeaturedHighlights", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HighlightsServiceAPI.FindAllFeaturedHighlights(context.Background()).Execute()
 
@@ -51,7 +51,7 @@ func Test_openapi_HighlightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test HighlightsServiceAPIService FindAllHighlightRepos", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HighlightsServiceAPI.FindAllHighlightRepos(context.Background()).Execute()
 
@@ -63,7 +63,7 @@ func Test_openapi_HighlightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test HighlightsServiceAPIService FindAllHighlights", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HighlightsServiceAPI.FindAllHighlights(context.Background()).Execute()
 
@@ -75,7 +75,7 @@ func Test_openapi_HighlightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test HighlightsServiceAPIService FindTopHighlights", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HighlightsServiceAPI.FindTopHighlights(context.Background()).Execute()
 
@@ -87,9 +87,9 @@ func Test_openapi_HighlightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test HighlightsServiceAPIService GetAllHighlightReactions", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.HighlightsServiceAPI.GetAllHighlightReactions(context.Background(), id).Execute()
 
@@ -101,9 +101,9 @@ func Test_openapi_HighlightsServiceAPIService(t *testing.T) {
 
 	t.Run("Test HighlightsServiceAPIService RemoveAFeaturedHighlight", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.HighlightsServiceAPI.RemoveAFeaturedHighlight(context.Background(), id).Execute()
 

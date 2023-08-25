@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [http:/http:///localhost](https://http:/http:///localhost).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -22,23 +22,23 @@ var _ MappedNullable = &DbRepo{}
 // DbRepo struct for DbRepo
 type DbRepo struct {
 	// Repository identifier
-	Id float32 `json:"id"`
+	Id int32 `json:"id"`
 	// Owner user identifier
-	UserId float32 `json:"user_id"`
+	UserId int32 `json:"user_id"`
 	// Total size in bytes
-	Size float32 `json:"size"`
+	Size int32 `json:"size"`
 	// Total number of issues
-	Issues float32 `json:"issues"`
+	Issues int32 `json:"issues"`
 	// Total number of stars
-	Stars float32 `json:"stars"`
+	Stars int32 `json:"stars"`
 	// Total number of forks
-	Forks float32 `json:"forks"`
+	Forks int32 `json:"forks"`
 	// Total number of watchers
-	Watchers float32 `json:"watchers"`
+	Watchers int32 `json:"watchers"`
 	// Total number of subscribers
-	Subscribers float32 `json:"subscribers"`
+	Subscribers int32 `json:"subscribers"`
 	// Total number of network usages
-	Network float32 `json:"network"`
+	Network int32 `json:"network"`
 	// Flag indicating repo is a fork
 	IsFork bool `json:"is_fork"`
 	// Flag indicating repo is private
@@ -98,26 +98,26 @@ type DbRepo struct {
 	// Repository GitHub topics
 	Topics []string `json:"topics"`
 	// Repository number of open PRs
-	OpenPrsCount *float32 `json:"open_prs_count,omitempty"`
+	OpenPrsCount *int32 `json:"open_prs_count,omitempty"`
 	// Repository number of closed PRs
-	ClosedPrsCount *float32 `json:"closed_prs_count,omitempty"`
+	ClosedPrsCount *int32 `json:"closed_prs_count,omitempty"`
 	// Repository number of merged PRs
-	MergedPrsCount *float32 `json:"merged_prs_count,omitempty"`
+	MergedPrsCount *int32 `json:"merged_prs_count,omitempty"`
 	// Repository number of draft PRs
-	DraftPrsCount *float32 `json:"draft_prs_count,omitempty"`
+	DraftPrsCount *int32 `json:"draft_prs_count,omitempty"`
 	// Repository number of spam PRs
-	SpamPrsCount *float32 `json:"spam_prs_count,omitempty"`
+	SpamPrsCount *int32 `json:"spam_prs_count,omitempty"`
 	// Repository average open/close time for PRs
-	PrVelocityCount *float32 `json:"pr_velocity_count,omitempty"`
+	PrVelocityCount *int32 `json:"pr_velocity_count,omitempty"`
 	// Number of non-closed PRs updated within the day range
-	PrActiveCount *float32 `json:"pr_active_count,omitempty"`
+	PrActiveCount *int32 `json:"pr_active_count,omitempty"`
 }
 
 // NewDbRepo instantiates a new DbRepo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbRepo(id float32, userId float32, size float32, issues float32, stars float32, forks float32, watchers float32, subscribers float32, network float32, isFork bool, isPrivate bool, isTemplate bool, isArchived bool, isDisabled bool, hasIssues bool, hasProjects bool, hasDownloads bool, hasWiki bool, hasPages bool, hasDiscussions bool, defaultBranch string, nodeId string, gitUrl string, sshUrl string, cloneUrl string, svnUrl string, name string, fullName string, description string, language string, license string, url string, homepage string, topics []string) *DbRepo {
+func NewDbRepo(id int32, userId int32, size int32, issues int32, stars int32, forks int32, watchers int32, subscribers int32, network int32, isFork bool, isPrivate bool, isTemplate bool, isArchived bool, isDisabled bool, hasIssues bool, hasProjects bool, hasDownloads bool, hasWiki bool, hasPages bool, hasDiscussions bool, defaultBranch string, nodeId string, gitUrl string, sshUrl string, cloneUrl string, svnUrl string, name string, fullName string, description string, language string, license string, url string, homepage string, topics []string) *DbRepo {
 	this := DbRepo{}
 	this.Id = id
 	this.UserId = userId
@@ -165,9 +165,9 @@ func NewDbRepoWithDefaults() *DbRepo {
 }
 
 // GetId returns the Id field value
-func (o *DbRepo) GetId() float32 {
+func (o *DbRepo) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -176,7 +176,7 @@ func (o *DbRepo) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetIdOk() (*float32, bool) {
+func (o *DbRepo) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -184,14 +184,14 @@ func (o *DbRepo) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *DbRepo) SetId(v float32) {
+func (o *DbRepo) SetId(v int32) {
 	o.Id = v
 }
 
 // GetUserId returns the UserId field value
-func (o *DbRepo) GetUserId() float32 {
+func (o *DbRepo) GetUserId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -200,7 +200,7 @@ func (o *DbRepo) GetUserId() float32 {
 
 // GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetUserIdOk() (*float32, bool) {
+func (o *DbRepo) GetUserIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -208,14 +208,14 @@ func (o *DbRepo) GetUserIdOk() (*float32, bool) {
 }
 
 // SetUserId sets field value
-func (o *DbRepo) SetUserId(v float32) {
+func (o *DbRepo) SetUserId(v int32) {
 	o.UserId = v
 }
 
 // GetSize returns the Size field value
-func (o *DbRepo) GetSize() float32 {
+func (o *DbRepo) GetSize() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -224,7 +224,7 @@ func (o *DbRepo) GetSize() float32 {
 
 // GetSizeOk returns a tuple with the Size field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetSizeOk() (*float32, bool) {
+func (o *DbRepo) GetSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -232,14 +232,14 @@ func (o *DbRepo) GetSizeOk() (*float32, bool) {
 }
 
 // SetSize sets field value
-func (o *DbRepo) SetSize(v float32) {
+func (o *DbRepo) SetSize(v int32) {
 	o.Size = v
 }
 
 // GetIssues returns the Issues field value
-func (o *DbRepo) GetIssues() float32 {
+func (o *DbRepo) GetIssues() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -248,7 +248,7 @@ func (o *DbRepo) GetIssues() float32 {
 
 // GetIssuesOk returns a tuple with the Issues field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetIssuesOk() (*float32, bool) {
+func (o *DbRepo) GetIssuesOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -256,14 +256,14 @@ func (o *DbRepo) GetIssuesOk() (*float32, bool) {
 }
 
 // SetIssues sets field value
-func (o *DbRepo) SetIssues(v float32) {
+func (o *DbRepo) SetIssues(v int32) {
 	o.Issues = v
 }
 
 // GetStars returns the Stars field value
-func (o *DbRepo) GetStars() float32 {
+func (o *DbRepo) GetStars() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -272,7 +272,7 @@ func (o *DbRepo) GetStars() float32 {
 
 // GetStarsOk returns a tuple with the Stars field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetStarsOk() (*float32, bool) {
+func (o *DbRepo) GetStarsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -280,14 +280,14 @@ func (o *DbRepo) GetStarsOk() (*float32, bool) {
 }
 
 // SetStars sets field value
-func (o *DbRepo) SetStars(v float32) {
+func (o *DbRepo) SetStars(v int32) {
 	o.Stars = v
 }
 
 // GetForks returns the Forks field value
-func (o *DbRepo) GetForks() float32 {
+func (o *DbRepo) GetForks() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -296,7 +296,7 @@ func (o *DbRepo) GetForks() float32 {
 
 // GetForksOk returns a tuple with the Forks field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetForksOk() (*float32, bool) {
+func (o *DbRepo) GetForksOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -304,14 +304,14 @@ func (o *DbRepo) GetForksOk() (*float32, bool) {
 }
 
 // SetForks sets field value
-func (o *DbRepo) SetForks(v float32) {
+func (o *DbRepo) SetForks(v int32) {
 	o.Forks = v
 }
 
 // GetWatchers returns the Watchers field value
-func (o *DbRepo) GetWatchers() float32 {
+func (o *DbRepo) GetWatchers() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -320,7 +320,7 @@ func (o *DbRepo) GetWatchers() float32 {
 
 // GetWatchersOk returns a tuple with the Watchers field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetWatchersOk() (*float32, bool) {
+func (o *DbRepo) GetWatchersOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -328,14 +328,14 @@ func (o *DbRepo) GetWatchersOk() (*float32, bool) {
 }
 
 // SetWatchers sets field value
-func (o *DbRepo) SetWatchers(v float32) {
+func (o *DbRepo) SetWatchers(v int32) {
 	o.Watchers = v
 }
 
 // GetSubscribers returns the Subscribers field value
-func (o *DbRepo) GetSubscribers() float32 {
+func (o *DbRepo) GetSubscribers() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -344,7 +344,7 @@ func (o *DbRepo) GetSubscribers() float32 {
 
 // GetSubscribersOk returns a tuple with the Subscribers field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetSubscribersOk() (*float32, bool) {
+func (o *DbRepo) GetSubscribersOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -352,14 +352,14 @@ func (o *DbRepo) GetSubscribersOk() (*float32, bool) {
 }
 
 // SetSubscribers sets field value
-func (o *DbRepo) SetSubscribers(v float32) {
+func (o *DbRepo) SetSubscribers(v int32) {
 	o.Subscribers = v
 }
 
 // GetNetwork returns the Network field value
-func (o *DbRepo) GetNetwork() float32 {
+func (o *DbRepo) GetNetwork() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -368,7 +368,7 @@ func (o *DbRepo) GetNetwork() float32 {
 
 // GetNetworkOk returns a tuple with the Network field value
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetNetworkOk() (*float32, bool) {
+func (o *DbRepo) GetNetworkOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -376,7 +376,7 @@ func (o *DbRepo) GetNetworkOk() (*float32, bool) {
 }
 
 // SetNetwork sets field value
-func (o *DbRepo) SetNetwork(v float32) {
+func (o *DbRepo) SetNetwork(v int32) {
 	o.Network = v
 }
 
@@ -1109,9 +1109,9 @@ func (o *DbRepo) SetTopics(v []string) {
 }
 
 // GetOpenPrsCount returns the OpenPrsCount field value if set, zero value otherwise.
-func (o *DbRepo) GetOpenPrsCount() float32 {
+func (o *DbRepo) GetOpenPrsCount() int32 {
 	if o == nil || IsNil(o.OpenPrsCount) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.OpenPrsCount
@@ -1119,7 +1119,7 @@ func (o *DbRepo) GetOpenPrsCount() float32 {
 
 // GetOpenPrsCountOk returns a tuple with the OpenPrsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetOpenPrsCountOk() (*float32, bool) {
+func (o *DbRepo) GetOpenPrsCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.OpenPrsCount) {
 		return nil, false
 	}
@@ -1135,15 +1135,15 @@ func (o *DbRepo) HasOpenPrsCount() bool {
 	return false
 }
 
-// SetOpenPrsCount gets a reference to the given float32 and assigns it to the OpenPrsCount field.
-func (o *DbRepo) SetOpenPrsCount(v float32) {
+// SetOpenPrsCount gets a reference to the given int32 and assigns it to the OpenPrsCount field.
+func (o *DbRepo) SetOpenPrsCount(v int32) {
 	o.OpenPrsCount = &v
 }
 
 // GetClosedPrsCount returns the ClosedPrsCount field value if set, zero value otherwise.
-func (o *DbRepo) GetClosedPrsCount() float32 {
+func (o *DbRepo) GetClosedPrsCount() int32 {
 	if o == nil || IsNil(o.ClosedPrsCount) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.ClosedPrsCount
@@ -1151,7 +1151,7 @@ func (o *DbRepo) GetClosedPrsCount() float32 {
 
 // GetClosedPrsCountOk returns a tuple with the ClosedPrsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetClosedPrsCountOk() (*float32, bool) {
+func (o *DbRepo) GetClosedPrsCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.ClosedPrsCount) {
 		return nil, false
 	}
@@ -1167,15 +1167,15 @@ func (o *DbRepo) HasClosedPrsCount() bool {
 	return false
 }
 
-// SetClosedPrsCount gets a reference to the given float32 and assigns it to the ClosedPrsCount field.
-func (o *DbRepo) SetClosedPrsCount(v float32) {
+// SetClosedPrsCount gets a reference to the given int32 and assigns it to the ClosedPrsCount field.
+func (o *DbRepo) SetClosedPrsCount(v int32) {
 	o.ClosedPrsCount = &v
 }
 
 // GetMergedPrsCount returns the MergedPrsCount field value if set, zero value otherwise.
-func (o *DbRepo) GetMergedPrsCount() float32 {
+func (o *DbRepo) GetMergedPrsCount() int32 {
 	if o == nil || IsNil(o.MergedPrsCount) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.MergedPrsCount
@@ -1183,7 +1183,7 @@ func (o *DbRepo) GetMergedPrsCount() float32 {
 
 // GetMergedPrsCountOk returns a tuple with the MergedPrsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetMergedPrsCountOk() (*float32, bool) {
+func (o *DbRepo) GetMergedPrsCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.MergedPrsCount) {
 		return nil, false
 	}
@@ -1199,15 +1199,15 @@ func (o *DbRepo) HasMergedPrsCount() bool {
 	return false
 }
 
-// SetMergedPrsCount gets a reference to the given float32 and assigns it to the MergedPrsCount field.
-func (o *DbRepo) SetMergedPrsCount(v float32) {
+// SetMergedPrsCount gets a reference to the given int32 and assigns it to the MergedPrsCount field.
+func (o *DbRepo) SetMergedPrsCount(v int32) {
 	o.MergedPrsCount = &v
 }
 
 // GetDraftPrsCount returns the DraftPrsCount field value if set, zero value otherwise.
-func (o *DbRepo) GetDraftPrsCount() float32 {
+func (o *DbRepo) GetDraftPrsCount() int32 {
 	if o == nil || IsNil(o.DraftPrsCount) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.DraftPrsCount
@@ -1215,7 +1215,7 @@ func (o *DbRepo) GetDraftPrsCount() float32 {
 
 // GetDraftPrsCountOk returns a tuple with the DraftPrsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetDraftPrsCountOk() (*float32, bool) {
+func (o *DbRepo) GetDraftPrsCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.DraftPrsCount) {
 		return nil, false
 	}
@@ -1231,15 +1231,15 @@ func (o *DbRepo) HasDraftPrsCount() bool {
 	return false
 }
 
-// SetDraftPrsCount gets a reference to the given float32 and assigns it to the DraftPrsCount field.
-func (o *DbRepo) SetDraftPrsCount(v float32) {
+// SetDraftPrsCount gets a reference to the given int32 and assigns it to the DraftPrsCount field.
+func (o *DbRepo) SetDraftPrsCount(v int32) {
 	o.DraftPrsCount = &v
 }
 
 // GetSpamPrsCount returns the SpamPrsCount field value if set, zero value otherwise.
-func (o *DbRepo) GetSpamPrsCount() float32 {
+func (o *DbRepo) GetSpamPrsCount() int32 {
 	if o == nil || IsNil(o.SpamPrsCount) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.SpamPrsCount
@@ -1247,7 +1247,7 @@ func (o *DbRepo) GetSpamPrsCount() float32 {
 
 // GetSpamPrsCountOk returns a tuple with the SpamPrsCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetSpamPrsCountOk() (*float32, bool) {
+func (o *DbRepo) GetSpamPrsCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.SpamPrsCount) {
 		return nil, false
 	}
@@ -1263,15 +1263,15 @@ func (o *DbRepo) HasSpamPrsCount() bool {
 	return false
 }
 
-// SetSpamPrsCount gets a reference to the given float32 and assigns it to the SpamPrsCount field.
-func (o *DbRepo) SetSpamPrsCount(v float32) {
+// SetSpamPrsCount gets a reference to the given int32 and assigns it to the SpamPrsCount field.
+func (o *DbRepo) SetSpamPrsCount(v int32) {
 	o.SpamPrsCount = &v
 }
 
 // GetPrVelocityCount returns the PrVelocityCount field value if set, zero value otherwise.
-func (o *DbRepo) GetPrVelocityCount() float32 {
+func (o *DbRepo) GetPrVelocityCount() int32 {
 	if o == nil || IsNil(o.PrVelocityCount) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.PrVelocityCount
@@ -1279,7 +1279,7 @@ func (o *DbRepo) GetPrVelocityCount() float32 {
 
 // GetPrVelocityCountOk returns a tuple with the PrVelocityCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetPrVelocityCountOk() (*float32, bool) {
+func (o *DbRepo) GetPrVelocityCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.PrVelocityCount) {
 		return nil, false
 	}
@@ -1295,15 +1295,15 @@ func (o *DbRepo) HasPrVelocityCount() bool {
 	return false
 }
 
-// SetPrVelocityCount gets a reference to the given float32 and assigns it to the PrVelocityCount field.
-func (o *DbRepo) SetPrVelocityCount(v float32) {
+// SetPrVelocityCount gets a reference to the given int32 and assigns it to the PrVelocityCount field.
+func (o *DbRepo) SetPrVelocityCount(v int32) {
 	o.PrVelocityCount = &v
 }
 
 // GetPrActiveCount returns the PrActiveCount field value if set, zero value otherwise.
-func (o *DbRepo) GetPrActiveCount() float32 {
+func (o *DbRepo) GetPrActiveCount() int32 {
 	if o == nil || IsNil(o.PrActiveCount) {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.PrActiveCount
@@ -1311,7 +1311,7 @@ func (o *DbRepo) GetPrActiveCount() float32 {
 
 // GetPrActiveCountOk returns a tuple with the PrActiveCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DbRepo) GetPrActiveCountOk() (*float32, bool) {
+func (o *DbRepo) GetPrActiveCountOk() (*int32, bool) {
 	if o == nil || IsNil(o.PrActiveCount) {
 		return nil, false
 	}
@@ -1327,13 +1327,13 @@ func (o *DbRepo) HasPrActiveCount() bool {
 	return false
 }
 
-// SetPrActiveCount gets a reference to the given float32 and assigns it to the PrActiveCount field.
-func (o *DbRepo) SetPrActiveCount(v float32) {
+// SetPrActiveCount gets a reference to the given int32 and assigns it to the PrActiveCount field.
+func (o *DbRepo) SetPrActiveCount(v int32) {
 	o.PrActiveCount = &v
 }
 
 func (o DbRepo) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1447,5 +1447,3 @@ func (v *NullableDbRepo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

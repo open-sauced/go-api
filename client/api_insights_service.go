@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,13 +20,12 @@ import (
 	"strings"
 )
 
-
 // InsightsServiceAPIService InsightsServiceAPI service
 type InsightsServiceAPIService service
 
 type ApiAddInsightForUserRequest struct {
-	ctx context.Context
-	ApiService *InsightsServiceAPIService
+	ctx              context.Context
+	ApiService       *InsightsServiceAPIService
 	createInsightDto *CreateInsightDto
 }
 
@@ -42,24 +41,25 @@ func (r ApiAddInsightForUserRequest) Execute() (*DbInsight, *http.Response, erro
 /*
 AddInsightForUser Adds a new insight page for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAddInsightForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAddInsightForUserRequest
 */
 func (a *InsightsServiceAPIService) AddInsightForUser(ctx context.Context) ApiAddInsightForUserRequest {
 	return ApiAddInsightForUserRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DbInsight
+//
+//	@return DbInsight
 func (a *InsightsServiceAPIService) AddInsightForUserExecute(r ApiAddInsightForUserRequest) (*DbInsight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbInsight
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbInsight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.AddInsightForUser")
@@ -133,9 +133,9 @@ func (a *InsightsServiceAPIService) AddInsightForUserExecute(r ApiAddInsightForU
 }
 
 type ApiAddMemberForInsightRequest struct {
-	ctx context.Context
-	ApiService *InsightsServiceAPIService
-	id float32
+	ctx                    context.Context
+	ApiService             *InsightsServiceAPIService
+	id                     int32
 	createInsightMemberDto *CreateInsightMemberDto
 }
 
@@ -151,26 +151,27 @@ func (r ApiAddMemberForInsightRequest) Execute() (*DbInsightMember, *http.Respon
 /*
 AddMemberForInsight Adds a new member for the insight
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiAddMemberForInsightRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiAddMemberForInsightRequest
 */
-func (a *InsightsServiceAPIService) AddMemberForInsight(ctx context.Context, id float32) ApiAddMemberForInsightRequest {
+func (a *InsightsServiceAPIService) AddMemberForInsight(ctx context.Context, id int32) ApiAddMemberForInsightRequest {
 	return ApiAddMemberForInsightRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbInsightMember
+//
+//	@return DbInsightMember
 func (a *InsightsServiceAPIService) AddMemberForInsightExecute(r ApiAddMemberForInsightRequest) (*DbInsightMember, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbInsightMember
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbInsightMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.AddMemberForInsight")
@@ -245,21 +246,21 @@ func (a *InsightsServiceAPIService) AddMemberForInsightExecute(r ApiAddMemberFor
 }
 
 type ApiFindAllInsightMembersRequest struct {
-	ctx context.Context
-	ApiService *InsightsServiceAPIService
-	id float32
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *InsightsServiceAPIService
+	id             int32
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllInsightMembersRequest) Page(page float32) ApiFindAllInsightMembersRequest {
+func (r ApiFindAllInsightMembersRequest) Page(page int32) ApiFindAllInsightMembersRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllInsightMembersRequest) Limit(limit float32) ApiFindAllInsightMembersRequest {
+func (r ApiFindAllInsightMembersRequest) Limit(limit int32) ApiFindAllInsightMembersRequest {
 	r.limit = &limit
 	return r
 }
@@ -270,7 +271,7 @@ func (r ApiFindAllInsightMembersRequest) OrderDirection(orderDirection OrderDire
 }
 
 // Range in days
-func (r ApiFindAllInsightMembersRequest) Range_(range_ float32) ApiFindAllInsightMembersRequest {
+func (r ApiFindAllInsightMembersRequest) Range_(range_ int32) ApiFindAllInsightMembersRequest {
 	r.range_ = &range_
 	return r
 }
@@ -282,26 +283,27 @@ func (r ApiFindAllInsightMembersRequest) Execute() (*FindAllInsightMembers200Res
 /*
 FindAllInsightMembers Listing all members for an insight and paginate them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiFindAllInsightMembersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiFindAllInsightMembersRequest
 */
-func (a *InsightsServiceAPIService) FindAllInsightMembers(ctx context.Context, id float32) ApiFindAllInsightMembersRequest {
+func (a *InsightsServiceAPIService) FindAllInsightMembers(ctx context.Context, id int32) ApiFindAllInsightMembersRequest {
 	return ApiFindAllInsightMembersRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllInsightMembers200Response
+//
+//	@return FindAllInsightMembers200Response
 func (a *InsightsServiceAPIService) FindAllInsightMembersExecute(r ApiFindAllInsightMembersRequest) (*FindAllInsightMembers200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllInsightMembers200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllInsightMembers200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.FindAllInsightMembers")
@@ -383,20 +385,20 @@ func (a *InsightsServiceAPIService) FindAllInsightMembersExecute(r ApiFindAllIns
 }
 
 type ApiFindAllInsightsByUserIdRequest struct {
-	ctx context.Context
-	ApiService *InsightsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *InsightsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllInsightsByUserIdRequest) Page(page float32) ApiFindAllInsightsByUserIdRequest {
+func (r ApiFindAllInsightsByUserIdRequest) Page(page int32) ApiFindAllInsightsByUserIdRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllInsightsByUserIdRequest) Limit(limit float32) ApiFindAllInsightsByUserIdRequest {
+func (r ApiFindAllInsightsByUserIdRequest) Limit(limit int32) ApiFindAllInsightsByUserIdRequest {
 	r.limit = &limit
 	return r
 }
@@ -407,7 +409,7 @@ func (r ApiFindAllInsightsByUserIdRequest) OrderDirection(orderDirection OrderDi
 }
 
 // Range in days
-func (r ApiFindAllInsightsByUserIdRequest) Range_(range_ float32) ApiFindAllInsightsByUserIdRequest {
+func (r ApiFindAllInsightsByUserIdRequest) Range_(range_ int32) ApiFindAllInsightsByUserIdRequest {
 	r.range_ = &range_
 	return r
 }
@@ -419,24 +421,25 @@ func (r ApiFindAllInsightsByUserIdRequest) Execute() (*FindAllInsightsByUserId20
 /*
 FindAllInsightsByUserId Listing all insights for a user and paginate them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllInsightsByUserIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllInsightsByUserIdRequest
 */
 func (a *InsightsServiceAPIService) FindAllInsightsByUserId(ctx context.Context) ApiFindAllInsightsByUserIdRequest {
 	return ApiFindAllInsightsByUserIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllInsightsByUserId200Response
+//
+//	@return FindAllInsightsByUserId200Response
 func (a *InsightsServiceAPIService) FindAllInsightsByUserIdExecute(r ApiFindAllInsightsByUserIdRequest) (*FindAllInsightsByUserId200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllInsightsByUserId200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllInsightsByUserId200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.FindAllInsightsByUserId")
@@ -517,9 +520,9 @@ func (a *InsightsServiceAPIService) FindAllInsightsByUserIdExecute(r ApiFindAllI
 }
 
 type ApiFindInsightPageByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InsightsServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiFindInsightPageByIdRequest) Execute() (*DbInsight, *http.Response, error) {
@@ -529,26 +532,27 @@ func (r ApiFindInsightPageByIdRequest) Execute() (*DbInsight, *http.Response, er
 /*
 FindInsightPageById Finds a insight page by :id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiFindInsightPageByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiFindInsightPageByIdRequest
 */
-func (a *InsightsServiceAPIService) FindInsightPageById(ctx context.Context, id float32) ApiFindInsightPageByIdRequest {
+func (a *InsightsServiceAPIService) FindInsightPageById(ctx context.Context, id int32) ApiFindInsightPageByIdRequest {
 	return ApiFindInsightPageByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbInsight
+//
+//	@return DbInsight
 func (a *InsightsServiceAPIService) FindInsightPageByIdExecute(r ApiFindInsightPageByIdRequest) (*DbInsight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbInsight
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbInsight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.FindInsightPageById")
@@ -618,9 +622,9 @@ func (a *InsightsServiceAPIService) FindInsightPageByIdExecute(r ApiFindInsightP
 }
 
 type ApiRemoveInsightForUserRequest struct {
-	ctx context.Context
-	ApiService *InsightsServiceAPIService
-	id float32
+	ctx              context.Context
+	ApiService       *InsightsServiceAPIService
+	id               int32
 	updateInsightDto *UpdateInsightDto
 }
 
@@ -636,26 +640,27 @@ func (r ApiRemoveInsightForUserRequest) Execute() (*DbInsight, *http.Response, e
 /*
 RemoveInsightForUser Removes an insight page for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiRemoveInsightForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiRemoveInsightForUserRequest
 */
-func (a *InsightsServiceAPIService) RemoveInsightForUser(ctx context.Context, id float32) ApiRemoveInsightForUserRequest {
+func (a *InsightsServiceAPIService) RemoveInsightForUser(ctx context.Context, id int32) ApiRemoveInsightForUserRequest {
 	return ApiRemoveInsightForUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbInsight
+//
+//	@return DbInsight
 func (a *InsightsServiceAPIService) RemoveInsightForUserExecute(r ApiRemoveInsightForUserRequest) (*DbInsight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbInsight
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbInsight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.RemoveInsightForUser")
@@ -730,10 +735,10 @@ func (a *InsightsServiceAPIService) RemoveInsightForUserExecute(r ApiRemoveInsig
 }
 
 type ApiRemoveInsightMemberByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *InsightsServiceAPIService
-	id float32
-	memberId string
+	id         int32
+	memberId   string
 }
 
 func (r ApiRemoveInsightMemberByIdRequest) Execute() (*DbInsight, *http.Response, error) {
@@ -743,28 +748,29 @@ func (r ApiRemoveInsightMemberByIdRequest) Execute() (*DbInsight, *http.Response
 /*
 RemoveInsightMemberById Removes a member from an insight
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @param memberId
- @return ApiRemoveInsightMemberByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@param memberId
+	@return ApiRemoveInsightMemberByIdRequest
 */
-func (a *InsightsServiceAPIService) RemoveInsightMemberById(ctx context.Context, id float32, memberId string) ApiRemoveInsightMemberByIdRequest {
+func (a *InsightsServiceAPIService) RemoveInsightMemberById(ctx context.Context, id int32, memberId string) ApiRemoveInsightMemberByIdRequest {
 	return ApiRemoveInsightMemberByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
-		memberId: memberId,
+		ctx:        ctx,
+		id:         id,
+		memberId:   memberId,
 	}
 }
 
 // Execute executes the request
-//  @return DbInsight
+//
+//	@return DbInsight
 func (a *InsightsServiceAPIService) RemoveInsightMemberByIdExecute(r ApiRemoveInsightMemberByIdRequest) (*DbInsight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbInsight
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbInsight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.RemoveInsightMemberById")
@@ -835,9 +841,9 @@ func (a *InsightsServiceAPIService) RemoveInsightMemberByIdExecute(r ApiRemoveIn
 }
 
 type ApiUpdateInsightForUserRequest struct {
-	ctx context.Context
-	ApiService *InsightsServiceAPIService
-	id float32
+	ctx              context.Context
+	ApiService       *InsightsServiceAPIService
+	id               int32
 	updateInsightDto *UpdateInsightDto
 }
 
@@ -853,26 +859,27 @@ func (r ApiUpdateInsightForUserRequest) Execute() (*DbInsight, *http.Response, e
 /*
 UpdateInsightForUser Updates an insight page for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiUpdateInsightForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiUpdateInsightForUserRequest
 */
-func (a *InsightsServiceAPIService) UpdateInsightForUser(ctx context.Context, id float32) ApiUpdateInsightForUserRequest {
+func (a *InsightsServiceAPIService) UpdateInsightForUser(ctx context.Context, id int32) ApiUpdateInsightForUserRequest {
 	return ApiUpdateInsightForUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbInsight
+//
+//	@return DbInsight
 func (a *InsightsServiceAPIService) UpdateInsightForUserExecute(r ApiUpdateInsightForUserRequest) (*DbInsight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbInsight
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbInsight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.UpdateInsightForUser")
@@ -947,10 +954,10 @@ func (a *InsightsServiceAPIService) UpdateInsightForUserExecute(r ApiUpdateInsig
 }
 
 type ApiUpdateInsightMemberRequest struct {
-	ctx context.Context
-	ApiService *InsightsServiceAPIService
-	id float32
-	memberId string
+	ctx                    context.Context
+	ApiService             *InsightsServiceAPIService
+	id                     int32
+	memberId               string
 	updateInsightMemberDto *UpdateInsightMemberDto
 }
 
@@ -966,28 +973,29 @@ func (r ApiUpdateInsightMemberRequest) Execute() (*DbInsight, *http.Response, er
 /*
 UpdateInsightMember Updates an insight member information
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @param memberId
- @return ApiUpdateInsightMemberRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@param memberId
+	@return ApiUpdateInsightMemberRequest
 */
-func (a *InsightsServiceAPIService) UpdateInsightMember(ctx context.Context, id float32, memberId string) ApiUpdateInsightMemberRequest {
+func (a *InsightsServiceAPIService) UpdateInsightMember(ctx context.Context, id int32, memberId string) ApiUpdateInsightMemberRequest {
 	return ApiUpdateInsightMemberRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
-		memberId: memberId,
+		ctx:        ctx,
+		id:         id,
+		memberId:   memberId,
 	}
 }
 
 // Execute executes the request
-//  @return DbInsight
+//
+//	@return DbInsight
 func (a *InsightsServiceAPIService) UpdateInsightMemberExecute(r ApiUpdateInsightMemberRequest) (*DbInsight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbInsight
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbInsight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "InsightsServiceAPIService.UpdateInsightMember")

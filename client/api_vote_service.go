@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,14 +20,13 @@ import (
 	"strings"
 )
 
-
 // VoteServiceAPIService VoteServiceAPI service
 type VoteServiceAPIService service
 
 type ApiDownVoteOneByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *VoteServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiDownVoteOneByIdRequest) Execute() (*DbRepoToUserVotes, *http.Response, error) {
@@ -37,26 +36,27 @@ func (r ApiDownVoteOneByIdRequest) Execute() (*DbRepoToUserVotes, *http.Response
 /*
 DownVoteOneById Finds a repo by :id and removes existing vote
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiDownVoteOneByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiDownVoteOneByIdRequest
 */
-func (a *VoteServiceAPIService) DownVoteOneById(ctx context.Context, id float32) ApiDownVoteOneByIdRequest {
+func (a *VoteServiceAPIService) DownVoteOneById(ctx context.Context, id int32) ApiDownVoteOneByIdRequest {
 	return ApiDownVoteOneByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserVotes
+//
+//	@return DbRepoToUserVotes
 func (a *VoteServiceAPIService) DownVoteOneByIdExecute(r ApiDownVoteOneByIdRequest) (*DbRepoToUserVotes, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserVotes
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserVotes
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VoteServiceAPIService.DownVoteOneById")
@@ -126,10 +126,10 @@ func (a *VoteServiceAPIService) DownVoteOneByIdExecute(r ApiDownVoteOneByIdReque
 }
 
 type ApiDownVoteOneByOwnerAndRepoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *VoteServiceAPIService
-	owner string
-	repo string
+	owner      string
+	repo       string
 }
 
 func (r ApiDownVoteOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserVotes, *http.Response, error) {
@@ -139,28 +139,29 @@ func (r ApiDownVoteOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserVotes, *htt
 /*
 DownVoteOneByOwnerAndRepo Finds a repo by :owner and :repo and removes existing vote
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiDownVoteOneByOwnerAndRepoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiDownVoteOneByOwnerAndRepoRequest
 */
 func (a *VoteServiceAPIService) DownVoteOneByOwnerAndRepo(ctx context.Context, owner string, repo string) ApiDownVoteOneByOwnerAndRepoRequest {
 	return ApiDownVoteOneByOwnerAndRepoRequest{
 		ApiService: a,
-		ctx: ctx,
-		owner: owner,
-		repo: repo,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserVotes
+//
+//	@return DbRepoToUserVotes
 func (a *VoteServiceAPIService) DownVoteOneByOwnerAndRepoExecute(r ApiDownVoteOneByOwnerAndRepoRequest) (*DbRepoToUserVotes, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserVotes
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserVotes
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VoteServiceAPIService.DownVoteOneByOwnerAndRepo")
@@ -231,21 +232,21 @@ func (a *VoteServiceAPIService) DownVoteOneByOwnerAndRepoExecute(r ApiDownVoteOn
 }
 
 type ApiFindAllUserVotedRequest struct {
-	ctx context.Context
-	ApiService *VoteServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *VoteServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	orderBy *RepoOrderFieldsEnum
+	range_         *int32
+	orderBy        *RepoOrderFieldsEnum
 }
 
-func (r ApiFindAllUserVotedRequest) Page(page float32) ApiFindAllUserVotedRequest {
+func (r ApiFindAllUserVotedRequest) Page(page int32) ApiFindAllUserVotedRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllUserVotedRequest) Limit(limit float32) ApiFindAllUserVotedRequest {
+func (r ApiFindAllUserVotedRequest) Limit(limit int32) ApiFindAllUserVotedRequest {
 	r.limit = &limit
 	return r
 }
@@ -256,7 +257,7 @@ func (r ApiFindAllUserVotedRequest) OrderDirection(orderDirection OrderDirection
 }
 
 // Range in days
-func (r ApiFindAllUserVotedRequest) Range_(range_ float32) ApiFindAllUserVotedRequest {
+func (r ApiFindAllUserVotedRequest) Range_(range_ int32) ApiFindAllUserVotedRequest {
 	r.range_ = &range_
 	return r
 }
@@ -273,24 +274,25 @@ func (r ApiFindAllUserVotedRequest) Execute() (*FindAllTopReposByUsername200Resp
 /*
 FindAllUserVoted Finds all repos voted by authenticated user and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllUserVotedRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllUserVotedRequest
 */
 func (a *VoteServiceAPIService) FindAllUserVoted(ctx context.Context) ApiFindAllUserVotedRequest {
 	return ApiFindAllUserVotedRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllTopReposByUsername200Response
+//
+//	@return FindAllTopReposByUsername200Response
 func (a *VoteServiceAPIService) FindAllUserVotedExecute(r ApiFindAllUserVotedRequest) (*FindAllTopReposByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllTopReposByUsername200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllTopReposByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VoteServiceAPIService.FindAllUserVoted")
@@ -374,9 +376,9 @@ func (a *VoteServiceAPIService) FindAllUserVotedExecute(r ApiFindAllUserVotedReq
 }
 
 type ApiFindOneByRepoIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *VoteServiceAPIService
-	repoId float32
+	repoId     int32
 }
 
 func (r ApiFindOneByRepoIdRequest) Execute() (*VotedRepoDto, *http.Response, error) {
@@ -386,26 +388,27 @@ func (r ApiFindOneByRepoIdRequest) Execute() (*VotedRepoDto, *http.Response, err
 /*
 FindOneByRepoId Finds a repo by :repoId and returns if authenticated user has voted for it
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param repoId
- @return ApiFindOneByRepoIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param repoId
+	@return ApiFindOneByRepoIdRequest
 */
-func (a *VoteServiceAPIService) FindOneByRepoId(ctx context.Context, repoId float32) ApiFindOneByRepoIdRequest {
+func (a *VoteServiceAPIService) FindOneByRepoId(ctx context.Context, repoId int32) ApiFindOneByRepoIdRequest {
 	return ApiFindOneByRepoIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		repoId: repoId,
+		ctx:        ctx,
+		repoId:     repoId,
 	}
 }
 
 // Execute executes the request
-//  @return VotedRepoDto
+//
+//	@return VotedRepoDto
 func (a *VoteServiceAPIService) FindOneByRepoIdExecute(r ApiFindOneByRepoIdRequest) (*VotedRepoDto, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *VotedRepoDto
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VotedRepoDto
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VoteServiceAPIService.FindOneByRepoId")
@@ -475,9 +478,9 @@ func (a *VoteServiceAPIService) FindOneByRepoIdExecute(r ApiFindOneByRepoIdReque
 }
 
 type ApiVoteOneByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *VoteServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiVoteOneByIdRequest) Execute() (*DbRepoToUserVotes, *http.Response, error) {
@@ -487,26 +490,27 @@ func (r ApiVoteOneByIdRequest) Execute() (*DbRepoToUserVotes, *http.Response, er
 /*
 VoteOneById Finds a repo by :id and adds a vote
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiVoteOneByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiVoteOneByIdRequest
 */
-func (a *VoteServiceAPIService) VoteOneById(ctx context.Context, id float32) ApiVoteOneByIdRequest {
+func (a *VoteServiceAPIService) VoteOneById(ctx context.Context, id int32) ApiVoteOneByIdRequest {
 	return ApiVoteOneByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserVotes
+//
+//	@return DbRepoToUserVotes
 func (a *VoteServiceAPIService) VoteOneByIdExecute(r ApiVoteOneByIdRequest) (*DbRepoToUserVotes, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserVotes
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserVotes
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VoteServiceAPIService.VoteOneById")
@@ -576,10 +580,10 @@ func (a *VoteServiceAPIService) VoteOneByIdExecute(r ApiVoteOneByIdRequest) (*Db
 }
 
 type ApiVoteOneByOwnerAndRepoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *VoteServiceAPIService
-	owner string
-	repo string
+	owner      string
+	repo       string
 }
 
 func (r ApiVoteOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserVotes, *http.Response, error) {
@@ -589,28 +593,29 @@ func (r ApiVoteOneByOwnerAndRepoRequest) Execute() (*DbRepoToUserVotes, *http.Re
 /*
 VoteOneByOwnerAndRepo Finds a repo by :owner and :repo and adds a vote
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiVoteOneByOwnerAndRepoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiVoteOneByOwnerAndRepoRequest
 */
 func (a *VoteServiceAPIService) VoteOneByOwnerAndRepo(ctx context.Context, owner string, repo string) ApiVoteOneByOwnerAndRepoRequest {
 	return ApiVoteOneByOwnerAndRepoRequest{
 		ApiService: a,
-		ctx: ctx,
-		owner: owner,
-		repo: repo,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepoToUserVotes
+//
+//	@return DbRepoToUserVotes
 func (a *VoteServiceAPIService) VoteOneByOwnerAndRepoExecute(r ApiVoteOneByOwnerAndRepoRequest) (*DbRepoToUserVotes, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepoToUserVotes
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoToUserVotes
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VoteServiceAPIService.VoteOneByOwnerAndRepo")

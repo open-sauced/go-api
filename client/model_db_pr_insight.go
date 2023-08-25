@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -21,24 +21,24 @@ var _ MappedNullable = &DbPRInsight{}
 // DbPRInsight struct for DbPRInsight
 type DbPRInsight struct {
 	// Repository identifier
-	Id float32 `json:"id"`
+	Id int32 `json:"id"`
 	// Selected interval in numerical days, goes back with number, 0 means today
-	Interval float32 `json:"interval"`
+	Interval int32 `json:"interval"`
 	// Selected interval computed date in human readable format
-	Day float32 `json:"day"`
+	Day DateTime `json:"day"`
 	// PR Type: all requests count
-	AllPrs float32 `json:"all_prs"`
+	AllPrs int32 `json:"all_prs"`
 	// PR Type: accepted requests count
-	AcceptedPrs float32 `json:"accepted_prs"`
+	AcceptedPrs int32 `json:"accepted_prs"`
 	// PR Type: spam requests count
-	SpamPrs float32 `json:"spam_prs"`
+	SpamPrs int32 `json:"spam_prs"`
 }
 
 // NewDbPRInsight instantiates a new DbPRInsight object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbPRInsight(id float32, interval float32, day float32, allPrs float32, acceptedPrs float32, spamPrs float32) *DbPRInsight {
+func NewDbPRInsight(id int32, interval int32, day DateTime, allPrs int32, acceptedPrs int32, spamPrs int32) *DbPRInsight {
 	this := DbPRInsight{}
 	this.Id = id
 	this.Interval = interval
@@ -54,15 +54,15 @@ func NewDbPRInsight(id float32, interval float32, day float32, allPrs float32, a
 // but it doesn't guarantee that properties required by API are set
 func NewDbPRInsightWithDefaults() *DbPRInsight {
 	this := DbPRInsight{}
-	var interval float32 = 0
+	var interval int32 = 0
 	this.Interval = interval
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *DbPRInsight) GetId() float32 {
+func (o *DbPRInsight) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -71,7 +71,7 @@ func (o *DbPRInsight) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetIdOk() (*float32, bool) {
+func (o *DbPRInsight) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,14 +79,14 @@ func (o *DbPRInsight) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *DbPRInsight) SetId(v float32) {
+func (o *DbPRInsight) SetId(v int32) {
 	o.Id = v
 }
 
 // GetInterval returns the Interval field value
-func (o *DbPRInsight) GetInterval() float32 {
+func (o *DbPRInsight) GetInterval() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -95,7 +95,7 @@ func (o *DbPRInsight) GetInterval() float32 {
 
 // GetIntervalOk returns a tuple with the Interval field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetIntervalOk() (*float32, bool) {
+func (o *DbPRInsight) GetIntervalOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,14 +103,14 @@ func (o *DbPRInsight) GetIntervalOk() (*float32, bool) {
 }
 
 // SetInterval sets field value
-func (o *DbPRInsight) SetInterval(v float32) {
+func (o *DbPRInsight) SetInterval(v int32) {
 	o.Interval = v
 }
 
 // GetDay returns the Day field value
-func (o *DbPRInsight) GetDay() float32 {
+func (o *DbPRInsight) GetDay() DateTime {
 	if o == nil {
-		var ret float32
+		var ret DateTime
 		return ret
 	}
 
@@ -119,7 +119,7 @@ func (o *DbPRInsight) GetDay() float32 {
 
 // GetDayOk returns a tuple with the Day field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetDayOk() (*float32, bool) {
+func (o *DbPRInsight) GetDayOk() (*DateTime, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -127,14 +127,14 @@ func (o *DbPRInsight) GetDayOk() (*float32, bool) {
 }
 
 // SetDay sets field value
-func (o *DbPRInsight) SetDay(v float32) {
+func (o *DbPRInsight) SetDay(v DateTime) {
 	o.Day = v
 }
 
 // GetAllPrs returns the AllPrs field value
-func (o *DbPRInsight) GetAllPrs() float32 {
+func (o *DbPRInsight) GetAllPrs() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -143,7 +143,7 @@ func (o *DbPRInsight) GetAllPrs() float32 {
 
 // GetAllPrsOk returns a tuple with the AllPrs field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetAllPrsOk() (*float32, bool) {
+func (o *DbPRInsight) GetAllPrsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -151,14 +151,14 @@ func (o *DbPRInsight) GetAllPrsOk() (*float32, bool) {
 }
 
 // SetAllPrs sets field value
-func (o *DbPRInsight) SetAllPrs(v float32) {
+func (o *DbPRInsight) SetAllPrs(v int32) {
 	o.AllPrs = v
 }
 
 // GetAcceptedPrs returns the AcceptedPrs field value
-func (o *DbPRInsight) GetAcceptedPrs() float32 {
+func (o *DbPRInsight) GetAcceptedPrs() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -167,7 +167,7 @@ func (o *DbPRInsight) GetAcceptedPrs() float32 {
 
 // GetAcceptedPrsOk returns a tuple with the AcceptedPrs field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetAcceptedPrsOk() (*float32, bool) {
+func (o *DbPRInsight) GetAcceptedPrsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -175,14 +175,14 @@ func (o *DbPRInsight) GetAcceptedPrsOk() (*float32, bool) {
 }
 
 // SetAcceptedPrs sets field value
-func (o *DbPRInsight) SetAcceptedPrs(v float32) {
+func (o *DbPRInsight) SetAcceptedPrs(v int32) {
 	o.AcceptedPrs = v
 }
 
 // GetSpamPrs returns the SpamPrs field value
-func (o *DbPRInsight) GetSpamPrs() float32 {
+func (o *DbPRInsight) GetSpamPrs() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -191,7 +191,7 @@ func (o *DbPRInsight) GetSpamPrs() float32 {
 
 // GetSpamPrsOk returns a tuple with the SpamPrs field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetSpamPrsOk() (*float32, bool) {
+func (o *DbPRInsight) GetSpamPrsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,12 +199,12 @@ func (o *DbPRInsight) GetSpamPrsOk() (*float32, bool) {
 }
 
 // SetSpamPrs sets field value
-func (o *DbPRInsight) SetSpamPrs(v float32) {
+func (o *DbPRInsight) SetSpamPrs(v int32) {
 	o.SpamPrs = v
 }
 
 func (o DbPRInsight) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -257,5 +257,3 @@ func (v *NullableDbPRInsight) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

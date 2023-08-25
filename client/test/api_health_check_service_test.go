@@ -25,7 +25,7 @@ func Test_openapi_HealthCheckServiceAPIService(t *testing.T) {
 
 	t.Run("Test HealthCheckServiceAPIService HealthStatusService", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HealthCheckServiceAPI.HealthStatusService(context.Background()).Execute()
 
@@ -37,7 +37,7 @@ func Test_openapi_HealthCheckServiceAPIService(t *testing.T) {
 
 	t.Run("Test HealthCheckServiceAPIService HealthStatusWeb", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.HealthCheckServiceAPI.HealthStatusWeb(context.Background()).Execute()
 

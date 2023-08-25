@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Insight identifier | 
-**UserId** | **float32** | User ID | 
+**Id** | **int32** | Insight identifier | 
+**UserId** | **int32** | User ID | 
 **Name** | **string** | Insight Page Name | 
 **IsPublic** | **bool** | Flag indicating insight visibility | 
 **IsFavorite** | **bool** | Flag indicating insight favorite | 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewDbInsight
 
-`func NewDbInsight(id float32, userId float32, name string, isPublic bool, isFavorite bool, shortCode string, ) *DbInsight`
+`func NewDbInsight(id int32, userId int32, name string, isPublic bool, isFavorite bool, shortCode string, ) *DbInsight`
 
 NewDbInsight instantiates a new DbInsight object
 This constructor will assign default values to properties that have it defined,
@@ -35,40 +35,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbInsight) GetId() float32`
+`func (o *DbInsight) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbInsight) GetIdOk() (*float32, bool)`
+`func (o *DbInsight) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbInsight) SetId(v float32)`
+`func (o *DbInsight) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetUserId
 
-`func (o *DbInsight) GetUserId() float32`
+`func (o *DbInsight) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbInsight) GetUserIdOk() (*float32, bool)`
+`func (o *DbInsight) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbInsight) SetUserId(v float32)`
+`func (o *DbInsight) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 

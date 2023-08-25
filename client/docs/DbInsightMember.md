@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Insight Member identifier | 
-**InsightId** | **float32** | Insight ID | 
-**UserId** | Pointer to **float32** | User ID | [optional] 
+**InsightId** | **int32** | Insight ID | 
+**UserId** | Pointer to **int32** | User ID | [optional] 
 **Name** | Pointer to **string** | User&#39;s Name | [optional] 
 **Access** | **string** | Insight Member Access | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing team member creation | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewDbInsightMember
 
-`func NewDbInsightMember(id string, insightId float32, access string, ) *DbInsightMember`
+`func NewDbInsightMember(id string, insightId int32, access string, ) *DbInsightMember`
 
 NewDbInsightMember instantiates a new DbInsightMember object
 This constructor will assign default values to properties that have it defined,
@@ -56,40 +56,40 @@ SetId sets Id field to given value.
 
 ### GetInsightId
 
-`func (o *DbInsightMember) GetInsightId() float32`
+`func (o *DbInsightMember) GetInsightId() int32`
 
 GetInsightId returns the InsightId field if non-nil, zero value otherwise.
 
 ### GetInsightIdOk
 
-`func (o *DbInsightMember) GetInsightIdOk() (*float32, bool)`
+`func (o *DbInsightMember) GetInsightIdOk() (*int32, bool)`
 
 GetInsightIdOk returns a tuple with the InsightId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInsightId
 
-`func (o *DbInsightMember) SetInsightId(v float32)`
+`func (o *DbInsightMember) SetInsightId(v int32)`
 
 SetInsightId sets InsightId field to given value.
 
 
 ### GetUserId
 
-`func (o *DbInsightMember) GetUserId() float32`
+`func (o *DbInsightMember) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbInsightMember) GetUserIdOk() (*float32, bool)`
+`func (o *DbInsightMember) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbInsightMember) SetUserId(v float32)`
+`func (o *DbInsightMember) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 

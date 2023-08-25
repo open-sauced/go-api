@@ -25,7 +25,7 @@ func Test_openapi_EmojisServiceAPIService(t *testing.T) {
 
 	t.Run("Test EmojisServiceAPIService FindAllEmojis", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EmojisServiceAPI.FindAllEmojis(context.Background()).Execute()
 

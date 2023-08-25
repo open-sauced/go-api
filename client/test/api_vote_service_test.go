@@ -25,9 +25,9 @@ func Test_openapi_VoteServiceAPIService(t *testing.T) {
 
 	t.Run("Test VoteServiceAPIService DownVoteOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.VoteServiceAPI.DownVoteOneById(context.Background(), id).Execute()
 
@@ -39,7 +39,7 @@ func Test_openapi_VoteServiceAPIService(t *testing.T) {
 
 	t.Run("Test VoteServiceAPIService DownVoteOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string
@@ -54,7 +54,7 @@ func Test_openapi_VoteServiceAPIService(t *testing.T) {
 
 	t.Run("Test VoteServiceAPIService FindAllUserVoted", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.VoteServiceAPI.FindAllUserVoted(context.Background()).Execute()
 
@@ -66,9 +66,9 @@ func Test_openapi_VoteServiceAPIService(t *testing.T) {
 
 	t.Run("Test VoteServiceAPIService FindOneByRepoId", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var repoId float32
+		var repoId int32
 
 		resp, httpRes, err := apiClient.VoteServiceAPI.FindOneByRepoId(context.Background(), repoId).Execute()
 
@@ -80,9 +80,9 @@ func Test_openapi_VoteServiceAPIService(t *testing.T) {
 
 	t.Run("Test VoteServiceAPIService VoteOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.VoteServiceAPI.VoteOneById(context.Background(), id).Execute()
 
@@ -94,7 +94,7 @@ func Test_openapi_VoteServiceAPIService(t *testing.T) {
 
 	t.Run("Test VoteServiceAPIService VoteOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string

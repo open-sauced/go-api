@@ -11,7 +11,7 @@ info:
     This REST API can be used to create, read, update or delete data from the Open Sauced community platform.
     The Swagger-UI provides useful information to get started and an overview of all available resources.
     Each API route is clickable and has their own detailed description on how to use it.
-    The base URL for the API is [http:/http:///localhost](https://http:/http:///localhost).
+    The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).
 
     [comment]: # (TODO: add bearer auth information)
 
@@ -258,7 +258,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -268,7 +268,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -284,7 +284,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -316,7 +316,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -326,7 +326,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -342,7 +342,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -374,7 +374,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -384,7 +384,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -400,7 +400,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -425,7 +425,16 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
+        style: form
+      - description: User ID to filter followings from the list
+        explode: true
+        in: query
+        name: userId
+        required: false
+        schema:
+          default: 0
+          type: integer
         style: form
       - explode: true
         in: query
@@ -435,7 +444,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -488,7 +497,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -510,7 +519,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -534,7 +543,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       requestBody:
         content:
@@ -567,7 +576,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -594,7 +603,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       - explode: false
         in: path
@@ -623,7 +632,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       - explode: false
         in: path
@@ -663,7 +672,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -673,7 +682,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -689,7 +698,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - description: Highlight Repo Filter
         example: open-sauced/insights
@@ -723,7 +732,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -733,7 +742,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -749,7 +758,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - description: Highlight Repo Filter
         example: open-sauced/insights
@@ -862,7 +871,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -872,7 +881,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -888,7 +897,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -915,7 +924,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -925,7 +934,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -941,7 +950,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -1054,7 +1063,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1064,7 +1073,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1080,7 +1089,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -1106,7 +1115,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1116,7 +1125,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1132,7 +1141,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -1170,7 +1179,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1180,7 +1189,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1196,7 +1205,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -1219,7 +1228,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1229,7 +1238,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1245,7 +1254,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1320,7 +1329,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1330,7 +1339,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1346,7 +1355,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1479,7 +1488,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -1534,7 +1543,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1544,7 +1553,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1560,7 +1569,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1590,7 +1599,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1600,7 +1609,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1616,7 +1625,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1715,7 +1724,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1725,7 +1734,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1741,7 +1750,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1772,7 +1781,7 @@ paths:
         name: repoId
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -1797,7 +1806,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -1824,7 +1833,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -1923,7 +1932,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1933,7 +1942,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1949,7 +1958,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -1980,7 +1989,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2007,7 +2016,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2106,7 +2115,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2116,7 +2125,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2132,7 +2141,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2163,7 +2172,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2190,7 +2199,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2289,7 +2298,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2299,7 +2308,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2315,7 +2324,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2346,7 +2355,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2373,7 +2382,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2470,7 +2479,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       - explode: true
         in: query
@@ -2479,7 +2488,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2489,7 +2498,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2505,7 +2514,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2552,7 +2561,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2562,7 +2571,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2578,7 +2587,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2610,7 +2619,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       requestBody:
         content:
@@ -2642,7 +2651,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2669,7 +2678,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2679,7 +2688,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2695,7 +2704,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -2751,7 +2760,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       requestBody:
         content:
@@ -2788,7 +2797,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2798,7 +2807,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -2814,14 +2823,14 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: false
         in: path
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -2845,7 +2854,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       requestBody:
         content:
@@ -2884,7 +2893,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       - explode: false
         in: path
@@ -2917,7 +2926,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       - explode: false
         in: path
@@ -3012,7 +3021,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3022,7 +3031,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3038,7 +3047,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - description: Highlight Repo Filter
         example: open-sauced/insights
@@ -3070,7 +3079,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3080,7 +3089,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3096,7 +3105,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - description: Highlight Repo Filter
         example: open-sauced/insights
@@ -3126,7 +3135,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -3152,7 +3161,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -3187,7 +3196,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3197,7 +3206,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3213,7 +3222,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3234,7 +3243,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -3261,7 +3270,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3271,7 +3280,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3287,7 +3296,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3310,7 +3319,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3320,7 +3329,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3336,7 +3345,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3361,7 +3370,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3371,7 +3380,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3387,7 +3396,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3449,7 +3458,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3459,7 +3468,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3475,7 +3484,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3512,7 +3521,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3522,7 +3531,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3538,7 +3547,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3605,7 +3614,7 @@ paths:
       - Endorsements service
   /v1/endorsements/user/{username}/created:
     get:
-      operationId: findAllUserReceivedEndorsements
+      operationId: findAllUserCreatedEndorsementsByUsername
       parameters:
       - explode: false
         in: path
@@ -3621,7 +3630,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3631,7 +3640,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3647,7 +3656,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3661,7 +3670,7 @@ paths:
       - Endorsements service
   /v1/endorsements/user/{username}/received:
     get:
-      operationId: findAllUserReceivedEndorsements
+      operationId: findAllUserReceivedEndorsementsByUsername
       parameters:
       - explode: false
         in: path
@@ -3677,7 +3686,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3687,7 +3696,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3703,7 +3712,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -3726,7 +3735,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3736,7 +3745,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3752,7 +3761,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3806,7 +3815,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3816,7 +3825,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3832,30 +3841,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          $ref: '#/components/schemas/InsightFilterFieldsEnum'
-        style: form
-      - example: javascript
-        explode: true
-        in: query
-        name: topic
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: open-sauced/insights
-        explode: true
-        in: query
-        name: repo
-        required: false
-        schema:
-          type: string
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3885,7 +3871,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3895,7 +3881,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3911,7 +3897,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3941,7 +3927,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3951,7 +3937,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3967,7 +3953,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -3998,7 +3984,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4008,7 +3994,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4024,7 +4010,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4073,7 +4059,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -4098,7 +4084,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4108,7 +4094,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4124,7 +4110,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -4145,7 +4131,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -4170,7 +4156,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4180,7 +4166,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4196,7 +4182,7 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       responses:
         "200":
@@ -4217,7 +4203,7 @@ paths:
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -4242,7 +4228,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4252,7 +4238,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4268,14 +4254,14 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: false
         in: path
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -4298,7 +4284,7 @@ paths:
         schema:
           default: 1
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4308,7 +4294,7 @@ paths:
           default: 10
           maximum: 1000
           minimum: 1
-          type: number
+          type: integer
         style: form
       - explode: true
         in: query
@@ -4324,14 +4310,14 @@ paths:
         required: false
         schema:
           default: 30
-          type: number
+          type: integer
         style: form
       - explode: false
         in: path
         name: id
         required: true
         schema:
-          type: number
+          type: integer
         style: simple
       responses:
         "200":
@@ -4413,7 +4399,7 @@ components:
         insights_role:
           description: Authenticated User's Insights Role
           example: 10
-          type: number
+          type: integer
         bio:
           description: User bio information
           example: OpenSauced User
@@ -4457,7 +4443,7 @@ components:
         notification_count:
           description: Unread User Notification Count
           example: 5
-          type: number
+          type: integer
       required:
       - id
       type: object
@@ -4474,7 +4460,7 @@ components:
           - javascript
           - react
           items:
-            type: array
+            type: string
           type: array
         timezone:
           description: User timezone in UTC
@@ -4603,11 +4589,11 @@ components:
         id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         open_issues:
           description: Total number of open issues user has across public activity
           example: 498
-          type: number
+          type: integer
         created_at:
           description: Timestamp representing user creation
           format: date-time
@@ -4678,7 +4664,7 @@ components:
           default: 10
           description: Insights Role
           example: 10
-          type: number
+          type: integer
         bio:
           description: User bio information
           example: OpenSauced User
@@ -4730,19 +4716,19 @@ components:
         public_repos:
           description: GitHub user public repos number
           example: 0
-          type: number
+          type: integer
         public_gists:
           description: GitHub user public gists number
           example: 0
-          type: number
+          type: integer
         followers:
           description: GitHub user public followers number
           example: 0
-          type: number
+          type: integer
         following:
           description: GitHub user public following number
           example: 0
-          type: number
+          type: integer
         type:
           default: User
           description: GitHub user type
@@ -4761,34 +4747,35 @@ components:
           example: UTC-5
           type: string
         languages:
+          default: {}
           description: GitHub top languages
           example: "{ TypeScript: 33128, HTML: 453, JavaScript: 90, CSS: 80 }"
           type: object
         notification_count:
           description: User notification count
           example: 0
-          type: number
+          type: integer
         highlights_count:
           description: User highlights count
           example: 0
-          type: number
+          type: integer
         following_count:
           description: User following count
           example: 0
-          type: number
+          type: integer
         followers_count:
           description: User followers count
           example: 0
-          type: number
+          type: integer
         recent_pull_requests_count:
           description: Count of user pull requests within the last 30 days
           example: 0
-          type: number
+          type: integer
         recent_pull_request_velocity_count:
           description: User average pull request velocity in days over the last 30
             days
           example: 0
-          type: number
+          type: integer
         is_maintainer:
           description: Flag to indicate if user is a maintainer of any repos
           example: true
@@ -4831,7 +4818,7 @@ components:
           - javascript
           - react
           items:
-            type: array
+            type: string
           type: array
       required:
       - interests
@@ -4858,19 +4845,19 @@ components:
         page:
           description: The current page
           example: 1
-          type: number
+          type: integer
         limit:
           description: The number of items per page
           example: 10
-          type: number
+          type: integer
         itemCount:
           description: The number of items in the collection
           example: 100
-          type: number
+          type: integer
         pageCount:
           description: The number of pages in the collection
           example: 10
-          type: number
+          type: integer
         hasPreviousPage:
           description: Flag indicating if there is a previous page
           example: false
@@ -4904,11 +4891,11 @@ components:
         id:
           description: Pull request identifier
           example: 1045024650
-          type: number
+          type: integer
         number:
           description: Pull request number
           example: 612
-          type: number
+          type: integer
         state:
           description: Pull request state
           example: closed
@@ -5013,19 +5000,19 @@ components:
         comments:
           description: PR comments
           example: 0
-          type: number
+          type: integer
         additions:
           description: PR lines added
           example: 10
-          type: number
+          type: integer
         deletions:
           description: PR lines deleted
           example: 5
-          type: number
+          type: integer
         changed_files:
           description: PR files changed
           example: 5
-          type: number
+          type: integer
         full_name:
           description: Pull request repo full name
           example: open-sauced/insights
@@ -5068,20 +5055,18 @@ components:
         user_id: 237133
         name: Brian Douglas
         tagged_repos:
-        - - open-sauced/insights
-          - open-sauced/ai
-        - - open-sauced/insights
-          - open-sauced/ai
+        - open-sauced/insights
+        - open-sauced/ai
         id: 237133
       properties:
         id:
           description: User Highlight identifier
           example: 237133
-          type: number
+          type: integer
         user_id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         url:
           description: Highlight Pull Request URL
           example: github.com/open-sauced/insights/pull/1
@@ -5139,14 +5124,12 @@ components:
           example: bdougie
           type: string
         tagged_repos:
+          description: An array of full-names of tagged repositories
+          example:
+          - open-sauced/insights
+          - open-sauced/ai
           items:
-            description: An array of full-names of tagged repositories
-            example:
-            - open-sauced/insights
-            - open-sauced/ai
-            items:
-              type: string
-            type: array
+            type: string
           type: array
       required:
       - highlight
@@ -5210,39 +5193,39 @@ components:
         id:
           description: Repository identifier
           example: 71359796
-          type: number
+          type: integer
         user_id:
           description: Owner user identifier
           example: 57568598
-          type: number
+          type: integer
         size:
           description: Total size in bytes
           example: 274322
-          type: number
+          type: integer
         issues:
           description: Total number of issues
           example: 274
-          type: number
+          type: integer
         stars:
           description: Total number of stars
           example: 5
-          type: number
+          type: integer
         forks:
           description: Total number of forks
           example: 1
-          type: number
+          type: integer
         watchers:
           description: Total number of watchers
           example: 5473
-          type: number
+          type: integer
         subscribers:
           description: Total number of subscribers
           example: 11756
-          type: number
+          type: integer
         network:
           description: Total number of network usages
           example: 4
-          type: number
+          type: integer
         is_fork:
           description: Flag indicating repo is a fork
           example: false
@@ -5368,31 +5351,31 @@ components:
         open_prs_count:
           description: Repository number of open PRs
           example: 5
-          type: number
+          type: integer
         closed_prs_count:
           description: Repository number of closed PRs
           example: 173
-          type: number
+          type: integer
         merged_prs_count:
           description: Repository number of merged PRs
           example: 276
-          type: number
+          type: integer
         draft_prs_count:
           description: Repository number of draft PRs
           example: 2
-          type: number
+          type: integer
         spam_prs_count:
           description: Repository number of spam PRs
           example: 2
-          type: number
+          type: integer
         pr_velocity_count:
           description: Repository average open/close time for PRs
           example: 0
-          type: number
+          type: integer
         pr_active_count:
           description: Number of non-closed PRs updated within the day range
           example: 0
-          type: number
+          type: integer
       required:
       - clone_url
       - default_branch
@@ -5476,7 +5459,7 @@ components:
           - open-sauced/insights
           - open-sauced/ai
           items:
-            type: array
+            type: string
           type: array
       required:
       - highlight
@@ -5497,15 +5480,15 @@ components:
         id:
           description: Notification identifier
           example: 237133
-          type: number
+          type: integer
         user_id:
           description: User ID
           example: 498
-          type: number
+          type: integer
         from_user_id:
           description: From User ID
           example: 43311
-          type: number
+          type: integer
         type:
           description: User notification type
           example: welcome
@@ -5529,15 +5512,26 @@ components:
       type: object
     DbUserHighlightReactionResponse:
       example:
+        reaction_users:
+        - RitaDee
+        - diivi
         emoji_id: uuid-v4
-        reaction_count: 0.8008281904610115
+        reaction_count: 0
       properties:
         emoji_id:
           description: Emoji identifier
           example: uuid-v4
           type: string
         reaction_count:
-          type: number
+          type: integer
+        reaction_users:
+          description: Usernames of users who reacted with this emoji
+          example:
+          - RitaDee
+          - diivi
+          items:
+            type: string
+          type: array
       required:
       - emoji_id
       type: object
@@ -5549,7 +5543,7 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         emoji_id: uuid-v4
         id: uuid-v4
-        reaction_count: 0.8008281904610115
+        reaction_count: 0
       properties:
         id:
           description: Reaction identifier
@@ -5558,11 +5552,11 @@ components:
         highlight_id:
           description: Highlight identifier
           example: 71359796
-          type: number
+          type: integer
         user_id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         emoji_id:
           description: Emoji identifier
           example: uuid-v4
@@ -5576,7 +5570,7 @@ components:
           format: date-time
           type: string
         reaction_count:
-          type: number
+          type: integer
       required:
       - emoji_id
       - highlight_id
@@ -5603,15 +5597,15 @@ components:
         id:
           description: User Follow identifier
           example: 196
-          type: number
+          type: integer
         user_id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         following_user_id:
           description: User follower identifier
           example: 71359796
-          type: number
+          type: integer
         created_at:
           description: Timestamp representing user follow creation
           format: date-time
@@ -5645,11 +5639,11 @@ components:
         user_id:
           description: Collaboration Receipient User ID
           example: 237133
-          type: number
+          type: integer
         request_user_id:
           description: Collaboration Request User ID
           example: 31333
-          type: number
+          type: integer
         message:
           description: Collaboration Request Message
           example: "Hey, are you up for collaborating on this cool project?"
@@ -5730,15 +5724,15 @@ components:
         creator_user_id:
           description: Endorsement Creator User ID
           example: 237133
-          type: number
+          type: integer
         recipient_user_id:
           description: Endorsement Recipient User ID
           example: 31333
-          type: number
+          type: integer
         repo_id:
           description: Repository ID
           example: 78133
-          type: number
+          type: integer
         source_comment_url:
           description: Endorsement Source Comment URL
           type: string
@@ -5785,34 +5779,35 @@ components:
         interval: 1
         id: 71359796
         accepted_prs: 287
-        day: 0.8008281904610115
+        day: 2022-08-28 22:04:39.000000
         spam_prs: 287
       properties:
         id:
           description: Repository identifier
           example: 71359796
-          type: number
+          type: integer
         interval:
           default: 0
           description: "Selected interval in numerical days, goes back with number,\
             \ 0 means today"
           example: 1
-          type: number
+          type: integer
         day:
           description: Selected interval computed date in human readable format
-          type: number
+          example: 2022-08-28 22:04:39.000000
+          type: date-time
         all_prs:
           description: "PR Type: all requests count"
           example: 287
-          type: number
+          type: integer
         accepted_prs:
           description: "PR Type: accepted requests count"
           example: 287
-          type: number
+          type: integer
         spam_prs:
           description: "PR Type: spam requests count"
           example: 287
-          type: number
+          type: integer
       required:
       - accepted_prs
       - all_prs
@@ -5835,11 +5830,11 @@ components:
         descriptionLength:
           description: Description Length
           example: 250
-          type: number
+          type: integer
         temperature:
           description: Description Temperature
           example: 7
-          type: number
+          type: integer
         tone:
           description: Description Tone
           example: formal
@@ -5876,11 +5871,11 @@ components:
         descriptionLength:
           description: Suggestion Length
           example: 250
-          type: number
+          type: integer
         temperature:
           description: Description Temperature
           example: 7
-          type: number
+          type: integer
         language:
           default: english
           description: Suggestion Language
@@ -5904,11 +5899,11 @@ components:
         descriptionLength:
           description: Suggestion Length
           example: 250
-          type: number
+          type: integer
         temperature:
           description: Description Temperature
           example: 7
-          type: number
+          type: integer
         code:
           description: Code
           type: string
@@ -5927,11 +5922,11 @@ components:
         descriptionLength:
           description: Description Length
           example: 250
-          type: number
+          type: integer
         temperature:
           description: Description Temperature
           example: 7
-          type: number
+          type: integer
         language:
           default: english
           description: Description Language
@@ -5972,15 +5967,15 @@ components:
         id:
           description: Vote identifier
           example: 196
-          type: number
+          type: integer
         user_id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         repo_id:
           description: Repository identifier
           example: 71359796
-          type: number
+          type: integer
         created_at:
           description: Timestamp representing vote creation
           format: date-time
@@ -6022,15 +6017,15 @@ components:
         id:
           description: Star identifier
           example: 196
-          type: number
+          type: integer
         user_id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         repo_id:
           description: Repository identifier
           example: 71359796
-          type: number
+          type: integer
         created_at:
           description: Timestamp representing star creation
           format: date-time
@@ -6055,15 +6050,15 @@ components:
         id:
           description: Stargaze identifier
           example: 196
-          type: number
+          type: integer
         user_id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         repo_id:
           description: Repository identifier
           example: 71359796
-          type: number
+          type: integer
         created_at:
           description: Timestamp representing stargaze creation
           format: date-time
@@ -6089,15 +6084,15 @@ components:
         id:
           description: Submission identifier
           example: 196
-          type: number
+          type: integer
         user_id:
           description: User identifier
           example: 237133
-          type: number
+          type: integer
         repo_id:
           description: Repository identifier
           example: 71359796
-          type: number
+          type: integer
         is_accepted:
           description: Flag representing if the submission is approved by open sauced
             staff
@@ -6121,15 +6116,15 @@ components:
         id:
           description: Contribution identifier
           example: 12237133
-          type: number
+          type: integer
         repo_id:
           description: Repository identifier
           example: 71359796
-          type: number
+          type: integer
         count:
           description: Total number of contributed pull requests
           example: 15
-          type: number
+          type: integer
         last_merged_at:
           description: Timestamp representing last contribution merge to the default
             branch
@@ -6174,11 +6169,11 @@ components:
         id:
           description: Insight identifier
           example: 237133
-          type: number
+          type: integer
         user_id:
           description: User ID
           example: 237133
-          type: number
+          type: integer
         name:
           description: Insight Page Name
           example: Open Sauced Team
@@ -6220,7 +6215,7 @@ components:
         id:
           description: Repo ID
           example: 234343
-          type: number
+          type: integer
         fullName:
           description: Repo Full Name
           example: open-sauced/insights
@@ -6307,11 +6302,11 @@ components:
         insight_id:
           description: Insight ID
           example: 237133
-          type: number
+          type: integer
         user_id:
           description: User ID
           example: 237133
-          type: number
+          type: integer
         name:
           description: User's Name
           example: Brian Douglas
@@ -6380,11 +6375,11 @@ components:
         summaryLength:
           description: Summary Length
           example: 250
-          type: number
+          type: integer
         temperature:
           description: Summary Temperature
           example: 7
-          type: number
+          type: integer
         tone:
           description: Summary Tone
           example: formal
@@ -6424,11 +6419,11 @@ components:
         summaryLength:
           description: Summary Length
           example: 250
-          type: number
+          type: integer
         temperature:
           description: Summary Temperature
           example: 7
-          type: number
+          type: integer
         tone:
           description: Summary Tone
           example: formal
@@ -6469,7 +6464,7 @@ components:
         display_order:
           description: Emoji display order
           example: 1
-          type: number
+          type: integer
         created_at:
           description: Timestamp representing highlight reaction creation
           format: date-time
@@ -6496,15 +6491,15 @@ components:
         creator_user_id:
           description: Endorsement Creator User ID
           example: 42211
-          type: number
+          type: integer
         recipient_user_id:
           description: Endorsement Recipient User ID
           example: 5736810
-          type: number
+          type: integer
         repo_id:
           description: Repository ID
           example: 78133
-          type: number
+          type: integer
         source_comment_url:
           default: ""
           description: Endorsement Source Comment URL
@@ -6539,7 +6534,7 @@ components:
       type: object
     BakeRepoDto:
       example:
-        wait: "false"
+        wait: false
         url: https://github.com/open-sauced/insights
       properties:
         url:
@@ -6548,8 +6543,8 @@ components:
           type: string
         wait:
           description: Option to wait for Pizza service to finish baking repo
-          example: "false"
-          type: string
+          example: false
+          type: boolean
       required:
       - url
       - wait
@@ -6563,7 +6558,7 @@ components:
         id:
           description: Baked repository identifier
           example: 71359796
-          type: number
+          type: integer
         clone_url:
           description: Repository clone url
           example: https://github.com/open-sauced/insights.git
@@ -6571,7 +6566,7 @@ components:
         repo_id:
           description: Repository identifier
           example: 12345678
-          type: number
+          type: integer
       required:
       - clone_url
       - id
@@ -6584,7 +6579,7 @@ components:
         id:
           description: Commit author identifier
           example: 71359796
-          type: number
+          type: integer
       required:
       - id
       type: object
@@ -6599,7 +6594,7 @@ components:
         id:
           description: Commit identifier
           example: 71359796
-          type: number
+          type: integer
         commit_hash:
           description: Hash for the commit
           example: 5e7c6c7af42d38c57f363c564c58007da448c443
@@ -6611,11 +6606,11 @@ components:
         baked_repo_id:
           description: Baked repo identifier
           example: 57568598
-          type: number
+          type: integer
         commit_author_id:
           description: Commit author identifier
           example: 9876543
-          type: number
+          type: integer
       required:
       - baked_repo_id
       - commit_author_id

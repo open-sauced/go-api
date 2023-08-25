@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [http:/http:///localhost](https://http:/http:///localhost).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,13 +20,12 @@ import (
 	"strings"
 )
 
-
 // UserHighlightsServiceAPIService UserHighlightsServiceAPI service
 type UserHighlightsServiceAPIService service
 
 type ApiAddHighlightForUserRequest struct {
-	ctx context.Context
-	ApiService *UserHighlightsServiceAPIService
+	ctx                    context.Context
+	ApiService             *UserHighlightsServiceAPIService
 	createUserHighlightDto *CreateUserHighlightDto
 }
 
@@ -42,24 +41,25 @@ func (r ApiAddHighlightForUserRequest) Execute() (*OmitTypeClass, *http.Response
 /*
 AddHighlightForUser Adds a new highlight for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAddHighlightForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAddHighlightForUserRequest
 */
 func (a *UserHighlightsServiceAPIService) AddHighlightForUser(ctx context.Context) ApiAddHighlightForUserRequest {
 	return ApiAddHighlightForUserRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return OmitTypeClass
+//
+//	@return OmitTypeClass
 func (a *UserHighlightsServiceAPIService) AddHighlightForUserExecute(r ApiAddHighlightForUserRequest) (*OmitTypeClass, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OmitTypeClass
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *OmitTypeClass
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.AddHighlightForUser")
@@ -133,10 +133,10 @@ func (a *UserHighlightsServiceAPIService) AddHighlightForUserExecute(r ApiAddHig
 }
 
 type ApiAddHighlightReactionForUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserHighlightsServiceAPIService
-	id float32
-	emojiId string
+	id         int32
+	emojiId    string
 }
 
 func (r ApiAddHighlightReactionForUserRequest) Execute() (*DbUserHighlightReaction, *http.Response, error) {
@@ -146,28 +146,29 @@ func (r ApiAddHighlightReactionForUserRequest) Execute() (*DbUserHighlightReacti
 /*
 AddHighlightReactionForUser Adds a new highlight reaction for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @param emojiId
- @return ApiAddHighlightReactionForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@param emojiId
+	@return ApiAddHighlightReactionForUserRequest
 */
-func (a *UserHighlightsServiceAPIService) AddHighlightReactionForUser(ctx context.Context, id float32, emojiId string) ApiAddHighlightReactionForUserRequest {
+func (a *UserHighlightsServiceAPIService) AddHighlightReactionForUser(ctx context.Context, id int32, emojiId string) ApiAddHighlightReactionForUserRequest {
 	return ApiAddHighlightReactionForUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
-		emojiId: emojiId,
+		ctx:        ctx,
+		id:         id,
+		emojiId:    emojiId,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlightReaction
+//
+//	@return DbUserHighlightReaction
 func (a *UserHighlightsServiceAPIService) AddHighlightReactionForUserExecute(r ApiAddHighlightReactionForUserRequest) (*DbUserHighlightReaction, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlightReaction
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlightReaction
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.AddHighlightReactionForUser")
@@ -238,9 +239,9 @@ func (a *UserHighlightsServiceAPIService) AddHighlightReactionForUserExecute(r A
 }
 
 type ApiDeleteHighlightForUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserHighlightsServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiDeleteHighlightForUserRequest) Execute() (*http.Response, error) {
@@ -250,24 +251,24 @@ func (r ApiDeleteHighlightForUserRequest) Execute() (*http.Response, error) {
 /*
 DeleteHighlightForUser Deletes the highlight for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiDeleteHighlightForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiDeleteHighlightForUserRequest
 */
-func (a *UserHighlightsServiceAPIService) DeleteHighlightForUser(ctx context.Context, id float32) ApiDeleteHighlightForUserRequest {
+func (a *UserHighlightsServiceAPIService) DeleteHighlightForUser(ctx context.Context, id int32) ApiDeleteHighlightForUserRequest {
 	return ApiDeleteHighlightForUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 func (a *UserHighlightsServiceAPIService) DeleteHighlightForUserExecute(r ApiDeleteHighlightForUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.DeleteHighlightForUser")
@@ -328,10 +329,10 @@ func (a *UserHighlightsServiceAPIService) DeleteHighlightForUserExecute(r ApiDel
 }
 
 type ApiDeleteHighlightReactionForUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserHighlightsServiceAPIService
-	id float32
-	emojiId string
+	id         int32
+	emojiId    string
 }
 
 func (r ApiDeleteHighlightReactionForUserRequest) Execute() (*http.Response, error) {
@@ -341,26 +342,26 @@ func (r ApiDeleteHighlightReactionForUserRequest) Execute() (*http.Response, err
 /*
 DeleteHighlightReactionForUser Deletes the highlight reaction for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @param emojiId
- @return ApiDeleteHighlightReactionForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@param emojiId
+	@return ApiDeleteHighlightReactionForUserRequest
 */
-func (a *UserHighlightsServiceAPIService) DeleteHighlightReactionForUser(ctx context.Context, id float32, emojiId string) ApiDeleteHighlightReactionForUserRequest {
+func (a *UserHighlightsServiceAPIService) DeleteHighlightReactionForUser(ctx context.Context, id int32, emojiId string) ApiDeleteHighlightReactionForUserRequest {
 	return ApiDeleteHighlightReactionForUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
-		emojiId: emojiId,
+		ctx:        ctx,
+		id:         id,
+		emojiId:    emojiId,
 	}
 }
 
 // Execute executes the request
 func (a *UserHighlightsServiceAPIService) DeleteHighlightReactionForUserExecute(r ApiDeleteHighlightReactionForUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.DeleteHighlightReactionForUser")
@@ -422,9 +423,9 @@ func (a *UserHighlightsServiceAPIService) DeleteHighlightReactionForUserExecute(
 }
 
 type ApiGetAllHighlightUserReactionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserHighlightsServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiGetAllHighlightUserReactionsRequest) Execute() (*DbUserHighlightReactionResponse, *http.Response, error) {
@@ -434,26 +435,27 @@ func (r ApiGetAllHighlightUserReactionsRequest) Execute() (*DbUserHighlightReact
 /*
 GetAllHighlightUserReactions Retrieves a highlight reactions for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiGetAllHighlightUserReactionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetAllHighlightUserReactionsRequest
 */
-func (a *UserHighlightsServiceAPIService) GetAllHighlightUserReactions(ctx context.Context, id float32) ApiGetAllHighlightUserReactionsRequest {
+func (a *UserHighlightsServiceAPIService) GetAllHighlightUserReactions(ctx context.Context, id int32) ApiGetAllHighlightUserReactionsRequest {
 	return ApiGetAllHighlightUserReactionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlightReactionResponse
+//
+//	@return DbUserHighlightReactionResponse
 func (a *UserHighlightsServiceAPIService) GetAllHighlightUserReactionsExecute(r ApiGetAllHighlightUserReactionsRequest) (*DbUserHighlightReactionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlightReactionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlightReactionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.GetAllHighlightUserReactions")
@@ -523,21 +525,21 @@ func (a *UserHighlightsServiceAPIService) GetAllHighlightUserReactionsExecute(r 
 }
 
 type ApiGetFollowingHighlightReposRequest struct {
-	ctx context.Context
-	ApiService *UserHighlightsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *UserHighlightsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	repo *string
+	range_         *int32
+	repo           *string
 }
 
-func (r ApiGetFollowingHighlightReposRequest) Page(page float32) ApiGetFollowingHighlightReposRequest {
+func (r ApiGetFollowingHighlightReposRequest) Page(page int32) ApiGetFollowingHighlightReposRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiGetFollowingHighlightReposRequest) Limit(limit float32) ApiGetFollowingHighlightReposRequest {
+func (r ApiGetFollowingHighlightReposRequest) Limit(limit int32) ApiGetFollowingHighlightReposRequest {
 	r.limit = &limit
 	return r
 }
@@ -548,7 +550,7 @@ func (r ApiGetFollowingHighlightReposRequest) OrderDirection(orderDirection Orde
 }
 
 // Range in days
-func (r ApiGetFollowingHighlightReposRequest) Range_(range_ float32) ApiGetFollowingHighlightReposRequest {
+func (r ApiGetFollowingHighlightReposRequest) Range_(range_ int32) ApiGetFollowingHighlightReposRequest {
 	r.range_ = &range_
 	return r
 }
@@ -566,24 +568,25 @@ func (r ApiGetFollowingHighlightReposRequest) Execute() (*DbUserHighlightRepo, *
 /*
 GetFollowingHighlightRepos Fetches highlight repos for users the authenticated user follows
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFollowingHighlightReposRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFollowingHighlightReposRequest
 */
 func (a *UserHighlightsServiceAPIService) GetFollowingHighlightRepos(ctx context.Context) ApiGetFollowingHighlightReposRequest {
 	return ApiGetFollowingHighlightReposRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlightRepo
+//
+//	@return DbUserHighlightRepo
 func (a *UserHighlightsServiceAPIService) GetFollowingHighlightReposExecute(r ApiGetFollowingHighlightReposRequest) (*DbUserHighlightRepo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlightRepo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlightRepo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.GetFollowingHighlightRepos")
@@ -667,21 +670,21 @@ func (a *UserHighlightsServiceAPIService) GetFollowingHighlightReposExecute(r Ap
 }
 
 type ApiGetFollowingHighlightsRequest struct {
-	ctx context.Context
-	ApiService *UserHighlightsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *UserHighlightsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	repo *string
+	range_         *int32
+	repo           *string
 }
 
-func (r ApiGetFollowingHighlightsRequest) Page(page float32) ApiGetFollowingHighlightsRequest {
+func (r ApiGetFollowingHighlightsRequest) Page(page int32) ApiGetFollowingHighlightsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiGetFollowingHighlightsRequest) Limit(limit float32) ApiGetFollowingHighlightsRequest {
+func (r ApiGetFollowingHighlightsRequest) Limit(limit int32) ApiGetFollowingHighlightsRequest {
 	r.limit = &limit
 	return r
 }
@@ -692,7 +695,7 @@ func (r ApiGetFollowingHighlightsRequest) OrderDirection(orderDirection OrderDir
 }
 
 // Range in days
-func (r ApiGetFollowingHighlightsRequest) Range_(range_ float32) ApiGetFollowingHighlightsRequest {
+func (r ApiGetFollowingHighlightsRequest) Range_(range_ int32) ApiGetFollowingHighlightsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -710,24 +713,25 @@ func (r ApiGetFollowingHighlightsRequest) Execute() (*DbUserHighlight, *http.Res
 /*
 GetFollowingHighlights Fetches highlights for users the authenticated user follows
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetFollowingHighlightsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFollowingHighlightsRequest
 */
 func (a *UserHighlightsServiceAPIService) GetFollowingHighlights(ctx context.Context) ApiGetFollowingHighlightsRequest {
 	return ApiGetFollowingHighlightsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlight
+//
+//	@return DbUserHighlight
 func (a *UserHighlightsServiceAPIService) GetFollowingHighlightsExecute(r ApiGetFollowingHighlightsRequest) (*DbUserHighlight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlight
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.GetFollowingHighlights")
@@ -811,9 +815,9 @@ func (a *UserHighlightsServiceAPIService) GetFollowingHighlightsExecute(r ApiGet
 }
 
 type ApiGetUserHighlightRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserHighlightsServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiGetUserHighlightRequest) Execute() (*DbUserHighlight, *http.Response, error) {
@@ -823,26 +827,27 @@ func (r ApiGetUserHighlightRequest) Execute() (*DbUserHighlight, *http.Response,
 /*
 GetUserHighlight Retrieves a highlight
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiGetUserHighlightRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetUserHighlightRequest
 */
-func (a *UserHighlightsServiceAPIService) GetUserHighlight(ctx context.Context, id float32) ApiGetUserHighlightRequest {
+func (a *UserHighlightsServiceAPIService) GetUserHighlight(ctx context.Context, id int32) ApiGetUserHighlightRequest {
 	return ApiGetUserHighlightRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlight
+//
+//	@return DbUserHighlight
 func (a *UserHighlightsServiceAPIService) GetUserHighlightExecute(r ApiGetUserHighlightRequest) (*DbUserHighlight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlight
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.GetUserHighlight")
@@ -912,9 +917,9 @@ func (a *UserHighlightsServiceAPIService) GetUserHighlightExecute(r ApiGetUserHi
 }
 
 type ApiUpdateHighlightForUserRequest struct {
-	ctx context.Context
-	ApiService *UserHighlightsServiceAPIService
-	id float32
+	ctx                    context.Context
+	ApiService             *UserHighlightsServiceAPIService
+	id                     int32
 	createUserHighlightDto *CreateUserHighlightDto
 }
 
@@ -930,26 +935,27 @@ func (r ApiUpdateHighlightForUserRequest) Execute() (*DbUserHighlight, *http.Res
 /*
 UpdateHighlightForUser Updates the highlight for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiUpdateHighlightForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiUpdateHighlightForUserRequest
 */
-func (a *UserHighlightsServiceAPIService) UpdateHighlightForUser(ctx context.Context, id float32) ApiUpdateHighlightForUserRequest {
+func (a *UserHighlightsServiceAPIService) UpdateHighlightForUser(ctx context.Context, id int32) ApiUpdateHighlightForUserRequest {
 	return ApiUpdateHighlightForUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlight
+//
+//	@return DbUserHighlight
 func (a *UserHighlightsServiceAPIService) UpdateHighlightForUserExecute(r ApiUpdateHighlightForUserRequest) (*DbUserHighlight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlight
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserHighlightsServiceAPIService.UpdateHighlightForUser")

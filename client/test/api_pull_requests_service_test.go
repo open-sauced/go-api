@@ -25,7 +25,7 @@ func Test_openapi_PullRequestsServiceAPIService(t *testing.T) {
 
 	t.Run("Test PullRequestsServiceAPIService GenerateCodeExplanation", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.PullRequestsServiceAPI.GenerateCodeExplanation(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_openapi_PullRequestsServiceAPIService(t *testing.T) {
 
 	t.Run("Test PullRequestsServiceAPIService GenerateCodeRefactor", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.PullRequestsServiceAPI.GenerateCodeRefactor(context.Background()).Execute()
 
@@ -47,7 +47,7 @@ func Test_openapi_PullRequestsServiceAPIService(t *testing.T) {
 
 	t.Run("Test PullRequestsServiceAPIService GenerateCodeTest", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.PullRequestsServiceAPI.GenerateCodeTest(context.Background()).Execute()
 
@@ -58,7 +58,7 @@ func Test_openapi_PullRequestsServiceAPIService(t *testing.T) {
 
 	t.Run("Test PullRequestsServiceAPIService GeneratePRDescription", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.PullRequestsServiceAPI.GeneratePRDescription(context.Background()).Execute()
 
@@ -69,7 +69,7 @@ func Test_openapi_PullRequestsServiceAPIService(t *testing.T) {
 
 	t.Run("Test PullRequestsServiceAPIService GetPullRequestInsights", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.PullRequestsServiceAPI.GetPullRequestInsights(context.Background()).Execute()
 
@@ -81,7 +81,7 @@ func Test_openapi_PullRequestsServiceAPIService(t *testing.T) {
 
 	t.Run("Test PullRequestsServiceAPIService ListAllPullRequests", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.PullRequestsServiceAPI.ListAllPullRequests(context.Background()).Execute()
 
@@ -93,7 +93,7 @@ func Test_openapi_PullRequestsServiceAPIService(t *testing.T) {
 
 	t.Run("Test PullRequestsServiceAPIService SearchAllPullRequests", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.PullRequestsServiceAPI.SearchAllPullRequests(context.Background()).Execute()
 

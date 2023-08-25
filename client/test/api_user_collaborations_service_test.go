@@ -25,7 +25,7 @@ func Test_openapi_UserCollaborationsServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserCollaborationsServiceAPIService AddUserCollaboration", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.UserCollaborationsServiceAPI.AddUserCollaboration(context.Background()).Execute()
 
@@ -37,7 +37,7 @@ func Test_openapi_UserCollaborationsServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserCollaborationsServiceAPIService FindAllUserCollaborations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.UserCollaborationsServiceAPI.FindAllUserCollaborations(context.Background()).Execute()
 
@@ -49,7 +49,7 @@ func Test_openapi_UserCollaborationsServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserCollaborationsServiceAPIService RemoveUserCollaborationById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
@@ -62,7 +62,7 @@ func Test_openapi_UserCollaborationsServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserCollaborationsServiceAPIService UpdateUserCollaboration", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 

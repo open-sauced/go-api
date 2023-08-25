@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DescriptionLength** | **float32** | Description Length | 
-**Temperature** | **float32** | Description Temperature | 
+**DescriptionLength** | **int32** | Description Length | 
+**Temperature** | **int32** | Description Temperature | 
 **Tone** | **string** | Description Tone | 
 **Language** | **string** | Description Language | [default to "english"]
 **Diff** | Pointer to **string** | PR Diff | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewGeneratePullRequestDescriptionDto
 
-`func NewGeneratePullRequestDescriptionDto(descriptionLength float32, temperature float32, tone string, language string, ) *GeneratePullRequestDescriptionDto`
+`func NewGeneratePullRequestDescriptionDto(descriptionLength int32, temperature int32, tone string, language string, ) *GeneratePullRequestDescriptionDto`
 
 NewGeneratePullRequestDescriptionDto instantiates a new GeneratePullRequestDescriptionDto object
 This constructor will assign default values to properties that have it defined,
@@ -32,40 +32,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDescriptionLength
 
-`func (o *GeneratePullRequestDescriptionDto) GetDescriptionLength() float32`
+`func (o *GeneratePullRequestDescriptionDto) GetDescriptionLength() int32`
 
 GetDescriptionLength returns the DescriptionLength field if non-nil, zero value otherwise.
 
 ### GetDescriptionLengthOk
 
-`func (o *GeneratePullRequestDescriptionDto) GetDescriptionLengthOk() (*float32, bool)`
+`func (o *GeneratePullRequestDescriptionDto) GetDescriptionLengthOk() (*int32, bool)`
 
 GetDescriptionLengthOk returns a tuple with the DescriptionLength field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescriptionLength
 
-`func (o *GeneratePullRequestDescriptionDto) SetDescriptionLength(v float32)`
+`func (o *GeneratePullRequestDescriptionDto) SetDescriptionLength(v int32)`
 
 SetDescriptionLength sets DescriptionLength field to given value.
 
 
 ### GetTemperature
 
-`func (o *GeneratePullRequestDescriptionDto) GetTemperature() float32`
+`func (o *GeneratePullRequestDescriptionDto) GetTemperature() int32`
 
 GetTemperature returns the Temperature field if non-nil, zero value otherwise.
 
 ### GetTemperatureOk
 
-`func (o *GeneratePullRequestDescriptionDto) GetTemperatureOk() (*float32, bool)`
+`func (o *GeneratePullRequestDescriptionDto) GetTemperatureOk() (*int32, bool)`
 
 GetTemperatureOk returns a tuple with the Temperature field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTemperature
 
-`func (o *GeneratePullRequestDescriptionDto) SetTemperature(v float32)`
+`func (o *GeneratePullRequestDescriptionDto) SetTemperature(v int32)`
 
 SetTemperature sets Temperature field to given value.
 

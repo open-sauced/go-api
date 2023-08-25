@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DescriptionLength** | **float32** | Suggestion Length | 
-**Temperature** | **float32** | Description Temperature | 
+**DescriptionLength** | **int32** | Suggestion Length | 
+**Temperature** | **int32** | Description Temperature | 
 **Code** | **string** | Code | 
 
 ## Methods
 
 ### NewGenerateCodeTestSuggestionDto
 
-`func NewGenerateCodeTestSuggestionDto(descriptionLength float32, temperature float32, code string, ) *GenerateCodeTestSuggestionDto`
+`func NewGenerateCodeTestSuggestionDto(descriptionLength int32, temperature int32, code string, ) *GenerateCodeTestSuggestionDto`
 
 NewGenerateCodeTestSuggestionDto instantiates a new GenerateCodeTestSuggestionDto object
 This constructor will assign default values to properties that have it defined,
@@ -29,40 +29,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetDescriptionLength
 
-`func (o *GenerateCodeTestSuggestionDto) GetDescriptionLength() float32`
+`func (o *GenerateCodeTestSuggestionDto) GetDescriptionLength() int32`
 
 GetDescriptionLength returns the DescriptionLength field if non-nil, zero value otherwise.
 
 ### GetDescriptionLengthOk
 
-`func (o *GenerateCodeTestSuggestionDto) GetDescriptionLengthOk() (*float32, bool)`
+`func (o *GenerateCodeTestSuggestionDto) GetDescriptionLengthOk() (*int32, bool)`
 
 GetDescriptionLengthOk returns a tuple with the DescriptionLength field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescriptionLength
 
-`func (o *GenerateCodeTestSuggestionDto) SetDescriptionLength(v float32)`
+`func (o *GenerateCodeTestSuggestionDto) SetDescriptionLength(v int32)`
 
 SetDescriptionLength sets DescriptionLength field to given value.
 
 
 ### GetTemperature
 
-`func (o *GenerateCodeTestSuggestionDto) GetTemperature() float32`
+`func (o *GenerateCodeTestSuggestionDto) GetTemperature() int32`
 
 GetTemperature returns the Temperature field if non-nil, zero value otherwise.
 
 ### GetTemperatureOk
 
-`func (o *GenerateCodeTestSuggestionDto) GetTemperatureOk() (*float32, bool)`
+`func (o *GenerateCodeTestSuggestionDto) GetTemperatureOk() (*int32, bool)`
 
 GetTemperatureOk returns a tuple with the Temperature field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTemperature
 
-`func (o *GenerateCodeTestSuggestionDto) SetTemperature(v float32)`
+`func (o *GenerateCodeTestSuggestionDto) SetTemperature(v int32)`
 
 SetTemperature sets Temperature field to given value.
 

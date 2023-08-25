@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **Highlight** | **string** | Highlight Text | 
 **ShippedAt** | Pointer to **string** | Shipped Date | [optional] 
 **Type** | **string** | Highlight type | [default to "pull_request"]
-**TaggedRepos** | [**[]Array**](Array.md) | An array of full-names of tagged repositories | 
+**TaggedRepos** | **[]string** | An array of full-names of tagged repositories | 
 
 ## Methods
 
 ### NewCreateUserHighlightDto
 
-`func NewCreateUserHighlightDto(url string, highlight string, type_ string, taggedRepos []Array, ) *CreateUserHighlightDto`
+`func NewCreateUserHighlightDto(url string, highlight string, type_ string, taggedRepos []string, ) *CreateUserHighlightDto`
 
 NewCreateUserHighlightDto instantiates a new CreateUserHighlightDto object
 This constructor will assign default values to properties that have it defined,
@@ -142,20 +142,20 @@ SetType sets Type field to given value.
 
 ### GetTaggedRepos
 
-`func (o *CreateUserHighlightDto) GetTaggedRepos() []Array`
+`func (o *CreateUserHighlightDto) GetTaggedRepos() []string`
 
 GetTaggedRepos returns the TaggedRepos field if non-nil, zero value otherwise.
 
 ### GetTaggedReposOk
 
-`func (o *CreateUserHighlightDto) GetTaggedReposOk() (*[]Array, bool)`
+`func (o *CreateUserHighlightDto) GetTaggedReposOk() (*[]string, bool)`
 
 GetTaggedReposOk returns a tuple with the TaggedRepos field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTaggedRepos
 
-`func (o *CreateUserHighlightDto) SetTaggedRepos(v []Array)`
+`func (o *CreateUserHighlightDto) SetTaggedRepos(v []string)`
 
 SetTaggedRepos sets TaggedRepos field to given value.
 

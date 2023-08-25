@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Contribution identifier | 
-**RepoId** | **float32** | Repository identifier | 
-**Count** | **float32** | Total number of contributed pull requests | 
+**Id** | **int32** | Contribution identifier | 
+**RepoId** | **int32** | Repository identifier | 
+**Count** | **int32** | Total number of contributed pull requests | 
 **LastMergedAt** | **time.Time** | Timestamp representing last contribution merge to the default branch | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing contribution creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing contribution last update | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewDbContribution
 
-`func NewDbContribution(id float32, repoId float32, count float32, lastMergedAt time.Time, contributor string, url string, ) *DbContribution`
+`func NewDbContribution(id int32, repoId int32, count int32, lastMergedAt time.Time, contributor string, url string, ) *DbContribution`
 
 NewDbContribution instantiates a new DbContribution object
 This constructor will assign default values to properties that have it defined,
@@ -34,60 +34,60 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbContribution) GetId() float32`
+`func (o *DbContribution) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbContribution) GetIdOk() (*float32, bool)`
+`func (o *DbContribution) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbContribution) SetId(v float32)`
+`func (o *DbContribution) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetRepoId
 
-`func (o *DbContribution) GetRepoId() float32`
+`func (o *DbContribution) GetRepoId() int32`
 
 GetRepoId returns the RepoId field if non-nil, zero value otherwise.
 
 ### GetRepoIdOk
 
-`func (o *DbContribution) GetRepoIdOk() (*float32, bool)`
+`func (o *DbContribution) GetRepoIdOk() (*int32, bool)`
 
 GetRepoIdOk returns a tuple with the RepoId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepoId
 
-`func (o *DbContribution) SetRepoId(v float32)`
+`func (o *DbContribution) SetRepoId(v int32)`
 
 SetRepoId sets RepoId field to given value.
 
 
 ### GetCount
 
-`func (o *DbContribution) GetCount() float32`
+`func (o *DbContribution) GetCount() int32`
 
 GetCount returns the Count field if non-nil, zero value otherwise.
 
 ### GetCountOk
 
-`func (o *DbContribution) GetCountOk() (*float32, bool)`
+`func (o *DbContribution) GetCountOk() (*int32, bool)`
 
 GetCountOk returns a tuple with the Count field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCount
 
-`func (o *DbContribution) SetCount(v float32)`
+`func (o *DbContribution) SetCount(v int32)`
 
 SetCount sets Count field to given value.
 

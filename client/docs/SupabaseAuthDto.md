@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **UpdatedAt** | Pointer to **string** | Timestamp representing supabase user last update | [optional] 
 **IsOnboarded** | Pointer to **bool** | Flag indicated whether the user is onboarded | [optional] 
 **IsWaitlisted** | Pointer to **bool** | Flag indicated whether the user is waitlisted | [optional] 
-**InsightsRole** | Pointer to **float32** | Authenticated User&#39;s Insights Role | [optional] 
+**InsightsRole** | Pointer to **int32** | Authenticated User&#39;s Insights Role | [optional] 
 **Bio** | Pointer to **string** | User bio information | [optional] 
 **Name** | Pointer to **string** | User name information | [optional] 
 **Url** | Pointer to **string** | User website | [optional] 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **LinkedinUrl** | Pointer to **string** | LinkedIn URL | [optional] 
 **GithubSponsorsUrl** | Pointer to **string** | GitHub Sponsors URL | [optional] 
 **DiscordUrl** | Pointer to **string** | Discord URL | [optional] 
-**NotificationCount** | Pointer to **float32** | Unread User Notification Count | [optional] 
+**NotificationCount** | Pointer to **int32** | Unread User Notification Count | [optional] 
 
 ## Methods
 
@@ -293,20 +293,20 @@ HasIsWaitlisted returns a boolean if a field has been set.
 
 ### GetInsightsRole
 
-`func (o *SupabaseAuthDto) GetInsightsRole() float32`
+`func (o *SupabaseAuthDto) GetInsightsRole() int32`
 
 GetInsightsRole returns the InsightsRole field if non-nil, zero value otherwise.
 
 ### GetInsightsRoleOk
 
-`func (o *SupabaseAuthDto) GetInsightsRoleOk() (*float32, bool)`
+`func (o *SupabaseAuthDto) GetInsightsRoleOk() (*int32, bool)`
 
 GetInsightsRoleOk returns a tuple with the InsightsRole field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInsightsRole
 
-`func (o *SupabaseAuthDto) SetInsightsRole(v float32)`
+`func (o *SupabaseAuthDto) SetInsightsRole(v int32)`
 
 SetInsightsRole sets InsightsRole field to given value.
 
@@ -568,20 +568,20 @@ HasDiscordUrl returns a boolean if a field has been set.
 
 ### GetNotificationCount
 
-`func (o *SupabaseAuthDto) GetNotificationCount() float32`
+`func (o *SupabaseAuthDto) GetNotificationCount() int32`
 
 GetNotificationCount returns the NotificationCount field if non-nil, zero value otherwise.
 
 ### GetNotificationCountOk
 
-`func (o *SupabaseAuthDto) GetNotificationCountOk() (*float32, bool)`
+`func (o *SupabaseAuthDto) GetNotificationCountOk() (*int32, bool)`
 
 GetNotificationCountOk returns a tuple with the NotificationCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNotificationCount
 
-`func (o *SupabaseAuthDto) SetNotificationCount(v float32)`
+`func (o *SupabaseAuthDto) SetNotificationCount(v int32)`
 
 SetNotificationCount sets NotificationCount field to given value.
 

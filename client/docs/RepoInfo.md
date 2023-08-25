@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Repo ID | 
+**Id** | **int32** | Repo ID | 
 **FullName** | **string** | Repo Full Name | 
 
 ## Methods
 
 ### NewRepoInfo
 
-`func NewRepoInfo(id float32, fullName string, ) *RepoInfo`
+`func NewRepoInfo(id int32, fullName string, ) *RepoInfo`
 
 NewRepoInfo instantiates a new RepoInfo object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *RepoInfo) GetId() float32`
+`func (o *RepoInfo) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *RepoInfo) GetIdOk() (*float32, bool)`
+`func (o *RepoInfo) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *RepoInfo) SetId(v float32)`
+`func (o *RepoInfo) SetId(v int32)`
 
 SetId sets Id field to given value.
 

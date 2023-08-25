@@ -25,7 +25,7 @@ func Test_openapi_ContributorsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ContributorsServiceAPIService FindAllChurnPullRequestContributors", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ContributorsServiceAPI.FindAllChurnPullRequestContributors(context.Background()).Execute()
 
@@ -37,7 +37,7 @@ func Test_openapi_ContributorsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ContributorsServiceAPIService FindAllRecentPullRequestContributors", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ContributorsServiceAPI.FindAllRecentPullRequestContributors(context.Background()).Execute()
 
@@ -49,7 +49,7 @@ func Test_openapi_ContributorsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ContributorsServiceAPIService FindAllRepeatPullRequestContributors", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ContributorsServiceAPI.FindAllRepeatPullRequestContributors(context.Background()).Execute()
 
@@ -61,7 +61,7 @@ func Test_openapi_ContributorsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ContributorsServiceAPIService NewPullRequestContributors", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ContributorsServiceAPI.NewPullRequestContributors(context.Background()).Execute()
 
@@ -73,7 +73,7 @@ func Test_openapi_ContributorsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ContributorsServiceAPIService SearchAllPullRequestContributors", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ContributorsServiceAPI.SearchAllPullRequestContributors(context.Background()).Execute()
 

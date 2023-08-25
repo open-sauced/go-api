@@ -25,7 +25,7 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	t.Run("Test EndorsementsServiceAPIService CreateEndorsement", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EndorsementsServiceAPI.CreateEndorsement(context.Background()).Execute()
 
@@ -37,7 +37,7 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	t.Run("Test EndorsementsServiceAPIService DeleteEndoresementById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
@@ -50,7 +50,7 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	t.Run("Test EndorsementsServiceAPIService FindAllByRepoOwnerOrUsername", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var repoOwnerOrUser string
 
@@ -64,7 +64,7 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	t.Run("Test EndorsementsServiceAPIService FindAllEndorsements", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EndorsementsServiceAPI.FindAllEndorsements(context.Background()).Execute()
 
@@ -76,7 +76,7 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	t.Run("Test EndorsementsServiceAPIService FindAllEndorsementsByRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string
@@ -91,7 +91,7 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	t.Run("Test EndorsementsServiceAPIService FindAllUserCreatedEndorsements", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EndorsementsServiceAPI.FindAllUserCreatedEndorsements(context.Background()).Execute()
 
@@ -103,7 +103,7 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	t.Run("Test EndorsementsServiceAPIService FindAllUserReceivedEndorsements", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsements(context.Background()).Execute()
 
@@ -113,37 +113,9 @@ func Test_openapi_EndorsementsServiceAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test EndorsementsServiceAPIService FindAllUserReceivedEndorsements_1", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var username string
-
-		resp, httpRes, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsements_1(context.Background(), username).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test EndorsementsServiceAPIService FindAllUserReceivedEndorsements_2", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var username string
-
-		resp, httpRes, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsements_2(context.Background(), username).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test EndorsementsServiceAPIService FindEndorsementById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 

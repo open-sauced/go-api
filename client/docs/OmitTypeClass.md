@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Notification identifier | 
-**UserId** | **float32** | User ID | 
-**FromUserId** | Pointer to **float32** | From User ID | [optional] 
+**Id** | **int32** | Notification identifier | 
+**UserId** | **int32** | User ID | 
+**FromUserId** | Pointer to **int32** | From User ID | [optional] 
 **Type** | **string** | User notification type | 
 **Message** | Pointer to **string** | User notification message | [optional] 
 **NotifiedAt** | Pointer to **time.Time** | Timestamp representing db-user-notification creation | [optional] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewOmitTypeClass
 
-`func NewOmitTypeClass(id float32, userId float32, type_ string, ) *OmitTypeClass`
+`func NewOmitTypeClass(id int32, userId int32, type_ string, ) *OmitTypeClass`
 
 NewOmitTypeClass instantiates a new OmitTypeClass object
 This constructor will assign default values to properties that have it defined,
@@ -33,60 +33,60 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *OmitTypeClass) GetId() float32`
+`func (o *OmitTypeClass) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *OmitTypeClass) GetIdOk() (*float32, bool)`
+`func (o *OmitTypeClass) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *OmitTypeClass) SetId(v float32)`
+`func (o *OmitTypeClass) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetUserId
 
-`func (o *OmitTypeClass) GetUserId() float32`
+`func (o *OmitTypeClass) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *OmitTypeClass) GetUserIdOk() (*float32, bool)`
+`func (o *OmitTypeClass) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *OmitTypeClass) SetUserId(v float32)`
+`func (o *OmitTypeClass) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
 
 ### GetFromUserId
 
-`func (o *OmitTypeClass) GetFromUserId() float32`
+`func (o *OmitTypeClass) GetFromUserId() int32`
 
 GetFromUserId returns the FromUserId field if non-nil, zero value otherwise.
 
 ### GetFromUserIdOk
 
-`func (o *OmitTypeClass) GetFromUserIdOk() (*float32, bool)`
+`func (o *OmitTypeClass) GetFromUserIdOk() (*int32, bool)`
 
 GetFromUserIdOk returns a tuple with the FromUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFromUserId
 
-`func (o *OmitTypeClass) SetFromUserId(v float32)`
+`func (o *OmitTypeClass) SetFromUserId(v int32)`
 
 SetFromUserId sets FromUserId field to given value.
 

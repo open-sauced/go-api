@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [http:/http:///localhost](https://http:/http:///localhost).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -19,13 +19,12 @@ import (
 	"net/url"
 )
 
-
 // PullRequestsServiceAPIService PullRequestsServiceAPI service
 type PullRequestsServiceAPIService service
 
 type ApiGenerateCodeExplanationRequest struct {
-	ctx context.Context
-	ApiService *PullRequestsServiceAPIService
+	ctx                        context.Context
+	ApiService                 *PullRequestsServiceAPIService
 	generateCodeExplanationDto *GenerateCodeExplanationDto
 }
 
@@ -41,22 +40,22 @@ func (r ApiGenerateCodeExplanationRequest) Execute() (*http.Response, error) {
 /*
 GenerateCodeExplanation Generates an explanation for the provided code
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateCodeExplanationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateCodeExplanationRequest
 */
 func (a *PullRequestsServiceAPIService) GenerateCodeExplanation(ctx context.Context) ApiGenerateCodeExplanationRequest {
 	return ApiGenerateCodeExplanationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
 func (a *PullRequestsServiceAPIService) GenerateCodeExplanationExecute(r ApiGenerateCodeExplanationRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GenerateCodeExplanation")
@@ -121,8 +120,8 @@ func (a *PullRequestsServiceAPIService) GenerateCodeExplanationExecute(r ApiGene
 }
 
 type ApiGenerateCodeRefactorRequest struct {
-	ctx context.Context
-	ApiService *PullRequestsServiceAPIService
+	ctx                               context.Context
+	ApiService                        *PullRequestsServiceAPIService
 	generateCodeRefactorSuggestionDto *GenerateCodeRefactorSuggestionDto
 }
 
@@ -138,22 +137,22 @@ func (r ApiGenerateCodeRefactorRequest) Execute() (*http.Response, error) {
 /*
 GenerateCodeRefactor Generates a refactor suggestion based on the provided code
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateCodeRefactorRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateCodeRefactorRequest
 */
 func (a *PullRequestsServiceAPIService) GenerateCodeRefactor(ctx context.Context) ApiGenerateCodeRefactorRequest {
 	return ApiGenerateCodeRefactorRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
 func (a *PullRequestsServiceAPIService) GenerateCodeRefactorExecute(r ApiGenerateCodeRefactorRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GenerateCodeRefactor")
@@ -218,8 +217,8 @@ func (a *PullRequestsServiceAPIService) GenerateCodeRefactorExecute(r ApiGenerat
 }
 
 type ApiGenerateCodeTestRequest struct {
-	ctx context.Context
-	ApiService *PullRequestsServiceAPIService
+	ctx                           context.Context
+	ApiService                    *PullRequestsServiceAPIService
 	generateCodeTestSuggestionDto *GenerateCodeTestSuggestionDto
 }
 
@@ -235,22 +234,22 @@ func (r ApiGenerateCodeTestRequest) Execute() (*http.Response, error) {
 /*
 GenerateCodeTest Generates a test for the provided code
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateCodeTestRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateCodeTestRequest
 */
 func (a *PullRequestsServiceAPIService) GenerateCodeTest(ctx context.Context) ApiGenerateCodeTestRequest {
 	return ApiGenerateCodeTestRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
 func (a *PullRequestsServiceAPIService) GenerateCodeTestExecute(r ApiGenerateCodeTestRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GenerateCodeTest")
@@ -315,8 +314,8 @@ func (a *PullRequestsServiceAPIService) GenerateCodeTestExecute(r ApiGenerateCod
 }
 
 type ApiGeneratePRDescriptionRequest struct {
-	ctx context.Context
-	ApiService *PullRequestsServiceAPIService
+	ctx                               context.Context
+	ApiService                        *PullRequestsServiceAPIService
 	generatePullRequestDescriptionDto *GeneratePullRequestDescriptionDto
 }
 
@@ -332,22 +331,22 @@ func (r ApiGeneratePRDescriptionRequest) Execute() (*http.Response, error) {
 /*
 GeneratePRDescription Generates a PR description based on the provided information
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratePRDescriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGeneratePRDescriptionRequest
 */
 func (a *PullRequestsServiceAPIService) GeneratePRDescription(ctx context.Context) ApiGeneratePRDescriptionRequest {
 	return ApiGeneratePRDescriptionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
 func (a *PullRequestsServiceAPIService) GeneratePRDescriptionExecute(r ApiGeneratePRDescriptionRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPost
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GeneratePRDescription")
@@ -412,24 +411,24 @@ func (a *PullRequestsServiceAPIService) GeneratePRDescriptionExecute(r ApiGenera
 }
 
 type ApiGetPullRequestInsightsRequest struct {
-	ctx context.Context
-	ApiService *PullRequestsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *PullRequestsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	filter *InsightFilterFieldsEnum
-	topic *string
-	repo *string
-	repoIds *string
+	range_         *int32
+	filter         *InsightFilterFieldsEnum
+	topic          *string
+	repo           *string
+	repoIds        *string
 }
 
-func (r ApiGetPullRequestInsightsRequest) Page(page float32) ApiGetPullRequestInsightsRequest {
+func (r ApiGetPullRequestInsightsRequest) Page(page int32) ApiGetPullRequestInsightsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiGetPullRequestInsightsRequest) Limit(limit float32) ApiGetPullRequestInsightsRequest {
+func (r ApiGetPullRequestInsightsRequest) Limit(limit int32) ApiGetPullRequestInsightsRequest {
 	r.limit = &limit
 	return r
 }
@@ -440,7 +439,7 @@ func (r ApiGetPullRequestInsightsRequest) OrderDirection(orderDirection OrderDir
 }
 
 // Range in days
-func (r ApiGetPullRequestInsightsRequest) Range_(range_ float32) ApiGetPullRequestInsightsRequest {
+func (r ApiGetPullRequestInsightsRequest) Range_(range_ int32) ApiGetPullRequestInsightsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -472,24 +471,25 @@ func (r ApiGetPullRequestInsightsRequest) Execute() ([]DbPRInsight, *http.Respon
 /*
 GetPullRequestInsights Find pull request insights over the last 2 months
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetPullRequestInsightsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetPullRequestInsightsRequest
 */
 func (a *PullRequestsServiceAPIService) GetPullRequestInsights(ctx context.Context) ApiGetPullRequestInsightsRequest {
 	return ApiGetPullRequestInsightsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return []DbPRInsight
+//
+//	@return []DbPRInsight
 func (a *PullRequestsServiceAPIService) GetPullRequestInsightsExecute(r ApiGetPullRequestInsightsRequest) ([]DbPRInsight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  []DbPRInsight
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []DbPRInsight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GetPullRequestInsights")
@@ -582,20 +582,20 @@ func (a *PullRequestsServiceAPIService) GetPullRequestInsightsExecute(r ApiGetPu
 }
 
 type ApiListAllPullRequestsRequest struct {
-	ctx context.Context
-	ApiService *PullRequestsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *PullRequestsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiListAllPullRequestsRequest) Page(page float32) ApiListAllPullRequestsRequest {
+func (r ApiListAllPullRequestsRequest) Page(page int32) ApiListAllPullRequestsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiListAllPullRequestsRequest) Limit(limit float32) ApiListAllPullRequestsRequest {
+func (r ApiListAllPullRequestsRequest) Limit(limit int32) ApiListAllPullRequestsRequest {
 	r.limit = &limit
 	return r
 }
@@ -606,7 +606,7 @@ func (r ApiListAllPullRequestsRequest) OrderDirection(orderDirection OrderDirect
 }
 
 // Range in days
-func (r ApiListAllPullRequestsRequest) Range_(range_ float32) ApiListAllPullRequestsRequest {
+func (r ApiListAllPullRequestsRequest) Range_(range_ int32) ApiListAllPullRequestsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -618,24 +618,25 @@ func (r ApiListAllPullRequestsRequest) Execute() (*FindContributorPullRequests20
 /*
 ListAllPullRequests Finds all pull requests and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListAllPullRequestsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListAllPullRequestsRequest
 */
 func (a *PullRequestsServiceAPIService) ListAllPullRequests(ctx context.Context) ApiListAllPullRequestsRequest {
 	return ApiListAllPullRequestsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindContributorPullRequests200Response
+//
+//	@return FindContributorPullRequests200Response
 func (a *PullRequestsServiceAPIService) ListAllPullRequestsExecute(r ApiListAllPullRequestsRequest) (*FindContributorPullRequests200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindContributorPullRequests200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindContributorPullRequests200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.ListAllPullRequests")
@@ -716,27 +717,27 @@ func (a *PullRequestsServiceAPIService) ListAllPullRequestsExecute(r ApiListAllP
 }
 
 type ApiSearchAllPullRequestsRequest struct {
-	ctx context.Context
-	ApiService *PullRequestsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *PullRequestsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	orderBy *PullRequestOrderFieldsEnum
-	filter *InsightFilterFieldsEnum
-	topic *string
-	repo *string
-	repoIds *string
-	status *PullRequestStatusEnum
-	contributor *string
+	range_         *int32
+	orderBy        *PullRequestOrderFieldsEnum
+	filter         *InsightFilterFieldsEnum
+	topic          *string
+	repo           *string
+	repoIds        *string
+	status         *PullRequestStatusEnum
+	contributor    *string
 }
 
-func (r ApiSearchAllPullRequestsRequest) Page(page float32) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestsRequest) Page(page int32) ApiSearchAllPullRequestsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Limit(limit float32) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestsRequest) Limit(limit int32) ApiSearchAllPullRequestsRequest {
 	r.limit = &limit
 	return r
 }
@@ -747,7 +748,7 @@ func (r ApiSearchAllPullRequestsRequest) OrderDirection(orderDirection OrderDire
 }
 
 // Range in days
-func (r ApiSearchAllPullRequestsRequest) Range_(range_ float32) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestsRequest) Range_(range_ int32) ApiSearchAllPullRequestsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -794,24 +795,25 @@ func (r ApiSearchAllPullRequestsRequest) Execute() (*FindContributorPullRequests
 /*
 SearchAllPullRequests Searches pull requests using filters and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchAllPullRequestsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSearchAllPullRequestsRequest
 */
 func (a *PullRequestsServiceAPIService) SearchAllPullRequests(ctx context.Context) ApiSearchAllPullRequestsRequest {
 	return ApiSearchAllPullRequestsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindContributorPullRequests200Response
+//
+//	@return FindContributorPullRequests200Response
 func (a *PullRequestsServiceAPIService) SearchAllPullRequestsExecute(r ApiSearchAllPullRequestsRequest) (*FindContributorPullRequests200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindContributorPullRequests200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindContributorPullRequests200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.SearchAllPullRequests")

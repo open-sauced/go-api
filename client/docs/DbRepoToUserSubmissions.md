@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Submission identifier | 
-**UserId** | **float32** | User identifier | 
-**RepoId** | **float32** | Repository identifier | 
+**Id** | **int32** | Submission identifier | 
+**UserId** | **int32** | User identifier | 
+**RepoId** | **int32** | Repository identifier | 
 **IsAccepted** | Pointer to **bool** | Flag representing if the submission is approved by open sauced staff | [optional] 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing submission creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing submission last update | [optional] 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewDbRepoToUserSubmissions
 
-`func NewDbRepoToUserSubmissions(id float32, userId float32, repoId float32, ) *DbRepoToUserSubmissions`
+`func NewDbRepoToUserSubmissions(id int32, userId int32, repoId int32, ) *DbRepoToUserSubmissions`
 
 NewDbRepoToUserSubmissions instantiates a new DbRepoToUserSubmissions object
 This constructor will assign default values to properties that have it defined,
@@ -32,60 +32,60 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbRepoToUserSubmissions) GetId() float32`
+`func (o *DbRepoToUserSubmissions) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbRepoToUserSubmissions) GetIdOk() (*float32, bool)`
+`func (o *DbRepoToUserSubmissions) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbRepoToUserSubmissions) SetId(v float32)`
+`func (o *DbRepoToUserSubmissions) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetUserId
 
-`func (o *DbRepoToUserSubmissions) GetUserId() float32`
+`func (o *DbRepoToUserSubmissions) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbRepoToUserSubmissions) GetUserIdOk() (*float32, bool)`
+`func (o *DbRepoToUserSubmissions) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbRepoToUserSubmissions) SetUserId(v float32)`
+`func (o *DbRepoToUserSubmissions) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
 
 ### GetRepoId
 
-`func (o *DbRepoToUserSubmissions) GetRepoId() float32`
+`func (o *DbRepoToUserSubmissions) GetRepoId() int32`
 
 GetRepoId returns the RepoId field if non-nil, zero value otherwise.
 
 ### GetRepoIdOk
 
-`func (o *DbRepoToUserSubmissions) GetRepoIdOk() (*float32, bool)`
+`func (o *DbRepoToUserSubmissions) GetRepoIdOk() (*int32, bool)`
 
 GetRepoIdOk returns a tuple with the RepoId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepoId
 
-`func (o *DbRepoToUserSubmissions) SetRepoId(v float32)`
+`func (o *DbRepoToUserSubmissions) SetRepoId(v int32)`
 
 SetRepoId sets RepoId field to given value.
 

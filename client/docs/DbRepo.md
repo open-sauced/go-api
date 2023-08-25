@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | Repository identifier | 
-**UserId** | **float32** | Owner user identifier | 
-**Size** | **float32** | Total size in bytes | 
-**Issues** | **float32** | Total number of issues | 
-**Stars** | **float32** | Total number of stars | 
-**Forks** | **float32** | Total number of forks | 
-**Watchers** | **float32** | Total number of watchers | 
-**Subscribers** | **float32** | Total number of subscribers | 
-**Network** | **float32** | Total number of network usages | 
+**Id** | **int32** | Repository identifier | 
+**UserId** | **int32** | Owner user identifier | 
+**Size** | **int32** | Total size in bytes | 
+**Issues** | **int32** | Total number of issues | 
+**Stars** | **int32** | Total number of stars | 
+**Forks** | **int32** | Total number of forks | 
+**Watchers** | **int32** | Total number of watchers | 
+**Subscribers** | **int32** | Total number of subscribers | 
+**Network** | **int32** | Total number of network usages | 
 **IsFork** | **bool** | Flag indicating repo is a fork | 
 **IsPrivate** | **bool** | Flag indicating repo is private | 
 **IsTemplate** | **bool** | Flag indicating repo is a template | 
@@ -42,19 +42,19 @@ Name | Type | Description | Notes
 **Url** | **string** | Repository GitHub linked URL | 
 **Homepage** | **string** | Repository GitHub homepage | 
 **Topics** | **[]string** | Repository GitHub topics | 
-**OpenPrsCount** | Pointer to **float32** | Repository number of open PRs | [optional] 
-**ClosedPrsCount** | Pointer to **float32** | Repository number of closed PRs | [optional] 
-**MergedPrsCount** | Pointer to **float32** | Repository number of merged PRs | [optional] 
-**DraftPrsCount** | Pointer to **float32** | Repository number of draft PRs | [optional] 
-**SpamPrsCount** | Pointer to **float32** | Repository number of spam PRs | [optional] 
-**PrVelocityCount** | Pointer to **float32** | Repository average open/close time for PRs | [optional] 
-**PrActiveCount** | Pointer to **float32** | Number of non-closed PRs updated within the day range | [optional] 
+**OpenPrsCount** | Pointer to **int32** | Repository number of open PRs | [optional] 
+**ClosedPrsCount** | Pointer to **int32** | Repository number of closed PRs | [optional] 
+**MergedPrsCount** | Pointer to **int32** | Repository number of merged PRs | [optional] 
+**DraftPrsCount** | Pointer to **int32** | Repository number of draft PRs | [optional] 
+**SpamPrsCount** | Pointer to **int32** | Repository number of spam PRs | [optional] 
+**PrVelocityCount** | Pointer to **int32** | Repository average open/close time for PRs | [optional] 
+**PrActiveCount** | Pointer to **int32** | Number of non-closed PRs updated within the day range | [optional] 
 
 ## Methods
 
 ### NewDbRepo
 
-`func NewDbRepo(id float32, userId float32, size float32, issues float32, stars float32, forks float32, watchers float32, subscribers float32, network float32, isFork bool, isPrivate bool, isTemplate bool, isArchived bool, isDisabled bool, hasIssues bool, hasProjects bool, hasDownloads bool, hasWiki bool, hasPages bool, hasDiscussions bool, defaultBranch string, nodeId string, gitUrl string, sshUrl string, cloneUrl string, svnUrl string, name string, fullName string, description string, language string, license string, url string, homepage string, topics []string, ) *DbRepo`
+`func NewDbRepo(id int32, userId int32, size int32, issues int32, stars int32, forks int32, watchers int32, subscribers int32, network int32, isFork bool, isPrivate bool, isTemplate bool, isArchived bool, isDisabled bool, hasIssues bool, hasProjects bool, hasDownloads bool, hasWiki bool, hasPages bool, hasDiscussions bool, defaultBranch string, nodeId string, gitUrl string, sshUrl string, cloneUrl string, svnUrl string, name string, fullName string, description string, language string, license string, url string, homepage string, topics []string, ) *DbRepo`
 
 NewDbRepo instantiates a new DbRepo object
 This constructor will assign default values to properties that have it defined,
@@ -71,180 +71,180 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbRepo) GetId() float32`
+`func (o *DbRepo) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbRepo) GetIdOk() (*float32, bool)`
+`func (o *DbRepo) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbRepo) SetId(v float32)`
+`func (o *DbRepo) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetUserId
 
-`func (o *DbRepo) GetUserId() float32`
+`func (o *DbRepo) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbRepo) GetUserIdOk() (*float32, bool)`
+`func (o *DbRepo) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbRepo) SetUserId(v float32)`
+`func (o *DbRepo) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
 
 ### GetSize
 
-`func (o *DbRepo) GetSize() float32`
+`func (o *DbRepo) GetSize() int32`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *DbRepo) GetSizeOk() (*float32, bool)`
+`func (o *DbRepo) GetSizeOk() (*int32, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *DbRepo) SetSize(v float32)`
+`func (o *DbRepo) SetSize(v int32)`
 
 SetSize sets Size field to given value.
 
 
 ### GetIssues
 
-`func (o *DbRepo) GetIssues() float32`
+`func (o *DbRepo) GetIssues() int32`
 
 GetIssues returns the Issues field if non-nil, zero value otherwise.
 
 ### GetIssuesOk
 
-`func (o *DbRepo) GetIssuesOk() (*float32, bool)`
+`func (o *DbRepo) GetIssuesOk() (*int32, bool)`
 
 GetIssuesOk returns a tuple with the Issues field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIssues
 
-`func (o *DbRepo) SetIssues(v float32)`
+`func (o *DbRepo) SetIssues(v int32)`
 
 SetIssues sets Issues field to given value.
 
 
 ### GetStars
 
-`func (o *DbRepo) GetStars() float32`
+`func (o *DbRepo) GetStars() int32`
 
 GetStars returns the Stars field if non-nil, zero value otherwise.
 
 ### GetStarsOk
 
-`func (o *DbRepo) GetStarsOk() (*float32, bool)`
+`func (o *DbRepo) GetStarsOk() (*int32, bool)`
 
 GetStarsOk returns a tuple with the Stars field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStars
 
-`func (o *DbRepo) SetStars(v float32)`
+`func (o *DbRepo) SetStars(v int32)`
 
 SetStars sets Stars field to given value.
 
 
 ### GetForks
 
-`func (o *DbRepo) GetForks() float32`
+`func (o *DbRepo) GetForks() int32`
 
 GetForks returns the Forks field if non-nil, zero value otherwise.
 
 ### GetForksOk
 
-`func (o *DbRepo) GetForksOk() (*float32, bool)`
+`func (o *DbRepo) GetForksOk() (*int32, bool)`
 
 GetForksOk returns a tuple with the Forks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetForks
 
-`func (o *DbRepo) SetForks(v float32)`
+`func (o *DbRepo) SetForks(v int32)`
 
 SetForks sets Forks field to given value.
 
 
 ### GetWatchers
 
-`func (o *DbRepo) GetWatchers() float32`
+`func (o *DbRepo) GetWatchers() int32`
 
 GetWatchers returns the Watchers field if non-nil, zero value otherwise.
 
 ### GetWatchersOk
 
-`func (o *DbRepo) GetWatchersOk() (*float32, bool)`
+`func (o *DbRepo) GetWatchersOk() (*int32, bool)`
 
 GetWatchersOk returns a tuple with the Watchers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetWatchers
 
-`func (o *DbRepo) SetWatchers(v float32)`
+`func (o *DbRepo) SetWatchers(v int32)`
 
 SetWatchers sets Watchers field to given value.
 
 
 ### GetSubscribers
 
-`func (o *DbRepo) GetSubscribers() float32`
+`func (o *DbRepo) GetSubscribers() int32`
 
 GetSubscribers returns the Subscribers field if non-nil, zero value otherwise.
 
 ### GetSubscribersOk
 
-`func (o *DbRepo) GetSubscribersOk() (*float32, bool)`
+`func (o *DbRepo) GetSubscribersOk() (*int32, bool)`
 
 GetSubscribersOk returns a tuple with the Subscribers field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSubscribers
 
-`func (o *DbRepo) SetSubscribers(v float32)`
+`func (o *DbRepo) SetSubscribers(v int32)`
 
 SetSubscribers sets Subscribers field to given value.
 
 
 ### GetNetwork
 
-`func (o *DbRepo) GetNetwork() float32`
+`func (o *DbRepo) GetNetwork() int32`
 
 GetNetwork returns the Network field if non-nil, zero value otherwise.
 
 ### GetNetworkOk
 
-`func (o *DbRepo) GetNetworkOk() (*float32, bool)`
+`func (o *DbRepo) GetNetworkOk() (*int32, bool)`
 
 GetNetworkOk returns a tuple with the Network field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNetwork
 
-`func (o *DbRepo) SetNetwork(v float32)`
+`func (o *DbRepo) SetNetwork(v int32)`
 
 SetNetwork sets Network field to given value.
 
@@ -851,20 +851,20 @@ SetTopics sets Topics field to given value.
 
 ### GetOpenPrsCount
 
-`func (o *DbRepo) GetOpenPrsCount() float32`
+`func (o *DbRepo) GetOpenPrsCount() int32`
 
 GetOpenPrsCount returns the OpenPrsCount field if non-nil, zero value otherwise.
 
 ### GetOpenPrsCountOk
 
-`func (o *DbRepo) GetOpenPrsCountOk() (*float32, bool)`
+`func (o *DbRepo) GetOpenPrsCountOk() (*int32, bool)`
 
 GetOpenPrsCountOk returns a tuple with the OpenPrsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOpenPrsCount
 
-`func (o *DbRepo) SetOpenPrsCount(v float32)`
+`func (o *DbRepo) SetOpenPrsCount(v int32)`
 
 SetOpenPrsCount sets OpenPrsCount field to given value.
 
@@ -876,20 +876,20 @@ HasOpenPrsCount returns a boolean if a field has been set.
 
 ### GetClosedPrsCount
 
-`func (o *DbRepo) GetClosedPrsCount() float32`
+`func (o *DbRepo) GetClosedPrsCount() int32`
 
 GetClosedPrsCount returns the ClosedPrsCount field if non-nil, zero value otherwise.
 
 ### GetClosedPrsCountOk
 
-`func (o *DbRepo) GetClosedPrsCountOk() (*float32, bool)`
+`func (o *DbRepo) GetClosedPrsCountOk() (*int32, bool)`
 
 GetClosedPrsCountOk returns a tuple with the ClosedPrsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetClosedPrsCount
 
-`func (o *DbRepo) SetClosedPrsCount(v float32)`
+`func (o *DbRepo) SetClosedPrsCount(v int32)`
 
 SetClosedPrsCount sets ClosedPrsCount field to given value.
 
@@ -901,20 +901,20 @@ HasClosedPrsCount returns a boolean if a field has been set.
 
 ### GetMergedPrsCount
 
-`func (o *DbRepo) GetMergedPrsCount() float32`
+`func (o *DbRepo) GetMergedPrsCount() int32`
 
 GetMergedPrsCount returns the MergedPrsCount field if non-nil, zero value otherwise.
 
 ### GetMergedPrsCountOk
 
-`func (o *DbRepo) GetMergedPrsCountOk() (*float32, bool)`
+`func (o *DbRepo) GetMergedPrsCountOk() (*int32, bool)`
 
 GetMergedPrsCountOk returns a tuple with the MergedPrsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMergedPrsCount
 
-`func (o *DbRepo) SetMergedPrsCount(v float32)`
+`func (o *DbRepo) SetMergedPrsCount(v int32)`
 
 SetMergedPrsCount sets MergedPrsCount field to given value.
 
@@ -926,20 +926,20 @@ HasMergedPrsCount returns a boolean if a field has been set.
 
 ### GetDraftPrsCount
 
-`func (o *DbRepo) GetDraftPrsCount() float32`
+`func (o *DbRepo) GetDraftPrsCount() int32`
 
 GetDraftPrsCount returns the DraftPrsCount field if non-nil, zero value otherwise.
 
 ### GetDraftPrsCountOk
 
-`func (o *DbRepo) GetDraftPrsCountOk() (*float32, bool)`
+`func (o *DbRepo) GetDraftPrsCountOk() (*int32, bool)`
 
 GetDraftPrsCountOk returns a tuple with the DraftPrsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDraftPrsCount
 
-`func (o *DbRepo) SetDraftPrsCount(v float32)`
+`func (o *DbRepo) SetDraftPrsCount(v int32)`
 
 SetDraftPrsCount sets DraftPrsCount field to given value.
 
@@ -951,20 +951,20 @@ HasDraftPrsCount returns a boolean if a field has been set.
 
 ### GetSpamPrsCount
 
-`func (o *DbRepo) GetSpamPrsCount() float32`
+`func (o *DbRepo) GetSpamPrsCount() int32`
 
 GetSpamPrsCount returns the SpamPrsCount field if non-nil, zero value otherwise.
 
 ### GetSpamPrsCountOk
 
-`func (o *DbRepo) GetSpamPrsCountOk() (*float32, bool)`
+`func (o *DbRepo) GetSpamPrsCountOk() (*int32, bool)`
 
 GetSpamPrsCountOk returns a tuple with the SpamPrsCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSpamPrsCount
 
-`func (o *DbRepo) SetSpamPrsCount(v float32)`
+`func (o *DbRepo) SetSpamPrsCount(v int32)`
 
 SetSpamPrsCount sets SpamPrsCount field to given value.
 
@@ -976,20 +976,20 @@ HasSpamPrsCount returns a boolean if a field has been set.
 
 ### GetPrVelocityCount
 
-`func (o *DbRepo) GetPrVelocityCount() float32`
+`func (o *DbRepo) GetPrVelocityCount() int32`
 
 GetPrVelocityCount returns the PrVelocityCount field if non-nil, zero value otherwise.
 
 ### GetPrVelocityCountOk
 
-`func (o *DbRepo) GetPrVelocityCountOk() (*float32, bool)`
+`func (o *DbRepo) GetPrVelocityCountOk() (*int32, bool)`
 
 GetPrVelocityCountOk returns a tuple with the PrVelocityCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrVelocityCount
 
-`func (o *DbRepo) SetPrVelocityCount(v float32)`
+`func (o *DbRepo) SetPrVelocityCount(v int32)`
 
 SetPrVelocityCount sets PrVelocityCount field to given value.
 
@@ -1001,20 +1001,20 @@ HasPrVelocityCount returns a boolean if a field has been set.
 
 ### GetPrActiveCount
 
-`func (o *DbRepo) GetPrActiveCount() float32`
+`func (o *DbRepo) GetPrActiveCount() int32`
 
 GetPrActiveCount returns the PrActiveCount field if non-nil, zero value otherwise.
 
 ### GetPrActiveCountOk
 
-`func (o *DbRepo) GetPrActiveCountOk() (*float32, bool)`
+`func (o *DbRepo) GetPrActiveCountOk() (*int32, bool)`
 
 GetPrActiveCountOk returns a tuple with the PrActiveCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPrActiveCount
 
-`func (o *DbRepo) SetPrActiveCount(v float32)`
+`func (o *DbRepo) SetPrActiveCount(v int32)`
 
 SetPrActiveCount sets PrActiveCount field to given value.
 

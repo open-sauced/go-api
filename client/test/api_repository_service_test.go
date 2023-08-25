@@ -25,7 +25,7 @@ func Test_openapi_RepositoryServiceAPIService(t *testing.T) {
 
 	t.Run("Test RepositoryServiceAPIService FindAll", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.RepositoryServiceAPI.FindAll(context.Background()).Execute()
 
@@ -37,7 +37,7 @@ func Test_openapi_RepositoryServiceAPIService(t *testing.T) {
 
 	t.Run("Test RepositoryServiceAPIService FindAllReposWithFilters", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.RepositoryServiceAPI.FindAllReposWithFilters(context.Background()).Execute()
 
@@ -49,9 +49,9 @@ func Test_openapi_RepositoryServiceAPIService(t *testing.T) {
 
 	t.Run("Test RepositoryServiceAPIService FindOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.RepositoryServiceAPI.FindOneById(context.Background(), id).Execute()
 
@@ -63,7 +63,7 @@ func Test_openapi_RepositoryServiceAPIService(t *testing.T) {
 
 	t.Run("Test RepositoryServiceAPIService FindOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string

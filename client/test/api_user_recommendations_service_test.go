@@ -25,7 +25,7 @@ func Test_openapi_UserRecommendationsServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserRecommendationsServiceAPIService FindUserRepoRecommendations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.UserRecommendationsServiceAPI.FindUserRepoRecommendations(context.Background()).Execute()
 

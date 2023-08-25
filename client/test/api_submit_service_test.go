@@ -25,9 +25,9 @@ func Test_openapi_SubmitServiceAPIService(t *testing.T) {
 
 	t.Run("Test SubmitServiceAPIService DownSubmitOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.SubmitServiceAPI.DownSubmitOneById(context.Background(), id).Execute()
 
@@ -39,7 +39,7 @@ func Test_openapi_SubmitServiceAPIService(t *testing.T) {
 
 	t.Run("Test SubmitServiceAPIService DownSubmitOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string
@@ -54,7 +54,7 @@ func Test_openapi_SubmitServiceAPIService(t *testing.T) {
 
 	t.Run("Test SubmitServiceAPIService FindAllUserSubmitted", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.SubmitServiceAPI.FindAllUserSubmitted(context.Background()).Execute()
 
@@ -66,9 +66,9 @@ func Test_openapi_SubmitServiceAPIService(t *testing.T) {
 
 	t.Run("Test SubmitServiceAPIService SubmitOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.SubmitServiceAPI.SubmitOneById(context.Background(), id).Execute()
 
@@ -80,7 +80,7 @@ func Test_openapi_SubmitServiceAPIService(t *testing.T) {
 
 	t.Run("Test SubmitServiceAPIService SubmitOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatorUserId** | **float32** | Endorsement Creator User ID | 
-**RecipientUserId** | **float32** | Endorsement Recipient User ID | 
-**RepoId** | **float32** | Repository ID | 
+**CreatorUserId** | **int32** | Endorsement Creator User ID | 
+**RecipientUserId** | **int32** | Endorsement Recipient User ID | 
+**RepoId** | **int32** | Repository ID | 
 **SourceCommentUrl** | Pointer to **string** | Endorsement Source Comment URL | [optional] [default to ""]
 **SourceContextUrl** | **string** | Endorsement Source Context URL | 
 **Type** | **string** | Endorsement Type | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewCreateEndorsementDto
 
-`func NewCreateEndorsementDto(creatorUserId float32, recipientUserId float32, repoId float32, sourceContextUrl string, type_ string, ) *CreateEndorsementDto`
+`func NewCreateEndorsementDto(creatorUserId int32, recipientUserId int32, repoId int32, sourceContextUrl string, type_ string, ) *CreateEndorsementDto`
 
 NewCreateEndorsementDto instantiates a new CreateEndorsementDto object
 This constructor will assign default values to properties that have it defined,
@@ -32,60 +32,60 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCreatorUserId
 
-`func (o *CreateEndorsementDto) GetCreatorUserId() float32`
+`func (o *CreateEndorsementDto) GetCreatorUserId() int32`
 
 GetCreatorUserId returns the CreatorUserId field if non-nil, zero value otherwise.
 
 ### GetCreatorUserIdOk
 
-`func (o *CreateEndorsementDto) GetCreatorUserIdOk() (*float32, bool)`
+`func (o *CreateEndorsementDto) GetCreatorUserIdOk() (*int32, bool)`
 
 GetCreatorUserIdOk returns a tuple with the CreatorUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatorUserId
 
-`func (o *CreateEndorsementDto) SetCreatorUserId(v float32)`
+`func (o *CreateEndorsementDto) SetCreatorUserId(v int32)`
 
 SetCreatorUserId sets CreatorUserId field to given value.
 
 
 ### GetRecipientUserId
 
-`func (o *CreateEndorsementDto) GetRecipientUserId() float32`
+`func (o *CreateEndorsementDto) GetRecipientUserId() int32`
 
 GetRecipientUserId returns the RecipientUserId field if non-nil, zero value otherwise.
 
 ### GetRecipientUserIdOk
 
-`func (o *CreateEndorsementDto) GetRecipientUserIdOk() (*float32, bool)`
+`func (o *CreateEndorsementDto) GetRecipientUserIdOk() (*int32, bool)`
 
 GetRecipientUserIdOk returns a tuple with the RecipientUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRecipientUserId
 
-`func (o *CreateEndorsementDto) SetRecipientUserId(v float32)`
+`func (o *CreateEndorsementDto) SetRecipientUserId(v int32)`
 
 SetRecipientUserId sets RecipientUserId field to given value.
 
 
 ### GetRepoId
 
-`func (o *CreateEndorsementDto) GetRepoId() float32`
+`func (o *CreateEndorsementDto) GetRepoId() int32`
 
 GetRepoId returns the RepoId field if non-nil, zero value otherwise.
 
 ### GetRepoIdOk
 
-`func (o *CreateEndorsementDto) GetRepoIdOk() (*float32, bool)`
+`func (o *CreateEndorsementDto) GetRepoIdOk() (*int32, bool)`
 
 GetRepoIdOk returns a tuple with the RepoId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepoId
 
-`func (o *CreateEndorsementDto) SetRepoId(v float32)`
+`func (o *CreateEndorsementDto) SetRepoId(v int32)`
 
 SetRepoId sets RepoId field to given value.
 

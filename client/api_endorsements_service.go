@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,14 +20,13 @@ import (
 	"strings"
 )
 
-
 // EndorsementsServiceAPIService EndorsementsServiceAPI service
 type EndorsementsServiceAPIService service
 
 type ApiCreateEndorsementRequest struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
-	xOpenSaucedToken *string
+	ctx                  context.Context
+	ApiService           *EndorsementsServiceAPIService
+	xOpenSaucedToken     *string
 	createEndorsementDto *CreateEndorsementDto
 }
 
@@ -48,24 +47,25 @@ func (r ApiCreateEndorsementRequest) Execute() (*DbEndorsement, *http.Response, 
 /*
 CreateEndorsement Creates a new endorsement record
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateEndorsementRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateEndorsementRequest
 */
 func (a *EndorsementsServiceAPIService) CreateEndorsement(ctx context.Context) ApiCreateEndorsementRequest {
 	return ApiCreateEndorsementRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DbEndorsement
+//
+//	@return DbEndorsement
 func (a *EndorsementsServiceAPIService) CreateEndorsementExecute(r ApiCreateEndorsementRequest) (*DbEndorsement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbEndorsement
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbEndorsement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.CreateEndorsement")
@@ -143,9 +143,9 @@ func (a *EndorsementsServiceAPIService) CreateEndorsementExecute(r ApiCreateEndo
 }
 
 type ApiDeleteEndoresementByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EndorsementsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiDeleteEndoresementByIdRequest) Execute() (*http.Response, error) {
@@ -155,24 +155,24 @@ func (r ApiDeleteEndoresementByIdRequest) Execute() (*http.Response, error) {
 /*
 DeleteEndoresementById Finds ands deletes the endorsement by ID
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiDeleteEndoresementByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiDeleteEndoresementByIdRequest
 */
 func (a *EndorsementsServiceAPIService) DeleteEndoresementById(ctx context.Context, id string) ApiDeleteEndoresementByIdRequest {
 	return ApiDeleteEndoresementByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 func (a *EndorsementsServiceAPIService) DeleteEndoresementByIdExecute(r ApiDeleteEndoresementByIdRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.DeleteEndoresementById")
@@ -233,21 +233,21 @@ func (a *EndorsementsServiceAPIService) DeleteEndoresementByIdExecute(r ApiDelet
 }
 
 type ApiFindAllByRepoOwnerOrUsernameRequest struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
+	ctx             context.Context
+	ApiService      *EndorsementsServiceAPIService
 	repoOwnerOrUser string
-	page *float32
-	limit *float32
-	orderDirection *OrderDirectionEnum
-	range_ *float32
+	page            *int32
+	limit           *int32
+	orderDirection  *OrderDirectionEnum
+	range_          *int32
 }
 
-func (r ApiFindAllByRepoOwnerOrUsernameRequest) Page(page float32) ApiFindAllByRepoOwnerOrUsernameRequest {
+func (r ApiFindAllByRepoOwnerOrUsernameRequest) Page(page int32) ApiFindAllByRepoOwnerOrUsernameRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllByRepoOwnerOrUsernameRequest) Limit(limit float32) ApiFindAllByRepoOwnerOrUsernameRequest {
+func (r ApiFindAllByRepoOwnerOrUsernameRequest) Limit(limit int32) ApiFindAllByRepoOwnerOrUsernameRequest {
 	r.limit = &limit
 	return r
 }
@@ -258,7 +258,7 @@ func (r ApiFindAllByRepoOwnerOrUsernameRequest) OrderDirection(orderDirection Or
 }
 
 // Range in days
-func (r ApiFindAllByRepoOwnerOrUsernameRequest) Range_(range_ float32) ApiFindAllByRepoOwnerOrUsernameRequest {
+func (r ApiFindAllByRepoOwnerOrUsernameRequest) Range_(range_ int32) ApiFindAllByRepoOwnerOrUsernameRequest {
 	r.range_ = &range_
 	return r
 }
@@ -270,26 +270,27 @@ func (r ApiFindAllByRepoOwnerOrUsernameRequest) Execute() (*FindAllUserCreatedEn
 /*
 FindAllByRepoOwnerOrUsername Finds all endorsements by repo org or username and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param repoOwnerOrUser
- @return ApiFindAllByRepoOwnerOrUsernameRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param repoOwnerOrUser
+	@return ApiFindAllByRepoOwnerOrUsernameRequest
 */
 func (a *EndorsementsServiceAPIService) FindAllByRepoOwnerOrUsername(ctx context.Context, repoOwnerOrUser string) ApiFindAllByRepoOwnerOrUsernameRequest {
 	return ApiFindAllByRepoOwnerOrUsernameRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:      a,
+		ctx:             ctx,
 		repoOwnerOrUser: repoOwnerOrUser,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllUserCreatedEndorsements200Response
+//
+//	@return FindAllUserCreatedEndorsements200Response
 func (a *EndorsementsServiceAPIService) FindAllByRepoOwnerOrUsernameExecute(r ApiFindAllByRepoOwnerOrUsernameRequest) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCreatedEndorsements200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCreatedEndorsements200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllByRepoOwnerOrUsername")
@@ -371,20 +372,20 @@ func (a *EndorsementsServiceAPIService) FindAllByRepoOwnerOrUsernameExecute(r Ap
 }
 
 type ApiFindAllEndorsementsRequest struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *EndorsementsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllEndorsementsRequest) Page(page float32) ApiFindAllEndorsementsRequest {
+func (r ApiFindAllEndorsementsRequest) Page(page int32) ApiFindAllEndorsementsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllEndorsementsRequest) Limit(limit float32) ApiFindAllEndorsementsRequest {
+func (r ApiFindAllEndorsementsRequest) Limit(limit int32) ApiFindAllEndorsementsRequest {
 	r.limit = &limit
 	return r
 }
@@ -395,7 +396,7 @@ func (r ApiFindAllEndorsementsRequest) OrderDirection(orderDirection OrderDirect
 }
 
 // Range in days
-func (r ApiFindAllEndorsementsRequest) Range_(range_ float32) ApiFindAllEndorsementsRequest {
+func (r ApiFindAllEndorsementsRequest) Range_(range_ int32) ApiFindAllEndorsementsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -407,24 +408,25 @@ func (r ApiFindAllEndorsementsRequest) Execute() (*FindAllUserCreatedEndorsement
 /*
 FindAllEndorsements Finds all endorsements and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllEndorsementsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllEndorsementsRequest
 */
 func (a *EndorsementsServiceAPIService) FindAllEndorsements(ctx context.Context) ApiFindAllEndorsementsRequest {
 	return ApiFindAllEndorsementsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllUserCreatedEndorsements200Response
+//
+//	@return FindAllUserCreatedEndorsements200Response
 func (a *EndorsementsServiceAPIService) FindAllEndorsementsExecute(r ApiFindAllEndorsementsRequest) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCreatedEndorsements200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCreatedEndorsements200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllEndorsements")
@@ -505,22 +507,22 @@ func (a *EndorsementsServiceAPIService) FindAllEndorsementsExecute(r ApiFindAllE
 }
 
 type ApiFindAllEndorsementsByRepoRequest struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
-	owner string
-	repo string
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *EndorsementsServiceAPIService
+	owner          string
+	repo           string
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllEndorsementsByRepoRequest) Page(page float32) ApiFindAllEndorsementsByRepoRequest {
+func (r ApiFindAllEndorsementsByRepoRequest) Page(page int32) ApiFindAllEndorsementsByRepoRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllEndorsementsByRepoRequest) Limit(limit float32) ApiFindAllEndorsementsByRepoRequest {
+func (r ApiFindAllEndorsementsByRepoRequest) Limit(limit int32) ApiFindAllEndorsementsByRepoRequest {
 	r.limit = &limit
 	return r
 }
@@ -531,7 +533,7 @@ func (r ApiFindAllEndorsementsByRepoRequest) OrderDirection(orderDirection Order
 }
 
 // Range in days
-func (r ApiFindAllEndorsementsByRepoRequest) Range_(range_ float32) ApiFindAllEndorsementsByRepoRequest {
+func (r ApiFindAllEndorsementsByRepoRequest) Range_(range_ int32) ApiFindAllEndorsementsByRepoRequest {
 	r.range_ = &range_
 	return r
 }
@@ -543,28 +545,29 @@ func (r ApiFindAllEndorsementsByRepoRequest) Execute() (*FindAllUserCreatedEndor
 /*
 FindAllEndorsementsByRepo Finds all endorsements by repo owner or username and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiFindAllEndorsementsByRepoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiFindAllEndorsementsByRepoRequest
 */
 func (a *EndorsementsServiceAPIService) FindAllEndorsementsByRepo(ctx context.Context, owner string, repo string) ApiFindAllEndorsementsByRepoRequest {
 	return ApiFindAllEndorsementsByRepoRequest{
 		ApiService: a,
-		ctx: ctx,
-		owner: owner,
-		repo: repo,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllUserCreatedEndorsements200Response
+//
+//	@return FindAllUserCreatedEndorsements200Response
 func (a *EndorsementsServiceAPIService) FindAllEndorsementsByRepoExecute(r ApiFindAllEndorsementsByRepoRequest) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCreatedEndorsements200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCreatedEndorsements200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllEndorsementsByRepo")
@@ -647,20 +650,20 @@ func (a *EndorsementsServiceAPIService) FindAllEndorsementsByRepoExecute(r ApiFi
 }
 
 type ApiFindAllUserCreatedEndorsementsRequest struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *EndorsementsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllUserCreatedEndorsementsRequest) Page(page float32) ApiFindAllUserCreatedEndorsementsRequest {
+func (r ApiFindAllUserCreatedEndorsementsRequest) Page(page int32) ApiFindAllUserCreatedEndorsementsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllUserCreatedEndorsementsRequest) Limit(limit float32) ApiFindAllUserCreatedEndorsementsRequest {
+func (r ApiFindAllUserCreatedEndorsementsRequest) Limit(limit int32) ApiFindAllUserCreatedEndorsementsRequest {
 	r.limit = &limit
 	return r
 }
@@ -671,7 +674,7 @@ func (r ApiFindAllUserCreatedEndorsementsRequest) OrderDirection(orderDirection 
 }
 
 // Range in days
-func (r ApiFindAllUserCreatedEndorsementsRequest) Range_(range_ float32) ApiFindAllUserCreatedEndorsementsRequest {
+func (r ApiFindAllUserCreatedEndorsementsRequest) Range_(range_ int32) ApiFindAllUserCreatedEndorsementsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -683,24 +686,25 @@ func (r ApiFindAllUserCreatedEndorsementsRequest) Execute() (*FindAllUserCreated
 /*
 FindAllUserCreatedEndorsements Finds all endorsements created by the authenticated user and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllUserCreatedEndorsementsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllUserCreatedEndorsementsRequest
 */
 func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsements(ctx context.Context) ApiFindAllUserCreatedEndorsementsRequest {
 	return ApiFindAllUserCreatedEndorsementsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllUserCreatedEndorsements200Response
+//
+//	@return FindAllUserCreatedEndorsements200Response
 func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsExecute(r ApiFindAllUserCreatedEndorsementsRequest) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCreatedEndorsements200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCreatedEndorsements200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllUserCreatedEndorsements")
@@ -780,21 +784,160 @@ func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsExecute(r 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiFindAllUserReceivedEndorsementsRequest struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
-	page *float32
-	limit *float32
+type ApiFindAllUserCreatedEndorsementsByUsernameRequest struct {
+	ctx            context.Context
+	ApiService     *EndorsementsServiceAPIService
+	username       string
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllUserReceivedEndorsementsRequest) Page(page float32) ApiFindAllUserReceivedEndorsementsRequest {
+func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) Page(page int32) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllUserReceivedEndorsementsRequest) Limit(limit float32) ApiFindAllUserReceivedEndorsementsRequest {
+func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) Limit(limit int32) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) Range_(range_ int32) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) Execute() (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
+	return r.ApiService.FindAllUserCreatedEndorsementsByUsernameExecute(r)
+}
+
+/*
+FindAllUserCreatedEndorsementsByUsername Finds all endorsements received by the user and paginates them
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param username
+	@return ApiFindAllUserCreatedEndorsementsByUsernameRequest
+*/
+func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsByUsername(ctx context.Context, username string) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
+	return ApiFindAllUserCreatedEndorsementsByUsernameRequest{
+		ApiService: a,
+		ctx:        ctx,
+		username:   username,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindAllUserCreatedEndorsements200Response
+func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsByUsernameExecute(r ApiFindAllUserCreatedEndorsementsByUsernameRequest) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCreatedEndorsements200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllUserCreatedEndorsementsByUsername")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/endorsements/user/{username}/created"
+	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiFindAllUserReceivedEndorsementsRequest struct {
+	ctx            context.Context
+	ApiService     *EndorsementsServiceAPIService
+	page           *int32
+	limit          *int32
+	orderDirection *OrderDirectionEnum
+	range_         *int32
+}
+
+func (r ApiFindAllUserReceivedEndorsementsRequest) Page(page int32) ApiFindAllUserReceivedEndorsementsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiFindAllUserReceivedEndorsementsRequest) Limit(limit int32) ApiFindAllUserReceivedEndorsementsRequest {
 	r.limit = &limit
 	return r
 }
@@ -805,7 +948,7 @@ func (r ApiFindAllUserReceivedEndorsementsRequest) OrderDirection(orderDirection
 }
 
 // Range in days
-func (r ApiFindAllUserReceivedEndorsementsRequest) Range_(range_ float32) ApiFindAllUserReceivedEndorsementsRequest {
+func (r ApiFindAllUserReceivedEndorsementsRequest) Range_(range_ int32) ApiFindAllUserReceivedEndorsementsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -817,24 +960,25 @@ func (r ApiFindAllUserReceivedEndorsementsRequest) Execute() (*FindAllUserCreate
 /*
 FindAllUserReceivedEndorsements Finds all endorsements received by the authenticated user and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllUserReceivedEndorsementsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllUserReceivedEndorsementsRequest
 */
 func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsements(ctx context.Context) ApiFindAllUserReceivedEndorsementsRequest {
 	return ApiFindAllUserReceivedEndorsementsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllUserCreatedEndorsements200Response
+//
+//	@return FindAllUserCreatedEndorsements200Response
 func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsementsExecute(r ApiFindAllUserReceivedEndorsementsRequest) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCreatedEndorsements200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCreatedEndorsements200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllUserReceivedEndorsements")
@@ -914,205 +1058,68 @@ func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsementsExecute(r
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiFindAllUserReceivedEndorsements_0Request struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
-	username string
-	page *float32
-	limit *float32
+type ApiFindAllUserReceivedEndorsementsByUsernameRequest struct {
+	ctx            context.Context
+	ApiService     *EndorsementsServiceAPIService
+	username       string
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllUserReceivedEndorsements_0Request) Page(page float32) ApiFindAllUserReceivedEndorsements_0Request {
+func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) Page(page int32) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllUserReceivedEndorsements_0Request) Limit(limit float32) ApiFindAllUserReceivedEndorsements_0Request {
+func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) Limit(limit int32) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiFindAllUserReceivedEndorsements_0Request) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllUserReceivedEndorsements_0Request {
+func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
 	r.orderDirection = &orderDirection
 	return r
 }
 
 // Range in days
-func (r ApiFindAllUserReceivedEndorsements_0Request) Range_(range_ float32) ApiFindAllUserReceivedEndorsements_0Request {
+func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) Range_(range_ int32) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
 	r.range_ = &range_
 	return r
 }
 
-func (r ApiFindAllUserReceivedEndorsements_0Request) Execute() (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
-	return r.ApiService.FindAllUserReceivedEndorsements_1Execute(r)
+func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) Execute() (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
+	return r.ApiService.FindAllUserReceivedEndorsementsByUsernameExecute(r)
 }
 
 /*
-FindAllUserReceivedEndorsements_0 Finds all endorsements received by the user and paginates them
+FindAllUserReceivedEndorsementsByUsername Finds all endorsements received by the user and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param username
- @return ApiFindAllUserReceivedEndorsements_0Request
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param username
+	@return ApiFindAllUserReceivedEndorsementsByUsernameRequest
 */
-func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsements_1(ctx context.Context, username string) ApiFindAllUserReceivedEndorsements_0Request {
-	return ApiFindAllUserReceivedEndorsements_0Request{
+func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsementsByUsername(ctx context.Context, username string) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
+	return ApiFindAllUserReceivedEndorsementsByUsernameRequest{
 		ApiService: a,
-		ctx: ctx,
-		username: username,
+		ctx:        ctx,
+		username:   username,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllUserCreatedEndorsements200Response
-func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsements_1Execute(r ApiFindAllUserReceivedEndorsements_0Request) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
+//
+//	@return FindAllUserCreatedEndorsements200Response
+func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsementsByUsernameExecute(r ApiFindAllUserReceivedEndorsementsByUsernameRequest) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCreatedEndorsements200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCreatedEndorsements200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllUserReceivedEndorsements_1")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/endorsements/user/{username}/created"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
-	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiFindAllUserReceivedEndorsements_1Request struct {
-	ctx context.Context
-	ApiService *EndorsementsServiceAPIService
-	username string
-	page *float32
-	limit *float32
-	orderDirection *OrderDirectionEnum
-	range_ *float32
-}
-
-func (r ApiFindAllUserReceivedEndorsements_1Request) Page(page float32) ApiFindAllUserReceivedEndorsements_1Request {
-	r.page = &page
-	return r
-}
-
-func (r ApiFindAllUserReceivedEndorsements_1Request) Limit(limit float32) ApiFindAllUserReceivedEndorsements_1Request {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiFindAllUserReceivedEndorsements_1Request) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllUserReceivedEndorsements_1Request {
-	r.orderDirection = &orderDirection
-	return r
-}
-
-// Range in days
-func (r ApiFindAllUserReceivedEndorsements_1Request) Range_(range_ float32) ApiFindAllUserReceivedEndorsements_1Request {
-	r.range_ = &range_
-	return r
-}
-
-func (r ApiFindAllUserReceivedEndorsements_1Request) Execute() (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
-	return r.ApiService.FindAllUserReceivedEndorsements_2Execute(r)
-}
-
-/*
-FindAllUserReceivedEndorsements_1 Finds all endorsements received by the user and paginates them
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param username
- @return ApiFindAllUserReceivedEndorsements_1Request
-*/
-func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsements_2(ctx context.Context, username string) ApiFindAllUserReceivedEndorsements_1Request {
-	return ApiFindAllUserReceivedEndorsements_1Request{
-		ApiService: a,
-		ctx: ctx,
-		username: username,
-	}
-}
-
-// Execute executes the request
-//  @return FindAllUserCreatedEndorsements200Response
-func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsements_2Execute(r ApiFindAllUserReceivedEndorsements_1Request) (*FindAllUserCreatedEndorsements200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCreatedEndorsements200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllUserReceivedEndorsements_2")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindAllUserReceivedEndorsementsByUsername")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1191,9 +1198,9 @@ func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsements_2Execute
 }
 
 type ApiFindEndorsementByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *EndorsementsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiFindEndorsementByIdRequest) Execute() (*DbEndorsement, *http.Response, error) {
@@ -1209,32 +1216,31 @@ summary: "Finds all endorsements by repo owner grouped by user",
 
 async findAllEndorsementsByRepoByUser (
 
-
-
 ) {
 return this.endorsementService.findAllEndorsementsByRepoByUser(owner, repo, pageOptionsDto);
 }
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiFindEndorsementByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiFindEndorsementByIdRequest
 */
 func (a *EndorsementsServiceAPIService) FindEndorsementById(ctx context.Context, id string) ApiFindEndorsementByIdRequest {
 	return ApiFindEndorsementByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbEndorsement
+//
+//	@return DbEndorsement
 func (a *EndorsementsServiceAPIService) FindEndorsementByIdExecute(r ApiFindEndorsementByIdRequest) (*DbEndorsement, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbEndorsement
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbEndorsement
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EndorsementsServiceAPIService.FindEndorsementById")

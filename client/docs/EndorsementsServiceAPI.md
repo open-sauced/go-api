@@ -1,6 +1,6 @@
 # \EndorsementsServiceAPI
 
-All URIs are relative to *https://api.opensauced.pizza*
+All URIs are relative to *http://localhost:3001*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,9 +10,9 @@ Method | HTTP request | Description
 [**FindAllEndorsements**](EndorsementsServiceAPI.md#FindAllEndorsements) | **Get** /v1/endorsements | Finds all endorsements and paginates them
 [**FindAllEndorsementsByRepo**](EndorsementsServiceAPI.md#FindAllEndorsementsByRepo) | **Get** /v1/endorsements/repos/{owner}/{repo} | Finds all endorsements by repo owner or username and paginates them
 [**FindAllUserCreatedEndorsements**](EndorsementsServiceAPI.md#FindAllUserCreatedEndorsements) | **Get** /v1/user/endorsements/created | Finds all endorsements created by the authenticated user and paginates them
+[**FindAllUserCreatedEndorsementsByUsername**](EndorsementsServiceAPI.md#FindAllUserCreatedEndorsementsByUsername) | **Get** /v1/endorsements/user/{username}/created | Finds all endorsements received by the user and paginates them
 [**FindAllUserReceivedEndorsements**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsements) | **Get** /v1/user/endorsements/received | Finds all endorsements received by the authenticated user and paginates them
-[**FindAllUserReceivedEndorsements_0**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsements_0) | **Get** /v1/endorsements/user/{username}/created | Finds all endorsements received by the user and paginates them
-[**FindAllUserReceivedEndorsements_1**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsements_1) | **Get** /v1/endorsements/user/{username}/received | Finds all endorsements received by the user and paginates them
+[**FindAllUserReceivedEndorsementsByUsername**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsementsByUsername) | **Get** /v1/endorsements/user/{username}/received | Finds all endorsements received by the user and paginates them
 [**FindEndorsementById**](EndorsementsServiceAPI.md#FindEndorsementById) | **Get** /v1/endorsements/{id} | Retrieves the endorsement based on ID
 
 
@@ -32,12 +32,12 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
     xOpenSaucedToken := "xOpenSaucedToken_example" // string | 
-    createEndorsementDto := *openapiclient.NewCreateEndorsementDto(float32(42211), float32(5736810), float32(78133), "https://github.com/open-sauced/insights/pulls", "doc") // CreateEndorsementDto | 
+    createEndorsementDto := *openapiclient.NewCreateEndorsementDto(int32(42211), int32(5736810), int32(78133), "https://github.com/open-sauced/insights/pulls", "doc") // CreateEndorsementDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -98,7 +98,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
@@ -164,15 +164,15 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
     repoOwnerOrUser := "repoOwnerOrUser_example" // string | 
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -202,10 +202,10 @@ Other parameters are passed through a pointer to a apiFindAllByRepoOwnerOrUserna
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -240,14 +240,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -272,10 +272,10 @@ Other parameters are passed through a pointer to a apiFindAllEndorsementsRequest
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -310,16 +310,16 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
     owner := "owner_example" // string | 
     repo := "repo_example" // string | 
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -351,10 +351,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -389,14 +389,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -421,10 +421,10 @@ Other parameters are passed through a pointer to a apiFindAllUserCreatedEndorsem
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -433,6 +433,82 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## FindAllUserCreatedEndorsementsByUsername
+
+> FindAllUserCreatedEndorsements200Response FindAllUserCreatedEndorsementsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+
+Finds all endorsements received by the user and paginates them
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    username := "username_example" // string | 
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
+    orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserCreatedEndorsementsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserCreatedEndorsementsByUsername``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FindAllUserCreatedEndorsementsByUsername`: FindAllUserCreatedEndorsements200Response
+    fmt.Fprintf(os.Stdout, "Response from `EndorsementsServiceAPI.FindAllUserCreatedEndorsementsByUsername`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**username** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFindAllUserCreatedEndorsementsByUsernameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
+ **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
+ **range_** | **int32** | Range in days | [default to 30]
+
+### Return type
+
+[**FindAllUserCreatedEndorsements200Response**](FindAllUserCreatedEndorsements200Response.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -459,14 +535,14 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -491,10 +567,10 @@ Other parameters are passed through a pointer to a apiFindAllUserReceivedEndorse
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -514,9 +590,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## FindAllUserReceivedEndorsements_0
+## FindAllUserReceivedEndorsementsByUsername
 
-> FindAllUserCreatedEndorsements200Response FindAllUserReceivedEndorsements_0(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllUserReceivedEndorsementsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
 
 Finds all endorsements received by the user and paginates them
 
@@ -529,25 +605,25 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {
     username := "username_example" // string | 
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsements_0(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsementsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserReceivedEndorsements_0``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserReceivedEndorsementsByUsername``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FindAllUserReceivedEndorsements_0`: FindAllUserCreatedEndorsements200Response
-    fmt.Fprintf(os.Stdout, "Response from `EndorsementsServiceAPI.FindAllUserReceivedEndorsements_0`: %v\n", resp)
+    // response from `FindAllUserReceivedEndorsementsByUsername`: FindAllUserCreatedEndorsements200Response
+    fmt.Fprintf(os.Stdout, "Response from `EndorsementsServiceAPI.FindAllUserReceivedEndorsementsByUsername`: %v\n", resp)
 }
 ```
 
@@ -561,92 +637,16 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiFindAllUserReceivedEndorsements_1Request struct via the builder pattern
+Other parameters are passed through a pointer to a apiFindAllUserReceivedEndorsementsByUsernameRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
-
-### Return type
-
-[**FindAllUserCreatedEndorsements200Response**](FindAllUserCreatedEndorsements200Response.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## FindAllUserReceivedEndorsements_1
-
-> FindAllUserCreatedEndorsements200Response FindAllUserReceivedEndorsements_1(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
-
-Finds all endorsements received by the user and paginates them
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    username := "username_example" // string | 
-    page := float32(8.14) // float32 |  (optional) (default to 1)
-    limit := float32(8.14) // float32 |  (optional) (default to 10)
-    orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
-    range_ := float32(8.14) // float32 | Range in days (optional) (default to 30)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsements_1(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserReceivedEndorsements_1``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `FindAllUserReceivedEndorsements_1`: FindAllUserCreatedEndorsements200Response
-    fmt.Fprintf(os.Stdout, "Response from `EndorsementsServiceAPI.FindAllUserReceivedEndorsements_1`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**username** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiFindAllUserReceivedEndorsements_2Request struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **page** | **float32** |  | [default to 1]
- **limit** | **float32** |  | [default to 10]
- **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
- **range_** | **float32** | Range in days | [default to 30]
+ **range_** | **int32** | Range in days | [default to 30]
 
 ### Return type
 
@@ -683,7 +683,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/open-sauced/go-api"
 )
 
 func main() {

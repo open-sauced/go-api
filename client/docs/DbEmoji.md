@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | **string** | Emoji identifier | 
 **Name** | **string** | Emoji Name | 
 **Url** | **string** | Emoji URL | 
-**DisplayOrder** | **float32** | Emoji display order | 
+**DisplayOrder** | **int32** | Emoji display order | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing highlight reaction creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing highlight reaction last update | [optional] 
 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewDbEmoji
 
-`func NewDbEmoji(id string, name string, url string, displayOrder float32, ) *DbEmoji`
+`func NewDbEmoji(id string, name string, url string, displayOrder int32, ) *DbEmoji`
 
 NewDbEmoji instantiates a new DbEmoji object
 This constructor will assign default values to properties that have it defined,
@@ -92,20 +92,20 @@ SetUrl sets Url field to given value.
 
 ### GetDisplayOrder
 
-`func (o *DbEmoji) GetDisplayOrder() float32`
+`func (o *DbEmoji) GetDisplayOrder() int32`
 
 GetDisplayOrder returns the DisplayOrder field if non-nil, zero value otherwise.
 
 ### GetDisplayOrderOk
 
-`func (o *DbEmoji) GetDisplayOrderOk() (*float32, bool)`
+`func (o *DbEmoji) GetDisplayOrderOk() (*int32, bool)`
 
 GetDisplayOrderOk returns a tuple with the DisplayOrder field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisplayOrder
 
-`func (o *DbEmoji) SetDisplayOrder(v float32)`
+`func (o *DbEmoji) SetDisplayOrder(v int32)`
 
 SetDisplayOrder sets DisplayOrder field to given value.
 

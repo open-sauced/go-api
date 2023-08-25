@@ -1,4 +1,4 @@
-# Go API client for openapi
+# Go API client for client
 
 
 ## Swagger-UI API Documentation
@@ -6,7 +6,7 @@
 This REST API can be used to create, read, update or delete data from the Open Sauced community platform.
 The Swagger-UI provides useful information to get started and an overview of all available resources.
 Each API route is clickable and has their own detailed description on how to use it.
-The base URL for the API is [https://api.opensauced.pizza](https://https://api.opensauced.pizza).
+The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).
 
 [comment]: # (TODO: add bearer auth information)
 
@@ -63,7 +63,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import openapi "github.com/GIT_USER_ID/GIT_REPO_ID"
+import client "github.com/open-sauced/go-api"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -81,7 +81,7 @@ Default configuration comes with `Servers` field that contains server objects as
 For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
 
 ```golang
-ctx := context.WithValue(context.Background(), openapi.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), client.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
@@ -89,7 +89,7 @@ ctx := context.WithValue(context.Background(), openapi.ContextServerIndex, 1)
 Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
 
 ```golang
-ctx := context.WithValue(context.Background(), openapi.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), client.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -103,10 +103,10 @@ An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```golang
-ctx := context.WithValue(context.Background(), openapi.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), client.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), client.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
@@ -115,7 +115,7 @@ ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVari
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.opensauced.pizza*
+All URIs are relative to *http://localhost:3001*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -141,9 +141,9 @@ Class | Method | HTTP request | Description
 *EndorsementsServiceAPI* | [**FindAllEndorsements**](docs/EndorsementsServiceAPI.md#findallendorsements) | **Get** /v1/endorsements | Finds all endorsements and paginates them
 *EndorsementsServiceAPI* | [**FindAllEndorsementsByRepo**](docs/EndorsementsServiceAPI.md#findallendorsementsbyrepo) | **Get** /v1/endorsements/repos/{owner}/{repo} | Finds all endorsements by repo owner or username and paginates them
 *EndorsementsServiceAPI* | [**FindAllUserCreatedEndorsements**](docs/EndorsementsServiceAPI.md#findallusercreatedendorsements) | **Get** /v1/user/endorsements/created | Finds all endorsements created by the authenticated user and paginates them
+*EndorsementsServiceAPI* | [**FindAllUserCreatedEndorsementsByUsername**](docs/EndorsementsServiceAPI.md#findallusercreatedendorsementsbyusername) | **Get** /v1/endorsements/user/{username}/created | Finds all endorsements received by the user and paginates them
 *EndorsementsServiceAPI* | [**FindAllUserReceivedEndorsements**](docs/EndorsementsServiceAPI.md#findalluserreceivedendorsements) | **Get** /v1/user/endorsements/received | Finds all endorsements received by the authenticated user and paginates them
-*EndorsementsServiceAPI* | [**FindAllUserReceivedEndorsements_0**](docs/EndorsementsServiceAPI.md#findalluserreceivedendorsements_0) | **Get** /v1/endorsements/user/{username}/created | Finds all endorsements received by the user and paginates them
-*EndorsementsServiceAPI* | [**FindAllUserReceivedEndorsements_1**](docs/EndorsementsServiceAPI.md#findalluserreceivedendorsements_1) | **Get** /v1/endorsements/user/{username}/received | Finds all endorsements received by the user and paginates them
+*EndorsementsServiceAPI* | [**FindAllUserReceivedEndorsementsByUsername**](docs/EndorsementsServiceAPI.md#findalluserreceivedendorsementsbyusername) | **Get** /v1/endorsements/user/{username}/received | Finds all endorsements received by the user and paginates them
 *EndorsementsServiceAPI* | [**FindEndorsementById**](docs/EndorsementsServiceAPI.md#findendorsementbyid) | **Get** /v1/endorsements/{id} | Retrieves the endorsement based on ID
 *HealthCheckServiceAPI* | [**HealthStatusService**](docs/HealthCheckServiceAPI.md#healthstatusservice) | **Get** /v1/health/service | Check the health of Open Sauced service endpoints
 *HealthCheckServiceAPI* | [**HealthStatusWeb**](docs/HealthCheckServiceAPI.md#healthstatusweb) | **Get** /v1/health/web | Check the health of Open Sauced web endpoints
@@ -185,27 +185,6 @@ Class | Method | HTTP request | Description
 *RepositoryServiceAPI* | [**FindAllReposWithFilters**](docs/RepositoryServiceAPI.md#findallreposwithfilters) | **Get** /v1/repos/search | Finds all repos using filters and paginates them
 *RepositoryServiceAPI* | [**FindOneById**](docs/RepositoryServiceAPI.md#findonebyid) | **Get** /v1/repos/{id} | Finds a repo by :id
 *RepositoryServiceAPI* | [**FindOneByOwnerAndRepo**](docs/RepositoryServiceAPI.md#findonebyownerandrepo) | **Get** /v1/repos/{owner}/{repo} | Finds a repo by :owner and :repo
-*RepositoryServiceGuardedAPI* | [**DownStarOneById**](docs/RepositoryServiceGuardedAPI.md#downstaronebyid) | **Delete** /v1/repos/{id}/star | Finds a repo by :id and removes existing star
-*RepositoryServiceGuardedAPI* | [**DownStarOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downstaronebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and removes existing star
-*RepositoryServiceGuardedAPI* | [**DownStargazeOneById**](docs/RepositoryServiceGuardedAPI.md#downstargazeonebyid) | **Delete** /v1/repos/{id}/stargaze | Finds a repo by :id and unfollows
-*RepositoryServiceGuardedAPI* | [**DownStargazeOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downstargazeonebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and unfollows
-*RepositoryServiceGuardedAPI* | [**DownSubmitOneById**](docs/RepositoryServiceGuardedAPI.md#downsubmitonebyid) | **Delete** /v1/repos/{id}/submit | Finds a repo by :id and removes existing submission
-*RepositoryServiceGuardedAPI* | [**DownSubmitOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downsubmitonebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and removes existing submission
-*RepositoryServiceGuardedAPI* | [**DownVoteOneById**](docs/RepositoryServiceGuardedAPI.md#downvoteonebyid) | **Delete** /v1/repos/{id}/vote | Finds a repo by :id and removes existing vote
-*RepositoryServiceGuardedAPI* | [**DownVoteOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downvoteonebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and removes existing vote
-*RepositoryServiceGuardedAPI* | [**FindAllUserStargazed**](docs/RepositoryServiceGuardedAPI.md#findalluserstargazed) | **Get** /v1/repos/listUserStargazed | Finds all repos followed by authenticated user and paginates them
-*RepositoryServiceGuardedAPI* | [**FindAllUserStarred**](docs/RepositoryServiceGuardedAPI.md#findalluserstarred) | **Get** /v1/repos/listUserStarred | Finds all repos starred by authenticated user and paginates them
-*RepositoryServiceGuardedAPI* | [**FindAllUserSubmitted**](docs/RepositoryServiceGuardedAPI.md#findallusersubmitted) | **Get** /v1/repos/listUserSubmitted | Finds all repos submitted by authenticated user and paginates them
-*RepositoryServiceGuardedAPI* | [**FindAllUserVoted**](docs/RepositoryServiceGuardedAPI.md#findalluservoted) | **Get** /v1/repos/listUserVoted | Finds all repos voted by authenticated user and paginates them
-*RepositoryServiceGuardedAPI* | [**FindOneByRepoId**](docs/RepositoryServiceGuardedAPI.md#findonebyrepoid) | **Get** /v1/repos/{repoId}/vote | Finds a repo by :repoId and returns if authenticated user has voted for it
-*RepositoryServiceGuardedAPI* | [**StarOneById**](docs/RepositoryServiceGuardedAPI.md#staronebyid) | **Put** /v1/repos/{id}/star | Finds a repo by :id and adds a star
-*RepositoryServiceGuardedAPI* | [**StarOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#staronebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and adds a star
-*RepositoryServiceGuardedAPI* | [**StargazeOneById**](docs/RepositoryServiceGuardedAPI.md#stargazeonebyid) | **Put** /v1/repos/{id}/stargaze | Finds a repo by :id and follows
-*RepositoryServiceGuardedAPI* | [**StargazeOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#stargazeonebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and follows
-*RepositoryServiceGuardedAPI* | [**SubmitOneById**](docs/RepositoryServiceGuardedAPI.md#submitonebyid) | **Put** /v1/repos/{id}/submit | Finds a repo by :id and adds a submission
-*RepositoryServiceGuardedAPI* | [**SubmitOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#submitonebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and adds a submission
-*RepositoryServiceGuardedAPI* | [**VoteOneById**](docs/RepositoryServiceGuardedAPI.md#voteonebyid) | **Put** /v1/repos/{id}/vote | Finds a repo by :id and adds a vote
-*RepositoryServiceGuardedAPI* | [**VoteOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#voteonebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and adds a vote
 *StarServiceAPI* | [**DownStarOneById**](docs/StarServiceAPI.md#downstaronebyid) | **Delete** /v1/repos/{id}/star | Finds a repo by :id and removes existing star
 *StarServiceAPI* | [**DownStarOneByOwnerAndRepo**](docs/StarServiceAPI.md#downstaronebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and removes existing star
 *StarServiceAPI* | [**FindAllUserStarred**](docs/StarServiceAPI.md#findalluserstarred) | **Get** /v1/repos/listUserStarred | Finds all repos starred by authenticated user and paginates them

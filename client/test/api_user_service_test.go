@@ -25,7 +25,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService FindAllHighlightsByUsername", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var username string
 
@@ -39,7 +39,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService FindAllTopReposByUsername", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var username string
 
@@ -53,7 +53,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService FindContributorPullRequests", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var username string
 
@@ -67,7 +67,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService FindOneUserByUserame", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var username string
 
@@ -81,7 +81,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService FollowUserById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var username string
 
@@ -95,7 +95,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService GetFollowStatusByUsername", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var username string
 
@@ -109,7 +109,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService GetTop10Highlights", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.UserServiceAPI.GetTop10Highlights(context.Background()).Execute()
 
@@ -121,7 +121,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService GetUserNotifications", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.UserServiceAPI.GetUserNotifications(context.Background()).Execute()
 
@@ -133,7 +133,7 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	t.Run("Test UserServiceAPIService UnfollowUserByUsername", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var username string
 

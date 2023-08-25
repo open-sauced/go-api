@@ -14,7 +14,6 @@ api_issue_summary_service.go
 api_pizza_oven_service.go
 api_pull_requests_service.go
 api_repository_service.go
-api_repository_service_guarded.go
 api_star_service.go
 api_stargaze_service.go
 api_stripe_service.go
@@ -100,7 +99,6 @@ docs/PullRequestsServiceAPI.md
 docs/RepoInfo.md
 docs/RepoOrderFieldsEnum.md
 docs/RepositoryServiceAPI.md
-docs/RepositoryServiceGuardedAPI.md
 docs/SearchAllPullRequestContributors200Response.md
 docs/StarServiceAPI.md
 docs/StargazeServiceAPI.md
@@ -120,9 +118,6 @@ docs/UserRecommendationsServiceAPI.md
 docs/UserServiceAPI.md
 docs/VoteServiceAPI.md
 docs/VotedRepoDto.md
-git_push.sh
-go.mod
-go.sum
 model_bake_repo_dto.go
 model_create_blog_summary_dto.go
 model_create_endorsement_dto.go

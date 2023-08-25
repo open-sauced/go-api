@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SummaryLength** | **float32** | Summary Length | 
-**Temperature** | **float32** | Summary Temperature | 
+**SummaryLength** | **int32** | Summary Length | 
+**Temperature** | **int32** | Summary Temperature | 
 **Tone** | **string** | Summary Tone | 
 **Language** | **string** | Summary Language | [default to "english"]
 **IssueTitle** | **string** | Issue Title | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewCreateIssueSummaryDto
 
-`func NewCreateIssueSummaryDto(summaryLength float32, temperature float32, tone string, language string, issueTitle string, issueDescription string, issueComments string, ) *CreateIssueSummaryDto`
+`func NewCreateIssueSummaryDto(summaryLength int32, temperature int32, tone string, language string, issueTitle string, issueDescription string, issueComments string, ) *CreateIssueSummaryDto`
 
 NewCreateIssueSummaryDto instantiates a new CreateIssueSummaryDto object
 This constructor will assign default values to properties that have it defined,
@@ -33,40 +33,40 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSummaryLength
 
-`func (o *CreateIssueSummaryDto) GetSummaryLength() float32`
+`func (o *CreateIssueSummaryDto) GetSummaryLength() int32`
 
 GetSummaryLength returns the SummaryLength field if non-nil, zero value otherwise.
 
 ### GetSummaryLengthOk
 
-`func (o *CreateIssueSummaryDto) GetSummaryLengthOk() (*float32, bool)`
+`func (o *CreateIssueSummaryDto) GetSummaryLengthOk() (*int32, bool)`
 
 GetSummaryLengthOk returns a tuple with the SummaryLength field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSummaryLength
 
-`func (o *CreateIssueSummaryDto) SetSummaryLength(v float32)`
+`func (o *CreateIssueSummaryDto) SetSummaryLength(v int32)`
 
 SetSummaryLength sets SummaryLength field to given value.
 
 
 ### GetTemperature
 
-`func (o *CreateIssueSummaryDto) GetTemperature() float32`
+`func (o *CreateIssueSummaryDto) GetTemperature() int32`
 
 GetTemperature returns the Temperature field if non-nil, zero value otherwise.
 
 ### GetTemperatureOk
 
-`func (o *CreateIssueSummaryDto) GetTemperatureOk() (*float32, bool)`
+`func (o *CreateIssueSummaryDto) GetTemperatureOk() (*int32, bool)`
 
 GetTemperatureOk returns a tuple with the Temperature field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTemperature
 
-`func (o *CreateIssueSummaryDto) SetTemperature(v float32)`
+`func (o *CreateIssueSummaryDto) SetTemperature(v int32)`
 
 SetTemperature sets Temperature field to given value.
 

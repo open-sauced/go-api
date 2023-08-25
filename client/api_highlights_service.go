@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,14 +20,13 @@ import (
 	"strings"
 )
 
-
 // HighlightsServiceAPIService HighlightsServiceAPI service
 type HighlightsServiceAPIService service
 
 type ApiAddAFeaturedHighlightRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *HighlightsServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiAddAFeaturedHighlightRequest) Execute() (*DbUserHighlight, *http.Response, error) {
@@ -37,26 +36,27 @@ func (r ApiAddAFeaturedHighlightRequest) Execute() (*DbUserHighlight, *http.Resp
 /*
 AddAFeaturedHighlight Add a highlight to the featured list
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiAddAFeaturedHighlightRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiAddAFeaturedHighlightRequest
 */
-func (a *HighlightsServiceAPIService) AddAFeaturedHighlight(ctx context.Context, id float32) ApiAddAFeaturedHighlightRequest {
+func (a *HighlightsServiceAPIService) AddAFeaturedHighlight(ctx context.Context, id int32) ApiAddAFeaturedHighlightRequest {
 	return ApiAddAFeaturedHighlightRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlight
+//
+//	@return DbUserHighlight
 func (a *HighlightsServiceAPIService) AddAFeaturedHighlightExecute(r ApiAddAFeaturedHighlightRequest) (*DbUserHighlight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlight
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HighlightsServiceAPIService.AddAFeaturedHighlight")
@@ -126,21 +126,21 @@ func (a *HighlightsServiceAPIService) AddAFeaturedHighlightExecute(r ApiAddAFeat
 }
 
 type ApiFindAllFeaturedHighlightsRequest struct {
-	ctx context.Context
-	ApiService *HighlightsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *HighlightsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	repo *string
+	range_         *int32
+	repo           *string
 }
 
-func (r ApiFindAllFeaturedHighlightsRequest) Page(page float32) ApiFindAllFeaturedHighlightsRequest {
+func (r ApiFindAllFeaturedHighlightsRequest) Page(page int32) ApiFindAllFeaturedHighlightsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllFeaturedHighlightsRequest) Limit(limit float32) ApiFindAllFeaturedHighlightsRequest {
+func (r ApiFindAllFeaturedHighlightsRequest) Limit(limit int32) ApiFindAllFeaturedHighlightsRequest {
 	r.limit = &limit
 	return r
 }
@@ -151,7 +151,7 @@ func (r ApiFindAllFeaturedHighlightsRequest) OrderDirection(orderDirection Order
 }
 
 // Range in days
-func (r ApiFindAllFeaturedHighlightsRequest) Range_(range_ float32) ApiFindAllFeaturedHighlightsRequest {
+func (r ApiFindAllFeaturedHighlightsRequest) Range_(range_ int32) ApiFindAllFeaturedHighlightsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -169,24 +169,25 @@ func (r ApiFindAllFeaturedHighlightsRequest) Execute() (*FindAllHighlightsByUser
 /*
 FindAllFeaturedHighlights Finds all featured highlights and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllFeaturedHighlightsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllFeaturedHighlightsRequest
 */
 func (a *HighlightsServiceAPIService) FindAllFeaturedHighlights(ctx context.Context) ApiFindAllFeaturedHighlightsRequest {
 	return ApiFindAllFeaturedHighlightsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllHighlightsByUsername200Response
+//
+//	@return FindAllHighlightsByUsername200Response
 func (a *HighlightsServiceAPIService) FindAllFeaturedHighlightsExecute(r ApiFindAllFeaturedHighlightsRequest) (*FindAllHighlightsByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllHighlightsByUsername200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllHighlightsByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HighlightsServiceAPIService.FindAllFeaturedHighlights")
@@ -270,20 +271,20 @@ func (a *HighlightsServiceAPIService) FindAllFeaturedHighlightsExecute(r ApiFind
 }
 
 type ApiFindAllHighlightReposRequest struct {
-	ctx context.Context
-	ApiService *HighlightsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *HighlightsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllHighlightReposRequest) Page(page float32) ApiFindAllHighlightReposRequest {
+func (r ApiFindAllHighlightReposRequest) Page(page int32) ApiFindAllHighlightReposRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllHighlightReposRequest) Limit(limit float32) ApiFindAllHighlightReposRequest {
+func (r ApiFindAllHighlightReposRequest) Limit(limit int32) ApiFindAllHighlightReposRequest {
 	r.limit = &limit
 	return r
 }
@@ -294,7 +295,7 @@ func (r ApiFindAllHighlightReposRequest) OrderDirection(orderDirection OrderDire
 }
 
 // Range in days
-func (r ApiFindAllHighlightReposRequest) Range_(range_ float32) ApiFindAllHighlightReposRequest {
+func (r ApiFindAllHighlightReposRequest) Range_(range_ int32) ApiFindAllHighlightReposRequest {
 	r.range_ = &range_
 	return r
 }
@@ -306,24 +307,25 @@ func (r ApiFindAllHighlightReposRequest) Execute() (*FindAllHighlightRepos200Res
 /*
 FindAllHighlightRepos Finds all highlight repos and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllHighlightReposRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllHighlightReposRequest
 */
 func (a *HighlightsServiceAPIService) FindAllHighlightRepos(ctx context.Context) ApiFindAllHighlightReposRequest {
 	return ApiFindAllHighlightReposRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllHighlightRepos200Response
+//
+//	@return FindAllHighlightRepos200Response
 func (a *HighlightsServiceAPIService) FindAllHighlightReposExecute(r ApiFindAllHighlightReposRequest) (*FindAllHighlightRepos200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllHighlightRepos200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllHighlightRepos200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HighlightsServiceAPIService.FindAllHighlightRepos")
@@ -404,21 +406,21 @@ func (a *HighlightsServiceAPIService) FindAllHighlightReposExecute(r ApiFindAllH
 }
 
 type ApiFindAllHighlightsRequest struct {
-	ctx context.Context
-	ApiService *HighlightsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *HighlightsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	repo *string
+	range_         *int32
+	repo           *string
 }
 
-func (r ApiFindAllHighlightsRequest) Page(page float32) ApiFindAllHighlightsRequest {
+func (r ApiFindAllHighlightsRequest) Page(page int32) ApiFindAllHighlightsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllHighlightsRequest) Limit(limit float32) ApiFindAllHighlightsRequest {
+func (r ApiFindAllHighlightsRequest) Limit(limit int32) ApiFindAllHighlightsRequest {
 	r.limit = &limit
 	return r
 }
@@ -429,7 +431,7 @@ func (r ApiFindAllHighlightsRequest) OrderDirection(orderDirection OrderDirectio
 }
 
 // Range in days
-func (r ApiFindAllHighlightsRequest) Range_(range_ float32) ApiFindAllHighlightsRequest {
+func (r ApiFindAllHighlightsRequest) Range_(range_ int32) ApiFindAllHighlightsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -447,24 +449,25 @@ func (r ApiFindAllHighlightsRequest) Execute() (*FindAllHighlightsByUsername200R
 /*
 FindAllHighlights Finds all highlights and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllHighlightsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllHighlightsRequest
 */
 func (a *HighlightsServiceAPIService) FindAllHighlights(ctx context.Context) ApiFindAllHighlightsRequest {
 	return ApiFindAllHighlightsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllHighlightsByUsername200Response
+//
+//	@return FindAllHighlightsByUsername200Response
 func (a *HighlightsServiceAPIService) FindAllHighlightsExecute(r ApiFindAllHighlightsRequest) (*FindAllHighlightsByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllHighlightsByUsername200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllHighlightsByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HighlightsServiceAPIService.FindAllHighlights")
@@ -548,20 +551,20 @@ func (a *HighlightsServiceAPIService) FindAllHighlightsExecute(r ApiFindAllHighl
 }
 
 type ApiFindTopHighlightsRequest struct {
-	ctx context.Context
-	ApiService *HighlightsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *HighlightsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindTopHighlightsRequest) Page(page float32) ApiFindTopHighlightsRequest {
+func (r ApiFindTopHighlightsRequest) Page(page int32) ApiFindTopHighlightsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindTopHighlightsRequest) Limit(limit float32) ApiFindTopHighlightsRequest {
+func (r ApiFindTopHighlightsRequest) Limit(limit int32) ApiFindTopHighlightsRequest {
 	r.limit = &limit
 	return r
 }
@@ -572,7 +575,7 @@ func (r ApiFindTopHighlightsRequest) OrderDirection(orderDirection OrderDirectio
 }
 
 // Range in days
-func (r ApiFindTopHighlightsRequest) Range_(range_ float32) ApiFindTopHighlightsRequest {
+func (r ApiFindTopHighlightsRequest) Range_(range_ int32) ApiFindTopHighlightsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -584,24 +587,25 @@ func (r ApiFindTopHighlightsRequest) Execute() (*FindAllHighlightsByUsername200R
 /*
 FindTopHighlights Finds top highlights for the day range and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindTopHighlightsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindTopHighlightsRequest
 */
 func (a *HighlightsServiceAPIService) FindTopHighlights(ctx context.Context) ApiFindTopHighlightsRequest {
 	return ApiFindTopHighlightsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllHighlightsByUsername200Response
+//
+//	@return FindAllHighlightsByUsername200Response
 func (a *HighlightsServiceAPIService) FindTopHighlightsExecute(r ApiFindTopHighlightsRequest) (*FindAllHighlightsByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllHighlightsByUsername200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllHighlightsByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HighlightsServiceAPIService.FindTopHighlights")
@@ -682,9 +686,9 @@ func (a *HighlightsServiceAPIService) FindTopHighlightsExecute(r ApiFindTopHighl
 }
 
 type ApiGetAllHighlightReactionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *HighlightsServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiGetAllHighlightReactionsRequest) Execute() (*DbUserHighlightReactionResponse, *http.Response, error) {
@@ -694,26 +698,27 @@ func (r ApiGetAllHighlightReactionsRequest) Execute() (*DbUserHighlightReactionR
 /*
 GetAllHighlightReactions Retrieves total reactions for a highlight
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiGetAllHighlightReactionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetAllHighlightReactionsRequest
 */
-func (a *HighlightsServiceAPIService) GetAllHighlightReactions(ctx context.Context, id float32) ApiGetAllHighlightReactionsRequest {
+func (a *HighlightsServiceAPIService) GetAllHighlightReactions(ctx context.Context, id int32) ApiGetAllHighlightReactionsRequest {
 	return ApiGetAllHighlightReactionsRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlightReactionResponse
+//
+//	@return DbUserHighlightReactionResponse
 func (a *HighlightsServiceAPIService) GetAllHighlightReactionsExecute(r ApiGetAllHighlightReactionsRequest) (*DbUserHighlightReactionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlightReactionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlightReactionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HighlightsServiceAPIService.GetAllHighlightReactions")
@@ -783,9 +788,9 @@ func (a *HighlightsServiceAPIService) GetAllHighlightReactionsExecute(r ApiGetAl
 }
 
 type ApiRemoveAFeaturedHighlightRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *HighlightsServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiRemoveAFeaturedHighlightRequest) Execute() (*DbUserHighlight, *http.Response, error) {
@@ -795,26 +800,27 @@ func (r ApiRemoveAFeaturedHighlightRequest) Execute() (*DbUserHighlight, *http.R
 /*
 RemoveAFeaturedHighlight Remove a highlight from the featured list
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiRemoveAFeaturedHighlightRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiRemoveAFeaturedHighlightRequest
 */
-func (a *HighlightsServiceAPIService) RemoveAFeaturedHighlight(ctx context.Context, id float32) ApiRemoveAFeaturedHighlightRequest {
+func (a *HighlightsServiceAPIService) RemoveAFeaturedHighlight(ctx context.Context, id int32) ApiRemoveAFeaturedHighlightRequest {
 	return ApiRemoveAFeaturedHighlightRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserHighlight
+//
+//	@return DbUserHighlight
 func (a *HighlightsServiceAPIService) RemoveAFeaturedHighlightExecute(r ApiRemoveAFeaturedHighlightRequest) (*DbUserHighlight, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserHighlight
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserHighlight
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HighlightsServiceAPIService.RemoveAFeaturedHighlight")

@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -21,9 +21,9 @@ var _ MappedNullable = &CreateBlogSummaryDto{}
 // CreateBlogSummaryDto struct for CreateBlogSummaryDto
 type CreateBlogSummaryDto struct {
 	// Summary Length
-	SummaryLength float32 `json:"summaryLength"`
+	SummaryLength int32 `json:"summaryLength"`
 	// Summary Temperature
-	Temperature float32 `json:"temperature"`
+	Temperature int32 `json:"temperature"`
 	// Summary Tone
 	Tone string `json:"tone"`
 	// Summary Language
@@ -38,7 +38,7 @@ type CreateBlogSummaryDto struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateBlogSummaryDto(summaryLength float32, temperature float32, tone string, language string, blogTitle string, blogMarkdown string) *CreateBlogSummaryDto {
+func NewCreateBlogSummaryDto(summaryLength int32, temperature int32, tone string, language string, blogTitle string, blogMarkdown string) *CreateBlogSummaryDto {
 	this := CreateBlogSummaryDto{}
 	this.SummaryLength = summaryLength
 	this.Temperature = temperature
@@ -60,9 +60,9 @@ func NewCreateBlogSummaryDtoWithDefaults() *CreateBlogSummaryDto {
 }
 
 // GetSummaryLength returns the SummaryLength field value
-func (o *CreateBlogSummaryDto) GetSummaryLength() float32 {
+func (o *CreateBlogSummaryDto) GetSummaryLength() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -71,7 +71,7 @@ func (o *CreateBlogSummaryDto) GetSummaryLength() float32 {
 
 // GetSummaryLengthOk returns a tuple with the SummaryLength field value
 // and a boolean to check if the value has been set.
-func (o *CreateBlogSummaryDto) GetSummaryLengthOk() (*float32, bool) {
+func (o *CreateBlogSummaryDto) GetSummaryLengthOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,14 +79,14 @@ func (o *CreateBlogSummaryDto) GetSummaryLengthOk() (*float32, bool) {
 }
 
 // SetSummaryLength sets field value
-func (o *CreateBlogSummaryDto) SetSummaryLength(v float32) {
+func (o *CreateBlogSummaryDto) SetSummaryLength(v int32) {
 	o.SummaryLength = v
 }
 
 // GetTemperature returns the Temperature field value
-func (o *CreateBlogSummaryDto) GetTemperature() float32 {
+func (o *CreateBlogSummaryDto) GetTemperature() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -95,7 +95,7 @@ func (o *CreateBlogSummaryDto) GetTemperature() float32 {
 
 // GetTemperatureOk returns a tuple with the Temperature field value
 // and a boolean to check if the value has been set.
-func (o *CreateBlogSummaryDto) GetTemperatureOk() (*float32, bool) {
+func (o *CreateBlogSummaryDto) GetTemperatureOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *CreateBlogSummaryDto) GetTemperatureOk() (*float32, bool) {
 }
 
 // SetTemperature sets field value
-func (o *CreateBlogSummaryDto) SetTemperature(v float32) {
+func (o *CreateBlogSummaryDto) SetTemperature(v int32) {
 	o.Temperature = v
 }
 
@@ -204,7 +204,7 @@ func (o *CreateBlogSummaryDto) SetBlogMarkdown(v string) {
 }
 
 func (o CreateBlogSummaryDto) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -257,5 +257,3 @@ func (v *NullableCreateBlogSummaryDto) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

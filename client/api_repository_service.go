@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,26 +20,25 @@ import (
 	"strings"
 )
 
-
 // RepositoryServiceAPIService RepositoryServiceAPI service
 type RepositoryServiceAPIService service
 
 type ApiFindAllRequest struct {
-	ctx context.Context
-	ApiService *RepositoryServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *RepositoryServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	orderBy *RepoOrderFieldsEnum
+	range_         *int32
+	orderBy        *RepoOrderFieldsEnum
 }
 
-func (r ApiFindAllRequest) Page(page float32) ApiFindAllRequest {
+func (r ApiFindAllRequest) Page(page int32) ApiFindAllRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllRequest) Limit(limit float32) ApiFindAllRequest {
+func (r ApiFindAllRequest) Limit(limit int32) ApiFindAllRequest {
 	r.limit = &limit
 	return r
 }
@@ -50,7 +49,7 @@ func (r ApiFindAllRequest) OrderDirection(orderDirection OrderDirectionEnum) Api
 }
 
 // Range in days
-func (r ApiFindAllRequest) Range_(range_ float32) ApiFindAllRequest {
+func (r ApiFindAllRequest) Range_(range_ int32) ApiFindAllRequest {
 	r.range_ = &range_
 	return r
 }
@@ -67,24 +66,25 @@ func (r ApiFindAllRequest) Execute() (*FindAllTopReposByUsername200Response, *ht
 /*
 FindAll Finds all repos and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllRequest
 */
 func (a *RepositoryServiceAPIService) FindAll(ctx context.Context) ApiFindAllRequest {
 	return ApiFindAllRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllTopReposByUsername200Response
+//
+//	@return FindAllTopReposByUsername200Response
 func (a *RepositoryServiceAPIService) FindAllExecute(r ApiFindAllRequest) (*FindAllTopReposByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllTopReposByUsername200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllTopReposByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindAll")
@@ -168,25 +168,25 @@ func (a *RepositoryServiceAPIService) FindAllExecute(r ApiFindAllRequest) (*Find
 }
 
 type ApiFindAllReposWithFiltersRequest struct {
-	ctx context.Context
-	ApiService *RepositoryServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *RepositoryServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
-	orderBy *RepoOrderFieldsEnum
-	filter *InsightFilterFieldsEnum
-	repo *string
-	topic *string
-	repoIds *string
+	range_         *int32
+	orderBy        *RepoOrderFieldsEnum
+	filter         *InsightFilterFieldsEnum
+	repo           *string
+	topic          *string
+	repoIds        *string
 }
 
-func (r ApiFindAllReposWithFiltersRequest) Page(page float32) ApiFindAllReposWithFiltersRequest {
+func (r ApiFindAllReposWithFiltersRequest) Page(page int32) ApiFindAllReposWithFiltersRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllReposWithFiltersRequest) Limit(limit float32) ApiFindAllReposWithFiltersRequest {
+func (r ApiFindAllReposWithFiltersRequest) Limit(limit int32) ApiFindAllReposWithFiltersRequest {
 	r.limit = &limit
 	return r
 }
@@ -197,7 +197,7 @@ func (r ApiFindAllReposWithFiltersRequest) OrderDirection(orderDirection OrderDi
 }
 
 // Range in days
-func (r ApiFindAllReposWithFiltersRequest) Range_(range_ float32) ApiFindAllReposWithFiltersRequest {
+func (r ApiFindAllReposWithFiltersRequest) Range_(range_ int32) ApiFindAllReposWithFiltersRequest {
 	r.range_ = &range_
 	return r
 }
@@ -234,24 +234,25 @@ func (r ApiFindAllReposWithFiltersRequest) Execute() (*FindAllTopReposByUsername
 /*
 FindAllReposWithFilters Finds all repos using filters and paginates them
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllReposWithFiltersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllReposWithFiltersRequest
 */
 func (a *RepositoryServiceAPIService) FindAllReposWithFilters(ctx context.Context) ApiFindAllReposWithFiltersRequest {
 	return ApiFindAllReposWithFiltersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllTopReposByUsername200Response
+//
+//	@return FindAllTopReposByUsername200Response
 func (a *RepositoryServiceAPIService) FindAllReposWithFiltersExecute(r ApiFindAllReposWithFiltersRequest) (*FindAllTopReposByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllTopReposByUsername200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllTopReposByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindAllReposWithFilters")
@@ -347,9 +348,9 @@ func (a *RepositoryServiceAPIService) FindAllReposWithFiltersExecute(r ApiFindAl
 }
 
 type ApiFindOneByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RepositoryServiceAPIService
-	id float32
+	id         int32
 }
 
 func (r ApiFindOneByIdRequest) Execute() (*DbRepo, *http.Response, error) {
@@ -359,26 +360,27 @@ func (r ApiFindOneByIdRequest) Execute() (*DbRepo, *http.Response, error) {
 /*
 FindOneById Finds a repo by :id
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiFindOneByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiFindOneByIdRequest
 */
-func (a *RepositoryServiceAPIService) FindOneById(ctx context.Context, id float32) ApiFindOneByIdRequest {
+func (a *RepositoryServiceAPIService) FindOneById(ctx context.Context, id int32) ApiFindOneByIdRequest {
 	return ApiFindOneByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepo
+//
+//	@return DbRepo
 func (a *RepositoryServiceAPIService) FindOneByIdExecute(r ApiFindOneByIdRequest) (*DbRepo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindOneById")
@@ -448,10 +450,10 @@ func (a *RepositoryServiceAPIService) FindOneByIdExecute(r ApiFindOneByIdRequest
 }
 
 type ApiFindOneByOwnerAndRepoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *RepositoryServiceAPIService
-	owner string
-	repo string
+	owner      string
+	repo       string
 }
 
 func (r ApiFindOneByOwnerAndRepoRequest) Execute() (*DbRepo, *http.Response, error) {
@@ -461,28 +463,29 @@ func (r ApiFindOneByOwnerAndRepoRequest) Execute() (*DbRepo, *http.Response, err
 /*
 FindOneByOwnerAndRepo Finds a repo by :owner and :repo
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param owner
- @param repo
- @return ApiFindOneByOwnerAndRepoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiFindOneByOwnerAndRepoRequest
 */
 func (a *RepositoryServiceAPIService) FindOneByOwnerAndRepo(ctx context.Context, owner string, repo string) ApiFindOneByOwnerAndRepoRequest {
 	return ApiFindOneByOwnerAndRepoRequest{
 		ApiService: a,
-		ctx: ctx,
-		owner: owner,
-		repo: repo,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
 	}
 }
 
 // Execute executes the request
-//  @return DbRepo
+//
+//	@return DbRepo
 func (a *RepositoryServiceAPIService) FindOneByOwnerAndRepoExecute(r ApiFindOneByOwnerAndRepoRequest) (*DbRepo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbRepo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindOneByOwnerAndRepo")

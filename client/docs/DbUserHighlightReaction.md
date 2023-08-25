@@ -5,18 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Reaction identifier | 
-**HighlightId** | **float32** | Highlight identifier | 
-**UserId** | **float32** | User identifier | 
+**HighlightId** | **int32** | Highlight identifier | 
+**UserId** | **int32** | User identifier | 
 **EmojiId** | **string** | Emoji identifier | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing highlight reaction creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing highlight reaction last update | [optional] 
-**ReactionCount** | Pointer to **float32** |  | [optional] 
+**ReactionCount** | Pointer to **int32** |  | [optional] 
 
 ## Methods
 
 ### NewDbUserHighlightReaction
 
-`func NewDbUserHighlightReaction(id string, highlightId float32, userId float32, emojiId string, ) *DbUserHighlightReaction`
+`func NewDbUserHighlightReaction(id string, highlightId int32, userId int32, emojiId string, ) *DbUserHighlightReaction`
 
 NewDbUserHighlightReaction instantiates a new DbUserHighlightReaction object
 This constructor will assign default values to properties that have it defined,
@@ -53,40 +53,40 @@ SetId sets Id field to given value.
 
 ### GetHighlightId
 
-`func (o *DbUserHighlightReaction) GetHighlightId() float32`
+`func (o *DbUserHighlightReaction) GetHighlightId() int32`
 
 GetHighlightId returns the HighlightId field if non-nil, zero value otherwise.
 
 ### GetHighlightIdOk
 
-`func (o *DbUserHighlightReaction) GetHighlightIdOk() (*float32, bool)`
+`func (o *DbUserHighlightReaction) GetHighlightIdOk() (*int32, bool)`
 
 GetHighlightIdOk returns a tuple with the HighlightId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHighlightId
 
-`func (o *DbUserHighlightReaction) SetHighlightId(v float32)`
+`func (o *DbUserHighlightReaction) SetHighlightId(v int32)`
 
 SetHighlightId sets HighlightId field to given value.
 
 
 ### GetUserId
 
-`func (o *DbUserHighlightReaction) GetUserId() float32`
+`func (o *DbUserHighlightReaction) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbUserHighlightReaction) GetUserIdOk() (*float32, bool)`
+`func (o *DbUserHighlightReaction) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbUserHighlightReaction) SetUserId(v float32)`
+`func (o *DbUserHighlightReaction) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
@@ -163,20 +163,20 @@ HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetReactionCount
 
-`func (o *DbUserHighlightReaction) GetReactionCount() float32`
+`func (o *DbUserHighlightReaction) GetReactionCount() int32`
 
 GetReactionCount returns the ReactionCount field if non-nil, zero value otherwise.
 
 ### GetReactionCountOk
 
-`func (o *DbUserHighlightReaction) GetReactionCountOk() (*float32, bool)`
+`func (o *DbUserHighlightReaction) GetReactionCountOk() (*int32, bool)`
 
 GetReactionCountOk returns a tuple with the ReactionCount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReactionCount
 
-`func (o *DbUserHighlightReaction) SetReactionCount(v float32)`
+`func (o *DbUserHighlightReaction) SetReactionCount(v int32)`
 
 SetReactionCount sets ReactionCount field to given value.
 

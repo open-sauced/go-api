@@ -25,7 +25,7 @@ func Test_openapi_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService CheckAuthSession", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.CheckAuthSession(context.Background()).Execute()
 
@@ -37,7 +37,7 @@ func Test_openapi_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService PostCreateCheckoutSession", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.PostCreateCheckoutSession(context.Background()).Execute()
 
@@ -49,7 +49,7 @@ func Test_openapi_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService PostOnboarding", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.PostOnboarding(context.Background()).Execute()
 
@@ -61,7 +61,7 @@ func Test_openapi_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService PostWaitlist", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.PostWaitlist(context.Background()).Execute()
 
@@ -73,7 +73,7 @@ func Test_openapi_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService UpdateEmailPreferencesForUserProfile", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.UpdateEmailPreferencesForUserProfile(context.Background()).Execute()
 
@@ -85,7 +85,7 @@ func Test_openapi_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService UpdateInterestsForUserProfile", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.UpdateInterestsForUserProfile(context.Background()).Execute()
 
@@ -97,7 +97,7 @@ func Test_openapi_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService UpdateProfileForUser", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.UpdateProfileForUser(context.Background()).Execute()
 

@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | Endorsement identifier | 
-**CreatorUserId** | Pointer to **float32** | Endorsement Creator User ID | [optional] 
-**RecipientUserId** | Pointer to **float32** | Endorsement Recipient User ID | [optional] 
-**RepoId** | **float32** | Repository ID | 
+**CreatorUserId** | Pointer to **int32** | Endorsement Creator User ID | [optional] 
+**RecipientUserId** | Pointer to **int32** | Endorsement Recipient User ID | [optional] 
+**RepoId** | **int32** | Repository ID | 
 **SourceCommentUrl** | Pointer to **string** | Endorsement Source Comment URL | [optional] 
 **SourceContextUrl** | **string** | Endorsement Source Context URL | 
 **Type** | **string** | Endorsement Type | 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewDbEndorsement
 
-`func NewDbEndorsement(id string, repoId float32, sourceContextUrl string, type_ string, ) *DbEndorsement`
+`func NewDbEndorsement(id string, repoId int32, sourceContextUrl string, type_ string, ) *DbEndorsement`
 
 NewDbEndorsement instantiates a new DbEndorsement object
 This constructor will assign default values to properties that have it defined,
@@ -54,20 +54,20 @@ SetId sets Id field to given value.
 
 ### GetCreatorUserId
 
-`func (o *DbEndorsement) GetCreatorUserId() float32`
+`func (o *DbEndorsement) GetCreatorUserId() int32`
 
 GetCreatorUserId returns the CreatorUserId field if non-nil, zero value otherwise.
 
 ### GetCreatorUserIdOk
 
-`func (o *DbEndorsement) GetCreatorUserIdOk() (*float32, bool)`
+`func (o *DbEndorsement) GetCreatorUserIdOk() (*int32, bool)`
 
 GetCreatorUserIdOk returns a tuple with the CreatorUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatorUserId
 
-`func (o *DbEndorsement) SetCreatorUserId(v float32)`
+`func (o *DbEndorsement) SetCreatorUserId(v int32)`
 
 SetCreatorUserId sets CreatorUserId field to given value.
 
@@ -79,20 +79,20 @@ HasCreatorUserId returns a boolean if a field has been set.
 
 ### GetRecipientUserId
 
-`func (o *DbEndorsement) GetRecipientUserId() float32`
+`func (o *DbEndorsement) GetRecipientUserId() int32`
 
 GetRecipientUserId returns the RecipientUserId field if non-nil, zero value otherwise.
 
 ### GetRecipientUserIdOk
 
-`func (o *DbEndorsement) GetRecipientUserIdOk() (*float32, bool)`
+`func (o *DbEndorsement) GetRecipientUserIdOk() (*int32, bool)`
 
 GetRecipientUserIdOk returns a tuple with the RecipientUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRecipientUserId
 
-`func (o *DbEndorsement) SetRecipientUserId(v float32)`
+`func (o *DbEndorsement) SetRecipientUserId(v int32)`
 
 SetRecipientUserId sets RecipientUserId field to given value.
 
@@ -104,20 +104,20 @@ HasRecipientUserId returns a boolean if a field has been set.
 
 ### GetRepoId
 
-`func (o *DbEndorsement) GetRepoId() float32`
+`func (o *DbEndorsement) GetRepoId() int32`
 
 GetRepoId returns the RepoId field if non-nil, zero value otherwise.
 
 ### GetRepoIdOk
 
-`func (o *DbEndorsement) GetRepoIdOk() (*float32, bool)`
+`func (o *DbEndorsement) GetRepoIdOk() (*int32, bool)`
 
 GetRepoIdOk returns a tuple with the RepoId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepoId
 
-`func (o *DbEndorsement) SetRepoId(v float32)`
+`func (o *DbEndorsement) SetRepoId(v int32)`
 
 SetRepoId sets RepoId field to given value.
 

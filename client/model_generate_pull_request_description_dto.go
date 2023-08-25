@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -21,9 +21,9 @@ var _ MappedNullable = &GeneratePullRequestDescriptionDto{}
 // GeneratePullRequestDescriptionDto struct for GeneratePullRequestDescriptionDto
 type GeneratePullRequestDescriptionDto struct {
 	// Description Length
-	DescriptionLength float32 `json:"descriptionLength"`
+	DescriptionLength int32 `json:"descriptionLength"`
 	// Description Temperature
-	Temperature float32 `json:"temperature"`
+	Temperature int32 `json:"temperature"`
 	// Description Tone
 	Tone string `json:"tone"`
 	// Description Language
@@ -38,7 +38,7 @@ type GeneratePullRequestDescriptionDto struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGeneratePullRequestDescriptionDto(descriptionLength float32, temperature float32, tone string, language string) *GeneratePullRequestDescriptionDto {
+func NewGeneratePullRequestDescriptionDto(descriptionLength int32, temperature int32, tone string, language string) *GeneratePullRequestDescriptionDto {
 	this := GeneratePullRequestDescriptionDto{}
 	this.DescriptionLength = descriptionLength
 	this.Temperature = temperature
@@ -58,9 +58,9 @@ func NewGeneratePullRequestDescriptionDtoWithDefaults() *GeneratePullRequestDesc
 }
 
 // GetDescriptionLength returns the DescriptionLength field value
-func (o *GeneratePullRequestDescriptionDto) GetDescriptionLength() float32 {
+func (o *GeneratePullRequestDescriptionDto) GetDescriptionLength() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -69,7 +69,7 @@ func (o *GeneratePullRequestDescriptionDto) GetDescriptionLength() float32 {
 
 // GetDescriptionLengthOk returns a tuple with the DescriptionLength field value
 // and a boolean to check if the value has been set.
-func (o *GeneratePullRequestDescriptionDto) GetDescriptionLengthOk() (*float32, bool) {
+func (o *GeneratePullRequestDescriptionDto) GetDescriptionLengthOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,14 +77,14 @@ func (o *GeneratePullRequestDescriptionDto) GetDescriptionLengthOk() (*float32, 
 }
 
 // SetDescriptionLength sets field value
-func (o *GeneratePullRequestDescriptionDto) SetDescriptionLength(v float32) {
+func (o *GeneratePullRequestDescriptionDto) SetDescriptionLength(v int32) {
 	o.DescriptionLength = v
 }
 
 // GetTemperature returns the Temperature field value
-func (o *GeneratePullRequestDescriptionDto) GetTemperature() float32 {
+func (o *GeneratePullRequestDescriptionDto) GetTemperature() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *GeneratePullRequestDescriptionDto) GetTemperature() float32 {
 
 // GetTemperatureOk returns a tuple with the Temperature field value
 // and a boolean to check if the value has been set.
-func (o *GeneratePullRequestDescriptionDto) GetTemperatureOk() (*float32, bool) {
+func (o *GeneratePullRequestDescriptionDto) GetTemperatureOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *GeneratePullRequestDescriptionDto) GetTemperatureOk() (*float32, bool) 
 }
 
 // SetTemperature sets field value
-func (o *GeneratePullRequestDescriptionDto) SetTemperature(v float32) {
+func (o *GeneratePullRequestDescriptionDto) SetTemperature(v int32) {
 	o.Temperature = v
 }
 
@@ -218,7 +218,7 @@ func (o *GeneratePullRequestDescriptionDto) SetCommitMessages(v []string) {
 }
 
 func (o GeneratePullRequestDescriptionDto) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -275,5 +275,3 @@ func (v *NullableGeneratePullRequestDescriptionDto) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

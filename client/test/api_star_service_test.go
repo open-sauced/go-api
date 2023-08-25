@@ -25,9 +25,9 @@ func Test_openapi_StarServiceAPIService(t *testing.T) {
 
 	t.Run("Test StarServiceAPIService DownStarOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.StarServiceAPI.DownStarOneById(context.Background(), id).Execute()
 
@@ -39,7 +39,7 @@ func Test_openapi_StarServiceAPIService(t *testing.T) {
 
 	t.Run("Test StarServiceAPIService DownStarOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string
@@ -54,7 +54,7 @@ func Test_openapi_StarServiceAPIService(t *testing.T) {
 
 	t.Run("Test StarServiceAPIService FindAllUserStarred", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.StarServiceAPI.FindAllUserStarred(context.Background()).Execute()
 
@@ -66,9 +66,9 @@ func Test_openapi_StarServiceAPIService(t *testing.T) {
 
 	t.Run("Test StarServiceAPIService StarOneById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.StarServiceAPI.StarOneById(context.Background(), id).Execute()
 
@@ -80,7 +80,7 @@ func Test_openapi_StarServiceAPIService(t *testing.T) {
 
 	t.Run("Test StarServiceAPIService StarOneByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string

@@ -25,7 +25,7 @@ func Test_openapi_ContributionServiceAPIService(t *testing.T) {
 
 	t.Run("Test ContributionServiceAPIService FindAllByOwnerAndRepo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var owner string
 		var repo string
@@ -40,9 +40,9 @@ func Test_openapi_ContributionServiceAPIService(t *testing.T) {
 
 	t.Run("Test ContributionServiceAPIService FindAllByRepoId", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
-		var id float32
+		var id int32
 
 		resp, httpRes, err := apiClient.ContributionServiceAPI.FindAllByRepoId(context.Background(), id).Execute()
 

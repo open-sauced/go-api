@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** | User Collaboration identifier | 
-**UserId** | Pointer to **float32** | Collaboration Receipient User ID | [optional] 
-**RequestUserId** | Pointer to **float32** | Collaboration Request User ID | [optional] 
+**UserId** | Pointer to **int32** | Collaboration Receipient User ID | [optional] 
+**RequestUserId** | Pointer to **int32** | Collaboration Request User ID | [optional] 
 **Message** | **string** | Collaboration Request Message | 
 **Status** | **string** | Collaboration Status | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing user collaboration creation | [optional] 
@@ -56,20 +56,20 @@ SetId sets Id field to given value.
 
 ### GetUserId
 
-`func (o *DbUserCollaboration) GetUserId() float32`
+`func (o *DbUserCollaboration) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbUserCollaboration) GetUserIdOk() (*float32, bool)`
+`func (o *DbUserCollaboration) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbUserCollaboration) SetUserId(v float32)`
+`func (o *DbUserCollaboration) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
@@ -81,20 +81,20 @@ HasUserId returns a boolean if a field has been set.
 
 ### GetRequestUserId
 
-`func (o *DbUserCollaboration) GetRequestUserId() float32`
+`func (o *DbUserCollaboration) GetRequestUserId() int32`
 
 GetRequestUserId returns the RequestUserId field if non-nil, zero value otherwise.
 
 ### GetRequestUserIdOk
 
-`func (o *DbUserCollaboration) GetRequestUserIdOk() (*float32, bool)`
+`func (o *DbUserCollaboration) GetRequestUserIdOk() (*int32, bool)`
 
 GetRequestUserIdOk returns a tuple with the RequestUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequestUserId
 
-`func (o *DbUserCollaboration) SetRequestUserId(v float32)`
+`func (o *DbUserCollaboration) SetRequestUserId(v int32)`
 
 SetRequestUserId sets RequestUserId field to given value.
 

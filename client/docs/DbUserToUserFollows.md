@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **float32** | User Follow identifier | 
-**UserId** | **float32** | User identifier | 
-**FollowingUserId** | **float32** | User follower identifier | 
+**Id** | **int32** | User Follow identifier | 
+**UserId** | **int32** | User identifier | 
+**FollowingUserId** | **int32** | User follower identifier | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing user follow creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing user follow last update | [optional] 
 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewDbUserToUserFollows
 
-`func NewDbUserToUserFollows(id float32, userId float32, followingUserId float32, ) *DbUserToUserFollows`
+`func NewDbUserToUserFollows(id int32, userId int32, followingUserId int32, ) *DbUserToUserFollows`
 
 NewDbUserToUserFollows instantiates a new DbUserToUserFollows object
 This constructor will assign default values to properties that have it defined,
@@ -31,60 +31,60 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetId
 
-`func (o *DbUserToUserFollows) GetId() float32`
+`func (o *DbUserToUserFollows) GetId() int32`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *DbUserToUserFollows) GetIdOk() (*float32, bool)`
+`func (o *DbUserToUserFollows) GetIdOk() (*int32, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *DbUserToUserFollows) SetId(v float32)`
+`func (o *DbUserToUserFollows) SetId(v int32)`
 
 SetId sets Id field to given value.
 
 
 ### GetUserId
 
-`func (o *DbUserToUserFollows) GetUserId() float32`
+`func (o *DbUserToUserFollows) GetUserId() int32`
 
 GetUserId returns the UserId field if non-nil, zero value otherwise.
 
 ### GetUserIdOk
 
-`func (o *DbUserToUserFollows) GetUserIdOk() (*float32, bool)`
+`func (o *DbUserToUserFollows) GetUserIdOk() (*int32, bool)`
 
 GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUserId
 
-`func (o *DbUserToUserFollows) SetUserId(v float32)`
+`func (o *DbUserToUserFollows) SetUserId(v int32)`
 
 SetUserId sets UserId field to given value.
 
 
 ### GetFollowingUserId
 
-`func (o *DbUserToUserFollows) GetFollowingUserId() float32`
+`func (o *DbUserToUserFollows) GetFollowingUserId() int32`
 
 GetFollowingUserId returns the FollowingUserId field if non-nil, zero value otherwise.
 
 ### GetFollowingUserIdOk
 
-`func (o *DbUserToUserFollows) GetFollowingUserIdOk() (*float32, bool)`
+`func (o *DbUserToUserFollows) GetFollowingUserIdOk() (*int32, bool)`
 
 GetFollowingUserIdOk returns a tuple with the FollowingUserId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFollowingUserId
 
-`func (o *DbUserToUserFollows) SetFollowingUserId(v float32)`
+`func (o *DbUserToUserFollows) SetFollowingUserId(v int32)`
 
 SetFollowingUserId sets FollowingUserId field to given value.
 

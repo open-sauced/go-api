@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Interests** | [**[]Array**](Array.md) | An array of interests | 
+**Interests** | **[]string** | An array of interests | 
 **Timezone** | **string** | User timezone in UTC | 
 
 ## Methods
 
 ### NewUserOnboardingDto
 
-`func NewUserOnboardingDto(interests []Array, timezone string, ) *UserOnboardingDto`
+`func NewUserOnboardingDto(interests []string, timezone string, ) *UserOnboardingDto`
 
 NewUserOnboardingDto instantiates a new UserOnboardingDto object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetInterests
 
-`func (o *UserOnboardingDto) GetInterests() []Array`
+`func (o *UserOnboardingDto) GetInterests() []string`
 
 GetInterests returns the Interests field if non-nil, zero value otherwise.
 
 ### GetInterestsOk
 
-`func (o *UserOnboardingDto) GetInterestsOk() (*[]Array, bool)`
+`func (o *UserOnboardingDto) GetInterestsOk() (*[]string, bool)`
 
 GetInterestsOk returns a tuple with the Interests field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInterests
 
-`func (o *UserOnboardingDto) SetInterests(v []Array)`
+`func (o *UserOnboardingDto) SetInterests(v []string)`
 
 SetInterests sets Interests field to given value.
 

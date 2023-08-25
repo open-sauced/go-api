@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -20,13 +20,12 @@ import (
 	"strings"
 )
 
-
 // UserCollaborationsServiceAPIService UserCollaborationsServiceAPI service
 type UserCollaborationsServiceAPIService service
 
 type ApiAddUserCollaborationRequest struct {
-	ctx context.Context
-	ApiService *UserCollaborationsServiceAPIService
+	ctx                        context.Context
+	ApiService                 *UserCollaborationsServiceAPIService
 	createUserCollaborationDto *CreateUserCollaborationDto
 }
 
@@ -42,24 +41,25 @@ func (r ApiAddUserCollaborationRequest) Execute() (*DbUserCollaboration, *http.R
 /*
 AddUserCollaboration Adds a new collaboration request for the user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAddUserCollaborationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiAddUserCollaborationRequest
 */
 func (a *UserCollaborationsServiceAPIService) AddUserCollaboration(ctx context.Context) ApiAddUserCollaborationRequest {
 	return ApiAddUserCollaborationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserCollaboration
+//
+//	@return DbUserCollaboration
 func (a *UserCollaborationsServiceAPIService) AddUserCollaborationExecute(r ApiAddUserCollaborationRequest) (*DbUserCollaboration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserCollaboration
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserCollaboration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserCollaborationsServiceAPIService.AddUserCollaboration")
@@ -133,20 +133,20 @@ func (a *UserCollaborationsServiceAPIService) AddUserCollaborationExecute(r ApiA
 }
 
 type ApiFindAllUserCollaborationsRequest struct {
-	ctx context.Context
-	ApiService *UserCollaborationsServiceAPIService
-	page *float32
-	limit *float32
+	ctx            context.Context
+	ApiService     *UserCollaborationsServiceAPIService
+	page           *int32
+	limit          *int32
 	orderDirection *OrderDirectionEnum
-	range_ *float32
+	range_         *int32
 }
 
-func (r ApiFindAllUserCollaborationsRequest) Page(page float32) ApiFindAllUserCollaborationsRequest {
+func (r ApiFindAllUserCollaborationsRequest) Page(page int32) ApiFindAllUserCollaborationsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiFindAllUserCollaborationsRequest) Limit(limit float32) ApiFindAllUserCollaborationsRequest {
+func (r ApiFindAllUserCollaborationsRequest) Limit(limit int32) ApiFindAllUserCollaborationsRequest {
 	r.limit = &limit
 	return r
 }
@@ -157,7 +157,7 @@ func (r ApiFindAllUserCollaborationsRequest) OrderDirection(orderDirection Order
 }
 
 // Range in days
-func (r ApiFindAllUserCollaborationsRequest) Range_(range_ float32) ApiFindAllUserCollaborationsRequest {
+func (r ApiFindAllUserCollaborationsRequest) Range_(range_ int32) ApiFindAllUserCollaborationsRequest {
 	r.range_ = &range_
 	return r
 }
@@ -169,24 +169,25 @@ func (r ApiFindAllUserCollaborationsRequest) Execute() (*FindAllUserCollaboratio
 /*
 FindAllUserCollaborations Listing all collaborations for the authenticated user
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiFindAllUserCollaborationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindAllUserCollaborationsRequest
 */
 func (a *UserCollaborationsServiceAPIService) FindAllUserCollaborations(ctx context.Context) ApiFindAllUserCollaborationsRequest {
 	return ApiFindAllUserCollaborationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return FindAllUserCollaborations200Response
+//
+//	@return FindAllUserCollaborations200Response
 func (a *UserCollaborationsServiceAPIService) FindAllUserCollaborationsExecute(r ApiFindAllUserCollaborationsRequest) (*FindAllUserCollaborations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *FindAllUserCollaborations200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllUserCollaborations200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserCollaborationsServiceAPIService.FindAllUserCollaborations")
@@ -267,9 +268,9 @@ func (a *UserCollaborationsServiceAPIService) FindAllUserCollaborationsExecute(r
 }
 
 type ApiRemoveUserCollaborationByIdRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *UserCollaborationsServiceAPIService
-	id string
+	id         string
 }
 
 func (r ApiRemoveUserCollaborationByIdRequest) Execute() (*http.Response, error) {
@@ -279,24 +280,24 @@ func (r ApiRemoveUserCollaborationByIdRequest) Execute() (*http.Response, error)
 /*
 RemoveUserCollaborationById Removes the user collaboration request
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiRemoveUserCollaborationByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiRemoveUserCollaborationByIdRequest
 */
 func (a *UserCollaborationsServiceAPIService) RemoveUserCollaborationById(ctx context.Context, id string) ApiRemoveUserCollaborationByIdRequest {
 	return ApiRemoveUserCollaborationByIdRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
 func (a *UserCollaborationsServiceAPIService) RemoveUserCollaborationByIdExecute(r ApiRemoveUserCollaborationByIdRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserCollaborationsServiceAPIService.RemoveUserCollaborationById")
@@ -357,9 +358,9 @@ func (a *UserCollaborationsServiceAPIService) RemoveUserCollaborationByIdExecute
 }
 
 type ApiUpdateUserCollaborationRequest struct {
-	ctx context.Context
-	ApiService *UserCollaborationsServiceAPIService
-	id string
+	ctx                        context.Context
+	ApiService                 *UserCollaborationsServiceAPIService
+	id                         string
 	updateUserCollaborationDto *UpdateUserCollaborationDto
 }
 
@@ -375,26 +376,27 @@ func (r ApiUpdateUserCollaborationRequest) Execute() (*DbUserCollaboration, *htt
 /*
 UpdateUserCollaboration Updates a user collaboration
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiUpdateUserCollaborationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiUpdateUserCollaborationRequest
 */
 func (a *UserCollaborationsServiceAPIService) UpdateUserCollaboration(ctx context.Context, id string) ApiUpdateUserCollaborationRequest {
 	return ApiUpdateUserCollaborationRequest{
 		ApiService: a,
-		ctx: ctx,
-		id: id,
+		ctx:        ctx,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//  @return DbUserCollaboration
+//
+//	@return DbUserCollaboration
 func (a *UserCollaborationsServiceAPIService) UpdateUserCollaborationExecute(r ApiUpdateUserCollaborationRequest) (*DbUserCollaboration, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DbUserCollaboration
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserCollaboration
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserCollaborationsServiceAPIService.UpdateUserCollaboration")

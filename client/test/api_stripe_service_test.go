@@ -25,7 +25,7 @@ func Test_openapi_StripeServiceAPIService(t *testing.T) {
 
 	t.Run("Test StripeServiceAPIService HandleStripeWebhook", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.StripeServiceAPI.HandleStripeWebhook(context.Background()).Execute()
 

@@ -1,7 +1,7 @@
 /*
 @open-sauced/api.opensauced.pizza
 
- ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [https://api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
+ ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
 API version: 1
 Contact: hello@opensauced.pizza
@@ -22,9 +22,9 @@ var _ MappedNullable = &DbUser{}
 // DbUser struct for DbUser
 type DbUser struct {
 	// User identifier
-	Id float32 `json:"id"`
+	Id int32 `json:"id"`
 	// Total number of open issues user has across public activity
-	OpenIssues float32 `json:"open_issues"`
+	OpenIssues int32 `json:"open_issues"`
 	// Timestamp representing user creation
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Timestamp representing user last update
@@ -56,7 +56,7 @@ type DbUser struct {
 	// Flag indicating user's waitlist status
 	IsWaitlisted bool `json:"is_waitlisted"`
 	// Insights Role
-	Role float32 `json:"role"`
+	Role int32 `json:"role"`
 	// User bio information
 	Bio *string `json:"bio,omitempty"`
 	// GitHub blog information
@@ -82,13 +82,13 @@ type DbUser struct {
 	// GitHub user hireable status
 	Hireable *bool `json:"hireable,omitempty"`
 	// GitHub user public repos number
-	PublicRepos float32 `json:"public_repos"`
+	PublicRepos int32 `json:"public_repos"`
 	// GitHub user public gists number
-	PublicGists float32 `json:"public_gists"`
+	PublicGists int32 `json:"public_gists"`
 	// GitHub user public followers number
-	Followers float32 `json:"followers"`
+	Followers int32 `json:"followers"`
 	// GitHub user public following number
-	Following float32 `json:"following"`
+	Following int32 `json:"following"`
 	// GitHub user type
 	Type string `json:"type"`
 	// User display public email
@@ -100,17 +100,17 @@ type DbUser struct {
 	// GitHub top languages
 	Languages map[string]interface{} `json:"languages"`
 	// User notification count
-	NotificationCount float32 `json:"notification_count"`
+	NotificationCount int32 `json:"notification_count"`
 	// User highlights count
-	HighlightsCount float32 `json:"highlights_count"`
+	HighlightsCount int32 `json:"highlights_count"`
 	// User following count
-	FollowingCount float32 `json:"following_count"`
+	FollowingCount int32 `json:"following_count"`
 	// User followers count
-	FollowersCount float32 `json:"followers_count"`
+	FollowersCount int32 `json:"followers_count"`
 	// Count of user pull requests within the last 30 days
-	RecentPullRequestsCount float32 `json:"recent_pull_requests_count"`
+	RecentPullRequestsCount int32 `json:"recent_pull_requests_count"`
 	// User average pull request velocity in days over the last 30 days
-	RecentPullRequestVelocityCount float32 `json:"recent_pull_request_velocity_count"`
+	RecentPullRequestVelocityCount int32 `json:"recent_pull_request_velocity_count"`
 	// Flag to indicate if user is a maintainer of any repos
 	IsMaintainer bool `json:"is_maintainer"`
 }
@@ -119,7 +119,7 @@ type DbUser struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbUser(id float32, openIssues float32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role float32, publicRepos float32, publicGists float32, followers float32, following float32, type_ string, languages map[string]interface{}, notificationCount float32, highlightsCount float32, followingCount float32, followersCount float32, recentPullRequestsCount float32, recentPullRequestVelocityCount float32, isMaintainer bool) *DbUser {
+func NewDbUser(id int32, openIssues int32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role int32, publicRepos int32, publicGists int32, followers int32, following int32, type_ string, languages map[string]interface{}, notificationCount int32, highlightsCount int32, followingCount int32, followersCount int32, recentPullRequestsCount int32, recentPullRequestVelocityCount int32, isMaintainer bool) *DbUser {
 	this := DbUser{}
 	this.Id = id
 	this.OpenIssues = openIssues
@@ -161,7 +161,7 @@ func NewDbUserWithDefaults() *DbUser {
 	this.IsOnboarded = isOnboarded
 	var isWaitlisted bool = false
 	this.IsWaitlisted = isWaitlisted
-	var role float32 = 10
+	var role int32 = 10
 	this.Role = role
 	var type_ string = "User"
 	this.Type = type_
@@ -169,9 +169,9 @@ func NewDbUserWithDefaults() *DbUser {
 }
 
 // GetId returns the Id field value
-func (o *DbUser) GetId() float32 {
+func (o *DbUser) GetId() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -180,7 +180,7 @@ func (o *DbUser) GetId() float32 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetIdOk() (*float32, bool) {
+func (o *DbUser) GetIdOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -188,14 +188,14 @@ func (o *DbUser) GetIdOk() (*float32, bool) {
 }
 
 // SetId sets field value
-func (o *DbUser) SetId(v float32) {
+func (o *DbUser) SetId(v int32) {
 	o.Id = v
 }
 
 // GetOpenIssues returns the OpenIssues field value
-func (o *DbUser) GetOpenIssues() float32 {
+func (o *DbUser) GetOpenIssues() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -204,7 +204,7 @@ func (o *DbUser) GetOpenIssues() float32 {
 
 // GetOpenIssuesOk returns a tuple with the OpenIssues field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetOpenIssuesOk() (*float32, bool) {
+func (o *DbUser) GetOpenIssuesOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -212,7 +212,7 @@ func (o *DbUser) GetOpenIssuesOk() (*float32, bool) {
 }
 
 // SetOpenIssues sets field value
-func (o *DbUser) SetOpenIssues(v float32) {
+func (o *DbUser) SetOpenIssues(v int32) {
 	o.OpenIssues = v
 }
 
@@ -633,9 +633,9 @@ func (o *DbUser) SetIsWaitlisted(v bool) {
 }
 
 // GetRole returns the Role field value
-func (o *DbUser) GetRole() float32 {
+func (o *DbUser) GetRole() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -644,7 +644,7 @@ func (o *DbUser) GetRole() float32 {
 
 // GetRoleOk returns a tuple with the Role field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetRoleOk() (*float32, bool) {
+func (o *DbUser) GetRoleOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -652,7 +652,7 @@ func (o *DbUser) GetRoleOk() (*float32, bool) {
 }
 
 // SetRole sets field value
-func (o *DbUser) SetRole(v float32) {
+func (o *DbUser) SetRole(v int32) {
 	o.Role = v
 }
 
@@ -1041,9 +1041,9 @@ func (o *DbUser) SetHireable(v bool) {
 }
 
 // GetPublicRepos returns the PublicRepos field value
-func (o *DbUser) GetPublicRepos() float32 {
+func (o *DbUser) GetPublicRepos() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1052,7 +1052,7 @@ func (o *DbUser) GetPublicRepos() float32 {
 
 // GetPublicReposOk returns a tuple with the PublicRepos field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetPublicReposOk() (*float32, bool) {
+func (o *DbUser) GetPublicReposOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1060,14 +1060,14 @@ func (o *DbUser) GetPublicReposOk() (*float32, bool) {
 }
 
 // SetPublicRepos sets field value
-func (o *DbUser) SetPublicRepos(v float32) {
+func (o *DbUser) SetPublicRepos(v int32) {
 	o.PublicRepos = v
 }
 
 // GetPublicGists returns the PublicGists field value
-func (o *DbUser) GetPublicGists() float32 {
+func (o *DbUser) GetPublicGists() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1076,7 +1076,7 @@ func (o *DbUser) GetPublicGists() float32 {
 
 // GetPublicGistsOk returns a tuple with the PublicGists field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetPublicGistsOk() (*float32, bool) {
+func (o *DbUser) GetPublicGistsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1084,14 +1084,14 @@ func (o *DbUser) GetPublicGistsOk() (*float32, bool) {
 }
 
 // SetPublicGists sets field value
-func (o *DbUser) SetPublicGists(v float32) {
+func (o *DbUser) SetPublicGists(v int32) {
 	o.PublicGists = v
 }
 
 // GetFollowers returns the Followers field value
-func (o *DbUser) GetFollowers() float32 {
+func (o *DbUser) GetFollowers() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1100,7 +1100,7 @@ func (o *DbUser) GetFollowers() float32 {
 
 // GetFollowersOk returns a tuple with the Followers field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetFollowersOk() (*float32, bool) {
+func (o *DbUser) GetFollowersOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1108,14 +1108,14 @@ func (o *DbUser) GetFollowersOk() (*float32, bool) {
 }
 
 // SetFollowers sets field value
-func (o *DbUser) SetFollowers(v float32) {
+func (o *DbUser) SetFollowers(v int32) {
 	o.Followers = v
 }
 
 // GetFollowing returns the Following field value
-func (o *DbUser) GetFollowing() float32 {
+func (o *DbUser) GetFollowing() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1124,7 +1124,7 @@ func (o *DbUser) GetFollowing() float32 {
 
 // GetFollowingOk returns a tuple with the Following field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetFollowingOk() (*float32, bool) {
+func (o *DbUser) GetFollowingOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1132,7 +1132,7 @@ func (o *DbUser) GetFollowingOk() (*float32, bool) {
 }
 
 // SetFollowing sets field value
-func (o *DbUser) SetFollowing(v float32) {
+func (o *DbUser) SetFollowing(v int32) {
 	o.Following = v
 }
 
@@ -1281,9 +1281,9 @@ func (o *DbUser) SetLanguages(v map[string]interface{}) {
 }
 
 // GetNotificationCount returns the NotificationCount field value
-func (o *DbUser) GetNotificationCount() float32 {
+func (o *DbUser) GetNotificationCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1292,7 +1292,7 @@ func (o *DbUser) GetNotificationCount() float32 {
 
 // GetNotificationCountOk returns a tuple with the NotificationCount field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetNotificationCountOk() (*float32, bool) {
+func (o *DbUser) GetNotificationCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1300,14 +1300,14 @@ func (o *DbUser) GetNotificationCountOk() (*float32, bool) {
 }
 
 // SetNotificationCount sets field value
-func (o *DbUser) SetNotificationCount(v float32) {
+func (o *DbUser) SetNotificationCount(v int32) {
 	o.NotificationCount = v
 }
 
 // GetHighlightsCount returns the HighlightsCount field value
-func (o *DbUser) GetHighlightsCount() float32 {
+func (o *DbUser) GetHighlightsCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1316,7 +1316,7 @@ func (o *DbUser) GetHighlightsCount() float32 {
 
 // GetHighlightsCountOk returns a tuple with the HighlightsCount field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetHighlightsCountOk() (*float32, bool) {
+func (o *DbUser) GetHighlightsCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1324,14 +1324,14 @@ func (o *DbUser) GetHighlightsCountOk() (*float32, bool) {
 }
 
 // SetHighlightsCount sets field value
-func (o *DbUser) SetHighlightsCount(v float32) {
+func (o *DbUser) SetHighlightsCount(v int32) {
 	o.HighlightsCount = v
 }
 
 // GetFollowingCount returns the FollowingCount field value
-func (o *DbUser) GetFollowingCount() float32 {
+func (o *DbUser) GetFollowingCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1340,7 +1340,7 @@ func (o *DbUser) GetFollowingCount() float32 {
 
 // GetFollowingCountOk returns a tuple with the FollowingCount field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetFollowingCountOk() (*float32, bool) {
+func (o *DbUser) GetFollowingCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1348,14 +1348,14 @@ func (o *DbUser) GetFollowingCountOk() (*float32, bool) {
 }
 
 // SetFollowingCount sets field value
-func (o *DbUser) SetFollowingCount(v float32) {
+func (o *DbUser) SetFollowingCount(v int32) {
 	o.FollowingCount = v
 }
 
 // GetFollowersCount returns the FollowersCount field value
-func (o *DbUser) GetFollowersCount() float32 {
+func (o *DbUser) GetFollowersCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1364,7 +1364,7 @@ func (o *DbUser) GetFollowersCount() float32 {
 
 // GetFollowersCountOk returns a tuple with the FollowersCount field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetFollowersCountOk() (*float32, bool) {
+func (o *DbUser) GetFollowersCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1372,14 +1372,14 @@ func (o *DbUser) GetFollowersCountOk() (*float32, bool) {
 }
 
 // SetFollowersCount sets field value
-func (o *DbUser) SetFollowersCount(v float32) {
+func (o *DbUser) SetFollowersCount(v int32) {
 	o.FollowersCount = v
 }
 
 // GetRecentPullRequestsCount returns the RecentPullRequestsCount field value
-func (o *DbUser) GetRecentPullRequestsCount() float32 {
+func (o *DbUser) GetRecentPullRequestsCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1388,7 +1388,7 @@ func (o *DbUser) GetRecentPullRequestsCount() float32 {
 
 // GetRecentPullRequestsCountOk returns a tuple with the RecentPullRequestsCount field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetRecentPullRequestsCountOk() (*float32, bool) {
+func (o *DbUser) GetRecentPullRequestsCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1396,14 +1396,14 @@ func (o *DbUser) GetRecentPullRequestsCountOk() (*float32, bool) {
 }
 
 // SetRecentPullRequestsCount sets field value
-func (o *DbUser) SetRecentPullRequestsCount(v float32) {
+func (o *DbUser) SetRecentPullRequestsCount(v int32) {
 	o.RecentPullRequestsCount = v
 }
 
 // GetRecentPullRequestVelocityCount returns the RecentPullRequestVelocityCount field value
-func (o *DbUser) GetRecentPullRequestVelocityCount() float32 {
+func (o *DbUser) GetRecentPullRequestVelocityCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -1412,7 +1412,7 @@ func (o *DbUser) GetRecentPullRequestVelocityCount() float32 {
 
 // GetRecentPullRequestVelocityCountOk returns a tuple with the RecentPullRequestVelocityCount field value
 // and a boolean to check if the value has been set.
-func (o *DbUser) GetRecentPullRequestVelocityCountOk() (*float32, bool) {
+func (o *DbUser) GetRecentPullRequestVelocityCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1420,7 +1420,7 @@ func (o *DbUser) GetRecentPullRequestVelocityCountOk() (*float32, bool) {
 }
 
 // SetRecentPullRequestVelocityCount sets field value
-func (o *DbUser) SetRecentPullRequestVelocityCount(v float32) {
+func (o *DbUser) SetRecentPullRequestVelocityCount(v int32) {
 	o.RecentPullRequestVelocityCount = v
 }
 
@@ -1449,7 +1449,7 @@ func (o *DbUser) SetIsMaintainer(v bool) {
 }
 
 func (o DbUser) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -1586,5 +1586,3 @@ func (v *NullableDbUser) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
