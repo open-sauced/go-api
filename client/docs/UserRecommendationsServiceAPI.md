@@ -1,16 +1,87 @@
 # \UserRecommendationsServiceAPI
 
-All URIs are relative to *http://localhost:3001*
+All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**FindUserOrgsRepoRecommendations**](UserRecommendationsServiceAPI.md#FindUserOrgsRepoRecommendations) | **Get** /v1/user/recommendations/orgs | Listing recommended repos for the authenticated user based on their orgs
 [**FindUserRepoRecommendations**](UserRecommendationsServiceAPI.md#FindUserRepoRecommendations) | **Get** /v1/user/recommendations/repos | Listing recommended repos for the authenticated user
 
 
 
+## FindUserOrgsRepoRecommendations
+
+> FindAllTopReposByUsername200Response FindUserOrgsRepoRecommendations(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+
+Listing recommended repos for the authenticated user based on their orgs
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
+    orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserRecommendationsServiceAPI.FindUserOrgsRepoRecommendations(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserRecommendationsServiceAPI.FindUserOrgsRepoRecommendations``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FindUserOrgsRepoRecommendations`: FindAllTopReposByUsername200Response
+    fmt.Fprintf(os.Stdout, "Response from `UserRecommendationsServiceAPI.FindUserOrgsRepoRecommendations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFindUserOrgsRepoRecommendationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
+ **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
+ **range_** | **int32** | Range in days | [default to 30]
+
+### Return type
+
+[**FindAllTopReposByUsername200Response**](FindAllTopReposByUsername200Response.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## FindUserRepoRecommendations
 
-> FindUserRepoRecommendations(ctx).Execute()
+> FindAllTopReposByUsername200Response FindUserRepoRecommendations(ctx).Execute()
 
 Listing recommended repos for the authenticated user
 
@@ -30,11 +101,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.UserRecommendationsServiceAPI.FindUserRepoRecommendations(context.Background()).Execute()
+    resp, r, err := apiClient.UserRecommendationsServiceAPI.FindUserRepoRecommendations(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserRecommendationsServiceAPI.FindUserRepoRecommendations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
+    // response from `FindUserRepoRecommendations`: FindAllTopReposByUsername200Response
+    fmt.Fprintf(os.Stdout, "Response from `UserRecommendationsServiceAPI.FindUserRepoRecommendations`: %v\n", resp)
 }
 ```
 
@@ -49,7 +122,7 @@ Other parameters are passed through a pointer to a apiFindUserRepoRecommendation
 
 ### Return type
 
- (empty response body)
+[**FindAllTopReposByUsername200Response**](FindAllTopReposByUsername200Response.md)
 
 ### Authorization
 
@@ -58,7 +131,7 @@ Other parameters are passed through a pointer to a apiFindUserRepoRecommendation
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

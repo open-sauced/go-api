@@ -79,6 +79,8 @@ type DbPullRequest struct {
 	ChangedFiles *int32 `json:"changed_files,omitempty"`
 	// Pull request repo full name
 	FullName *string `json:"full_name,omitempty"`
+	// Number of commits in the PR
+	Commits *int32 `json:"commits,omitempty"`
 }
 
 // NewDbPullRequest instantiates a new DbPullRequest object
@@ -956,6 +958,38 @@ func (o *DbPullRequest) SetFullName(v string) {
 	o.FullName = &v
 }
 
+// GetCommits returns the Commits field value if set, zero value otherwise.
+func (o *DbPullRequest) GetCommits() int32 {
+	if o == nil || IsNil(o.Commits) {
+		var ret int32
+		return ret
+	}
+	return *o.Commits
+}
+
+// GetCommitsOk returns a tuple with the Commits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DbPullRequest) GetCommitsOk() (*int32, bool) {
+	if o == nil || IsNil(o.Commits) {
+		return nil, false
+	}
+	return o.Commits, true
+}
+
+// HasCommits returns a boolean if a field has been set.
+func (o *DbPullRequest) HasCommits() bool {
+	if o != nil && !IsNil(o.Commits) {
+		return true
+	}
+
+	return false
+}
+
+// SetCommits gets a reference to the given int32 and assigns it to the Commits field.
+func (o *DbPullRequest) SetCommits(v int32) {
+	o.Commits = &v
+}
+
 func (o DbPullRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1032,6 +1066,9 @@ func (o DbPullRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FullName) {
 		toSerialize["full_name"] = o.FullName
+	}
+	if !IsNil(o.Commits) {
+		toSerialize["commits"] = o.Commits
 	}
 	return toSerialize, nil
 }

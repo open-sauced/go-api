@@ -15,195 +15,112 @@ import (
 	"encoding/json"
 )
 
-// checks if the DbPRInsight type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DbPRInsight{}
+// checks if the CreateUserListDto type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateUserListDto{}
 
-// DbPRInsight struct for DbPRInsight
-type DbPRInsight struct {
-	// Repository identifier
-	Id int32 `json:"id"`
-	// Selected interval in numerical days, goes back with number, 0 means today
-	Interval int32 `json:"interval"`
-	// Selected interval computed date in human readable format
-	Day string `json:"day"`
-	// PR Type: all requests count
-	AllPrs int32 `json:"all_prs"`
-	// PR Type: accepted requests count
-	AcceptedPrs int32 `json:"accepted_prs"`
-	// PR Type: spam requests count
-	SpamPrs int32 `json:"spam_prs"`
+// CreateUserListDto struct for CreateUserListDto
+type CreateUserListDto struct {
+	// List Name
+	Name string `json:"name"`
+	// List Visibility
+	IsPublic bool `json:"is_public"`
+	// An array of contributor user IDs
+	Contributors []int32 `json:"contributors"`
 }
 
-// NewDbPRInsight instantiates a new DbPRInsight object
+// NewCreateUserListDto instantiates a new CreateUserListDto object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbPRInsight(id int32, interval int32, day string, allPrs int32, acceptedPrs int32, spamPrs int32) *DbPRInsight {
-	this := DbPRInsight{}
-	this.Id = id
-	this.Interval = interval
-	this.Day = day
-	this.AllPrs = allPrs
-	this.AcceptedPrs = acceptedPrs
-	this.SpamPrs = spamPrs
+func NewCreateUserListDto(name string, isPublic bool, contributors []int32) *CreateUserListDto {
+	this := CreateUserListDto{}
+	this.Name = name
+	this.IsPublic = isPublic
+	this.Contributors = contributors
 	return &this
 }
 
-// NewDbPRInsightWithDefaults instantiates a new DbPRInsight object
+// NewCreateUserListDtoWithDefaults instantiates a new CreateUserListDto object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDbPRInsightWithDefaults() *DbPRInsight {
-	this := DbPRInsight{}
-	var interval int32 = 0
-	this.Interval = interval
+func NewCreateUserListDtoWithDefaults() *CreateUserListDto {
+	this := CreateUserListDto{}
 	return &this
 }
 
-// GetId returns the Id field value
-func (o *DbPRInsight) GetId() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value
-// and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetIdOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Id, true
-}
-
-// SetId sets field value
-func (o *DbPRInsight) SetId(v int32) {
-	o.Id = v
-}
-
-// GetInterval returns the Interval field value
-func (o *DbPRInsight) GetInterval() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.Interval
-}
-
-// GetIntervalOk returns a tuple with the Interval field value
-// and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetIntervalOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Interval, true
-}
-
-// SetInterval sets field value
-func (o *DbPRInsight) SetInterval(v int32) {
-	o.Interval = v
-}
-
-// GetDay returns the Day field value
-func (o *DbPRInsight) GetDay() string {
+// GetName returns the Name field value
+func (o *CreateUserListDto) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Day
+	return o.Name
 }
 
-// GetDayOk returns a tuple with the Day field value
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetDayOk() (*string, bool) {
+func (o *CreateUserListDto) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Day, true
+	return &o.Name, true
 }
 
-// SetDay sets field value
-func (o *DbPRInsight) SetDay(v string) {
-	o.Day = v
+// SetName sets field value
+func (o *CreateUserListDto) SetName(v string) {
+	o.Name = v
 }
 
-// GetAllPrs returns the AllPrs field value
-func (o *DbPRInsight) GetAllPrs() int32 {
+// GetIsPublic returns the IsPublic field value
+func (o *CreateUserListDto) GetIsPublic() bool {
 	if o == nil {
-		var ret int32
+		var ret bool
 		return ret
 	}
 
-	return o.AllPrs
+	return o.IsPublic
 }
 
-// GetAllPrsOk returns a tuple with the AllPrs field value
+// GetIsPublicOk returns a tuple with the IsPublic field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetAllPrsOk() (*int32, bool) {
+func (o *CreateUserListDto) GetIsPublicOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AllPrs, true
+	return &o.IsPublic, true
 }
 
-// SetAllPrs sets field value
-func (o *DbPRInsight) SetAllPrs(v int32) {
-	o.AllPrs = v
+// SetIsPublic sets field value
+func (o *CreateUserListDto) SetIsPublic(v bool) {
+	o.IsPublic = v
 }
 
-// GetAcceptedPrs returns the AcceptedPrs field value
-func (o *DbPRInsight) GetAcceptedPrs() int32 {
+// GetContributors returns the Contributors field value
+func (o *CreateUserListDto) GetContributors() []int32 {
 	if o == nil {
-		var ret int32
+		var ret []int32
 		return ret
 	}
 
-	return o.AcceptedPrs
+	return o.Contributors
 }
 
-// GetAcceptedPrsOk returns a tuple with the AcceptedPrs field value
+// GetContributorsOk returns a tuple with the Contributors field value
 // and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetAcceptedPrsOk() (*int32, bool) {
+func (o *CreateUserListDto) GetContributorsOk() ([]int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AcceptedPrs, true
+	return o.Contributors, true
 }
 
-// SetAcceptedPrs sets field value
-func (o *DbPRInsight) SetAcceptedPrs(v int32) {
-	o.AcceptedPrs = v
+// SetContributors sets field value
+func (o *CreateUserListDto) SetContributors(v []int32) {
+	o.Contributors = v
 }
 
-// GetSpamPrs returns the SpamPrs field value
-func (o *DbPRInsight) GetSpamPrs() int32 {
-	if o == nil {
-		var ret int32
-		return ret
-	}
-
-	return o.SpamPrs
-}
-
-// GetSpamPrsOk returns a tuple with the SpamPrs field value
-// and a boolean to check if the value has been set.
-func (o *DbPRInsight) GetSpamPrsOk() (*int32, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SpamPrs, true
-}
-
-// SetSpamPrs sets field value
-func (o *DbPRInsight) SetSpamPrs(v int32) {
-	o.SpamPrs = v
-}
-
-func (o DbPRInsight) MarshalJSON() ([]byte, error) {
+func (o CreateUserListDto) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -211,49 +128,46 @@ func (o DbPRInsight) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DbPRInsight) ToMap() (map[string]interface{}, error) {
+func (o CreateUserListDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["interval"] = o.Interval
-	toSerialize["day"] = o.Day
-	toSerialize["all_prs"] = o.AllPrs
-	toSerialize["accepted_prs"] = o.AcceptedPrs
-	toSerialize["spam_prs"] = o.SpamPrs
+	toSerialize["name"] = o.Name
+	toSerialize["is_public"] = o.IsPublic
+	toSerialize["contributors"] = o.Contributors
 	return toSerialize, nil
 }
 
-type NullableDbPRInsight struct {
-	value *DbPRInsight
+type NullableCreateUserListDto struct {
+	value *CreateUserListDto
 	isSet bool
 }
 
-func (v NullableDbPRInsight) Get() *DbPRInsight {
+func (v NullableCreateUserListDto) Get() *CreateUserListDto {
 	return v.value
 }
 
-func (v *NullableDbPRInsight) Set(val *DbPRInsight) {
+func (v *NullableCreateUserListDto) Set(val *CreateUserListDto) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDbPRInsight) IsSet() bool {
+func (v NullableCreateUserListDto) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDbPRInsight) Unset() {
+func (v *NullableCreateUserListDto) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDbPRInsight(val *DbPRInsight) *NullableDbPRInsight {
-	return &NullableDbPRInsight{value: val, isSet: true}
+func NewNullableCreateUserListDto(val *CreateUserListDto) *NullableCreateUserListDto {
+	return &NullableCreateUserListDto{value: val, isSet: true}
 }
 
-func (v NullableDbPRInsight) MarshalJSON() ([]byte, error) {
+func (v NullableCreateUserListDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDbPRInsight) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateUserListDto) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

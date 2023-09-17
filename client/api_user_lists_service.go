@@ -20,96 +20,64 @@ import (
 	"strings"
 )
 
-// UserServiceAPIService UserServiceAPI service
-type UserServiceAPIService service
+// UserListsServiceAPIService UserListsServiceAPI service
+type UserListsServiceAPIService service
 
-type ApiFindAllHighlightsByUsernameRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+type ApiAddListForUserRequest struct {
+	ctx               context.Context
+	ApiService        *UserListsServiceAPIService
+	createUserListDto *CreateUserListDto
 }
 
-func (r ApiFindAllHighlightsByUsernameRequest) Page(page int32) ApiFindAllHighlightsByUsernameRequest {
-	r.page = &page
+func (r ApiAddListForUserRequest) CreateUserListDto(createUserListDto CreateUserListDto) ApiAddListForUserRequest {
+	r.createUserListDto = &createUserListDto
 	return r
 }
 
-func (r ApiFindAllHighlightsByUsernameRequest) Limit(limit int32) ApiFindAllHighlightsByUsernameRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiFindAllHighlightsByUsernameRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllHighlightsByUsernameRequest {
-	r.orderDirection = &orderDirection
-	return r
-}
-
-// Range in days
-func (r ApiFindAllHighlightsByUsernameRequest) Range_(range_ int32) ApiFindAllHighlightsByUsernameRequest {
-	r.range_ = &range_
-	return r
-}
-
-func (r ApiFindAllHighlightsByUsernameRequest) Execute() (*FindAllHighlightsByUsername200Response, *http.Response, error) {
-	return r.ApiService.FindAllHighlightsByUsernameExecute(r)
+func (r ApiAddListForUserRequest) Execute() (*DbUserList, *http.Response, error) {
+	return r.ApiService.AddListForUserExecute(r)
 }
 
 /*
-FindAllHighlightsByUsername Listing all Highlights for a user and paginate them
+AddListForUser Adds a new list for the authenticated user
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param username
-	@return ApiFindAllHighlightsByUsernameRequest
+	@return ApiAddListForUserRequest
 */
-func (a *UserServiceAPIService) FindAllHighlightsByUsername(ctx context.Context, username string) ApiFindAllHighlightsByUsernameRequest {
-	return ApiFindAllHighlightsByUsernameRequest{
+func (a *UserListsServiceAPIService) AddListForUser(ctx context.Context) ApiAddListForUserRequest {
+	return ApiAddListForUserRequest{
 		ApiService: a,
 		ctx:        ctx,
-		username:   username,
 	}
 }
 
 // Execute executes the request
 //
-//	@return FindAllHighlightsByUsername200Response
-func (a *UserServiceAPIService) FindAllHighlightsByUsernameExecute(r ApiFindAllHighlightsByUsernameRequest) (*FindAllHighlightsByUsername200Response, *http.Response, error) {
+//	@return DbUserList
+func (a *UserListsServiceAPIService) AddListForUserExecute(r ApiAddListForUserRequest) (*DbUserList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
+		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindAllHighlightsByUsername200Response
+		localVarReturnValue *DbUserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.FindAllHighlightsByUsername")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.AddListForUser")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/users/{username}/highlights"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
+	localVarPath := localBasePath + "/v1/lists"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createUserListDto == nil {
+		return localVarReturnValue, nil, reportError("createUserListDto is required and must be specified")
+	}
 
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
-	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -125,6 +93,8 @@ func (a *UserServiceAPIService) FindAllHighlightsByUsernameExecute(r ApiFindAllH
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.createUserListDto
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -162,327 +132,46 @@ func (a *UserServiceAPIService) FindAllHighlightsByUsernameExecute(r ApiFindAllH
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiFindAllTopReposByUsernameRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-}
-
-func (r ApiFindAllTopReposByUsernameRequest) Page(page int32) ApiFindAllTopReposByUsernameRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiFindAllTopReposByUsernameRequest) Limit(limit int32) ApiFindAllTopReposByUsernameRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiFindAllTopReposByUsernameRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllTopReposByUsernameRequest {
-	r.orderDirection = &orderDirection
-	return r
-}
-
-// Range in days
-func (r ApiFindAllTopReposByUsernameRequest) Range_(range_ int32) ApiFindAllTopReposByUsernameRequest {
-	r.range_ = &range_
-	return r
-}
-
-func (r ApiFindAllTopReposByUsernameRequest) Execute() (*FindAllTopReposByUsername200Response, *http.Response, error) {
-	return r.ApiService.FindAllTopReposByUsernameExecute(r)
-}
-
-/*
-FindAllTopReposByUsername Listing all Top Repos for a user and paginate them
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param username
-	@return ApiFindAllTopReposByUsernameRequest
-*/
-func (a *UserServiceAPIService) FindAllTopReposByUsername(ctx context.Context, username string) ApiFindAllTopReposByUsernameRequest {
-	return ApiFindAllTopReposByUsernameRequest{
-		ApiService: a,
-		ctx:        ctx,
-		username:   username,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FindAllTopReposByUsername200Response
-func (a *UserServiceAPIService) FindAllTopReposByUsernameExecute(r ApiFindAllTopReposByUsernameRequest) (*FindAllTopReposByUsername200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FindAllTopReposByUsername200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.FindAllTopReposByUsername")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/users/{username}/top-repos"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
-	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiFindContributorPullRequestsRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-}
-
-func (r ApiFindContributorPullRequestsRequest) Page(page int32) ApiFindContributorPullRequestsRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiFindContributorPullRequestsRequest) Limit(limit int32) ApiFindContributorPullRequestsRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiFindContributorPullRequestsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindContributorPullRequestsRequest {
-	r.orderDirection = &orderDirection
-	return r
-}
-
-// Range in days
-func (r ApiFindContributorPullRequestsRequest) Range_(range_ int32) ApiFindContributorPullRequestsRequest {
-	r.range_ = &range_
-	return r
-}
-
-func (r ApiFindContributorPullRequestsRequest) Execute() (*FindContributorPullRequests200Response, *http.Response, error) {
-	return r.ApiService.FindContributorPullRequestsExecute(r)
-}
-
-/*
-FindContributorPullRequests Finds pull requests by :username
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param username
-	@return ApiFindContributorPullRequestsRequest
-*/
-func (a *UserServiceAPIService) FindContributorPullRequests(ctx context.Context, username string) ApiFindContributorPullRequestsRequest {
-	return ApiFindContributorPullRequestsRequest{
-		ApiService: a,
-		ctx:        ctx,
-		username:   username,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FindContributorPullRequests200Response
-func (a *UserServiceAPIService) FindContributorPullRequestsExecute(r ApiFindContributorPullRequestsRequest) (*FindContributorPullRequests200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FindContributorPullRequests200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.FindContributorPullRequests")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/users/{username}/prs"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
-	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiFindOneUserByUserameRequest struct {
+type ApiDeleteListForUserRequest struct {
 	ctx        context.Context
-	ApiService *UserServiceAPIService
-	username   string
+	ApiService *UserListsServiceAPIService
+	id         string
 }
 
-func (r ApiFindOneUserByUserameRequest) Execute() (*DbUser, *http.Response, error) {
-	return r.ApiService.FindOneUserByUserameExecute(r)
+func (r ApiDeleteListForUserRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteListForUserExecute(r)
 }
 
 /*
-FindOneUserByUserame Finds a user by :username
+DeleteListForUser Deletes the list for the authenticated user
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param username
-	@return ApiFindOneUserByUserameRequest
+	@param id
+	@return ApiDeleteListForUserRequest
 */
-func (a *UserServiceAPIService) FindOneUserByUserame(ctx context.Context, username string) ApiFindOneUserByUserameRequest {
-	return ApiFindOneUserByUserameRequest{
+func (a *UserListsServiceAPIService) DeleteListForUser(ctx context.Context, id string) ApiDeleteListForUserRequest {
+	return ApiDeleteListForUserRequest{
 		ApiService: a,
 		ctx:        ctx,
-		username:   username,
+		id:         id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DbUser
-func (a *UserServiceAPIService) FindOneUserByUserameExecute(r ApiFindOneUserByUserameRequest) (*DbUser, *http.Response, error) {
+func (a *UserListsServiceAPIService) DeleteListForUserExecute(r ApiDeleteListForUserRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DbUser
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.FindOneUserByUserame")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.DeleteListForUser")
 	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/users/{username}"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
+	localVarPath := localBasePath + "/v1/lists/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -498,7 +187,7 @@ func (a *UserServiceAPIService) FindOneUserByUserameExecute(r ApiFindOneUserByUs
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
+	localVarHTTPHeaderAccepts := []string{}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -507,19 +196,19 @@ func (a *UserServiceAPIService) FindOneUserByUserameExecute(r ApiFindOneUserByUs
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -527,522 +216,154 @@ func (a *UserServiceAPIService) FindOneUserByUserameExecute(r ApiFindOneUserByUs
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
-type ApiFollowUserByIdRequest struct {
+type ApiDeleteUserListContributorRequest struct {
+	ctx                   context.Context
+	ApiService            *UserListsServiceAPIService
+	id                    string
+	userListContributorId int32
+}
+
+func (r ApiDeleteUserListContributorRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteUserListContributorExecute(r)
+}
+
+/*
+DeleteUserListContributor Delete contributor from an individual user list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@param userListContributorId
+	@return ApiDeleteUserListContributorRequest
+*/
+func (a *UserListsServiceAPIService) DeleteUserListContributor(ctx context.Context, id string, userListContributorId int32) ApiDeleteUserListContributorRequest {
+	return ApiDeleteUserListContributorRequest{
+		ApiService:            a,
+		ctx:                   ctx,
+		id:                    id,
+		userListContributorId: userListContributorId,
+	}
+}
+
+// Execute executes the request
+func (a *UserListsServiceAPIService) DeleteUserListContributorExecute(r ApiDeleteUserListContributorRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.DeleteUserListContributor")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/contributors/{userListContributorId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"userListContributorId"+"}", url.PathEscape(parameterValueToString(r.userListContributorId, "userListContributorId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiGetContributorsRequest struct {
 	ctx        context.Context
-	ApiService *UserServiceAPIService
-	username   string
-}
-
-func (r ApiFollowUserByIdRequest) Execute() (*DbUserToUserFollows, *http.Response, error) {
-	return r.ApiService.FollowUserByIdExecute(r)
-}
-
-/*
-FollowUserById Follows a user by username
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param username
-	@return ApiFollowUserByIdRequest
-*/
-func (a *UserServiceAPIService) FollowUserById(ctx context.Context, username string) ApiFollowUserByIdRequest {
-	return ApiFollowUserByIdRequest{
-		ApiService: a,
-		ctx:        ctx,
-		username:   username,
-	}
-}
-
-// Execute executes the request
-//
-//	@return DbUserToUserFollows
-func (a *UserServiceAPIService) FollowUserByIdExecute(r ApiFollowUserByIdRequest) (*DbUserToUserFollows, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DbUserToUserFollows
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.FollowUserById")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/users/{username}/follow"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetFollowStatusByUsernameRequest struct {
-	ctx        context.Context
-	ApiService *UserServiceAPIService
-	username   string
-}
-
-func (r ApiGetFollowStatusByUsernameRequest) Execute() (*DbUserToUserFollows, *http.Response, error) {
-	return r.ApiService.GetFollowStatusByUsernameExecute(r)
-}
-
-/*
-GetFollowStatusByUsername Checks if the authenticated user follows the provided username
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param username
-	@return ApiGetFollowStatusByUsernameRequest
-*/
-func (a *UserServiceAPIService) GetFollowStatusByUsername(ctx context.Context, username string) ApiGetFollowStatusByUsernameRequest {
-	return ApiGetFollowStatusByUsernameRequest{
-		ApiService: a,
-		ctx:        ctx,
-		username:   username,
-	}
-}
-
-// Execute executes the request
-//
-//	@return DbUserToUserFollows
-func (a *UserServiceAPIService) GetFollowStatusByUsernameExecute(r ApiGetFollowStatusByUsernameRequest) (*DbUserToUserFollows, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DbUserToUserFollows
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.GetFollowStatusByUsername")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/users/{username}/follow"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetTop10HighlightsRequest struct {
-	ctx        context.Context
-	ApiService *UserServiceAPIService
-	page       *int32
-	userId     *int32
-	limit      *int32
-}
-
-func (r ApiGetTop10HighlightsRequest) Page(page int32) ApiGetTop10HighlightsRequest {
-	r.page = &page
-	return r
-}
-
-// User ID to filter followings from the list
-func (r ApiGetTop10HighlightsRequest) UserId(userId int32) ApiGetTop10HighlightsRequest {
-	r.userId = &userId
-	return r
-}
-
-func (r ApiGetTop10HighlightsRequest) Limit(limit int32) ApiGetTop10HighlightsRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiGetTop10HighlightsRequest) Execute() (*DbTopUser, *http.Response, error) {
-	return r.ApiService.GetTop10HighlightsExecute(r)
-}
-
-/*
-GetTop10Highlights List top users
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTop10HighlightsRequest
-*/
-func (a *UserServiceAPIService) GetTop10Highlights(ctx context.Context) ApiGetTop10HighlightsRequest {
-	return ApiGetTop10HighlightsRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return DbTopUser
-func (a *UserServiceAPIService) GetTop10HighlightsExecute(r ApiGetTop10HighlightsRequest) (*DbTopUser, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DbTopUser
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.GetTop10Highlights")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/users/top"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.userId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "userId", r.userId, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetUserNotificationsRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-}
-
-func (r ApiGetUserNotificationsRequest) Page(page int32) ApiGetUserNotificationsRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiGetUserNotificationsRequest) Limit(limit int32) ApiGetUserNotificationsRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiGetUserNotificationsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetUserNotificationsRequest {
-	r.orderDirection = &orderDirection
-	return r
-}
-
-// Range in days
-func (r ApiGetUserNotificationsRequest) Range_(range_ int32) ApiGetUserNotificationsRequest {
-	r.range_ = &range_
-	return r
-}
-
-func (r ApiGetUserNotificationsRequest) Execute() (*OmitTypeClass, *http.Response, error) {
-	return r.ApiService.GetUserNotificationsExecute(r)
-}
-
-/*
-GetUserNotifications Retrieves notifications for the authenticated user
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetUserNotificationsRequest
-*/
-func (a *UserServiceAPIService) GetUserNotifications(ctx context.Context) ApiGetUserNotificationsRequest {
-	return ApiGetUserNotificationsRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return OmitTypeClass
-func (a *UserServiceAPIService) GetUserNotificationsExecute(r ApiGetUserNotificationsRequest) (*OmitTypeClass, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *OmitTypeClass
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.GetUserNotifications")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/user/notifications"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
-	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetUsersByFilterRequest struct {
-	ctx        context.Context
-	ApiService *UserServiceAPIService
-	username   *string
+	ApiService *UserListsServiceAPIService
 	page       *int32
 	limit      *int32
+	location   *string
+	timezone   *string
+	prVelocity *int32
 }
 
-// Username search query to filter from the list of users
-func (r ApiGetUsersByFilterRequest) Username(username string) ApiGetUsersByFilterRequest {
-	r.username = &username
-	return r
-}
-
-func (r ApiGetUsersByFilterRequest) Page(page int32) ApiGetUsersByFilterRequest {
+func (r ApiGetContributorsRequest) Page(page int32) ApiGetContributorsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiGetUsersByFilterRequest) Limit(limit int32) ApiGetUsersByFilterRequest {
+func (r ApiGetContributorsRequest) Limit(limit int32) ApiGetContributorsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetUsersByFilterRequest) Execute() (*DbFilteredUser, *http.Response, error) {
-	return r.ApiService.GetUsersByFilterExecute(r)
+func (r ApiGetContributorsRequest) Location(location string) ApiGetContributorsRequest {
+	r.location = &location
+	return r
+}
+
+func (r ApiGetContributorsRequest) Timezone(timezone string) ApiGetContributorsRequest {
+	r.timezone = &timezone
+	return r
+}
+
+// Less than or equal to the average number of days to merge a PR over the last 30 days
+func (r ApiGetContributorsRequest) PrVelocity(prVelocity int32) ApiGetContributorsRequest {
+	r.prVelocity = &prVelocity
+	return r
+}
+
+func (r ApiGetContributorsRequest) Execute() (*GetContributors200Response, *http.Response, error) {
+	return r.ApiService.GetContributorsExecute(r)
 }
 
 /*
-GetUsersByFilter Search users
+GetContributors Retrieves paginated contributors
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetUsersByFilterRequest
+	@return ApiGetContributorsRequest
 */
-func (a *UserServiceAPIService) GetUsersByFilter(ctx context.Context) ApiGetUsersByFilterRequest {
-	return ApiGetUsersByFilterRequest{
+func (a *UserListsServiceAPIService) GetContributors(ctx context.Context) ApiGetContributorsRequest {
+	return ApiGetContributorsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -1050,35 +371,40 @@ func (a *UserServiceAPIService) GetUsersByFilter(ctx context.Context) ApiGetUser
 
 // Execute executes the request
 //
-//	@return DbFilteredUser
-func (a *UserServiceAPIService) GetUsersByFilterExecute(r ApiGetUsersByFilterRequest) (*DbFilteredUser, *http.Response, error) {
+//	@return GetContributors200Response
+func (a *UserListsServiceAPIService) GetContributorsExecute(r ApiGetContributorsRequest) (*GetContributors200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DbFilteredUser
+		localVarReturnValue *GetContributors200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.GetUsersByFilter")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetContributors")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/users/search"
+	localVarPath := localBasePath + "/v1/lists/contributors"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.username == nil {
-		return localVarReturnValue, nil, reportError("username is required and must be specified")
-	}
 
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "username", r.username, "")
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.location != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "location", r.location, "")
+	}
+	if r.timezone != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "timezone", r.timezone, "")
+	}
+	if r.prVelocity != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pr_velocity", r.prVelocity, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1134,49 +460,184 @@ func (a *UserServiceAPIService) GetUsersByFilterExecute(r ApiGetUsersByFilterReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUnfollowUserByUsernameRequest struct {
-	ctx        context.Context
-	ApiService *UserServiceAPIService
-	username   string
+type ApiGetListsForUserRequest struct {
+	ctx            context.Context
+	ApiService     *UserListsServiceAPIService
+	page           *int32
+	limit          *int32
+	orderDirection *OrderDirectionEnum
+	range_         *int32
 }
 
-func (r ApiUnfollowUserByUsernameRequest) Execute() (*DbUserToUserFollows, *http.Response, error) {
-	return r.ApiService.UnfollowUserByUsernameExecute(r)
+func (r ApiGetListsForUserRequest) Page(page int32) ApiGetListsForUserRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetListsForUserRequest) Limit(limit int32) ApiGetListsForUserRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetListsForUserRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetListsForUserRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiGetListsForUserRequest) Range_(range_ int32) ApiGetListsForUserRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiGetListsForUserRequest) Execute() (*DbUserList, *http.Response, error) {
+	return r.ApiService.GetListsForUserExecute(r)
 }
 
 /*
-UnfollowUserByUsername Unfollows a user by username
+GetListsForUser Gets lists for the authenticated user
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param username
-	@return ApiUnfollowUserByUsernameRequest
+	@return ApiGetListsForUserRequest
 */
-func (a *UserServiceAPIService) UnfollowUserByUsername(ctx context.Context, username string) ApiUnfollowUserByUsernameRequest {
-	return ApiUnfollowUserByUsernameRequest{
+func (a *UserListsServiceAPIService) GetListsForUser(ctx context.Context) ApiGetListsForUserRequest {
+	return ApiGetListsForUserRequest{
 		ApiService: a,
 		ctx:        ctx,
-		username:   username,
 	}
 }
 
 // Execute executes the request
 //
-//	@return DbUserToUserFollows
-func (a *UserServiceAPIService) UnfollowUserByUsernameExecute(r ApiUnfollowUserByUsernameRequest) (*DbUserToUserFollows, *http.Response, error) {
+//	@return DbUserList
+func (a *UserListsServiceAPIService) GetListsForUserExecute(r ApiGetListsForUserRequest) (*DbUserList, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
+		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DbUserToUserFollows
+		localVarReturnValue *DbUserList
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.UnfollowUserByUsername")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetListsForUser")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/users/{username}/follow"
-	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
+	localVarPath := localBasePath + "/v1/lists"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserListRequest struct {
+	ctx        context.Context
+	ApiService *UserListsServiceAPIService
+	id         string
+}
+
+func (r ApiGetUserListRequest) Execute() (*DbUserList, *http.Response, error) {
+	return r.ApiService.GetUserListExecute(r)
+}
+
+/*
+GetUserList Retrieves an individual user list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetUserListRequest
+*/
+func (a *UserListsServiceAPIService) GetUserList(ctx context.Context, id string) ApiGetUserListRequest {
+	return ApiGetUserListRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbUserList
+func (a *UserListsServiceAPIService) GetUserListExecute(r ApiGetUserListRequest) (*DbUserList, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetUserList")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1199,6 +660,371 @@ func (a *UserServiceAPIService) UnfollowUserByUsernameExecute(r ApiUnfollowUserB
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserListContributorsRequest struct {
+	ctx            context.Context
+	ApiService     *UserListsServiceAPIService
+	id             string
+	page           *int32
+	limit          *int32
+	orderDirection *OrderDirectionEnum
+	range_         *int32
+}
+
+func (r ApiGetUserListContributorsRequest) Page(page int32) ApiGetUserListContributorsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetUserListContributorsRequest) Limit(limit int32) ApiGetUserListContributorsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetUserListContributorsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetUserListContributorsRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiGetUserListContributorsRequest) Range_(range_ int32) ApiGetUserListContributorsRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiGetUserListContributorsRequest) Execute() (*GetUserListContributors200Response, *http.Response, error) {
+	return r.ApiService.GetUserListContributorsExecute(r)
+}
+
+/*
+GetUserListContributors Retrieves contributors for an individual user list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetUserListContributorsRequest
+*/
+func (a *UserListsServiceAPIService) GetUserListContributors(ctx context.Context, id string) ApiGetUserListContributorsRequest {
+	return ApiGetUserListContributorsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetUserListContributors200Response
+func (a *UserListsServiceAPIService) GetUserListContributorsExecute(r ApiGetUserListContributorsRequest) (*GetUserListContributors200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetUserListContributors200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetUserListContributors")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/contributors"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPostUserListContributorsRequest struct {
+	ctx              context.Context
+	ApiService       *UserListsServiceAPIService
+	id               string
+	collaboratorsDto *CollaboratorsDto
+}
+
+func (r ApiPostUserListContributorsRequest) CollaboratorsDto(collaboratorsDto CollaboratorsDto) ApiPostUserListContributorsRequest {
+	r.collaboratorsDto = &collaboratorsDto
+	return r
+}
+
+func (r ApiPostUserListContributorsRequest) Execute() ([]DbUserListContributor, *http.Response, error) {
+	return r.ApiService.PostUserListContributorsExecute(r)
+}
+
+/*
+PostUserListContributors Add new contributors to an individual user list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiPostUserListContributorsRequest
+*/
+func (a *UserListsServiceAPIService) PostUserListContributors(ctx context.Context, id string) ApiPostUserListContributorsRequest {
+	return ApiPostUserListContributorsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return []DbUserListContributor
+func (a *UserListsServiceAPIService) PostUserListContributorsExecute(r ApiPostUserListContributorsRequest) ([]DbUserListContributor, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []DbUserListContributor
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.PostUserListContributors")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/contributors"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.collaboratorsDto == nil {
+		return localVarReturnValue, nil, reportError("collaboratorsDto is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.collaboratorsDto
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateListForUserRequest struct {
+	ctx               context.Context
+	ApiService        *UserListsServiceAPIService
+	id                string
+	createUserListDto *CreateUserListDto
+}
+
+func (r ApiUpdateListForUserRequest) CreateUserListDto(createUserListDto CreateUserListDto) ApiUpdateListForUserRequest {
+	r.createUserListDto = &createUserListDto
+	return r
+}
+
+func (r ApiUpdateListForUserRequest) Execute() (*DbUserList, *http.Response, error) {
+	return r.ApiService.UpdateListForUserExecute(r)
+}
+
+/*
+UpdateListForUser Updates the list for the authenticated user
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiUpdateListForUserRequest
+*/
+func (a *UserListsServiceAPIService) UpdateListForUser(ctx context.Context, id string) ApiUpdateListForUserRequest {
+	return ApiUpdateListForUserRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbUserList
+func (a *UserListsServiceAPIService) UpdateListForUserExecute(r ApiUpdateListForUserRequest) (*DbUserList, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.UpdateListForUser")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createUserListDto == nil {
+		return localVarReturnValue, nil, reportError("createUserListDto is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createUserListDto
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

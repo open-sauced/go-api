@@ -94,10 +94,6 @@ func NewConfiguration() *Configuration {
 		Debug:         false,
 		Servers: ServerConfigurations{
 			{
-				URL:         "http://localhost:3001",
-				Description: "Development",
-			},
-			{
 				URL:         "https://api.opensauced.pizza",
 				Description: "Production",
 			},

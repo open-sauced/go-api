@@ -87,6 +87,8 @@ type APIClient struct {
 
 	UserHighlightsServiceAPI *UserHighlightsServiceAPIService
 
+	UserListsServiceAPI *UserListsServiceAPIService
+
 	UserRecommendationsServiceAPI *UserRecommendationsServiceAPIService
 
 	UserServiceAPI *UserServiceAPIService
@@ -129,6 +131,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SubmitServiceAPI = (*SubmitServiceAPIService)(&c.common)
 	c.UserCollaborationsServiceAPI = (*UserCollaborationsServiceAPIService)(&c.common)
 	c.UserHighlightsServiceAPI = (*UserHighlightsServiceAPIService)(&c.common)
+	c.UserListsServiceAPI = (*UserListsServiceAPIService)(&c.common)
 	c.UserRecommendationsServiceAPI = (*UserRecommendationsServiceAPIService)(&c.common)
 	c.UserServiceAPI = (*UserServiceAPIService)(&c.common)
 	c.VoteServiceAPI = (*VoteServiceAPIService)(&c.common)

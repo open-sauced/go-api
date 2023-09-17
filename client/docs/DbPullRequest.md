@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **Deletions** | Pointer to **int32** | PR lines deleted | [optional] 
 **ChangedFiles** | Pointer to **int32** | PR files changed | [optional] 
 **FullName** | Pointer to **string** | Pull request repo full name | [optional] 
+**Commits** | Pointer to **int32** | Number of commits in the PR | [optional] 
 
 ## Methods
 
@@ -727,6 +728,31 @@ SetFullName sets FullName field to given value.
 `func (o *DbPullRequest) HasFullName() bool`
 
 HasFullName returns a boolean if a field has been set.
+
+### GetCommits
+
+`func (o *DbPullRequest) GetCommits() int32`
+
+GetCommits returns the Commits field if non-nil, zero value otherwise.
+
+### GetCommitsOk
+
+`func (o *DbPullRequest) GetCommitsOk() (*int32, bool)`
+
+GetCommitsOk returns a tuple with the Commits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommits
+
+`func (o *DbPullRequest) SetCommits(v int32)`
+
+SetCommits sets Commits field to given value.
+
+### HasCommits
+
+`func (o *DbPullRequest) HasCommits() bool`
+
+HasCommits returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

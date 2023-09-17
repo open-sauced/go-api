@@ -1,6 +1,6 @@
 # \AuthenticationServiceAPI
 
-All URIs are relative to *http://localhost:3001*
+All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

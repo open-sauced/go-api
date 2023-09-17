@@ -1,6 +1,6 @@
 # \UserServiceAPI
 
-All URIs are relative to *http://localhost:3001*
+All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**GetFollowStatusByUsername**](UserServiceAPI.md#GetFollowStatusByUsername) | **Get** /v1/users/{username}/follow | Checks if the authenticated user follows the provided username
 [**GetTop10Highlights**](UserServiceAPI.md#GetTop10Highlights) | **Get** /v1/users/top | List top users
 [**GetUserNotifications**](UserServiceAPI.md#GetUserNotifications) | **Get** /v1/user/notifications | Retrieves notifications for the authenticated user
+[**GetUsersByFilter**](UserServiceAPI.md#GetUsersByFilter) | **Get** /v1/users/search | Search users
 [**UnfollowUserByUsername**](UserServiceAPI.md#UnfollowUserByUsername) | **Delete** /v1/users/{username}/follow | Unfollows a user by username
 
 
@@ -575,6 +576,74 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUsersByFilter
+
+> DbFilteredUser GetUsersByFilter(ctx).Username(username).Page(page).Limit(limit).Execute()
+
+Search users
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    username := "username_example" // string | Username search query to filter from the list of users (default to "")
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserServiceAPI.GetUsersByFilter(context.Background()).Username(username).Page(page).Limit(limit).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.GetUsersByFilter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetUsersByFilter`: DbFilteredUser
+    fmt.Fprintf(os.Stdout, "Response from `UserServiceAPI.GetUsersByFilter`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetUsersByFilterRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **string** | Username search query to filter from the list of users | [default to &quot;&quot;]
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
+
+### Return type
+
+[**DbFilteredUser**](DbFilteredUser.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

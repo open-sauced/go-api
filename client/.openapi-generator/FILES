@@ -20,6 +20,7 @@ api_stripe_service.go
 api_submit_service.go
 api_user_collaborations_service.go
 api_user_highlights_service.go
+api_user_lists_service.go
 api_user_recommendations_service.go
 api_user_service.go
 api_vote_service.go
@@ -28,6 +29,7 @@ configuration.go
 docs/AuthenticationServiceAPI.md
 docs/BakeRepoDto.md
 docs/BlogSummaryServiceAPI.md
+docs/CollaboratorsDto.md
 docs/ContributionServiceAPI.md
 docs/ContributorsServiceAPI.md
 docs/CreateBlogSummaryDto.md
@@ -37,12 +39,14 @@ docs/CreateInsightMemberDto.md
 docs/CreateIssueSummaryDto.md
 docs/CreateUserCollaborationDto.md
 docs/CreateUserHighlightDto.md
+docs/CreateUserListDto.md
 docs/DbBakedRepo.md
 docs/DbCommitAuthors.md
 docs/DbCommits.md
 docs/DbContribution.md
 docs/DbEmoji.md
 docs/DbEndorsement.md
+docs/DbFilteredUser.md
 docs/DbInsight.md
 docs/DbInsightMember.md
 docs/DbPRInsight.md
@@ -60,6 +64,8 @@ docs/DbUserHighlight.md
 docs/DbUserHighlightReaction.md
 docs/DbUserHighlightReactionResponse.md
 docs/DbUserHighlightRepo.md
+docs/DbUserList.md
+docs/DbUserListContributor.md
 docs/DbUserToUserFollows.md
 docs/EmojisServiceAPI.md
 docs/EndorsementsServiceAPI.md
@@ -77,6 +83,8 @@ docs/GenerateCodeExplanationDto.md
 docs/GenerateCodeRefactorSuggestionDto.md
 docs/GenerateCodeTestSuggestionDto.md
 docs/GeneratePullRequestDescriptionDto.md
+docs/GetContributors200Response.md
+docs/GetUserListContributors200Response.md
 docs/HealthCheckServiceAPI.md
 docs/HealthStatusService200Response.md
 docs/HealthStatusService200ResponseInfoValue.md
@@ -113,12 +121,14 @@ docs/UpdateUserEmailPreferencesDto.md
 docs/UpdateUserProfileInterestsDto.md
 docs/UserCollaborationsServiceAPI.md
 docs/UserHighlightsServiceAPI.md
+docs/UserListsServiceAPI.md
 docs/UserOnboardingDto.md
 docs/UserRecommendationsServiceAPI.md
 docs/UserServiceAPI.md
 docs/VoteServiceAPI.md
 docs/VotedRepoDto.md
 model_bake_repo_dto.go
+model_collaborators_dto.go
 model_create_blog_summary_dto.go
 model_create_endorsement_dto.go
 model_create_insight_dto.go
@@ -126,12 +136,14 @@ model_create_insight_member_dto.go
 model_create_issue_summary_dto.go
 model_create_user_collaboration_dto.go
 model_create_user_highlight_dto.go
+model_create_user_list_dto.go
 model_db_baked_repo.go
 model_db_commit_authors.go
 model_db_commits.go
 model_db_contribution.go
 model_db_emoji.go
 model_db_endorsement.go
+model_db_filtered_user.go
 model_db_insight.go
 model_db_insight_member.go
 model_db_pr_insight.go
@@ -149,6 +161,8 @@ model_db_user_highlight.go
 model_db_user_highlight_reaction.go
 model_db_user_highlight_reaction_response.go
 model_db_user_highlight_repo.go
+model_db_user_list.go
+model_db_user_list_contributor.go
 model_db_user_to_user_follows.go
 model_find_all_by_repo_id_200_response.go
 model_find_all_emojis_200_response.go
@@ -164,6 +178,8 @@ model_generate_code_explanation_dto.go
 model_generate_code_refactor_suggestion_dto.go
 model_generate_code_test_suggestion_dto.go
 model_generate_pull_request_description_dto.go
+model_get_contributors_200_response.go
+model_get_user_list_contributors_200_response.go
 model_health_status_service_200_response.go
 model_health_status_service_200_response_info_value.go
 model_health_status_service_503_response.go
