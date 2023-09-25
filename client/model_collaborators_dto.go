@@ -13,88 +13,60 @@ package client
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the DbPullRequestContributor type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DbPullRequestContributor{}
+// checks if the CollaboratorsDto type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CollaboratorsDto{}
 
-// DbPullRequestContributor struct for DbPullRequestContributor
-type DbPullRequestContributor struct {
-	// Pull request author username
-	AuthorLogin string `json:"author_login"`
-	// Timestamp representing pr last update
-	UpdatedAt time.Time `json:"updated_at"`
+// CollaboratorsDto struct for CollaboratorsDto
+type CollaboratorsDto struct {
+	// An array of contributor user IDs
+	Contributors []int32 `json:"contributors"`
 }
 
-// NewDbPullRequestContributor instantiates a new DbPullRequestContributor object
+// NewCollaboratorsDto instantiates a new CollaboratorsDto object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbPullRequestContributor(authorLogin string, updatedAt time.Time) *DbPullRequestContributor {
-	this := DbPullRequestContributor{}
-	this.AuthorLogin = authorLogin
-	this.UpdatedAt = updatedAt
+func NewCollaboratorsDto(contributors []int32) *CollaboratorsDto {
+	this := CollaboratorsDto{}
+	this.Contributors = contributors
 	return &this
 }
 
-// NewDbPullRequestContributorWithDefaults instantiates a new DbPullRequestContributor object
+// NewCollaboratorsDtoWithDefaults instantiates a new CollaboratorsDto object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDbPullRequestContributorWithDefaults() *DbPullRequestContributor {
-	this := DbPullRequestContributor{}
+func NewCollaboratorsDtoWithDefaults() *CollaboratorsDto {
+	this := CollaboratorsDto{}
 	return &this
 }
 
-// GetAuthorLogin returns the AuthorLogin field value
-func (o *DbPullRequestContributor) GetAuthorLogin() string {
+// GetContributors returns the Contributors field value
+func (o *CollaboratorsDto) GetContributors() []int32 {
 	if o == nil {
-		var ret string
+		var ret []int32
 		return ret
 	}
 
-	return o.AuthorLogin
+	return o.Contributors
 }
 
-// GetAuthorLoginOk returns a tuple with the AuthorLogin field value
+// GetContributorsOk returns a tuple with the Contributors field value
 // and a boolean to check if the value has been set.
-func (o *DbPullRequestContributor) GetAuthorLoginOk() (*string, bool) {
+func (o *CollaboratorsDto) GetContributorsOk() ([]int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AuthorLogin, true
+	return o.Contributors, true
 }
 
-// SetAuthorLogin sets field value
-func (o *DbPullRequestContributor) SetAuthorLogin(v string) {
-	o.AuthorLogin = v
+// SetContributors sets field value
+func (o *CollaboratorsDto) SetContributors(v []int32) {
+	o.Contributors = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value
-func (o *DbPullRequestContributor) GetUpdatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
-// and a boolean to check if the value has been set.
-func (o *DbPullRequestContributor) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UpdatedAt, true
-}
-
-// SetUpdatedAt sets field value
-func (o *DbPullRequestContributor) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = v
-}
-
-func (o DbPullRequestContributor) MarshalJSON() ([]byte, error) {
+func (o CollaboratorsDto) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,45 +74,44 @@ func (o DbPullRequestContributor) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DbPullRequestContributor) ToMap() (map[string]interface{}, error) {
+func (o CollaboratorsDto) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["author_login"] = o.AuthorLogin
-	toSerialize["updated_at"] = o.UpdatedAt
+	toSerialize["contributors"] = o.Contributors
 	return toSerialize, nil
 }
 
-type NullableDbPullRequestContributor struct {
-	value *DbPullRequestContributor
+type NullableCollaboratorsDto struct {
+	value *CollaboratorsDto
 	isSet bool
 }
 
-func (v NullableDbPullRequestContributor) Get() *DbPullRequestContributor {
+func (v NullableCollaboratorsDto) Get() *CollaboratorsDto {
 	return v.value
 }
 
-func (v *NullableDbPullRequestContributor) Set(val *DbPullRequestContributor) {
+func (v *NullableCollaboratorsDto) Set(val *CollaboratorsDto) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDbPullRequestContributor) IsSet() bool {
+func (v NullableCollaboratorsDto) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDbPullRequestContributor) Unset() {
+func (v *NullableCollaboratorsDto) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDbPullRequestContributor(val *DbPullRequestContributor) *NullableDbPullRequestContributor {
-	return &NullableDbPullRequestContributor{value: val, isSet: true}
+func NewNullableCollaboratorsDto(val *CollaboratorsDto) *NullableCollaboratorsDto {
+	return &NullableCollaboratorsDto{value: val, isSet: true}
 }
 
-func (v NullableDbPullRequestContributor) MarshalJSON() ([]byte, error) {
+func (v NullableCollaboratorsDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDbPullRequestContributor) UnmarshalJSON(src []byte) error {
+func (v *NullableCollaboratorsDto) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

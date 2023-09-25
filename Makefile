@@ -1,4 +1,4 @@
-.PHONY: generate
+.PHONY: generate-client
 
 generate-client:
 	./generate.sh

@@ -53,8 +53,6 @@ type APIClient struct {
 
 	BlogSummaryServiceAPI *BlogSummaryServiceAPIService
 
-	ContributionServiceAPI *ContributionServiceAPIService
-
 	ContributorsServiceAPI *ContributorsServiceAPIService
 
 	EmojisServiceAPI *EmojisServiceAPIService
@@ -87,6 +85,8 @@ type APIClient struct {
 
 	UserHighlightsServiceAPI *UserHighlightsServiceAPIService
 
+	UserListsServiceAPI *UserListsServiceAPIService
+
 	UserRecommendationsServiceAPI *UserRecommendationsServiceAPIService
 
 	UserServiceAPI *UserServiceAPIService
@@ -112,7 +112,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.AuthenticationServiceAPI = (*AuthenticationServiceAPIService)(&c.common)
 	c.BlogSummaryServiceAPI = (*BlogSummaryServiceAPIService)(&c.common)
-	c.ContributionServiceAPI = (*ContributionServiceAPIService)(&c.common)
 	c.ContributorsServiceAPI = (*ContributorsServiceAPIService)(&c.common)
 	c.EmojisServiceAPI = (*EmojisServiceAPIService)(&c.common)
 	c.EndorsementsServiceAPI = (*EndorsementsServiceAPIService)(&c.common)
@@ -129,6 +128,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SubmitServiceAPI = (*SubmitServiceAPIService)(&c.common)
 	c.UserCollaborationsServiceAPI = (*UserCollaborationsServiceAPIService)(&c.common)
 	c.UserHighlightsServiceAPI = (*UserHighlightsServiceAPIService)(&c.common)
+	c.UserListsServiceAPI = (*UserListsServiceAPIService)(&c.common)
 	c.UserRecommendationsServiceAPI = (*UserRecommendationsServiceAPIService)(&c.common)
 	c.UserServiceAPI = (*UserServiceAPIService)(&c.common)
 	c.VoteServiceAPI = (*VoteServiceAPIService)(&c.common)

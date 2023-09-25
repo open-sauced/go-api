@@ -167,6 +167,306 @@ func (a *RepositoryServiceAPIService) FindAllExecute(r ApiFindAllRequest) (*Find
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiFindAllByOwnerAndRepoRequest struct {
+	ctx            context.Context
+	ApiService     *RepositoryServiceAPIService
+	owner          string
+	repo           string
+	page           *int32
+	limit          *int32
+	orderDirection *OrderDirectionEnum
+	range_         *int32
+	orderBy        *RepoOrderFieldsEnum
+}
+
+func (r ApiFindAllByOwnerAndRepoRequest) Page(page int32) ApiFindAllByOwnerAndRepoRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiFindAllByOwnerAndRepoRequest) Limit(limit int32) ApiFindAllByOwnerAndRepoRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiFindAllByOwnerAndRepoRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllByOwnerAndRepoRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiFindAllByOwnerAndRepoRequest) Range_(range_ int32) ApiFindAllByOwnerAndRepoRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiFindAllByOwnerAndRepoRequest) OrderBy(orderBy RepoOrderFieldsEnum) ApiFindAllByOwnerAndRepoRequest {
+	r.orderBy = &orderBy
+	return r
+}
+
+func (r ApiFindAllByOwnerAndRepoRequest) Execute() (*FindAllByRepoId200Response, *http.Response, error) {
+	return r.ApiService.FindAllByOwnerAndRepoExecute(r)
+}
+
+/*
+FindAllByOwnerAndRepo Finds a repo by :owner and :repo listing all contributions and paginating them
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiFindAllByOwnerAndRepoRequest
+*/
+func (a *RepositoryServiceAPIService) FindAllByOwnerAndRepo(ctx context.Context, owner string, repo string) ApiFindAllByOwnerAndRepoRequest {
+	return ApiFindAllByOwnerAndRepoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindAllByRepoId200Response
+func (a *RepositoryServiceAPIService) FindAllByOwnerAndRepoExecute(r ApiFindAllByOwnerAndRepoRequest) (*FindAllByRepoId200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllByRepoId200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindAllByOwnerAndRepo")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/repos/{owner}/{repo}/contributions"
+	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterValueToString(r.owner, "owner")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterValueToString(r.repo, "repo")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.orderBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiFindAllByRepoIdRequest struct {
+	ctx            context.Context
+	ApiService     *RepositoryServiceAPIService
+	id             int32
+	page           *int32
+	limit          *int32
+	orderDirection *OrderDirectionEnum
+	range_         *int32
+	orderBy        *RepoOrderFieldsEnum
+}
+
+func (r ApiFindAllByRepoIdRequest) Page(page int32) ApiFindAllByRepoIdRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiFindAllByRepoIdRequest) Limit(limit int32) ApiFindAllByRepoIdRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiFindAllByRepoIdRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindAllByRepoIdRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiFindAllByRepoIdRequest) Range_(range_ int32) ApiFindAllByRepoIdRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiFindAllByRepoIdRequest) OrderBy(orderBy RepoOrderFieldsEnum) ApiFindAllByRepoIdRequest {
+	r.orderBy = &orderBy
+	return r
+}
+
+func (r ApiFindAllByRepoIdRequest) Execute() (*FindAllByRepoId200Response, *http.Response, error) {
+	return r.ApiService.FindAllByRepoIdExecute(r)
+}
+
+/*
+FindAllByRepoId Find a repo by :id listing all contributions and paginating them
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiFindAllByRepoIdRequest
+*/
+func (a *RepositoryServiceAPIService) FindAllByRepoId(ctx context.Context, id int32) ApiFindAllByRepoIdRequest {
+	return ApiFindAllByRepoIdRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindAllByRepoId200Response
+func (a *RepositoryServiceAPIService) FindAllByRepoIdExecute(r ApiFindAllByRepoIdRequest) (*FindAllByRepoId200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllByRepoId200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindAllByRepoId")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/repos/{id}/contributions"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.orderBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiFindAllReposWithFiltersRequest struct {
 	ctx            context.Context
 	ApiService     *RepositoryServiceAPIService

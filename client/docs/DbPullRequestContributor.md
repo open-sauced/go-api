@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuthorLogin** | **string** | Pull request author username | 
-**UpdatedAt** | Pointer to **time.Time** | Timestamp representing pr last update | [optional] 
+**UpdatedAt** | **time.Time** | Timestamp representing pr last update | 
 
 ## Methods
 
 ### NewDbPullRequestContributor
 
-`func NewDbPullRequestContributor(authorLogin string, ) *DbPullRequestContributor`
+`func NewDbPullRequestContributor(authorLogin string, updatedAt time.Time, ) *DbPullRequestContributor`
 
 NewDbPullRequestContributor instantiates a new DbPullRequestContributor object
 This constructor will assign default values to properties that have it defined,
@@ -65,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *DbPullRequestContributor) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

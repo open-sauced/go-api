@@ -115,7 +115,7 @@ ctx = context.WithValue(context.Background(), client.ContextOperationServerVaria
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost:3001*
+All URIs are relative to *https://api.opensauced.pizza*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -185,6 +185,27 @@ Class | Method | HTTP request | Description
 *RepositoryServiceAPI* | [**FindAllReposWithFilters**](docs/RepositoryServiceAPI.md#findallreposwithfilters) | **Get** /v1/repos/search | Finds all repos using filters and paginates them
 *RepositoryServiceAPI* | [**FindOneById**](docs/RepositoryServiceAPI.md#findonebyid) | **Get** /v1/repos/{id} | Finds a repo by :id
 *RepositoryServiceAPI* | [**FindOneByOwnerAndRepo**](docs/RepositoryServiceAPI.md#findonebyownerandrepo) | **Get** /v1/repos/{owner}/{repo} | Finds a repo by :owner and :repo
+*RepositoryServiceGuardedAPI* | [**DownStarOneById**](docs/RepositoryServiceGuardedAPI.md#downstaronebyid) | **Delete** /v1/repos/{id}/star | Finds a repo by :id and removes existing star
+*RepositoryServiceGuardedAPI* | [**DownStarOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downstaronebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and removes existing star
+*RepositoryServiceGuardedAPI* | [**DownStargazeOneById**](docs/RepositoryServiceGuardedAPI.md#downstargazeonebyid) | **Delete** /v1/repos/{id}/stargaze | Finds a repo by :id and unfollows
+*RepositoryServiceGuardedAPI* | [**DownStargazeOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downstargazeonebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and unfollows
+*RepositoryServiceGuardedAPI* | [**DownSubmitOneById**](docs/RepositoryServiceGuardedAPI.md#downsubmitonebyid) | **Delete** /v1/repos/{id}/submit | Finds a repo by :id and removes existing submission
+*RepositoryServiceGuardedAPI* | [**DownSubmitOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downsubmitonebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and removes existing submission
+*RepositoryServiceGuardedAPI* | [**DownVoteOneById**](docs/RepositoryServiceGuardedAPI.md#downvoteonebyid) | **Delete** /v1/repos/{id}/vote | Finds a repo by :id and removes existing vote
+*RepositoryServiceGuardedAPI* | [**DownVoteOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#downvoteonebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and removes existing vote
+*RepositoryServiceGuardedAPI* | [**FindAllUserStargazed**](docs/RepositoryServiceGuardedAPI.md#findalluserstargazed) | **Get** /v1/repos/listUserStargazed | Finds all repos followed by authenticated user and paginates them
+*RepositoryServiceGuardedAPI* | [**FindAllUserStarred**](docs/RepositoryServiceGuardedAPI.md#findalluserstarred) | **Get** /v1/repos/listUserStarred | Finds all repos starred by authenticated user and paginates them
+*RepositoryServiceGuardedAPI* | [**FindAllUserSubmitted**](docs/RepositoryServiceGuardedAPI.md#findallusersubmitted) | **Get** /v1/repos/listUserSubmitted | Finds all repos submitted by authenticated user and paginates them
+*RepositoryServiceGuardedAPI* | [**FindAllUserVoted**](docs/RepositoryServiceGuardedAPI.md#findalluservoted) | **Get** /v1/repos/listUserVoted | Finds all repos voted by authenticated user and paginates them
+*RepositoryServiceGuardedAPI* | [**FindOneByRepoId**](docs/RepositoryServiceGuardedAPI.md#findonebyrepoid) | **Get** /v1/repos/{repoId}/vote | Finds a repo by :repoId and returns if authenticated user has voted for it
+*RepositoryServiceGuardedAPI* | [**StarOneById**](docs/RepositoryServiceGuardedAPI.md#staronebyid) | **Put** /v1/repos/{id}/star | Finds a repo by :id and adds a star
+*RepositoryServiceGuardedAPI* | [**StarOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#staronebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and adds a star
+*RepositoryServiceGuardedAPI* | [**StargazeOneById**](docs/RepositoryServiceGuardedAPI.md#stargazeonebyid) | **Put** /v1/repos/{id}/stargaze | Finds a repo by :id and follows
+*RepositoryServiceGuardedAPI* | [**StargazeOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#stargazeonebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and follows
+*RepositoryServiceGuardedAPI* | [**SubmitOneById**](docs/RepositoryServiceGuardedAPI.md#submitonebyid) | **Put** /v1/repos/{id}/submit | Finds a repo by :id and adds a submission
+*RepositoryServiceGuardedAPI* | [**SubmitOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#submitonebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and adds a submission
+*RepositoryServiceGuardedAPI* | [**VoteOneById**](docs/RepositoryServiceGuardedAPI.md#voteonebyid) | **Put** /v1/repos/{id}/vote | Finds a repo by :id and adds a vote
+*RepositoryServiceGuardedAPI* | [**VoteOneByOwnerAndRepo**](docs/RepositoryServiceGuardedAPI.md#voteonebyownerandrepo) | **Put** /v1/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and adds a vote
 *StarServiceAPI* | [**DownStarOneById**](docs/StarServiceAPI.md#downstaronebyid) | **Delete** /v1/repos/{id}/star | Finds a repo by :id and removes existing star
 *StarServiceAPI* | [**DownStarOneByOwnerAndRepo**](docs/StarServiceAPI.md#downstaronebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and removes existing star
 *StarServiceAPI* | [**FindAllUserStarred**](docs/StarServiceAPI.md#findalluserstarred) | **Get** /v1/repos/listUserStarred | Finds all repos starred by authenticated user and paginates them
@@ -214,6 +235,16 @@ Class | Method | HTTP request | Description
 *UserHighlightsServiceAPI* | [**GetFollowingHighlights**](docs/UserHighlightsServiceAPI.md#getfollowinghighlights) | **Get** /v1/user/highlights/following | Fetches highlights for users the authenticated user follows
 *UserHighlightsServiceAPI* | [**GetUserHighlight**](docs/UserHighlightsServiceAPI.md#getuserhighlight) | **Get** /v1/user/highlights/{id} | Retrieves a highlight
 *UserHighlightsServiceAPI* | [**UpdateHighlightForUser**](docs/UserHighlightsServiceAPI.md#updatehighlightforuser) | **Patch** /v1/user/highlights/{id} | Updates the highlight for the authenticated user
+*UserListsServiceAPI* | [**AddListForUser**](docs/UserListsServiceAPI.md#addlistforuser) | **Post** /v1/lists | Adds a new list for the authenticated user
+*UserListsServiceAPI* | [**DeleteListForUser**](docs/UserListsServiceAPI.md#deletelistforuser) | **Delete** /v1/lists/{id} | Deletes the list for the authenticated user
+*UserListsServiceAPI* | [**DeleteUserListContributor**](docs/UserListsServiceAPI.md#deleteuserlistcontributor) | **Delete** /v1/lists/{id}/contributors/{userListContributorId} | Delete contributor from an individual user list
+*UserListsServiceAPI* | [**GetContributors**](docs/UserListsServiceAPI.md#getcontributors) | **Get** /v1/lists/contributors | Retrieves paginated contributors
+*UserListsServiceAPI* | [**GetListsForUser**](docs/UserListsServiceAPI.md#getlistsforuser) | **Get** /v1/lists | Gets lists for the authenticated user
+*UserListsServiceAPI* | [**GetUserList**](docs/UserListsServiceAPI.md#getuserlist) | **Get** /v1/lists/{id} | Retrieves an individual user list
+*UserListsServiceAPI* | [**GetUserListContributors**](docs/UserListsServiceAPI.md#getuserlistcontributors) | **Get** /v1/lists/{id}/contributors | Retrieves contributors for an individual user list
+*UserListsServiceAPI* | [**PostUserListContributors**](docs/UserListsServiceAPI.md#postuserlistcontributors) | **Post** /v1/lists/{id}/contributors | Add new contributors to an individual user list
+*UserListsServiceAPI* | [**UpdateListForUser**](docs/UserListsServiceAPI.md#updatelistforuser) | **Patch** /v1/lists/{id} | Updates the list for the authenticated user
+*UserRecommendationsServiceAPI* | [**FindUserOrgsRepoRecommendations**](docs/UserRecommendationsServiceAPI.md#finduserorgsreporecommendations) | **Get** /v1/user/recommendations/orgs | Listing recommended repos for the authenticated user based on their orgs
 *UserRecommendationsServiceAPI* | [**FindUserRepoRecommendations**](docs/UserRecommendationsServiceAPI.md#finduserreporecommendations) | **Get** /v1/user/recommendations/repos | Listing recommended repos for the authenticated user
 *UserServiceAPI* | [**FindAllHighlightsByUsername**](docs/UserServiceAPI.md#findallhighlightsbyusername) | **Get** /v1/users/{username}/highlights | Listing all Highlights for a user and paginate them
 *UserServiceAPI* | [**FindAllTopReposByUsername**](docs/UserServiceAPI.md#findalltopreposbyusername) | **Get** /v1/users/{username}/top-repos | Listing all Top Repos for a user and paginate them
@@ -223,6 +254,7 @@ Class | Method | HTTP request | Description
 *UserServiceAPI* | [**GetFollowStatusByUsername**](docs/UserServiceAPI.md#getfollowstatusbyusername) | **Get** /v1/users/{username}/follow | Checks if the authenticated user follows the provided username
 *UserServiceAPI* | [**GetTop10Highlights**](docs/UserServiceAPI.md#gettop10highlights) | **Get** /v1/users/top | List top users
 *UserServiceAPI* | [**GetUserNotifications**](docs/UserServiceAPI.md#getusernotifications) | **Get** /v1/user/notifications | Retrieves notifications for the authenticated user
+*UserServiceAPI* | [**GetUsersByFilter**](docs/UserServiceAPI.md#getusersbyfilter) | **Get** /v1/users/search | Search users
 *UserServiceAPI* | [**UnfollowUserByUsername**](docs/UserServiceAPI.md#unfollowuserbyusername) | **Delete** /v1/users/{username}/follow | Unfollows a user by username
 *VoteServiceAPI* | [**DownVoteOneById**](docs/VoteServiceAPI.md#downvoteonebyid) | **Delete** /v1/repos/{id}/vote | Finds a repo by :id and removes existing vote
 *VoteServiceAPI* | [**DownVoteOneByOwnerAndRepo**](docs/VoteServiceAPI.md#downvoteonebyownerandrepo) | **Delete** /v1/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and removes existing vote
@@ -235,6 +267,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [BakeRepoDto](docs/BakeRepoDto.md)
+ - [CollaboratorsDto](docs/CollaboratorsDto.md)
  - [CreateBlogSummaryDto](docs/CreateBlogSummaryDto.md)
  - [CreateEndorsementDto](docs/CreateEndorsementDto.md)
  - [CreateInsightDto](docs/CreateInsightDto.md)
@@ -242,12 +275,14 @@ Class | Method | HTTP request | Description
  - [CreateIssueSummaryDto](docs/CreateIssueSummaryDto.md)
  - [CreateUserCollaborationDto](docs/CreateUserCollaborationDto.md)
  - [CreateUserHighlightDto](docs/CreateUserHighlightDto.md)
+ - [CreateUserListDto](docs/CreateUserListDto.md)
  - [DbBakedRepo](docs/DbBakedRepo.md)
  - [DbCommitAuthors](docs/DbCommitAuthors.md)
  - [DbCommits](docs/DbCommits.md)
  - [DbContribution](docs/DbContribution.md)
  - [DbEmoji](docs/DbEmoji.md)
  - [DbEndorsement](docs/DbEndorsement.md)
+ - [DbFilteredUser](docs/DbFilteredUser.md)
  - [DbInsight](docs/DbInsight.md)
  - [DbInsightMember](docs/DbInsightMember.md)
  - [DbPRInsight](docs/DbPRInsight.md)
@@ -265,6 +300,8 @@ Class | Method | HTTP request | Description
  - [DbUserHighlightReaction](docs/DbUserHighlightReaction.md)
  - [DbUserHighlightReactionResponse](docs/DbUserHighlightReactionResponse.md)
  - [DbUserHighlightRepo](docs/DbUserHighlightRepo.md)
+ - [DbUserList](docs/DbUserList.md)
+ - [DbUserListContributor](docs/DbUserListContributor.md)
  - [DbUserToUserFollows](docs/DbUserToUserFollows.md)
  - [FindAllByRepoId200Response](docs/FindAllByRepoId200Response.md)
  - [FindAllEmojis200Response](docs/FindAllEmojis200Response.md)
@@ -280,6 +317,8 @@ Class | Method | HTTP request | Description
  - [GenerateCodeRefactorSuggestionDto](docs/GenerateCodeRefactorSuggestionDto.md)
  - [GenerateCodeTestSuggestionDto](docs/GenerateCodeTestSuggestionDto.md)
  - [GeneratePullRequestDescriptionDto](docs/GeneratePullRequestDescriptionDto.md)
+ - [GetContributors200Response](docs/GetContributors200Response.md)
+ - [GetUserListContributors200Response](docs/GetUserListContributors200Response.md)
  - [HealthStatusService200Response](docs/HealthStatusService200Response.md)
  - [HealthStatusService200ResponseInfoValue](docs/HealthStatusService200ResponseInfoValue.md)
  - [HealthStatusService503Response](docs/HealthStatusService503Response.md)

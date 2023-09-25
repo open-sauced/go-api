@@ -13,88 +13,94 @@ package client
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the DbPullRequestContributor type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DbPullRequestContributor{}
+// checks if the DbFilteredUser type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DbFilteredUser{}
 
-// DbPullRequestContributor struct for DbPullRequestContributor
-type DbPullRequestContributor struct {
-	// Pull request author username
-	AuthorLogin string `json:"author_login"`
-	// Timestamp representing pr last update
-	UpdatedAt time.Time `json:"updated_at"`
+// DbFilteredUser struct for DbFilteredUser
+type DbFilteredUser struct {
+	// User Login
+	Login *string `json:"login,omitempty"`
+	// Users fullname
+	FullName string `json:"full_name"`
 }
 
-// NewDbPullRequestContributor instantiates a new DbPullRequestContributor object
+// NewDbFilteredUser instantiates a new DbFilteredUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbPullRequestContributor(authorLogin string, updatedAt time.Time) *DbPullRequestContributor {
-	this := DbPullRequestContributor{}
-	this.AuthorLogin = authorLogin
-	this.UpdatedAt = updatedAt
+func NewDbFilteredUser(fullName string) *DbFilteredUser {
+	this := DbFilteredUser{}
+	this.FullName = fullName
 	return &this
 }
 
-// NewDbPullRequestContributorWithDefaults instantiates a new DbPullRequestContributor object
+// NewDbFilteredUserWithDefaults instantiates a new DbFilteredUser object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDbPullRequestContributorWithDefaults() *DbPullRequestContributor {
-	this := DbPullRequestContributor{}
+func NewDbFilteredUserWithDefaults() *DbFilteredUser {
+	this := DbFilteredUser{}
 	return &this
 }
 
-// GetAuthorLogin returns the AuthorLogin field value
-func (o *DbPullRequestContributor) GetAuthorLogin() string {
+// GetLogin returns the Login field value if set, zero value otherwise.
+func (o *DbFilteredUser) GetLogin() string {
+	if o == nil || IsNil(o.Login) {
+		var ret string
+		return ret
+	}
+	return *o.Login
+}
+
+// GetLoginOk returns a tuple with the Login field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DbFilteredUser) GetLoginOk() (*string, bool) {
+	if o == nil || IsNil(o.Login) {
+		return nil, false
+	}
+	return o.Login, true
+}
+
+// HasLogin returns a boolean if a field has been set.
+func (o *DbFilteredUser) HasLogin() bool {
+	if o != nil && !IsNil(o.Login) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogin gets a reference to the given string and assigns it to the Login field.
+func (o *DbFilteredUser) SetLogin(v string) {
+	o.Login = &v
+}
+
+// GetFullName returns the FullName field value
+func (o *DbFilteredUser) GetFullName() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.AuthorLogin
+	return o.FullName
 }
 
-// GetAuthorLoginOk returns a tuple with the AuthorLogin field value
+// GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
-func (o *DbPullRequestContributor) GetAuthorLoginOk() (*string, bool) {
+func (o *DbFilteredUser) GetFullNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.AuthorLogin, true
+	return &o.FullName, true
 }
 
-// SetAuthorLogin sets field value
-func (o *DbPullRequestContributor) SetAuthorLogin(v string) {
-	o.AuthorLogin = v
+// SetFullName sets field value
+func (o *DbFilteredUser) SetFullName(v string) {
+	o.FullName = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value
-func (o *DbPullRequestContributor) GetUpdatedAt() time.Time {
-	if o == nil {
-		var ret time.Time
-		return ret
-	}
-
-	return o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
-// and a boolean to check if the value has been set.
-func (o *DbPullRequestContributor) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.UpdatedAt, true
-}
-
-// SetUpdatedAt sets field value
-func (o *DbPullRequestContributor) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = v
-}
-
-func (o DbPullRequestContributor) MarshalJSON() ([]byte, error) {
+func (o DbFilteredUser) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -102,45 +108,47 @@ func (o DbPullRequestContributor) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DbPullRequestContributor) ToMap() (map[string]interface{}, error) {
+func (o DbFilteredUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["author_login"] = o.AuthorLogin
-	toSerialize["updated_at"] = o.UpdatedAt
+	if !IsNil(o.Login) {
+		toSerialize["login"] = o.Login
+	}
+	toSerialize["full_name"] = o.FullName
 	return toSerialize, nil
 }
 
-type NullableDbPullRequestContributor struct {
-	value *DbPullRequestContributor
+type NullableDbFilteredUser struct {
+	value *DbFilteredUser
 	isSet bool
 }
 
-func (v NullableDbPullRequestContributor) Get() *DbPullRequestContributor {
+func (v NullableDbFilteredUser) Get() *DbFilteredUser {
 	return v.value
 }
 
-func (v *NullableDbPullRequestContributor) Set(val *DbPullRequestContributor) {
+func (v *NullableDbFilteredUser) Set(val *DbFilteredUser) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDbPullRequestContributor) IsSet() bool {
+func (v NullableDbFilteredUser) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDbPullRequestContributor) Unset() {
+func (v *NullableDbFilteredUser) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDbPullRequestContributor(val *DbPullRequestContributor) *NullableDbPullRequestContributor {
-	return &NullableDbPullRequestContributor{value: val, isSet: true}
+func NewNullableDbFilteredUser(val *DbFilteredUser) *NullableDbFilteredUser {
+	return &NullableDbFilteredUser{value: val, isSet: true}
 }
 
-func (v NullableDbPullRequestContributor) MarshalJSON() ([]byte, error) {
+func (v NullableDbFilteredUser) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDbPullRequestContributor) UnmarshalJSON(src []byte) error {
+func (v *NullableDbFilteredUser) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

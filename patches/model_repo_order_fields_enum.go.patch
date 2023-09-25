@@ -1,0 +1,15 @@
+diff --git a/client/model_repo_order_fields_enum.go b/client/model_repo_order_fields_enum.go
+index b1a323c..04cbc93 100644
+--- a/client/model_repo_order_fields_enum.go
++++ b/client/model_repo_order_fields_enum.go
+@@ -25,8 +25,8 @@ const (
+ 	STARS               RepoOrderFieldsEnum = "stars"
+ 	WATCHERS            RepoOrderFieldsEnum = "watchers"
+ 	SUBSCRIBERS         RepoOrderFieldsEnum = "subscribers"
+-	CREATED_AT          RepoOrderFieldsEnum = "created_at"
+-	UPDATED_AT          RepoOrderFieldsEnum = "updated_at"
++	REPO_CREATED_AT     RepoOrderFieldsEnum = "created_at"
++	REPO_UPDATED_AT     RepoOrderFieldsEnum = "updated_at"
+ 	NAME                RepoOrderFieldsEnum = "name"
+ 	CONTRIBUTIONS_COUNT RepoOrderFieldsEnum = "contributionsCount"
+ 	VOTES_COUNT         RepoOrderFieldsEnum = "votesCount"

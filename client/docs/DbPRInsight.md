@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** | Repository identifier | 
 **Interval** | **int32** | Selected interval in numerical days, goes back with number, 0 means today | [default to 0]
-**Day** | [**DateTime**](date-time.md) | Selected interval computed date in human readable format | 
+**Day** | **string** | Selected interval computed date in human readable format | 
 **AllPrs** | **int32** | PR Type: all requests count | 
 **AcceptedPrs** | **int32** | PR Type: accepted requests count | 
 **SpamPrs** | **int32** | PR Type: spam requests count | 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewDbPRInsight
 
-`func NewDbPRInsight(id int32, interval int32, day DateTime, allPrs int32, acceptedPrs int32, spamPrs int32, ) *DbPRInsight`
+`func NewDbPRInsight(id int32, interval int32, day string, allPrs int32, acceptedPrs int32, spamPrs int32, ) *DbPRInsight`
 
 NewDbPRInsight instantiates a new DbPRInsight object
 This constructor will assign default values to properties that have it defined,
@@ -72,20 +72,20 @@ SetInterval sets Interval field to given value.
 
 ### GetDay
 
-`func (o *DbPRInsight) GetDay() DateTime`
+`func (o *DbPRInsight) GetDay() string`
 
 GetDay returns the Day field if non-nil, zero value otherwise.
 
 ### GetDayOk
 
-`func (o *DbPRInsight) GetDayOk() (*DateTime, bool)`
+`func (o *DbPRInsight) GetDayOk() (*string, bool)`
 
 GetDayOk returns a tuple with the Day field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDay
 
-`func (o *DbPRInsight) SetDay(v DateTime)`
+`func (o *DbPRInsight) SetDay(v string)`
 
 SetDay sets Day field to given value.
 

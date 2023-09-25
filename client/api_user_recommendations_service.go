@@ -22,12 +22,147 @@ import (
 // UserRecommendationsServiceAPIService UserRecommendationsServiceAPI service
 type UserRecommendationsServiceAPIService service
 
+type ApiFindUserOrgsRepoRecommendationsRequest struct {
+	ctx            context.Context
+	ApiService     *UserRecommendationsServiceAPIService
+	page           *int32
+	limit          *int32
+	orderDirection *OrderDirectionEnum
+	range_         *int32
+}
+
+func (r ApiFindUserOrgsRepoRecommendationsRequest) Page(page int32) ApiFindUserOrgsRepoRecommendationsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiFindUserOrgsRepoRecommendationsRequest) Limit(limit int32) ApiFindUserOrgsRepoRecommendationsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiFindUserOrgsRepoRecommendationsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindUserOrgsRepoRecommendationsRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiFindUserOrgsRepoRecommendationsRequest) Range_(range_ int32) ApiFindUserOrgsRepoRecommendationsRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiFindUserOrgsRepoRecommendationsRequest) Execute() (*FindAllTopReposByUsername200Response, *http.Response, error) {
+	return r.ApiService.FindUserOrgsRepoRecommendationsExecute(r)
+}
+
+/*
+FindUserOrgsRepoRecommendations Listing recommended repos for the authenticated user based on their orgs
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFindUserOrgsRepoRecommendationsRequest
+*/
+func (a *UserRecommendationsServiceAPIService) FindUserOrgsRepoRecommendations(ctx context.Context) ApiFindUserOrgsRepoRecommendationsRequest {
+	return ApiFindUserOrgsRepoRecommendationsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindAllTopReposByUsername200Response
+func (a *UserRecommendationsServiceAPIService) FindUserOrgsRepoRecommendationsExecute(r ApiFindUserOrgsRepoRecommendationsRequest) (*FindAllTopReposByUsername200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllTopReposByUsername200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserRecommendationsServiceAPIService.FindUserOrgsRepoRecommendations")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/user/recommendations/orgs"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiFindUserRepoRecommendationsRequest struct {
 	ctx        context.Context
 	ApiService *UserRecommendationsServiceAPIService
 }
 
-func (r ApiFindUserRepoRecommendationsRequest) Execute() (*http.Response, error) {
+func (r ApiFindUserRepoRecommendationsRequest) Execute() (*FindAllTopReposByUsername200Response, *http.Response, error) {
 	return r.ApiService.FindUserRepoRecommendationsExecute(r)
 }
 
@@ -45,16 +180,19 @@ func (a *UserRecommendationsServiceAPIService) FindUserRepoRecommendations(ctx c
 }
 
 // Execute executes the request
-func (a *UserRecommendationsServiceAPIService) FindUserRepoRecommendationsExecute(r ApiFindUserRepoRecommendationsRequest) (*http.Response, error) {
+//
+//	@return FindAllTopReposByUsername200Response
+func (a *UserRecommendationsServiceAPIService) FindUserRepoRecommendationsExecute(r ApiFindUserRepoRecommendationsRequest) (*FindAllTopReposByUsername200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod = http.MethodGet
-		localVarPostBody   interface{}
-		formFiles          []formFile
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllTopReposByUsername200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserRecommendationsServiceAPIService.FindUserRepoRecommendations")
 	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/v1/user/recommendations/repos"
@@ -73,7 +211,7 @@ func (a *UserRecommendationsServiceAPIService) FindUserRepoRecommendationsExecut
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -82,19 +220,19 @@ func (a *UserRecommendationsServiceAPIService) FindUserRepoRecommendationsExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -102,8 +240,17 @@ func (a *UserRecommendationsServiceAPIService) FindUserRepoRecommendationsExecut
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

@@ -54,8 +54,6 @@ info:
   title: '@open-sauced/api.opensauced.pizza'
   version: "1"
 servers:
-- description: Development
-  url: http://localhost:3001
 - description: Production
   url: https://api.opensauced.pizza
 - description: Beta
@@ -454,6 +452,50 @@ paths:
                 $ref: '#/components/schemas/DbTopUser'
           description: ""
       summary: List top users
+      tags:
+      - User service
+  /v1/users/search:
+    get:
+      operationId: getUsersByFilter
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - description: Username search query to filter from the list of users
+        explode: true
+        in: query
+        name: username
+        required: true
+        schema:
+          default: ""
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbFilteredUser'
+          description: ""
+        "400":
+          description: Username is required
+      summary: Search users
       tags:
       - User service
   /v1/user/highlights:
@@ -1162,10 +1204,66 @@ paths:
       parameters: []
       responses:
         "200":
-          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
       security:
       - bearer: []
       summary: Listing recommended repos for the authenticated user
+      tags:
+      - User Recommendations service
+  /v1/user/recommendations/orgs:
+    get:
+      operationId: findUserOrgsRepoRecommendations
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/findAllTopReposByUsername_200_response'
+          description: Successfully received model list
+      security:
+      - bearer: []
+      summary: Listing recommended repos for the authenticated user based on their
+        orgs
       tags:
       - User Recommendations service
   /v1/prs/list:
@@ -2959,6 +3057,305 @@ paths:
       summary: Updates an insight member information
       tags:
       - Insights service
+  /v1/bake:
+    post:
+      operationId: Bake a repository with the pizza oven microservice
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BakeRepoDto'
+        required: true
+      responses:
+        "201":
+          description: ""
+        "202":
+          description: ""
+        "400":
+          description: Invalid request
+      summary: postToPizzaOvenService
+      tags:
+      - Pizza oven service
+  /v1/bake/repos/{id}:
+    get:
+      operationId: findBakedRepoById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbBakedRepo'
+          description: ""
+        "404":
+          description: Baked repository not found
+      summary: Finds a baked repo by :id
+      tags:
+      - Pizza oven service
+  /v1/bake/repos/list:
+    get:
+      operationId: listAllBakedRepos
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllBakedRepos_200_response'
+          description: Successfully received model list
+      summary: Finds all baked repos and paginates them
+      tags:
+      - Pizza oven service
+  /v1/bake/commit-authors/{id}:
+    get:
+      operationId: findCommitAuthorById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbCommitAuthors'
+          description: ""
+        "404":
+          description: Commit author not found
+      summary: Finds a commit author by :id
+      tags:
+      - Pizza oven service
+  /v1/bake/commit-authors/list:
+    get:
+      operationId: listAllCommitAuthors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllCommitAuthors_200_response'
+          description: Successfully received model list
+      summary: Finds all commit authors and paginates them
+      tags:
+      - Pizza oven service
+  /v1/bake/commits/{id}:
+    get:
+      operationId: findCommitById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbCommits'
+          description: ""
+        "404":
+          description: Commit not found
+      summary: Finds a commit by :id
+      tags:
+      - Pizza oven service
+  /v1/bake/commits/list/repo/{id}:
+    get:
+      operationId: listAllCommitsByBakedRepoId
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllCommitsByBakedRepoId_200_response'
+          description: Successfully received model list
+      summary: Finds all commits by baked repo :id and paginates them
+      tags:
+      - Pizza oven service
+  /v1/bake/commits/list/commit-author/{id}:
+    get:
+      operationId: listAllCommitsByCommitAuthorId
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/listAllCommitsByBakedRepoId_200_response'
+          description: Successfully received model list
+      summary: Finds all commits by commit author :id and paginates them
+      tags:
+      - Pizza oven service
   /v1/issues/summary/generate:
     post:
       operationId: generateIssueSummary
@@ -4030,196 +4427,241 @@ paths:
         IDs
       tags:
       - Contributors service
-  /v1/bake:
+  /v1/lists:
+    get:
+      operationId: getListsForUser
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserList'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to get user lists
+      security:
+      - bearer: []
+      summary: Gets lists for the authenticated user
+      tags:
+      - User Lists service
     post:
-      operationId: Bake a repository with the pizza oven microservice
+      operationId: addListForUser
       parameters: []
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BakeRepoDto'
+              $ref: '#/components/schemas/CreateUserListDto'
         required: true
       responses:
-        "201":
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserList'
           description: ""
-        "202":
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserList'
           description: ""
         "400":
           description: Invalid request
-      summary: postToPizzaOvenService
-      tags:
-      - Pizza oven service
-  /v1/bake/repos/{id}:
-    get:
-      operationId: findBakedRepoById
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DbBakedRepo'
-          description: ""
         "404":
-          description: Baked repository not found
-      summary: Finds a baked repo by :id
+          description: Unable to add user list
+      security:
+      - bearer: []
+      summary: Adds a new list for the authenticated user
       tags:
-      - Pizza oven service
-  /v1/bake/repos/list:
-    get:
-      operationId: listAllBakedRepos
-      parameters:
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          default: 1
-          minimum: 1
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          default: 10
-          maximum: 1000
-          minimum: 1
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: orderDirection
-        required: false
-        schema:
-          $ref: '#/components/schemas/OrderDirectionEnum'
-        style: form
-      - description: Range in days
-        explode: true
-        in: query
-        name: range
-        required: false
-        schema:
-          default: 30
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/listAllBakedRepos_200_response'
-          description: Successfully received model list
-      summary: Finds all baked repos and paginates them
-      tags:
-      - Pizza oven service
-  /v1/bake/commit-authors/{id}:
-    get:
-      operationId: findCommitAuthorById
+      - User Lists service
+  /v1/lists/{id}:
+    delete:
+      operationId: deleteListForUser
       parameters:
       - explode: false
         in: path
         name: id
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DbCommitAuthors'
           description: ""
+        "400":
+          description: Invalid request
         "404":
-          description: Commit author not found
-      summary: Finds a commit author by :id
+          description: Unable to delete user list
+      security:
+      - bearer: []
+      summary: Deletes the list for the authenticated user
       tags:
-      - Pizza oven service
-  /v1/bake/commit-authors/list:
+      - User Lists service
     get:
-      operationId: listAllCommitAuthors
-      parameters:
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          default: 1
-          minimum: 1
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          default: 10
-          maximum: 1000
-          minimum: 1
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: orderDirection
-        required: false
-        schema:
-          $ref: '#/components/schemas/OrderDirectionEnum'
-        style: form
-      - description: Range in days
-        explode: true
-        in: query
-        name: range
-        required: false
-        schema:
-          default: 30
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/listAllCommitAuthors_200_response'
-          description: Successfully received model list
-      summary: Finds all commit authors and paginates them
-      tags:
-      - Pizza oven service
-  /v1/bake/commits/{id}:
-    get:
-      operationId: findCommitById
+      operationId: getUserList
       parameters:
       - explode: false
         in: path
         name: id
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DbCommits'
+                $ref: '#/components/schemas/DbUserList'
           description: ""
+        "400":
+          description: Invalid request
         "404":
-          description: Commit not found
-      summary: Finds a commit by :id
+          description: Unable to get user list
+      security:
+      - bearer: []
+      summary: Retrieves an individual user list
       tags:
-      - Pizza oven service
-  /v1/bake/commits/list/repo/{id}:
+      - User Lists service
+    patch:
+      operationId: updateListForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserListDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbUserList'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to update user list
+      security:
+      - bearer: []
+      summary: Updates the list for the authenticated user
+      tags:
+      - User Lists service
+  /v1/lists/contributors:
     get:
-      operationId: listAllCommitsByBakedRepoId
+      operationId: getContributors
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - example: "Denver, Colorado"
+        explode: true
+        in: query
+        name: location
+        required: false
+        schema:
+          type: string
+        style: form
+      - example: Mountain Standard Time
+        explode: true
+        in: query
+        name: timezone
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Less than or equal to the average number of days to merge a PR
+          over the last 30 days
+        example: 2
+        explode: true
+        in: query
+        name: pr_velocity
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getContributors_200_response'
+          description: Successfully received model list
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to get contributors
+      security:
+      - bearer: []
+      summary: Retrieves paginated contributors
+      tags:
+      - User Lists service
+  /v1/lists/{id}/contributors:
+    get:
+      operationId: getUserListContributors
       parameters:
       - explode: true
         in: query
@@ -4261,74 +4703,88 @@ paths:
         name: id
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/listAllCommitsByBakedRepoId_200_response'
+                $ref: '#/components/schemas/getUserListContributors_200_response'
           description: Successfully received model list
-      summary: Finds all commits by baked repo :id and paginates them
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to get user list contributors
+      security:
+      - bearer: []
+      summary: Retrieves contributors for an individual user list
       tags:
-      - Pizza oven service
-  /v1/bake/commits/list/commit-author/{id}:
-    get:
-      operationId: listAllCommitsByCommitAuthorId
+      - User Lists service
+    post:
+      operationId: postUserListContributors
       parameters:
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          default: 1
-          minimum: 1
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          default: 10
-          maximum: 1000
-          minimum: 1
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: orderDirection
-        required: false
-        schema:
-          $ref: '#/components/schemas/OrderDirectionEnum'
-        style: form
-      - description: Range in days
-        explode: true
-        in: query
-        name: range
-        required: false
-        schema:
-          default: 30
-          type: integer
-        style: form
       - explode: false
         in: path
         name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollaboratorsDto'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DbUserListContributor'
+                type: array
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to add to user list contributors
+      security:
+      - bearer: []
+      summary: Add new contributors to an individual user list
+      tags:
+      - User Lists service
+  /v1/lists/{id}/contributors/{userListContributorId}:
+    delete:
+      operationId: deleteUserListContributor
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: userListContributorId
         required: true
         schema:
           type: integer
         style: simple
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/listAllCommitsByBakedRepoId_200_response'
-          description: Successfully received model list
-      summary: Finds all commits by commit author :id and paginates them
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to delete user from user list contributors
+      security:
+      - bearer: []
+      summary: Delete contributor from an individual user list
       tags:
-      - Pizza oven service
+      - User Lists service
 components:
   schemas:
     SupabaseAuthDto:
@@ -5017,6 +5473,10 @@ components:
           description: Pull request repo full name
           example: open-sauced/insights
           type: string
+        commits:
+          description: Number of commits in the PR
+          example: 4
+          type: integer
       required:
       - author_avatar
       - author_login
@@ -5420,6 +5880,24 @@ components:
           description: Top User Login
           example: bdougie
           type: string
+      required:
+      - login
+      type: object
+    DbFilteredUser:
+      example:
+        full_name: Brian Douglas
+        login: bdougie
+      properties:
+        login:
+          description: User Login
+          example: bdougie
+          type: string
+        full_name:
+          description: Users fullname
+          example: Brian Douglas
+          type: string
+      required:
+      - full_name
       type: object
     CreateUserHighlightDto:
       example:
@@ -5585,6 +6063,8 @@ components:
           description: Highlight Repo Full Name
           example: open-sauced/insights
           type: string
+      required:
+      - full_name
       type: object
     DbUserToUserFollows:
       example:
@@ -5779,7 +6259,7 @@ components:
         interval: 1
         id: 71359796
         accepted_prs: 287
-        day: 2022-08-28 22:04:39.000000
+        day: 2022-08-28T00:00:00.000+00:00
         spam_prs: 287
       properties:
         id:
@@ -5794,8 +6274,9 @@ components:
           type: integer
         day:
           description: Selected interval computed date in human readable format
-          example: 2022-08-28 22:04:39.000000
-          type: date-time
+          example: 2022-08-28
+          format: date
+          type: string
         all_prs:
           description: "PR Type: all requests count"
           example: 287
@@ -6362,6 +6843,92 @@ components:
       required:
       - access
       type: object
+    BakeRepoDto:
+      example:
+        wait: false
+        url: https://github.com/open-sauced/insights
+      properties:
+        url:
+          description: Repo clone URL
+          example: https://github.com/open-sauced/insights
+          type: string
+        wait:
+          description: Option to wait for Pizza service to finish baking repo
+          example: false
+          type: boolean
+      required:
+      - url
+      - wait
+      type: object
+    DbBakedRepo:
+      example:
+        repo_id: 12345678
+        clone_url: https://github.com/open-sauced/insights.git
+        id: 71359796
+      properties:
+        id:
+          description: Baked repository identifier
+          example: 71359796
+          type: integer
+        clone_url:
+          description: Repository clone url
+          example: https://github.com/open-sauced/insights.git
+          type: string
+        repo_id:
+          description: Repository identifier
+          example: 12345678
+          type: integer
+      required:
+      - clone_url
+      - id
+      - repo_id
+      type: object
+    DbCommitAuthors:
+      example:
+        id: 71359796
+      properties:
+        id:
+          description: Commit author identifier
+          example: 71359796
+          type: integer
+      required:
+      - id
+      type: object
+    DbCommits:
+      example:
+        commit_date: 5e7c6c7af42d38c57f363c564c58007da448c443
+        commit_author_id: 9876543
+        baked_repo_id: 57568598
+        id: 71359796
+        commit_hash: 5e7c6c7af42d38c57f363c564c58007da448c443
+      properties:
+        id:
+          description: Commit identifier
+          example: 71359796
+          type: integer
+        commit_hash:
+          description: Hash for the commit
+          example: 5e7c6c7af42d38c57f363c564c58007da448c443
+          type: string
+        commit_date:
+          description: Date for the commit
+          example: 5e7c6c7af42d38c57f363c564c58007da448c443
+          type: string
+        baked_repo_id:
+          description: Baked repo identifier
+          example: 57568598
+          type: integer
+        commit_author_id:
+          description: Commit author identifier
+          example: 9876543
+          type: integer
+      required:
+      - baked_repo_id
+      - commit_author_id
+      - commit_date
+      - commit_hash
+      - id
+      type: object
     CreateIssueSummaryDto:
       example:
         tone: formal
@@ -6531,92 +7098,130 @@ components:
           type: string
       required:
       - author_login
+      - updated_at
       type: object
-    BakeRepoDto:
+    DbUserList:
       example:
-        wait: false
-        url: https://github.com/open-sauced/insights
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        user_id: 237133
+        name: JavaScript Developers
+        is_public: false
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: uuid-v4
+        deleted_at: 2000-01-23T04:56:07.000+00:00
       properties:
-        url:
-          description: Repo clone URL
-          example: https://github.com/open-sauced/insights
+        id:
+          description: User List identifier
+          example: uuid-v4
           type: string
-        wait:
-          description: Option to wait for Pizza service to finish baking repo
+        user_id:
+          description: User ID
+          example: 237133
+          type: integer
+        name:
+          description: List Name
+          example: JavaScript Developers
+          type: string
+        is_public:
+          description: Flag indicating insight visibility
           example: false
           type: boolean
-      required:
-      - url
-      - wait
-      type: object
-    DbBakedRepo:
-      example:
-        repo_id: 12345678
-        clone_url: https://github.com/open-sauced/insights.git
-        id: 71359796
-      properties:
-        id:
-          description: Baked repository identifier
-          example: 71359796
-          type: integer
-        clone_url:
-          description: Repository clone url
-          example: https://github.com/open-sauced/insights.git
+        created_at:
+          description: Timestamp representing insight creation
+          format: date-time
           type: string
-        repo_id:
-          description: Repository identifier
-          example: 12345678
-          type: integer
-      required:
-      - clone_url
-      - id
-      - repo_id
-      type: object
-    DbCommitAuthors:
-      example:
-        id: 71359796
-      properties:
-        id:
-          description: Commit author identifier
-          example: 71359796
-          type: integer
+        updated_at:
+          description: Timestamp representing insight last updated
+          format: date-time
+          type: string
+        deleted_at:
+          description: Timestamp representing insight deletion
+          format: date-time
+          type: string
       required:
       - id
+      - is_public
+      - name
+      - user_id
       type: object
-    DbCommits:
+    CreateUserListDto:
       example:
-        commit_date: 5e7c6c7af42d38c57f363c564c58007da448c443
-        commit_author_id: 9876543
-        baked_repo_id: 57568598
-        id: 71359796
-        commit_hash: 5e7c6c7af42d38c57f363c564c58007da448c443
+        name: My List
+        is_public: false
+        contributors:
+        - 42211
+        - 81233
+      properties:
+        name:
+          description: List Name
+          example: My List
+          type: string
+        is_public:
+          description: List Visibility
+          example: false
+          type: boolean
+        contributors:
+          description: An array of contributor user IDs
+          example:
+          - 42211
+          - 81233
+          items:
+            type: integer
+          type: array
+      required:
+      - contributors
+      - is_public
+      - name
+      type: object
+    DbUserListContributor:
+      example:
+        list_id: uuid-v4
+        user_id: 237133
+        created_at: 2000-01-23T04:56:07.000+00:00
+        id: uuid-v4
+        login: bdougie
       properties:
         id:
-          description: Commit identifier
-          example: 71359796
-          type: integer
-        commit_hash:
-          description: Hash for the commit
-          example: 5e7c6c7af42d38c57f363c564c58007da448c443
+          description: User list contributor identifier
+          example: uuid-v4
           type: string
-        commit_date:
-          description: Date for the commit
-          example: 5e7c6c7af42d38c57f363c564c58007da448c443
+        user_id:
+          description: User identifier
+          example: 237133
+          type: integer
+        list_id:
+          description: List identifier
+          example: uuid-v4
           type: string
-        baked_repo_id:
-          description: Baked repo identifier
-          example: 57568598
-          type: integer
-        commit_author_id:
-          description: Commit author identifier
-          example: 9876543
-          type: integer
+        created_at:
+          description: Timestamp representing top repo first index
+          format: date-time
+          type: string
+        login:
+          description: User list collaborator's login
+          example: bdougie
+          type: string
       required:
-      - baked_repo_id
-      - commit_author_id
-      - commit_date
-      - commit_hash
       - id
+      - list_id
+      - user_id
+      type: object
+    CollaboratorsDto:
+      example:
+        contributors:
+        - 42211
+        - 81233
+      properties:
+        contributors:
+          description: An array of contributor user IDs
+          example:
+          - 42211
+          - 81233
+          items:
+            type: integer
+          type: array
+      required:
+      - contributors
       type: object
     findContributorPullRequests_200_response:
       allOf:
@@ -6758,6 +7363,30 @@ components:
             items:
               $ref: '#/components/schemas/DbInsightMember'
             type: array
+    listAllBakedRepos_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbBakedRepo'
+            type: array
+    listAllCommitAuthors_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbCommitAuthors'
+            type: array
+    listAllCommitsByBakedRepoId_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbCommits'
+            type: array
     findAllHighlightRepos_200_response:
       allOf:
       - $ref: '#/components/schemas/PageDto'
@@ -6782,29 +7411,21 @@ components:
             items:
               $ref: '#/components/schemas/DbPullRequestContributor'
             type: array
-    listAllBakedRepos_200_response:
+    getContributors_200_response:
       allOf:
       - $ref: '#/components/schemas/PageDto'
       - properties:
           data:
             items:
-              $ref: '#/components/schemas/DbBakedRepo'
+              $ref: '#/components/schemas/DbUser'
             type: array
-    listAllCommitAuthors_200_response:
+    getUserListContributors_200_response:
       allOf:
       - $ref: '#/components/schemas/PageDto'
       - properties:
           data:
             items:
-              $ref: '#/components/schemas/DbCommitAuthors'
-            type: array
-    listAllCommitsByBakedRepoId_200_response:
-      allOf:
-      - $ref: '#/components/schemas/PageDto'
-      - properties:
-          data:
-            items:
-              $ref: '#/components/schemas/DbCommits'
+              $ref: '#/components/schemas/DbUserListContributor'
             type: array
   securitySchemes:
     bearer:

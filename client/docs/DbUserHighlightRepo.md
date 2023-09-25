@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FullName** | Pointer to **string** | Highlight Repo Full Name | [optional] 
+**FullName** | **string** | Highlight Repo Full Name | 
 
 ## Methods
 
 ### NewDbUserHighlightRepo
 
-`func NewDbUserHighlightRepo() *DbUserHighlightRepo`
+`func NewDbUserHighlightRepo(fullName string, ) *DbUserHighlightRepo`
 
 NewDbUserHighlightRepo instantiates a new DbUserHighlightRepo object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetFullName sets FullName field to given value.
 
-### HasFullName
-
-`func (o *DbUserHighlightRepo) HasFullName() bool`
-
-HasFullName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

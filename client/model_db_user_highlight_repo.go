@@ -21,15 +21,16 @@ var _ MappedNullable = &DbUserHighlightRepo{}
 // DbUserHighlightRepo struct for DbUserHighlightRepo
 type DbUserHighlightRepo struct {
 	// Highlight Repo Full Name
-	FullName *string `json:"full_name,omitempty"`
+	FullName string `json:"full_name"`
 }
 
 // NewDbUserHighlightRepo instantiates a new DbUserHighlightRepo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbUserHighlightRepo() *DbUserHighlightRepo {
+func NewDbUserHighlightRepo(fullName string) *DbUserHighlightRepo {
 	this := DbUserHighlightRepo{}
+	this.FullName = fullName
 	return &this
 }
 
@@ -41,36 +42,28 @@ func NewDbUserHighlightRepoWithDefaults() *DbUserHighlightRepo {
 	return &this
 }
 
-// GetFullName returns the FullName field value if set, zero value otherwise.
+// GetFullName returns the FullName field value
 func (o *DbUserHighlightRepo) GetFullName() string {
-	if o == nil || IsNil(o.FullName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FullName
+
+	return o.FullName
 }
 
-// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
+// GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
 func (o *DbUserHighlightRepo) GetFullNameOk() (*string, bool) {
-	if o == nil || IsNil(o.FullName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FullName, true
+	return &o.FullName, true
 }
 
-// HasFullName returns a boolean if a field has been set.
-func (o *DbUserHighlightRepo) HasFullName() bool {
-	if o != nil && !IsNil(o.FullName) {
-		return true
-	}
-
-	return false
-}
-
-// SetFullName gets a reference to the given string and assigns it to the FullName field.
+// SetFullName sets field value
 func (o *DbUserHighlightRepo) SetFullName(v string) {
-	o.FullName = &v
+	o.FullName = v
 }
 
 func (o DbUserHighlightRepo) MarshalJSON() ([]byte, error) {
@@ -83,9 +76,7 @@ func (o DbUserHighlightRepo) MarshalJSON() ([]byte, error) {
 
 func (o DbUserHighlightRepo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FullName) {
-		toSerialize["full_name"] = o.FullName
-	}
+	toSerialize["full_name"] = o.FullName
 	return toSerialize, nil
 }
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Login** | Pointer to **string** | Top User Login | [optional] 
+**Login** | **string** | Top User Login | 
 
 ## Methods
 
 ### NewDbTopUser
 
-`func NewDbTopUser() *DbTopUser`
+`func NewDbTopUser(login string, ) *DbTopUser`
 
 NewDbTopUser instantiates a new DbTopUser object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetLogin sets Login field to given value.
 
-### HasLogin
-
-`func (o *DbTopUser) HasLogin() bool`
-
-HasLogin returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
