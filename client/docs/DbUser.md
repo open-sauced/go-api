@@ -42,8 +42,10 @@ Name | Type | Description | Notes
 **DisplayEmail** | Pointer to **bool** | User display public email | [optional] 
 **ReceiveCollaboration** | Pointer to **bool** | User receives collaboration requests | [optional] 
 **Timezone** | Pointer to **string** | User timezone in UTC | [optional] 
+**CouponCode** | Pointer to **string** | Coupon Code | [optional] 
 **Languages** | **map[string]interface{}** | GitHub top languages | [default to {}]
 **NotificationCount** | **int32** | User notification count | 
+**InsightsCount** | **int32** | User insight pages count | 
 **HighlightsCount** | **int32** | User highlights count | 
 **FollowingCount** | **int32** | User following count | 
 **FollowersCount** | **int32** | User followers count | 
@@ -55,7 +57,7 @@ Name | Type | Description | Notes
 
 ### NewDbUser
 
-`func NewDbUser(id int32, openIssues int32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role int32, publicRepos int32, publicGists int32, followers int32, following int32, type_ string, languages map[string]interface{}, notificationCount int32, highlightsCount int32, followingCount int32, followersCount int32, recentPullRequestsCount int32, recentPullRequestVelocityCount int32, isMaintainer bool, ) *DbUser`
+`func NewDbUser(id int32, openIssues int32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role int32, publicRepos int32, publicGists int32, followers int32, following int32, type_ string, languages map[string]interface{}, notificationCount int32, insightsCount int32, highlightsCount int32, followingCount int32, followersCount int32, recentPullRequestsCount int32, recentPullRequestVelocityCount int32, isMaintainer bool, ) *DbUser`
 
 NewDbUser instantiates a new DbUser object
 This constructor will assign default values to properties that have it defined,
@@ -940,6 +942,31 @@ SetTimezone sets Timezone field to given value.
 
 HasTimezone returns a boolean if a field has been set.
 
+### GetCouponCode
+
+`func (o *DbUser) GetCouponCode() string`
+
+GetCouponCode returns the CouponCode field if non-nil, zero value otherwise.
+
+### GetCouponCodeOk
+
+`func (o *DbUser) GetCouponCodeOk() (*string, bool)`
+
+GetCouponCodeOk returns a tuple with the CouponCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCouponCode
+
+`func (o *DbUser) SetCouponCode(v string)`
+
+SetCouponCode sets CouponCode field to given value.
+
+### HasCouponCode
+
+`func (o *DbUser) HasCouponCode() bool`
+
+HasCouponCode returns a boolean if a field has been set.
+
 ### GetLanguages
 
 `func (o *DbUser) GetLanguages() map[string]interface{}`
@@ -978,6 +1005,26 @@ and a boolean to check if the value has been set.
 `func (o *DbUser) SetNotificationCount(v int32)`
 
 SetNotificationCount sets NotificationCount field to given value.
+
+
+### GetInsightsCount
+
+`func (o *DbUser) GetInsightsCount() int32`
+
+GetInsightsCount returns the InsightsCount field if non-nil, zero value otherwise.
+
+### GetInsightsCountOk
+
+`func (o *DbUser) GetInsightsCountOk() (*int32, bool)`
+
+GetInsightsCountOk returns a tuple with the InsightsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInsightsCount
+
+`func (o *DbUser) SetInsightsCount(v int32)`
+
+SetInsightsCount sets InsightsCount field to given value.
 
 
 ### GetHighlightsCount

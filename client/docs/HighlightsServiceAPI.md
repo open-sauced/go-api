@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## FindAllFeaturedHighlights
 
-> FindAllHighlightsByUsername200Response FindAllFeaturedHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+> FindAllHighlightsByUsername200Response FindAllFeaturedHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
 
 Finds all featured highlights and paginates them
 
@@ -105,11 +105,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repo := "open-sauced/insights" // string | Highlight Repo Filter (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.HighlightsServiceAPI.FindAllFeaturedHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+    resp, r, err := apiClient.HighlightsServiceAPI.FindAllFeaturedHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `HighlightsServiceAPI.FindAllFeaturedHighlights``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -134,6 +135,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repo** | **string** | Highlight Repo Filter | 
 
 ### Return type
@@ -156,7 +158,7 @@ No authorization required
 
 ## FindAllHighlightRepos
 
-> FindAllHighlightRepos200Response FindAllHighlightRepos(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllHighlightRepos200Response FindAllHighlightRepos(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all highlight repos and paginates them
 
@@ -177,10 +179,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.HighlightsServiceAPI.FindAllHighlightRepos(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.HighlightsServiceAPI.FindAllHighlightRepos(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `HighlightsServiceAPI.FindAllHighlightRepos``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -205,6 +208,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -226,7 +230,7 @@ No authorization required
 
 ## FindAllHighlights
 
-> FindAllHighlightsByUsername200Response FindAllHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+> FindAllHighlightsByUsername200Response FindAllHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
 
 Finds all highlights and paginates them
 
@@ -247,11 +251,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repo := "open-sauced/insights" // string | Highlight Repo Filter (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.HighlightsServiceAPI.FindAllHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+    resp, r, err := apiClient.HighlightsServiceAPI.FindAllHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `HighlightsServiceAPI.FindAllHighlights``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -276,6 +281,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repo** | **string** | Highlight Repo Filter | 
 
 ### Return type
@@ -298,7 +304,7 @@ No authorization required
 
 ## FindTopHighlights
 
-> FindAllHighlightsByUsername200Response FindTopHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllHighlightsByUsername200Response FindTopHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds top highlights for the day range and paginates them
 
@@ -319,10 +325,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.HighlightsServiceAPI.FindTopHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.HighlightsServiceAPI.FindTopHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `HighlightsServiceAPI.FindTopHighlights``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -347,6 +354,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 

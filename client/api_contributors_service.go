@@ -23,13 +23,14 @@ import (
 type ContributorsServiceAPIService service
 
 type ApiFindAllChurnPullRequestContributorsRequest struct {
-	ctx            context.Context
-	ApiService     *ContributorsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repoIds        *string
+	ctx               context.Context
+	ApiService        *ContributorsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repoIds           *string
 }
 
 func (r ApiFindAllChurnPullRequestContributorsRequest) Page(page int32) ApiFindAllChurnPullRequestContributorsRequest {
@@ -50,6 +51,12 @@ func (r ApiFindAllChurnPullRequestContributorsRequest) OrderDirection(orderDirec
 // Range in days
 func (r ApiFindAllChurnPullRequestContributorsRequest) Range_(range_ int32) ApiFindAllChurnPullRequestContributorsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllChurnPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllChurnPullRequestContributorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -109,6 +116,9 @@ func (a *ContributorsServiceAPIService) FindAllChurnPullRequestContributorsExecu
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.repoIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
 	}
@@ -167,13 +177,14 @@ func (a *ContributorsServiceAPIService) FindAllChurnPullRequestContributorsExecu
 }
 
 type ApiFindAllRecentPullRequestContributorsRequest struct {
-	ctx            context.Context
-	ApiService     *ContributorsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repoIds        *string
+	ctx               context.Context
+	ApiService        *ContributorsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repoIds           *string
 }
 
 func (r ApiFindAllRecentPullRequestContributorsRequest) Page(page int32) ApiFindAllRecentPullRequestContributorsRequest {
@@ -194,6 +205,12 @@ func (r ApiFindAllRecentPullRequestContributorsRequest) OrderDirection(orderDire
 // Range in days
 func (r ApiFindAllRecentPullRequestContributorsRequest) Range_(range_ int32) ApiFindAllRecentPullRequestContributorsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllRecentPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllRecentPullRequestContributorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -253,6 +270,9 @@ func (a *ContributorsServiceAPIService) FindAllRecentPullRequestContributorsExec
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.repoIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
 	}
@@ -311,13 +331,14 @@ func (a *ContributorsServiceAPIService) FindAllRecentPullRequestContributorsExec
 }
 
 type ApiFindAllRepeatPullRequestContributorsRequest struct {
-	ctx            context.Context
-	ApiService     *ContributorsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repoIds        *string
+	ctx               context.Context
+	ApiService        *ContributorsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repoIds           *string
 }
 
 func (r ApiFindAllRepeatPullRequestContributorsRequest) Page(page int32) ApiFindAllRepeatPullRequestContributorsRequest {
@@ -338,6 +359,12 @@ func (r ApiFindAllRepeatPullRequestContributorsRequest) OrderDirection(orderDire
 // Range in days
 func (r ApiFindAllRepeatPullRequestContributorsRequest) Range_(range_ int32) ApiFindAllRepeatPullRequestContributorsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllRepeatPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllRepeatPullRequestContributorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -397,6 +424,9 @@ func (a *ContributorsServiceAPIService) FindAllRepeatPullRequestContributorsExec
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.repoIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
 	}
@@ -455,13 +485,14 @@ func (a *ContributorsServiceAPIService) FindAllRepeatPullRequestContributorsExec
 }
 
 type ApiNewPullRequestContributorsRequest struct {
-	ctx            context.Context
-	ApiService     *ContributorsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repoIds        *string
+	ctx               context.Context
+	ApiService        *ContributorsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repoIds           *string
 }
 
 func (r ApiNewPullRequestContributorsRequest) Page(page int32) ApiNewPullRequestContributorsRequest {
@@ -482,6 +513,12 @@ func (r ApiNewPullRequestContributorsRequest) OrderDirection(orderDirection Orde
 // Range in days
 func (r ApiNewPullRequestContributorsRequest) Range_(range_ int32) ApiNewPullRequestContributorsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiNewPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiNewPullRequestContributorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -541,6 +578,9 @@ func (a *ContributorsServiceAPIService) NewPullRequestContributorsExecute(r ApiN
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.repoIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
 	}
@@ -599,16 +639,17 @@ func (a *ContributorsServiceAPIService) NewPullRequestContributorsExecute(r ApiN
 }
 
 type ApiSearchAllPullRequestContributorsRequest struct {
-	ctx            context.Context
-	ApiService     *ContributorsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	filter         *InsightFilterFieldsEnum
-	topic          *string
-	repo           *string
-	repoIds        *string
+	ctx               context.Context
+	ApiService        *ContributorsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	filter            *InsightFilterFieldsEnum
+	topic             *string
+	repo              *string
+	repoIds           *string
 }
 
 func (r ApiSearchAllPullRequestContributorsRequest) Page(page int32) ApiSearchAllPullRequestContributorsRequest {
@@ -629,6 +670,12 @@ func (r ApiSearchAllPullRequestContributorsRequest) OrderDirection(orderDirectio
 // Range in days
 func (r ApiSearchAllPullRequestContributorsRequest) Range_(range_ int32) ApiSearchAllPullRequestContributorsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiSearchAllPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiSearchAllPullRequestContributorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -702,6 +749,9 @@ func (a *ContributorsServiceAPIService) SearchAllPullRequestContributorsExecute(
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")

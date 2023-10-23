@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | **string** | User list contributor identifier | 
 **UserId** | **int32** | User identifier | 
 **ListId** | **string** | List identifier | 
+**Username** | Pointer to **string** | List user source username | [optional] 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing top repo first index | [optional] 
 **Login** | Pointer to **string** | User list collaborator&#39;s login | [optional] 
 
@@ -88,6 +89,31 @@ and a boolean to check if the value has been set.
 
 SetListId sets ListId field to given value.
 
+
+### GetUsername
+
+`func (o *DbUserListContributor) GetUsername() string`
+
+GetUsername returns the Username field if non-nil, zero value otherwise.
+
+### GetUsernameOk
+
+`func (o *DbUserListContributor) GetUsernameOk() (*string, bool)`
+
+GetUsernameOk returns a tuple with the Username field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsername
+
+`func (o *DbUserListContributor) SetUsername(v string)`
+
+SetUsername sets Username field to given value.
+
+### HasUsername
+
+`func (o *DbUserListContributor) HasUsername() bool`
+
+HasUsername returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

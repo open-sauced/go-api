@@ -23,12 +23,13 @@ import (
 type UserRecommendationsServiceAPIService service
 
 type ApiFindUserOrgsRepoRecommendationsRequest struct {
-	ctx            context.Context
-	ApiService     *UserRecommendationsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserRecommendationsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindUserOrgsRepoRecommendationsRequest) Page(page int32) ApiFindUserOrgsRepoRecommendationsRequest {
@@ -49,6 +50,12 @@ func (r ApiFindUserOrgsRepoRecommendationsRequest) OrderDirection(orderDirection
 // Range in days
 func (r ApiFindUserOrgsRepoRecommendationsRequest) Range_(range_ int32) ApiFindUserOrgsRepoRecommendationsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindUserOrgsRepoRecommendationsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindUserOrgsRepoRecommendationsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -102,6 +109,9 @@ func (a *UserRecommendationsServiceAPIService) FindUserOrgsRepoRecommendationsEx
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

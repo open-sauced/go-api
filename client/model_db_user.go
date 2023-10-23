@@ -97,10 +97,14 @@ type DbUser struct {
 	ReceiveCollaboration *bool `json:"receive_collaboration,omitempty"`
 	// User timezone in UTC
 	Timezone *string `json:"timezone,omitempty"`
+	// Coupon Code
+	CouponCode *string `json:"coupon_code,omitempty"`
 	// GitHub top languages
 	Languages map[string]interface{} `json:"languages"`
 	// User notification count
 	NotificationCount int32 `json:"notification_count"`
+	// User insight pages count
+	InsightsCount int32 `json:"insights_count"`
 	// User highlights count
 	HighlightsCount int32 `json:"highlights_count"`
 	// User following count
@@ -119,7 +123,7 @@ type DbUser struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbUser(id int32, openIssues int32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role int32, publicRepos int32, publicGists int32, followers int32, following int32, type_ string, languages map[string]interface{}, notificationCount int32, highlightsCount int32, followingCount int32, followersCount int32, recentPullRequestsCount int32, recentPullRequestVelocityCount int32, isMaintainer bool) *DbUser {
+func NewDbUser(id int32, openIssues int32, nodeId string, avatarUrl string, login string, email string, isPrivate bool, isOpenSaucedMember bool, isOnboarded bool, isWaitlisted bool, role int32, publicRepos int32, publicGists int32, followers int32, following int32, type_ string, languages map[string]interface{}, notificationCount int32, insightsCount int32, highlightsCount int32, followingCount int32, followersCount int32, recentPullRequestsCount int32, recentPullRequestVelocityCount int32, isMaintainer bool) *DbUser {
 	this := DbUser{}
 	this.Id = id
 	this.OpenIssues = openIssues
@@ -139,6 +143,7 @@ func NewDbUser(id int32, openIssues int32, nodeId string, avatarUrl string, logi
 	this.Type = type_
 	this.Languages = languages
 	this.NotificationCount = notificationCount
+	this.InsightsCount = insightsCount
 	this.HighlightsCount = highlightsCount
 	this.FollowingCount = followingCount
 	this.FollowersCount = followersCount
@@ -1256,6 +1261,38 @@ func (o *DbUser) SetTimezone(v string) {
 	o.Timezone = &v
 }
 
+// GetCouponCode returns the CouponCode field value if set, zero value otherwise.
+func (o *DbUser) GetCouponCode() string {
+	if o == nil || IsNil(o.CouponCode) {
+		var ret string
+		return ret
+	}
+	return *o.CouponCode
+}
+
+// GetCouponCodeOk returns a tuple with the CouponCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DbUser) GetCouponCodeOk() (*string, bool) {
+	if o == nil || IsNil(o.CouponCode) {
+		return nil, false
+	}
+	return o.CouponCode, true
+}
+
+// HasCouponCode returns a boolean if a field has been set.
+func (o *DbUser) HasCouponCode() bool {
+	if o != nil && !IsNil(o.CouponCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCouponCode gets a reference to the given string and assigns it to the CouponCode field.
+func (o *DbUser) SetCouponCode(v string) {
+	o.CouponCode = &v
+}
+
 // GetLanguages returns the Languages field value
 func (o *DbUser) GetLanguages() map[string]interface{} {
 	if o == nil {
@@ -1302,6 +1339,30 @@ func (o *DbUser) GetNotificationCountOk() (*int32, bool) {
 // SetNotificationCount sets field value
 func (o *DbUser) SetNotificationCount(v int32) {
 	o.NotificationCount = v
+}
+
+// GetInsightsCount returns the InsightsCount field value
+func (o *DbUser) GetInsightsCount() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.InsightsCount
+}
+
+// GetInsightsCountOk returns a tuple with the InsightsCount field value
+// and a boolean to check if the value has been set.
+func (o *DbUser) GetInsightsCountOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.InsightsCount, true
+}
+
+// SetInsightsCount sets field value
+func (o *DbUser) SetInsightsCount(v int32) {
+	o.InsightsCount = v
 }
 
 // GetHighlightsCount returns the HighlightsCount field value
@@ -1540,8 +1601,12 @@ func (o DbUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone
 	}
+	if !IsNil(o.CouponCode) {
+		toSerialize["coupon_code"] = o.CouponCode
+	}
 	toSerialize["languages"] = o.Languages
 	toSerialize["notification_count"] = o.NotificationCount
+	toSerialize["insights_count"] = o.InsightsCount
 	toSerialize["highlights_count"] = o.HighlightsCount
 	toSerialize["following_count"] = o.FollowingCount
 	toSerialize["followers_count"] = o.FollowersCount

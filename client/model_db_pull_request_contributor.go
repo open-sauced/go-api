@@ -24,17 +24,16 @@ type DbPullRequestContributor struct {
 	// Pull request author username
 	AuthorLogin string `json:"author_login"`
 	// Timestamp representing pr last update
-	UpdatedAt time.Time `json:"updated_at"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
 // NewDbPullRequestContributor instantiates a new DbPullRequestContributor object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbPullRequestContributor(authorLogin string, updatedAt time.Time) *DbPullRequestContributor {
+func NewDbPullRequestContributor(authorLogin string) *DbPullRequestContributor {
 	this := DbPullRequestContributor{}
 	this.AuthorLogin = authorLogin
-	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -70,28 +69,36 @@ func (o *DbPullRequestContributor) SetAuthorLogin(v string) {
 	o.AuthorLogin = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *DbPullRequestContributor) GetUpdatedAt() time.Time {
-	if o == nil {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret time.Time
 		return ret
 	}
-
-	return o.UpdatedAt
+	return *o.UpdatedAt
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DbPullRequestContributor) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
-	return &o.UpdatedAt, true
+	return o.UpdatedAt, true
 }
 
-// SetUpdatedAt sets field value
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *DbPullRequestContributor) HasUpdatedAt() bool {
+	if o != nil && !IsNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
 func (o *DbPullRequestContributor) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = v
+	o.UpdatedAt = &v
 }
 
 func (o DbPullRequestContributor) MarshalJSON() ([]byte, error) {
@@ -105,7 +112,9 @@ func (o DbPullRequestContributor) MarshalJSON() ([]byte, error) {
 func (o DbPullRequestContributor) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["author_login"] = o.AuthorLogin
-	toSerialize["updated_at"] = o.UpdatedAt
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updated_at"] = o.UpdatedAt
+	}
 	return toSerialize, nil
 }
 

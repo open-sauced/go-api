@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 ## GetFollowingHighlightRepos
 
-> DbUserHighlightRepo GetFollowingHighlightRepos(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+> DbUserHighlightRepo GetFollowingHighlightRepos(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
 
 Fetches highlight repos for users the authenticated user follows
 
@@ -377,11 +377,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repo := "open-sauced/insights" // string | Highlight Repo Filter (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlightRepos(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlightRepos(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserHighlightsServiceAPI.GetFollowingHighlightRepos``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -406,6 +407,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repo** | **string** | Highlight Repo Filter | 
 
 ### Return type
@@ -428,7 +430,7 @@ Name | Type | Description  | Notes
 
 ## GetFollowingHighlights
 
-> DbUserHighlight GetFollowingHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+> DbUserHighlight GetFollowingHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
 
 Fetches highlights for users the authenticated user follows
 
@@ -449,11 +451,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repo := "open-sauced/insights" // string | Highlight Repo Filter (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Repo(repo).Execute()
+    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserHighlightsServiceAPI.GetFollowingHighlights``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -478,6 +481,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repo** | **string** | Highlight Repo Filter | 
 
 ### Return type

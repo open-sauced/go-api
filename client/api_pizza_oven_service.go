@@ -427,12 +427,13 @@ func (a *PizzaOvenServiceAPIService) FindCommitByIdExecute(r ApiFindCommitByIdRe
 }
 
 type ApiListAllBakedReposRequest struct {
-	ctx            context.Context
-	ApiService     *PizzaOvenServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *PizzaOvenServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiListAllBakedReposRequest) Page(page int32) ApiListAllBakedReposRequest {
@@ -453,6 +454,12 @@ func (r ApiListAllBakedReposRequest) OrderDirection(orderDirection OrderDirectio
 // Range in days
 func (r ApiListAllBakedReposRequest) Range_(range_ int32) ApiListAllBakedReposRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiListAllBakedReposRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiListAllBakedReposRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -506,6 +513,9 @@ func (a *PizzaOvenServiceAPIService) ListAllBakedReposExecute(r ApiListAllBakedR
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -562,12 +572,13 @@ func (a *PizzaOvenServiceAPIService) ListAllBakedReposExecute(r ApiListAllBakedR
 }
 
 type ApiListAllCommitAuthorsRequest struct {
-	ctx            context.Context
-	ApiService     *PizzaOvenServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *PizzaOvenServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiListAllCommitAuthorsRequest) Page(page int32) ApiListAllCommitAuthorsRequest {
@@ -588,6 +599,12 @@ func (r ApiListAllCommitAuthorsRequest) OrderDirection(orderDirection OrderDirec
 // Range in days
 func (r ApiListAllCommitAuthorsRequest) Range_(range_ int32) ApiListAllCommitAuthorsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiListAllCommitAuthorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiListAllCommitAuthorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -641,6 +658,9 @@ func (a *PizzaOvenServiceAPIService) ListAllCommitAuthorsExecute(r ApiListAllCom
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -697,13 +717,14 @@ func (a *PizzaOvenServiceAPIService) ListAllCommitAuthorsExecute(r ApiListAllCom
 }
 
 type ApiListAllCommitsByBakedRepoIdRequest struct {
-	ctx            context.Context
-	ApiService     *PizzaOvenServiceAPIService
-	id             int32
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *PizzaOvenServiceAPIService
+	id                int32
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiListAllCommitsByBakedRepoIdRequest) Page(page int32) ApiListAllCommitsByBakedRepoIdRequest {
@@ -724,6 +745,12 @@ func (r ApiListAllCommitsByBakedRepoIdRequest) OrderDirection(orderDirection Ord
 // Range in days
 func (r ApiListAllCommitsByBakedRepoIdRequest) Range_(range_ int32) ApiListAllCommitsByBakedRepoIdRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiListAllCommitsByBakedRepoIdRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiListAllCommitsByBakedRepoIdRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -781,6 +808,9 @@ func (a *PizzaOvenServiceAPIService) ListAllCommitsByBakedRepoIdExecute(r ApiLis
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -836,13 +866,14 @@ func (a *PizzaOvenServiceAPIService) ListAllCommitsByBakedRepoIdExecute(r ApiLis
 }
 
 type ApiListAllCommitsByCommitAuthorIdRequest struct {
-	ctx            context.Context
-	ApiService     *PizzaOvenServiceAPIService
-	id             int32
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *PizzaOvenServiceAPIService
+	id                int32
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiListAllCommitsByCommitAuthorIdRequest) Page(page int32) ApiListAllCommitsByCommitAuthorIdRequest {
@@ -863,6 +894,12 @@ func (r ApiListAllCommitsByCommitAuthorIdRequest) OrderDirection(orderDirection 
 // Range in days
 func (r ApiListAllCommitsByCommitAuthorIdRequest) Range_(range_ int32) ApiListAllCommitsByCommitAuthorIdRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiListAllCommitsByCommitAuthorIdRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiListAllCommitsByCommitAuthorIdRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -919,6 +956,9 @@ func (a *PizzaOvenServiceAPIService) ListAllCommitsByCommitAuthorIdExecute(r Api
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

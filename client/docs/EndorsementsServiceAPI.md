@@ -151,7 +151,7 @@ No authorization required
 
 ## FindAllByRepoOwnerOrUsername
 
-> FindAllUserCreatedEndorsements200Response FindAllByRepoOwnerOrUsername(ctx, repoOwnerOrUser).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllByRepoOwnerOrUsername(ctx, repoOwnerOrUser).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all endorsements by repo org or username and paginates them
 
@@ -173,10 +173,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllByRepoOwnerOrUsername(context.Background(), repoOwnerOrUser).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllByRepoOwnerOrUsername(context.Background(), repoOwnerOrUser).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllByRepoOwnerOrUsername``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -206,6 +207,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -227,7 +229,7 @@ No authorization required
 
 ## FindAllEndorsements
 
-> FindAllUserCreatedEndorsements200Response FindAllEndorsements(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllEndorsements(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all endorsements and paginates them
 
@@ -248,10 +250,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllEndorsements(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllEndorsements(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllEndorsements``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -276,6 +279,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -297,7 +301,7 @@ No authorization required
 
 ## FindAllEndorsementsByRepo
 
-> FindAllUserCreatedEndorsements200Response FindAllEndorsementsByRepo(ctx, owner, repo).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllEndorsementsByRepo(ctx, owner, repo).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all endorsements by repo owner or username and paginates them
 
@@ -320,10 +324,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllEndorsementsByRepo(context.Background(), owner, repo).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllEndorsementsByRepo(context.Background(), owner, repo).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllEndorsementsByRepo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -355,6 +360,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -376,7 +382,7 @@ No authorization required
 
 ## FindAllUserCreatedEndorsements
 
-> FindAllUserCreatedEndorsements200Response FindAllUserCreatedEndorsements(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllUserCreatedEndorsements(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all endorsements created by the authenticated user and paginates them
 
@@ -397,10 +403,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserCreatedEndorsements(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserCreatedEndorsements(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserCreatedEndorsements``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -425,6 +432,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -446,7 +454,7 @@ Name | Type | Description  | Notes
 
 ## FindAllUserCreatedEndorsementsByUsername
 
-> FindAllUserCreatedEndorsements200Response FindAllUserCreatedEndorsementsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllUserCreatedEndorsementsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all endorsements received by the user and paginates them
 
@@ -468,10 +476,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserCreatedEndorsementsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserCreatedEndorsementsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserCreatedEndorsementsByUsername``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -501,6 +510,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -522,7 +532,7 @@ No authorization required
 
 ## FindAllUserReceivedEndorsements
 
-> FindAllUserCreatedEndorsements200Response FindAllUserReceivedEndorsements(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllUserReceivedEndorsements(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all endorsements received by the authenticated user and paginates them
 
@@ -543,10 +553,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsements(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsements(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserReceivedEndorsements``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -571,6 +582,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -592,7 +604,7 @@ Name | Type | Description  | Notes
 
 ## FindAllUserReceivedEndorsementsByUsername
 
-> FindAllUserCreatedEndorsements200Response FindAllUserReceivedEndorsementsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllUserCreatedEndorsements200Response FindAllUserReceivedEndorsementsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds all endorsements received by the user and paginates them
 
@@ -614,10 +626,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsementsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EndorsementsServiceAPI.FindAllUserReceivedEndorsementsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EndorsementsServiceAPI.FindAllUserReceivedEndorsementsByUsername``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -647,6 +660,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 

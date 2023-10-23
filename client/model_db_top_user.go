@@ -21,16 +21,15 @@ var _ MappedNullable = &DbTopUser{}
 // DbTopUser struct for DbTopUser
 type DbTopUser struct {
 	// Top User Login
-	Login string `json:"login"`
+	Login *string `json:"login,omitempty"`
 }
 
 // NewDbTopUser instantiates a new DbTopUser object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbTopUser(login string) *DbTopUser {
+func NewDbTopUser() *DbTopUser {
 	this := DbTopUser{}
-	this.Login = login
 	return &this
 }
 
@@ -42,28 +41,36 @@ func NewDbTopUserWithDefaults() *DbTopUser {
 	return &this
 }
 
-// GetLogin returns the Login field value
+// GetLogin returns the Login field value if set, zero value otherwise.
 func (o *DbTopUser) GetLogin() string {
-	if o == nil {
+	if o == nil || IsNil(o.Login) {
 		var ret string
 		return ret
 	}
-
-	return o.Login
+	return *o.Login
 }
 
-// GetLoginOk returns a tuple with the Login field value
+// GetLoginOk returns a tuple with the Login field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DbTopUser) GetLoginOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Login) {
 		return nil, false
 	}
-	return &o.Login, true
+	return o.Login, true
 }
 
-// SetLogin sets field value
+// HasLogin returns a boolean if a field has been set.
+func (o *DbTopUser) HasLogin() bool {
+	if o != nil && !IsNil(o.Login) {
+		return true
+	}
+
+	return false
+}
+
+// SetLogin gets a reference to the given string and assigns it to the Login field.
 func (o *DbTopUser) SetLogin(v string) {
-	o.Login = v
+	o.Login = &v
 }
 
 func (o DbTopUser) MarshalJSON() ([]byte, error) {
@@ -76,7 +83,9 @@ func (o DbTopUser) MarshalJSON() ([]byte, error) {
 
 func (o DbTopUser) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["login"] = o.Login
+	if !IsNil(o.Login) {
+		toSerialize["login"] = o.Login
+	}
 	return toSerialize, nil
 }
 

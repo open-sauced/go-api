@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## FindAllHighlightsByUsername
 
-> FindAllHighlightsByUsername200Response FindAllHighlightsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllHighlightsByUsername200Response FindAllHighlightsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Listing all Highlights for a user and paginate them
 
@@ -41,10 +41,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserServiceAPI.FindAllHighlightsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.UserServiceAPI.FindAllHighlightsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.FindAllHighlightsByUsername``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -74,6 +75,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -95,7 +97,7 @@ No authorization required
 
 ## FindAllTopReposByUsername
 
-> FindAllTopReposByUsername200Response FindAllTopReposByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllTopReposByUsername200Response FindAllTopReposByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Listing all Top Repos for a user and paginate them
 
@@ -117,10 +119,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserServiceAPI.FindAllTopReposByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.UserServiceAPI.FindAllTopReposByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.FindAllTopReposByUsername``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -150,6 +153,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -171,7 +175,7 @@ No authorization required
 
 ## FindContributorPullRequests
 
-> FindContributorPullRequests200Response FindContributorPullRequests(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindContributorPullRequests200Response FindContributorPullRequests(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds pull requests by :username
 
@@ -193,10 +197,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserServiceAPI.FindContributorPullRequests(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.UserServiceAPI.FindContributorPullRequests(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.FindContributorPullRequests``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -226,6 +231,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -519,7 +525,7 @@ No authorization required
 
 ## GetUserNotifications
 
-> OmitTypeClass GetUserNotifications(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> OmitTypeClass GetUserNotifications(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Retrieves notifications for the authenticated user
 
@@ -540,10 +546,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserServiceAPI.GetUserNotifications(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.UserServiceAPI.GetUserNotifications(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.GetUserNotifications``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -568,6 +575,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 

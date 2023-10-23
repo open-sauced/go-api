@@ -64,6 +64,10 @@ type SupabaseAuthDto struct {
 	DiscordUrl *string `json:"discord_url,omitempty"`
 	// Unread User Notification Count
 	NotificationCount *int32 `json:"notification_count,omitempty"`
+	// Unread Insight Pagees Count
+	InsightsCount *int32 `json:"insights_count,omitempty"`
+	// Coupon Code
+	CouponCode *string `json:"coupon_code,omitempty"`
 }
 
 // NewSupabaseAuthDto instantiates a new SupabaseAuthDto object
@@ -780,6 +784,70 @@ func (o *SupabaseAuthDto) SetNotificationCount(v int32) {
 	o.NotificationCount = &v
 }
 
+// GetInsightsCount returns the InsightsCount field value if set, zero value otherwise.
+func (o *SupabaseAuthDto) GetInsightsCount() int32 {
+	if o == nil || IsNil(o.InsightsCount) {
+		var ret int32
+		return ret
+	}
+	return *o.InsightsCount
+}
+
+// GetInsightsCountOk returns a tuple with the InsightsCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupabaseAuthDto) GetInsightsCountOk() (*int32, bool) {
+	if o == nil || IsNil(o.InsightsCount) {
+		return nil, false
+	}
+	return o.InsightsCount, true
+}
+
+// HasInsightsCount returns a boolean if a field has been set.
+func (o *SupabaseAuthDto) HasInsightsCount() bool {
+	if o != nil && !IsNil(o.InsightsCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetInsightsCount gets a reference to the given int32 and assigns it to the InsightsCount field.
+func (o *SupabaseAuthDto) SetInsightsCount(v int32) {
+	o.InsightsCount = &v
+}
+
+// GetCouponCode returns the CouponCode field value if set, zero value otherwise.
+func (o *SupabaseAuthDto) GetCouponCode() string {
+	if o == nil || IsNil(o.CouponCode) {
+		var ret string
+		return ret
+	}
+	return *o.CouponCode
+}
+
+// GetCouponCodeOk returns a tuple with the CouponCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupabaseAuthDto) GetCouponCodeOk() (*string, bool) {
+	if o == nil || IsNil(o.CouponCode) {
+		return nil, false
+	}
+	return o.CouponCode, true
+}
+
+// HasCouponCode returns a boolean if a field has been set.
+func (o *SupabaseAuthDto) HasCouponCode() bool {
+	if o != nil && !IsNil(o.CouponCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetCouponCode gets a reference to the given string and assigns it to the CouponCode field.
+func (o *SupabaseAuthDto) SetCouponCode(v string) {
+	o.CouponCode = &v
+}
+
 func (o SupabaseAuthDto) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -853,6 +921,12 @@ func (o SupabaseAuthDto) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.NotificationCount) {
 		toSerialize["notification_count"] = o.NotificationCount
+	}
+	if !IsNil(o.InsightsCount) {
+		toSerialize["insights_count"] = o.InsightsCount
+	}
+	if !IsNil(o.CouponCode) {
+		toSerialize["coupon_code"] = o.CouponCode
 	}
 	return toSerialize, nil
 }

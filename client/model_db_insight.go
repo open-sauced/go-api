@@ -31,6 +31,8 @@ type DbInsight struct {
 	IsPublic bool `json:"is_public"`
 	// Flag indicating insight favorite
 	IsFavorite bool `json:"is_favorite"`
+	// Flag indicating featured insight
+	IsFeatured bool `json:"is_featured"`
 	// Title
 	ShortCode string `json:"short_code"`
 	// Timestamp representing insight creation
@@ -45,13 +47,14 @@ type DbInsight struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbInsight(id int32, userId int32, name string, isPublic bool, isFavorite bool, shortCode string) *DbInsight {
+func NewDbInsight(id int32, userId int32, name string, isPublic bool, isFavorite bool, isFeatured bool, shortCode string) *DbInsight {
 	this := DbInsight{}
 	this.Id = id
 	this.UserId = userId
 	this.Name = name
 	this.IsPublic = isPublic
 	this.IsFavorite = isFavorite
+	this.IsFeatured = isFeatured
 	this.ShortCode = shortCode
 	return &this
 }
@@ -182,6 +185,30 @@ func (o *DbInsight) GetIsFavoriteOk() (*bool, bool) {
 // SetIsFavorite sets field value
 func (o *DbInsight) SetIsFavorite(v bool) {
 	o.IsFavorite = v
+}
+
+// GetIsFeatured returns the IsFeatured field value
+func (o *DbInsight) GetIsFeatured() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsFeatured
+}
+
+// GetIsFeaturedOk returns a tuple with the IsFeatured field value
+// and a boolean to check if the value has been set.
+func (o *DbInsight) GetIsFeaturedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsFeatured, true
+}
+
+// SetIsFeatured sets field value
+func (o *DbInsight) SetIsFeatured(v bool) {
+	o.IsFeatured = v
 }
 
 // GetShortCode returns the ShortCode field value
@@ -319,6 +346,7 @@ func (o DbInsight) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["is_public"] = o.IsPublic
 	toSerialize["is_favorite"] = o.IsFavorite
+	toSerialize["is_featured"] = o.IsFeatured
 	toSerialize["short_code"] = o.ShortCode
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt

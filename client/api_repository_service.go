@@ -24,13 +24,14 @@ import (
 type RepositoryServiceAPIService service
 
 type ApiFindAllRequest struct {
-	ctx            context.Context
-	ApiService     *RepositoryServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *RepoOrderFieldsEnum
+	ctx               context.Context
+	ApiService        *RepositoryServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *RepoOrderFieldsEnum
 }
 
 func (r ApiFindAllRequest) Page(page int32) ApiFindAllRequest {
@@ -51,6 +52,12 @@ func (r ApiFindAllRequest) OrderDirection(orderDirection OrderDirectionEnum) Api
 // Range in days
 func (r ApiFindAllRequest) Range_(range_ int32) ApiFindAllRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -110,6 +117,9 @@ func (a *RepositoryServiceAPIService) FindAllExecute(r ApiFindAllRequest) (*Find
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")
 	}
@@ -168,15 +178,16 @@ func (a *RepositoryServiceAPIService) FindAllExecute(r ApiFindAllRequest) (*Find
 }
 
 type ApiFindAllByOwnerAndRepoRequest struct {
-	ctx            context.Context
-	ApiService     *RepositoryServiceAPIService
-	owner          string
-	repo           string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *RepoOrderFieldsEnum
+	ctx               context.Context
+	ApiService        *RepositoryServiceAPIService
+	owner             string
+	repo              string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *RepoOrderFieldsEnum
 }
 
 func (r ApiFindAllByOwnerAndRepoRequest) Page(page int32) ApiFindAllByOwnerAndRepoRequest {
@@ -197,6 +208,12 @@ func (r ApiFindAllByOwnerAndRepoRequest) OrderDirection(orderDirection OrderDire
 // Range in days
 func (r ApiFindAllByOwnerAndRepoRequest) Range_(range_ int32) ApiFindAllByOwnerAndRepoRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllByOwnerAndRepoRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllByOwnerAndRepoRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -262,6 +279,9 @@ func (a *RepositoryServiceAPIService) FindAllByOwnerAndRepoExecute(r ApiFindAllB
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")
 	}
@@ -319,15 +339,146 @@ func (a *RepositoryServiceAPIService) FindAllByOwnerAndRepoExecute(r ApiFindAllB
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiFindAllByOwnerRepoAndContributorLoginRequest struct {
+	ctx               context.Context
+	ApiService        *RepositoryServiceAPIService
+	owner             string
+	repo              string
+	login             string
+	prevDaysStartDate *int32
+	range_            *int32
+}
+
+// Previous number of days to go back to start date range
+func (r ApiFindAllByOwnerRepoAndContributorLoginRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllByOwnerRepoAndContributorLoginRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
+	return r
+}
+
+// Range in days
+func (r ApiFindAllByOwnerRepoAndContributorLoginRequest) Range_(range_ int32) ApiFindAllByOwnerRepoAndContributorLoginRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiFindAllByOwnerRepoAndContributorLoginRequest) Execute() (*DbRepoLoginContributions, *http.Response, error) {
+	return r.ApiService.FindAllByOwnerRepoAndContributorLoginExecute(r)
+}
+
+/*
+FindAllByOwnerRepoAndContributorLogin Finds a repo by :owner and :repo listing all contributions for a given :login and paginating them
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@param login
+	@return ApiFindAllByOwnerRepoAndContributorLoginRequest
+*/
+func (a *RepositoryServiceAPIService) FindAllByOwnerRepoAndContributorLogin(ctx context.Context, owner string, repo string, login string) ApiFindAllByOwnerRepoAndContributorLoginRequest {
+	return ApiFindAllByOwnerRepoAndContributorLoginRequest{
+		ApiService: a,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
+		login:      login,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbRepoLoginContributions
+func (a *RepositoryServiceAPIService) FindAllByOwnerRepoAndContributorLoginExecute(r ApiFindAllByOwnerRepoAndContributorLoginRequest) (*DbRepoLoginContributions, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoLoginContributions
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindAllByOwnerRepoAndContributorLogin")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/repos/{owner}/{repo}/{login}/contributions"
+	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterValueToString(r.owner, "owner")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterValueToString(r.repo, "repo")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"login"+"}", url.PathEscape(parameterValueToString(r.login, "login")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiFindAllByRepoIdRequest struct {
-	ctx            context.Context
-	ApiService     *RepositoryServiceAPIService
-	id             int32
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *RepoOrderFieldsEnum
+	ctx               context.Context
+	ApiService        *RepositoryServiceAPIService
+	id                int32
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *RepoOrderFieldsEnum
 }
 
 func (r ApiFindAllByRepoIdRequest) Page(page int32) ApiFindAllByRepoIdRequest {
@@ -348,6 +499,12 @@ func (r ApiFindAllByRepoIdRequest) OrderDirection(orderDirection OrderDirectionE
 // Range in days
 func (r ApiFindAllByRepoIdRequest) Range_(range_ int32) ApiFindAllByRepoIdRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllByRepoIdRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllByRepoIdRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -410,6 +567,9 @@ func (a *RepositoryServiceAPIService) FindAllByRepoIdExecute(r ApiFindAllByRepoI
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")
 	}
@@ -468,17 +628,18 @@ func (a *RepositoryServiceAPIService) FindAllByRepoIdExecute(r ApiFindAllByRepoI
 }
 
 type ApiFindAllReposWithFiltersRequest struct {
-	ctx            context.Context
-	ApiService     *RepositoryServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *RepoOrderFieldsEnum
-	filter         *InsightFilterFieldsEnum
-	repo           *string
-	topic          *string
-	repoIds        *string
+	ctx               context.Context
+	ApiService        *RepositoryServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *RepoOrderFieldsEnum
+	filter            *InsightFilterFieldsEnum
+	repo              *string
+	topic             *string
+	repoIds           *string
 }
 
 func (r ApiFindAllReposWithFiltersRequest) Page(page int32) ApiFindAllReposWithFiltersRequest {
@@ -499,6 +660,12 @@ func (r ApiFindAllReposWithFiltersRequest) OrderDirection(orderDirection OrderDi
 // Range in days
 func (r ApiFindAllReposWithFiltersRequest) Range_(range_ int32) ApiFindAllReposWithFiltersRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllReposWithFiltersRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllReposWithFiltersRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -577,6 +744,9 @@ func (a *RepositoryServiceAPIService) FindAllReposWithFiltersExecute(r ApiFindAl
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")

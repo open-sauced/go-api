@@ -4,6 +4,7 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**ApplyCouponForUser**](AuthenticationServiceAPI.md#ApplyCouponForUser) | **Patch** /v1/auth/profile/coupon | Applies a coupon for the authenticated user
 [**CheckAuthSession**](AuthenticationServiceAPI.md#CheckAuthSession) | **Get** /v1/auth/session | Get authenticated session information
 [**PostCreateCheckoutSession**](AuthenticationServiceAPI.md#PostCreateCheckoutSession) | **Post** /v1/auth/checkout/session | Creates a new checkout session for the user
 [**PostOnboarding**](AuthenticationServiceAPI.md#PostOnboarding) | **Post** /v1/auth/onboarding | Updates onboarding information for user
@@ -12,6 +13,70 @@ Method | HTTP request | Description
 [**UpdateInterestsForUserProfile**](AuthenticationServiceAPI.md#UpdateInterestsForUserProfile) | **Patch** /v1/auth/profile/interests | Updates the interests for the authenticated user profile
 [**UpdateProfileForUser**](AuthenticationServiceAPI.md#UpdateProfileForUser) | **Patch** /v1/auth/profile | Updates the profile for the authenticated user
 
+
+
+## ApplyCouponForUser
+
+> DbUser ApplyCouponForUser(ctx).ApplyUserCouponDto(applyUserCouponDto).Execute()
+
+Applies a coupon for the authenticated user
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    applyUserCouponDto := *openapiclient.NewApplyUserCouponDto("saucy") // ApplyUserCouponDto | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AuthenticationServiceAPI.ApplyCouponForUser(context.Background()).ApplyUserCouponDto(applyUserCouponDto).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationServiceAPI.ApplyCouponForUser``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ApplyCouponForUser`: DbUser
+    fmt.Fprintf(os.Stdout, "Response from `AuthenticationServiceAPI.ApplyCouponForUser`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiApplyCouponForUserRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **applyUserCouponDto** | [**ApplyUserCouponDto**](ApplyUserCouponDto.md) |  | 
+
+### Return type
+
+[**DbUser**](DbUser.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## CheckAuthSession

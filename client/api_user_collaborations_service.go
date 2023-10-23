@@ -133,12 +133,13 @@ func (a *UserCollaborationsServiceAPIService) AddUserCollaborationExecute(r ApiA
 }
 
 type ApiFindAllUserCollaborationsRequest struct {
-	ctx            context.Context
-	ApiService     *UserCollaborationsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserCollaborationsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllUserCollaborationsRequest) Page(page int32) ApiFindAllUserCollaborationsRequest {
@@ -159,6 +160,12 @@ func (r ApiFindAllUserCollaborationsRequest) OrderDirection(orderDirection Order
 // Range in days
 func (r ApiFindAllUserCollaborationsRequest) Range_(range_ int32) ApiFindAllUserCollaborationsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserCollaborationsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserCollaborationsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -212,6 +219,9 @@ func (a *UserCollaborationsServiceAPIService) FindAllUserCollaborationsExecute(r
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

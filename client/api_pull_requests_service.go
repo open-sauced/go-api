@@ -17,6 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 // PullRequestsServiceAPIService PullRequestsServiceAPI service
@@ -411,16 +412,17 @@ func (a *PullRequestsServiceAPIService) GeneratePRDescriptionExecute(r ApiGenera
 }
 
 type ApiGetPullRequestInsightsRequest struct {
-	ctx            context.Context
-	ApiService     *PullRequestsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	filter         *InsightFilterFieldsEnum
-	topic          *string
-	repo           *string
-	repoIds        *string
+	ctx               context.Context
+	ApiService        *PullRequestsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	filter            *InsightFilterFieldsEnum
+	topic             *string
+	repo              *string
+	repoIds           *string
 }
 
 func (r ApiGetPullRequestInsightsRequest) Page(page int32) ApiGetPullRequestInsightsRequest {
@@ -441,6 +443,12 @@ func (r ApiGetPullRequestInsightsRequest) OrderDirection(orderDirection OrderDir
 // Range in days
 func (r ApiGetPullRequestInsightsRequest) Range_(range_ int32) ApiGetPullRequestInsightsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetPullRequestInsightsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetPullRequestInsightsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -515,6 +523,9 @@ func (a *PullRequestsServiceAPIService) GetPullRequestInsightsExecute(r ApiGetPu
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
@@ -581,13 +592,116 @@ func (a *PullRequestsServiceAPIService) GetPullRequestInsightsExecute(r ApiGetPu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetPullRequestReviewsRequest struct {
+	ctx        context.Context
+	ApiService *PullRequestsServiceAPIService
+	id         string
+}
+
+func (r ApiGetPullRequestReviewsRequest) Execute() ([]DbPullRequestReview, *http.Response, error) {
+	return r.ApiService.GetPullRequestReviewsExecute(r)
+}
+
+/*
+GetPullRequestReviews Find all pull request reviews by pull request ID
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetPullRequestReviewsRequest
+*/
+func (a *PullRequestsServiceAPIService) GetPullRequestReviews(ctx context.Context, id string) ApiGetPullRequestReviewsRequest {
+	return ApiGetPullRequestReviewsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return []DbPullRequestReview
+func (a *PullRequestsServiceAPIService) GetPullRequestReviewsExecute(r ApiGetPullRequestReviewsRequest) ([]DbPullRequestReview, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []DbPullRequestReview
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GetPullRequestReviews")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/prs/{id}/reviews"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiListAllPullRequestsRequest struct {
-	ctx            context.Context
-	ApiService     *PullRequestsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *PullRequestsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiListAllPullRequestsRequest) Page(page int32) ApiListAllPullRequestsRequest {
@@ -608,6 +722,12 @@ func (r ApiListAllPullRequestsRequest) OrderDirection(orderDirection OrderDirect
 // Range in days
 func (r ApiListAllPullRequestsRequest) Range_(range_ int32) ApiListAllPullRequestsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiListAllPullRequestsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiListAllPullRequestsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -661,6 +781,9 @@ func (a *PullRequestsServiceAPIService) ListAllPullRequestsExecute(r ApiListAllP
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -717,19 +840,21 @@ func (a *PullRequestsServiceAPIService) ListAllPullRequestsExecute(r ApiListAllP
 }
 
 type ApiSearchAllPullRequestsRequest struct {
-	ctx            context.Context
-	ApiService     *PullRequestsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *PullRequestOrderFieldsEnum
-	filter         *InsightFilterFieldsEnum
-	topic          *string
-	repo           *string
-	repoIds        *string
-	status         *PullRequestStatusEnum
-	contributor    *string
+	ctx               context.Context
+	ApiService        *PullRequestsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *PullRequestOrderFieldsEnum
+	filter            *InsightFilterFieldsEnum
+	topic             *string
+	repo              *string
+	repoIds           *string
+	status            *PullRequestStatusEnum
+	contributor       *string
+	listId            *string
 }
 
 func (r ApiSearchAllPullRequestsRequest) Page(page int32) ApiSearchAllPullRequestsRequest {
@@ -750,6 +875,12 @@ func (r ApiSearchAllPullRequestsRequest) OrderDirection(orderDirection OrderDire
 // Range in days
 func (r ApiSearchAllPullRequestsRequest) Range_(range_ int32) ApiSearchAllPullRequestsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiSearchAllPullRequestsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiSearchAllPullRequestsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -785,6 +916,11 @@ func (r ApiSearchAllPullRequestsRequest) Status(status PullRequestStatusEnum) Ap
 
 func (r ApiSearchAllPullRequestsRequest) Contributor(contributor string) ApiSearchAllPullRequestsRequest {
 	r.contributor = &contributor
+	return r
+}
+
+func (r ApiSearchAllPullRequestsRequest) ListId(listId string) ApiSearchAllPullRequestsRequest {
+	r.listId = &listId
 	return r
 }
 
@@ -839,6 +975,9 @@ func (a *PullRequestsServiceAPIService) SearchAllPullRequestsExecute(r ApiSearch
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")
 	}
@@ -859,6 +998,9 @@ func (a *PullRequestsServiceAPIService) SearchAllPullRequestsExecute(r ApiSearch
 	}
 	if r.contributor != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "contributor", r.contributor, "")
+	}
+	if r.listId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "listId", r.listId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

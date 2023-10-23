@@ -233,13 +233,14 @@ func (a *EndorsementsServiceAPIService) DeleteEndoresementByIdExecute(r ApiDelet
 }
 
 type ApiFindAllByRepoOwnerOrUsernameRequest struct {
-	ctx             context.Context
-	ApiService      *EndorsementsServiceAPIService
-	repoOwnerOrUser string
-	page            *int32
-	limit           *int32
-	orderDirection  *OrderDirectionEnum
-	range_          *int32
+	ctx               context.Context
+	ApiService        *EndorsementsServiceAPIService
+	repoOwnerOrUser   string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllByRepoOwnerOrUsernameRequest) Page(page int32) ApiFindAllByRepoOwnerOrUsernameRequest {
@@ -260,6 +261,12 @@ func (r ApiFindAllByRepoOwnerOrUsernameRequest) OrderDirection(orderDirection Or
 // Range in days
 func (r ApiFindAllByRepoOwnerOrUsernameRequest) Range_(range_ int32) ApiFindAllByRepoOwnerOrUsernameRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllByRepoOwnerOrUsernameRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllByRepoOwnerOrUsernameRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -317,6 +324,9 @@ func (a *EndorsementsServiceAPIService) FindAllByRepoOwnerOrUsernameExecute(r Ap
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -372,12 +382,13 @@ func (a *EndorsementsServiceAPIService) FindAllByRepoOwnerOrUsernameExecute(r Ap
 }
 
 type ApiFindAllEndorsementsRequest struct {
-	ctx            context.Context
-	ApiService     *EndorsementsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *EndorsementsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllEndorsementsRequest) Page(page int32) ApiFindAllEndorsementsRequest {
@@ -398,6 +409,12 @@ func (r ApiFindAllEndorsementsRequest) OrderDirection(orderDirection OrderDirect
 // Range in days
 func (r ApiFindAllEndorsementsRequest) Range_(range_ int32) ApiFindAllEndorsementsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllEndorsementsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllEndorsementsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -451,6 +468,9 @@ func (a *EndorsementsServiceAPIService) FindAllEndorsementsExecute(r ApiFindAllE
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -507,14 +527,15 @@ func (a *EndorsementsServiceAPIService) FindAllEndorsementsExecute(r ApiFindAllE
 }
 
 type ApiFindAllEndorsementsByRepoRequest struct {
-	ctx            context.Context
-	ApiService     *EndorsementsServiceAPIService
-	owner          string
-	repo           string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *EndorsementsServiceAPIService
+	owner             string
+	repo              string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllEndorsementsByRepoRequest) Page(page int32) ApiFindAllEndorsementsByRepoRequest {
@@ -535,6 +556,12 @@ func (r ApiFindAllEndorsementsByRepoRequest) OrderDirection(orderDirection Order
 // Range in days
 func (r ApiFindAllEndorsementsByRepoRequest) Range_(range_ int32) ApiFindAllEndorsementsByRepoRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllEndorsementsByRepoRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllEndorsementsByRepoRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -595,6 +622,9 @@ func (a *EndorsementsServiceAPIService) FindAllEndorsementsByRepoExecute(r ApiFi
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -650,12 +680,13 @@ func (a *EndorsementsServiceAPIService) FindAllEndorsementsByRepoExecute(r ApiFi
 }
 
 type ApiFindAllUserCreatedEndorsementsRequest struct {
-	ctx            context.Context
-	ApiService     *EndorsementsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *EndorsementsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllUserCreatedEndorsementsRequest) Page(page int32) ApiFindAllUserCreatedEndorsementsRequest {
@@ -676,6 +707,12 @@ func (r ApiFindAllUserCreatedEndorsementsRequest) OrderDirection(orderDirection 
 // Range in days
 func (r ApiFindAllUserCreatedEndorsementsRequest) Range_(range_ int32) ApiFindAllUserCreatedEndorsementsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserCreatedEndorsementsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserCreatedEndorsementsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -729,6 +766,9 @@ func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsExecute(r 
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -785,13 +825,14 @@ func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsExecute(r 
 }
 
 type ApiFindAllUserCreatedEndorsementsByUsernameRequest struct {
-	ctx            context.Context
-	ApiService     *EndorsementsServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *EndorsementsServiceAPIService
+	username          string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) Page(page int32) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
@@ -812,6 +853,12 @@ func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) OrderDirection(order
 // Range in days
 func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) Range_(range_ int32) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserCreatedEndorsementsByUsernameRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserCreatedEndorsementsByUsernameRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -869,6 +916,9 @@ func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsByUsername
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -924,12 +974,13 @@ func (a *EndorsementsServiceAPIService) FindAllUserCreatedEndorsementsByUsername
 }
 
 type ApiFindAllUserReceivedEndorsementsRequest struct {
-	ctx            context.Context
-	ApiService     *EndorsementsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *EndorsementsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllUserReceivedEndorsementsRequest) Page(page int32) ApiFindAllUserReceivedEndorsementsRequest {
@@ -950,6 +1001,12 @@ func (r ApiFindAllUserReceivedEndorsementsRequest) OrderDirection(orderDirection
 // Range in days
 func (r ApiFindAllUserReceivedEndorsementsRequest) Range_(range_ int32) ApiFindAllUserReceivedEndorsementsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserReceivedEndorsementsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserReceivedEndorsementsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -1003,6 +1060,9 @@ func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsementsExecute(r
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1059,13 +1119,14 @@ func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsementsExecute(r
 }
 
 type ApiFindAllUserReceivedEndorsementsByUsernameRequest struct {
-	ctx            context.Context
-	ApiService     *EndorsementsServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *EndorsementsServiceAPIService
+	username          string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) Page(page int32) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
@@ -1086,6 +1147,12 @@ func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) OrderDirection(orde
 // Range in days
 func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) Range_(range_ int32) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserReceivedEndorsementsByUsernameRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserReceivedEndorsementsByUsernameRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -1142,6 +1209,9 @@ func (a *EndorsementsServiceAPIService) FindAllUserReceivedEndorsementsByUsernam
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

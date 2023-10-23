@@ -232,13 +232,14 @@ func (a *VoteServiceAPIService) DownVoteOneByOwnerAndRepoExecute(r ApiDownVoteOn
 }
 
 type ApiFindAllUserVotedRequest struct {
-	ctx            context.Context
-	ApiService     *VoteServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *RepoOrderFieldsEnum
+	ctx               context.Context
+	ApiService        *VoteServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *RepoOrderFieldsEnum
 }
 
 func (r ApiFindAllUserVotedRequest) Page(page int32) ApiFindAllUserVotedRequest {
@@ -259,6 +260,12 @@ func (r ApiFindAllUserVotedRequest) OrderDirection(orderDirection OrderDirection
 // Range in days
 func (r ApiFindAllUserVotedRequest) Range_(range_ int32) ApiFindAllUserVotedRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserVotedRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserVotedRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -317,6 +324,9 @@ func (a *VoteServiceAPIService) FindAllUserVotedExecute(r ApiFindAllUserVotedReq
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")

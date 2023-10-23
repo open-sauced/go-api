@@ -26,6 +26,7 @@ api_user_service.go
 api_vote_service.go
 client.go
 configuration.go
+docs/ApplyUserCouponDto.md
 docs/AuthenticationServiceAPI.md
 docs/BakeRepoDto.md
 docs/BlogSummaryServiceAPI.md
@@ -44,6 +45,9 @@ docs/DbBakedRepo.md
 docs/DbCommitAuthors.md
 docs/DbCommits.md
 docs/DbContribution.md
+docs/DbContributionStatTimeframe.md
+docs/DbContributionsProjects.md
+docs/DbContributorCategoryTimeframe.md
 docs/DbEmoji.md
 docs/DbEndorsement.md
 docs/DbFilteredUser.md
@@ -52,11 +56,14 @@ docs/DbInsightMember.md
 docs/DbPRInsight.md
 docs/DbPullRequest.md
 docs/DbPullRequestContributor.md
+docs/DbPullRequestReview.md
 docs/DbRepo.md
+docs/DbRepoLoginContributions.md
 docs/DbRepoToUserStargazers.md
 docs/DbRepoToUserStars.md
 docs/DbRepoToUserSubmissions.md
 docs/DbRepoToUserVotes.md
+docs/DbTimezone.md
 docs/DbTopUser.md
 docs/DbUser.md
 docs/DbUserCollaboration.md
@@ -66,6 +73,7 @@ docs/DbUserHighlightReactionResponse.md
 docs/DbUserHighlightRepo.md
 docs/DbUserList.md
 docs/DbUserListContributor.md
+docs/DbUserListContributorStat.md
 docs/DbUserToUserFollows.md
 docs/EmojisServiceAPI.md
 docs/EndorsementsServiceAPI.md
@@ -84,6 +92,7 @@ docs/GenerateCodeRefactorSuggestionDto.md
 docs/GenerateCodeTestSuggestionDto.md
 docs/GeneratePullRequestDescriptionDto.md
 docs/GetContributors200Response.md
+docs/GetMostActiveContributors200Response.md
 docs/GetUserListContributors200Response.md
 docs/HealthCheckServiceAPI.md
 docs/HealthStatusService200Response.md
@@ -121,12 +130,15 @@ docs/UpdateUserEmailPreferencesDto.md
 docs/UpdateUserProfileInterestsDto.md
 docs/UserCollaborationsServiceAPI.md
 docs/UserHighlightsServiceAPI.md
+docs/UserListContributorStatsOrderEnum.md
+docs/UserListContributorStatsTypeEnum.md
 docs/UserListsServiceAPI.md
 docs/UserOnboardingDto.md
 docs/UserRecommendationsServiceAPI.md
 docs/UserServiceAPI.md
 docs/VoteServiceAPI.md
 docs/VotedRepoDto.md
+model_apply_user_coupon_dto.go
 model_bake_repo_dto.go
 model_collaborators_dto.go
 model_create_blog_summary_dto.go
@@ -141,6 +153,9 @@ model_db_baked_repo.go
 model_db_commit_authors.go
 model_db_commits.go
 model_db_contribution.go
+model_db_contribution_stat_timeframe.go
+model_db_contributions_projects.go
+model_db_contributor_category_timeframe.go
 model_db_emoji.go
 model_db_endorsement.go
 model_db_filtered_user.go
@@ -149,11 +164,14 @@ model_db_insight_member.go
 model_db_pr_insight.go
 model_db_pull_request.go
 model_db_pull_request_contributor.go
+model_db_pull_request_review.go
 model_db_repo.go
+model_db_repo_login_contributions.go
 model_db_repo_to_user_stargazers.go
 model_db_repo_to_user_stars.go
 model_db_repo_to_user_submissions.go
 model_db_repo_to_user_votes.go
+model_db_timezone.go
 model_db_top_user.go
 model_db_user.go
 model_db_user_collaboration.go
@@ -163,6 +181,7 @@ model_db_user_highlight_reaction_response.go
 model_db_user_highlight_repo.go
 model_db_user_list.go
 model_db_user_list_contributor.go
+model_db_user_list_contributor_stat.go
 model_db_user_to_user_follows.go
 model_find_all_by_repo_id_200_response.go
 model_find_all_emojis_200_response.go
@@ -179,6 +198,7 @@ model_generate_code_refactor_suggestion_dto.go
 model_generate_code_test_suggestion_dto.go
 model_generate_pull_request_description_dto.go
 model_get_contributors_200_response.go
+model_get_most_active_contributors_200_response.go
 model_get_user_list_contributors_200_response.go
 model_health_status_service_200_response.go
 model_health_status_service_200_response_info_value.go
@@ -203,8 +223,10 @@ model_update_user_collaboration_dto.go
 model_update_user_dto.go
 model_update_user_email_preferences_dto.go
 model_update_user_profile_interests_dto.go
+model_user_list_contributor_stats_order_enum.go
+model_user_list_contributor_stats_type_enum.go
 model_user_onboarding_dto.go
 model_voted_repo_dto.go
 response.go
-test/api_user_lists_service_test.go
+test/api_contribution_service_test.go
 utils.go

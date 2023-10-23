@@ -87,4 +87,5 @@ There are some rough edges when generating the OpenAPI client that you'll want t
 - The tests may not have correctly generated struct member func names.
   - Either remove those generated tests or find the correct struct member func and make the correct change.
 - In general, it's a good idea to view the diff and run `go test ./...` before committing new changes.
-
+- The "contributions" service, at the time of this writing, is not fully complete.
+  So, it will have missing endpoints and no actual services. Its files can be safely deleted.

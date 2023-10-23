@@ -126,13 +126,14 @@ func (a *HighlightsServiceAPIService) AddAFeaturedHighlightExecute(r ApiAddAFeat
 }
 
 type ApiFindAllFeaturedHighlightsRequest struct {
-	ctx            context.Context
-	ApiService     *HighlightsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repo           *string
+	ctx               context.Context
+	ApiService        *HighlightsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repo              *string
 }
 
 func (r ApiFindAllFeaturedHighlightsRequest) Page(page int32) ApiFindAllFeaturedHighlightsRequest {
@@ -153,6 +154,12 @@ func (r ApiFindAllFeaturedHighlightsRequest) OrderDirection(orderDirection Order
 // Range in days
 func (r ApiFindAllFeaturedHighlightsRequest) Range_(range_ int32) ApiFindAllFeaturedHighlightsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllFeaturedHighlightsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllFeaturedHighlightsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -213,6 +220,9 @@ func (a *HighlightsServiceAPIService) FindAllFeaturedHighlightsExecute(r ApiFind
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.repo != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repo", r.repo, "")
 	}
@@ -271,12 +281,13 @@ func (a *HighlightsServiceAPIService) FindAllFeaturedHighlightsExecute(r ApiFind
 }
 
 type ApiFindAllHighlightReposRequest struct {
-	ctx            context.Context
-	ApiService     *HighlightsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *HighlightsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllHighlightReposRequest) Page(page int32) ApiFindAllHighlightReposRequest {
@@ -297,6 +308,12 @@ func (r ApiFindAllHighlightReposRequest) OrderDirection(orderDirection OrderDire
 // Range in days
 func (r ApiFindAllHighlightReposRequest) Range_(range_ int32) ApiFindAllHighlightReposRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllHighlightReposRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllHighlightReposRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -350,6 +367,9 @@ func (a *HighlightsServiceAPIService) FindAllHighlightReposExecute(r ApiFindAllH
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -406,13 +426,14 @@ func (a *HighlightsServiceAPIService) FindAllHighlightReposExecute(r ApiFindAllH
 }
 
 type ApiFindAllHighlightsRequest struct {
-	ctx            context.Context
-	ApiService     *HighlightsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repo           *string
+	ctx               context.Context
+	ApiService        *HighlightsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repo              *string
 }
 
 func (r ApiFindAllHighlightsRequest) Page(page int32) ApiFindAllHighlightsRequest {
@@ -433,6 +454,12 @@ func (r ApiFindAllHighlightsRequest) OrderDirection(orderDirection OrderDirectio
 // Range in days
 func (r ApiFindAllHighlightsRequest) Range_(range_ int32) ApiFindAllHighlightsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllHighlightsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllHighlightsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -493,6 +520,9 @@ func (a *HighlightsServiceAPIService) FindAllHighlightsExecute(r ApiFindAllHighl
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.repo != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repo", r.repo, "")
 	}
@@ -551,12 +581,13 @@ func (a *HighlightsServiceAPIService) FindAllHighlightsExecute(r ApiFindAllHighl
 }
 
 type ApiFindTopHighlightsRequest struct {
-	ctx            context.Context
-	ApiService     *HighlightsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *HighlightsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindTopHighlightsRequest) Page(page int32) ApiFindTopHighlightsRequest {
@@ -577,6 +608,12 @@ func (r ApiFindTopHighlightsRequest) OrderDirection(orderDirection OrderDirectio
 // Range in days
 func (r ApiFindTopHighlightsRequest) Range_(range_ int32) ApiFindTopHighlightsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindTopHighlightsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindTopHighlightsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -630,6 +667,9 @@ func (a *HighlightsServiceAPIService) FindTopHighlightsExecute(r ApiFindTopHighl
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

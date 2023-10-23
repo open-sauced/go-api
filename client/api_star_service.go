@@ -232,13 +232,14 @@ func (a *StarServiceAPIService) DownStarOneByOwnerAndRepoExecute(r ApiDownStarOn
 }
 
 type ApiFindAllUserStarredRequest struct {
-	ctx            context.Context
-	ApiService     *StarServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *RepoOrderFieldsEnum
+	ctx               context.Context
+	ApiService        *StarServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *RepoOrderFieldsEnum
 }
 
 func (r ApiFindAllUserStarredRequest) Page(page int32) ApiFindAllUserStarredRequest {
@@ -259,6 +260,12 @@ func (r ApiFindAllUserStarredRequest) OrderDirection(orderDirection OrderDirecti
 // Range in days
 func (r ApiFindAllUserStarredRequest) Range_(range_ int32) ApiFindAllUserStarredRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserStarredRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserStarredRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -317,6 +324,9 @@ func (a *StarServiceAPIService) FindAllUserStarredExecute(r ApiFindAllUserStarre
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")

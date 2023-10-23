@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## FindAllEmojis
 
-> FindAllEmojis200Response FindAllEmojis(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> FindAllEmojis200Response FindAllEmojis(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Listing all emojis and paginates them
 
@@ -31,10 +31,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EmojisServiceAPI.FindAllEmojis(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.EmojisServiceAPI.FindAllEmojis(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EmojisServiceAPI.FindAllEmojis``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,6 +60,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 

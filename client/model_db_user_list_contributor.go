@@ -27,6 +27,8 @@ type DbUserListContributor struct {
 	UserId int32 `json:"user_id"`
 	// List identifier
 	ListId string `json:"list_id"`
+	// List user source username
+	Username *string `json:"username,omitempty"`
 	// Timestamp representing top repo first index
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// User list collaborator's login
@@ -125,6 +127,38 @@ func (o *DbUserListContributor) SetListId(v string) {
 	o.ListId = v
 }
 
+// GetUsername returns the Username field value if set, zero value otherwise.
+func (o *DbUserListContributor) GetUsername() string {
+	if o == nil || IsNil(o.Username) {
+		var ret string
+		return ret
+	}
+	return *o.Username
+}
+
+// GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DbUserListContributor) GetUsernameOk() (*string, bool) {
+	if o == nil || IsNil(o.Username) {
+		return nil, false
+	}
+	return o.Username, true
+}
+
+// HasUsername returns a boolean if a field has been set.
+func (o *DbUserListContributor) HasUsername() bool {
+	if o != nil && !IsNil(o.Username) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsername gets a reference to the given string and assigns it to the Username field.
+func (o *DbUserListContributor) SetUsername(v string) {
+	o.Username = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *DbUserListContributor) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt) {
@@ -202,6 +236,9 @@ func (o DbUserListContributor) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["user_id"] = o.UserId
 	toSerialize["list_id"] = o.ListId
+	if !IsNil(o.Username) {
+		toSerialize["username"] = o.Username
+	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
 	}

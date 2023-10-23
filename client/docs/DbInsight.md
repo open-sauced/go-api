@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Insight Page Name | 
 **IsPublic** | **bool** | Flag indicating insight visibility | 
 **IsFavorite** | **bool** | Flag indicating insight favorite | 
+**IsFeatured** | **bool** | Flag indicating featured insight | 
 **ShortCode** | **string** | Title | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing insight creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing insight last updated | [optional] 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewDbInsight
 
-`func NewDbInsight(id int32, userId int32, name string, isPublic bool, isFavorite bool, shortCode string, ) *DbInsight`
+`func NewDbInsight(id int32, userId int32, name string, isPublic bool, isFavorite bool, isFeatured bool, shortCode string, ) *DbInsight`
 
 NewDbInsight instantiates a new DbInsight object
 This constructor will assign default values to properties that have it defined,
@@ -131,6 +132,26 @@ and a boolean to check if the value has been set.
 `func (o *DbInsight) SetIsFavorite(v bool)`
 
 SetIsFavorite sets IsFavorite field to given value.
+
+
+### GetIsFeatured
+
+`func (o *DbInsight) GetIsFeatured() bool`
+
+GetIsFeatured returns the IsFeatured field if non-nil, zero value otherwise.
+
+### GetIsFeaturedOk
+
+`func (o *DbInsight) GetIsFeaturedOk() (*bool, bool)`
+
+GetIsFeaturedOk returns a tuple with the IsFeatured field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsFeatured
+
+`func (o *DbInsight) SetIsFeatured(v bool)`
+
+SetIsFeatured sets IsFeatured field to given value.
 
 
 ### GetShortCode

@@ -246,13 +246,14 @@ func (a *InsightsServiceAPIService) AddMemberForInsightExecute(r ApiAddMemberFor
 }
 
 type ApiFindAllInsightMembersRequest struct {
-	ctx            context.Context
-	ApiService     *InsightsServiceAPIService
-	id             int32
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *InsightsServiceAPIService
+	id                int32
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllInsightMembersRequest) Page(page int32) ApiFindAllInsightMembersRequest {
@@ -273,6 +274,12 @@ func (r ApiFindAllInsightMembersRequest) OrderDirection(orderDirection OrderDire
 // Range in days
 func (r ApiFindAllInsightMembersRequest) Range_(range_ int32) ApiFindAllInsightMembersRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllInsightMembersRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllInsightMembersRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -330,6 +337,9 @@ func (a *InsightsServiceAPIService) FindAllInsightMembersExecute(r ApiFindAllIns
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -385,12 +395,13 @@ func (a *InsightsServiceAPIService) FindAllInsightMembersExecute(r ApiFindAllIns
 }
 
 type ApiFindAllInsightsByUserIdRequest struct {
-	ctx            context.Context
-	ApiService     *InsightsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *InsightsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllInsightsByUserIdRequest) Page(page int32) ApiFindAllInsightsByUserIdRequest {
@@ -411,6 +422,12 @@ func (r ApiFindAllInsightsByUserIdRequest) OrderDirection(orderDirection OrderDi
 // Range in days
 func (r ApiFindAllInsightsByUserIdRequest) Range_(range_ int32) ApiFindAllInsightsByUserIdRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllInsightsByUserIdRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllInsightsByUserIdRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -464,6 +481,9 @@ func (a *InsightsServiceAPIService) FindAllInsightsByUserIdExecute(r ApiFindAllI
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

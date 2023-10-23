@@ -7,8 +7,14 @@ Method | HTTP request | Description
 [**AddListForUser**](UserListsServiceAPI.md#AddListForUser) | **Post** /v1/lists | Adds a new list for the authenticated user
 [**DeleteListForUser**](UserListsServiceAPI.md#DeleteListForUser) | **Delete** /v1/lists/{id} | Deletes the list for the authenticated user
 [**DeleteUserListContributor**](UserListsServiceAPI.md#DeleteUserListContributor) | **Delete** /v1/lists/{id}/contributors/{userListContributorId} | Delete contributor from an individual user list
+[**GetContributionsByProject**](UserListsServiceAPI.md#GetContributionsByProject) | **Get** /v1/lists/{id}/stats/contributions-by-project | Gets contributions in a given timeframe
+[**GetContributionsByTimeFrame**](UserListsServiceAPI.md#GetContributionsByTimeFrame) | **Get** /v1/lists/{id}/stats/contributions-evolution-by-type | Gets contributions in a given timeframe
+[**GetContributorContributionsByProject**](UserListsServiceAPI.md#GetContributorContributionsByProject) | **Get** /v1/lists/{id}/stats/top-project-contributions-by-contributor | Gets top 20 contributor stats in a list by a given project
 [**GetContributors**](UserListsServiceAPI.md#GetContributors) | **Get** /v1/lists/contributors | Retrieves paginated contributors
+[**GetContributorsByTimeframe**](UserListsServiceAPI.md#GetContributorsByTimeframe) | **Get** /v1/lists/{id}/stats/contributions-evolution-by-contributor-type | Gets contributions by category within timeframe
 [**GetListsForUser**](UserListsServiceAPI.md#GetListsForUser) | **Get** /v1/lists | Gets lists for the authenticated user
+[**GetMostActiveContributors**](UserListsServiceAPI.md#GetMostActiveContributors) | **Get** /v1/lists/{id}/stats/most-active-contributors | Gets most active contributors for a given list
+[**GetTimezones**](UserListsServiceAPI.md#GetTimezones) | **Get** /v1/lists/timezones | Retrieves all users timezones
 [**GetUserList**](UserListsServiceAPI.md#GetUserList) | **Get** /v1/lists/{id} | Retrieves an individual user list
 [**GetUserListContributors**](UserListsServiceAPI.md#GetUserListContributors) | **Get** /v1/lists/{id}/contributors | Retrieves contributors for an individual user list
 [**PostUserListContributors**](UserListsServiceAPI.md#PostUserListContributors) | **Post** /v1/lists/{id}/contributors | Add new contributors to an individual user list
@@ -35,7 +41,7 @@ import (
 )
 
 func main() {
-    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []int32{int32(123)}) // CreateUserListDto | 
+    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []Array{"TODO"}) // CreateUserListDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -215,9 +221,223 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetContributionsByProject
+
+> DbContributionsProjects GetContributionsByProject(ctx, id).Range_(range_).Execute()
+
+Gets contributions in a given timeframe
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    id := "id_example" // string | 
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserListsServiceAPI.GetContributionsByProject(context.Background(), id).Range_(range_).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetContributionsByProject``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetContributionsByProject`: DbContributionsProjects
+    fmt.Fprintf(os.Stdout, "Response from `UserListsServiceAPI.GetContributionsByProject`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContributionsByProjectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **range_** | **int32** | Range in days | [default to 30]
+
+### Return type
+
+[**DbContributionsProjects**](DbContributionsProjects.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetContributionsByTimeFrame
+
+> DbContributionStatTimeframe GetContributionsByTimeFrame(ctx, id).Range_(range_).ContributorType(contributorType).Execute()
+
+Gets contributions in a given timeframe
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    id := "id_example" // string | 
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    contributorType := openapiclient.UserListContributorStatsTypeEnum("all") // UserListContributorStatsTypeEnum |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserListsServiceAPI.GetContributionsByTimeFrame(context.Background(), id).Range_(range_).ContributorType(contributorType).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetContributionsByTimeFrame``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetContributionsByTimeFrame`: DbContributionStatTimeframe
+    fmt.Fprintf(os.Stdout, "Response from `UserListsServiceAPI.GetContributionsByTimeFrame`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContributionsByTimeFrameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **range_** | **int32** | Range in days | [default to 30]
+ **contributorType** | [**UserListContributorStatsTypeEnum**](UserListContributorStatsTypeEnum.md) |  | 
+
+### Return type
+
+[**DbContributionStatTimeframe**](DbContributionStatTimeframe.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetContributorContributionsByProject
+
+> DbUserListContributorStat GetContributorContributionsByProject(ctx, id).RepoId(repoId).Range_(range_).Execute()
+
+Gets top 20 contributor stats in a list by a given project
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    id := "id_example" // string | 
+    repoId := int32(234343) // int32 | Repo ID
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserListsServiceAPI.GetContributorContributionsByProject(context.Background(), id).RepoId(repoId).Range_(range_).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetContributorContributionsByProject``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetContributorContributionsByProject`: DbUserListContributorStat
+    fmt.Fprintf(os.Stdout, "Response from `UserListsServiceAPI.GetContributorContributionsByProject`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContributorContributionsByProjectRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **repoId** | **int32** | Repo ID | 
+ **range_** | **int32** | Range in days | [default to 30]
+
+### Return type
+
+[**DbUserListContributorStat**](DbUserListContributorStat.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetContributors
 
-> GetContributors200Response GetContributors(ctx).Page(page).Limit(limit).Location(location).Timezone(timezone).PrVelocity(prVelocity).Execute()
+> GetContributors200Response GetContributors(ctx).Page(page).Limit(limit).Location(location).Contributor(contributor).Timezone(timezone).PrVelocity(prVelocity).Execute()
 
 Retrieves paginated contributors
 
@@ -236,13 +456,14 @@ import (
 func main() {
     page := int32(56) // int32 |  (optional) (default to 1)
     limit := int32(56) // int32 |  (optional) (default to 10)
-    location := "Denver, Colorado" // string |  (optional)
-    timezone := "Mountain Standard Time" // string |  (optional)
+    location := []string{"Inner_example"} // []string |  (optional)
+    contributor := "bdougie" // string |  (optional)
+    timezone := []string{"Inner_example"} // []string |  (optional)
     prVelocity := int32(2) // int32 | Less than or equal to the average number of days to merge a PR over the last 30 days (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserListsServiceAPI.GetContributors(context.Background()).Page(page).Limit(limit).Location(location).Timezone(timezone).PrVelocity(prVelocity).Execute()
+    resp, r, err := apiClient.UserListsServiceAPI.GetContributors(context.Background()).Page(page).Limit(limit).Location(location).Contributor(contributor).Timezone(timezone).PrVelocity(prVelocity).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetContributors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -265,8 +486,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **int32** |  | [default to 1]
  **limit** | **int32** |  | [default to 10]
- **location** | **string** |  | 
- **timezone** | **string** |  | 
+ **location** | **[]string** |  | 
+ **contributor** | **string** |  | 
+ **timezone** | **[]string** |  | 
  **prVelocity** | **int32** | Less than or equal to the average number of days to merge a PR over the last 30 days | 
 
 ### Return type
@@ -287,9 +509,81 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetContributorsByTimeframe
+
+> DbContributorCategoryTimeframe GetContributorsByTimeframe(ctx, id).Range_(range_).ContributorType(contributorType).Execute()
+
+Gets contributions by category within timeframe
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    id := "id_example" // string | 
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    contributorType := openapiclient.UserListContributorStatsTypeEnum("all") // UserListContributorStatsTypeEnum |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserListsServiceAPI.GetContributorsByTimeframe(context.Background(), id).Range_(range_).ContributorType(contributorType).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetContributorsByTimeframe``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetContributorsByTimeframe`: DbContributorCategoryTimeframe
+    fmt.Fprintf(os.Stdout, "Response from `UserListsServiceAPI.GetContributorsByTimeframe`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContributorsByTimeframeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **range_** | **int32** | Range in days | [default to 30]
+ **contributorType** | [**UserListContributorStatsTypeEnum**](UserListContributorStatsTypeEnum.md) |  | 
+
+### Return type
+
+[**DbContributorCategoryTimeframe**](DbContributorCategoryTimeframe.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetListsForUser
 
-> DbUserList GetListsForUser(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> DbUserList GetListsForUser(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Gets lists for the authenticated user
 
@@ -310,10 +604,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserListsServiceAPI.GetListsForUser(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.UserListsServiceAPI.GetListsForUser(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetListsForUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -338,6 +633,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -346,6 +642,147 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetMostActiveContributors
+
+> GetMostActiveContributors200Response GetMostActiveContributors(ctx, id).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).ContributorType(contributorType).OrderBy(orderBy).Execute()
+
+Gets most active contributors for a given list
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    id := "id_example" // string | 
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
+    orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
+    contributorType := openapiclient.UserListContributorStatsTypeEnum("all") // UserListContributorStatsTypeEnum |  (optional)
+    orderBy := openapiclient.UserListContributorStatsOrderEnum("commits") // UserListContributorStatsOrderEnum |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserListsServiceAPI.GetMostActiveContributors(context.Background(), id).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).ContributorType(contributorType).OrderBy(orderBy).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetMostActiveContributors``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetMostActiveContributors`: GetMostActiveContributors200Response
+    fmt.Fprintf(os.Stdout, "Response from `UserListsServiceAPI.GetMostActiveContributors`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetMostActiveContributorsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
+ **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
+ **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
+ **contributorType** | [**UserListContributorStatsTypeEnum**](UserListContributorStatsTypeEnum.md) |  | 
+ **orderBy** | [**UserListContributorStatsOrderEnum**](UserListContributorStatsOrderEnum.md) |  | 
+
+### Return type
+
+[**GetMostActiveContributors200Response**](GetMostActiveContributors200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTimezones
+
+> DbTimezone GetTimezones(ctx).Execute()
+
+Retrieves all users timezones
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserListsServiceAPI.GetTimezones(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetTimezones``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetTimezones`: DbTimezone
+    fmt.Fprintf(os.Stdout, "Response from `UserListsServiceAPI.GetTimezones`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTimezonesRequest struct via the builder pattern
+
+
+### Return type
+
+[**DbTimezone**](DbTimezone.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 
@@ -413,7 +850,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearer](../README.md#bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -427,7 +864,7 @@ Name | Type | Description  | Notes
 
 ## GetUserListContributors
 
-> GetUserListContributors200Response GetUserListContributors(ctx, id).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+> GetUserListContributors200Response GetUserListContributors(ctx, id).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Retrieves contributors for an individual user list
 
@@ -449,10 +886,11 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserListsServiceAPI.GetUserListContributors(context.Background(), id).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Execute()
+    resp, r, err := apiClient.UserListsServiceAPI.GetUserListContributors(context.Background(), id).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserListsServiceAPI.GetUserListContributors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -482,6 +920,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
 
 ### Return type
 
@@ -489,7 +928,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[bearer](../README.md#bearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -591,7 +1030,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []int32{int32(123)}) // CreateUserListDto | 
+    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []Array{"TODO"}) // CreateUserListDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

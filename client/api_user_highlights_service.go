@@ -525,13 +525,14 @@ func (a *UserHighlightsServiceAPIService) GetAllHighlightUserReactionsExecute(r 
 }
 
 type ApiGetFollowingHighlightReposRequest struct {
-	ctx            context.Context
-	ApiService     *UserHighlightsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repo           *string
+	ctx               context.Context
+	ApiService        *UserHighlightsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repo              *string
 }
 
 func (r ApiGetFollowingHighlightReposRequest) Page(page int32) ApiGetFollowingHighlightReposRequest {
@@ -552,6 +553,12 @@ func (r ApiGetFollowingHighlightReposRequest) OrderDirection(orderDirection Orde
 // Range in days
 func (r ApiGetFollowingHighlightReposRequest) Range_(range_ int32) ApiGetFollowingHighlightReposRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetFollowingHighlightReposRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetFollowingHighlightReposRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -612,6 +619,9 @@ func (a *UserHighlightsServiceAPIService) GetFollowingHighlightReposExecute(r Ap
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	if r.repo != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repo", r.repo, "")
 	}
@@ -670,13 +680,14 @@ func (a *UserHighlightsServiceAPIService) GetFollowingHighlightReposExecute(r Ap
 }
 
 type ApiGetFollowingHighlightsRequest struct {
-	ctx            context.Context
-	ApiService     *UserHighlightsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	repo           *string
+	ctx               context.Context
+	ApiService        *UserHighlightsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repo              *string
 }
 
 func (r ApiGetFollowingHighlightsRequest) Page(page int32) ApiGetFollowingHighlightsRequest {
@@ -697,6 +708,12 @@ func (r ApiGetFollowingHighlightsRequest) OrderDirection(orderDirection OrderDir
 // Range in days
 func (r ApiGetFollowingHighlightsRequest) Range_(range_ int32) ApiGetFollowingHighlightsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetFollowingHighlightsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetFollowingHighlightsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -756,6 +773,9 @@ func (a *UserHighlightsServiceAPIService) GetFollowingHighlightsExecute(r ApiGet
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	if r.repo != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repo", r.repo, "")

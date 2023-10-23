@@ -23,12 +23,13 @@ import (
 type EmojisServiceAPIService service
 
 type ApiFindAllEmojisRequest struct {
-	ctx            context.Context
-	ApiService     *EmojisServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *EmojisServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllEmojisRequest) Page(page int32) ApiFindAllEmojisRequest {
@@ -49,6 +50,12 @@ func (r ApiFindAllEmojisRequest) OrderDirection(orderDirection OrderDirectionEnu
 // Range in days
 func (r ApiFindAllEmojisRequest) Range_(range_ int32) ApiFindAllEmojisRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllEmojisRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllEmojisRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -102,6 +109,9 @@ func (a *EmojisServiceAPIService) FindAllEmojisExecute(r ApiFindAllEmojisRequest
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

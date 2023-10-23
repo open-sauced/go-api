@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## FindAllChurnPullRequestContributors
 
-> SearchAllPullRequestContributors200Response FindAllChurnPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+> SearchAllPullRequestContributors200Response FindAllChurnPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
 
 Gets all recent churned contributors for the last 30 days based on repo IDs
 
@@ -35,11 +35,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repoIds := "repoIds_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ContributorsServiceAPI.FindAllChurnPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+    resp, r, err := apiClient.ContributorsServiceAPI.FindAllChurnPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContributorsServiceAPI.FindAllChurnPullRequestContributors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,6 +65,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repoIds** | **string** |  | 
 
 ### Return type
@@ -86,7 +88,7 @@ No authorization required
 
 ## FindAllRecentPullRequestContributors
 
-> SearchAllPullRequestContributors200Response FindAllRecentPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+> SearchAllPullRequestContributors200Response FindAllRecentPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
 
 Gets all recent contributors for the last 30 days based on repo IDs
 
@@ -107,11 +109,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repoIds := "repoIds_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ContributorsServiceAPI.FindAllRecentPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+    resp, r, err := apiClient.ContributorsServiceAPI.FindAllRecentPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContributorsServiceAPI.FindAllRecentPullRequestContributors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -136,6 +139,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repoIds** | **string** |  | 
 
 ### Return type
@@ -158,7 +162,7 @@ No authorization required
 
 ## FindAllRepeatPullRequestContributors
 
-> SearchAllPullRequestContributors200Response FindAllRepeatPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+> SearchAllPullRequestContributors200Response FindAllRepeatPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
 
 Gets all recent repeat contributors for the last 30 days based on repo IDs
 
@@ -179,11 +183,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repoIds := "repoIds_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ContributorsServiceAPI.FindAllRepeatPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+    resp, r, err := apiClient.ContributorsServiceAPI.FindAllRepeatPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContributorsServiceAPI.FindAllRepeatPullRequestContributors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -208,6 +213,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repoIds** | **string** |  | 
 
 ### Return type
@@ -230,7 +236,7 @@ No authorization required
 
 ## NewPullRequestContributors
 
-> SearchAllPullRequestContributors200Response NewPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+> SearchAllPullRequestContributors200Response NewPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
 
 Gets new contributors given a date range for repo IDs
 
@@ -251,11 +257,12 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repoIds := "repoIds_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ContributorsServiceAPI.NewPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).RepoIds(repoIds).Execute()
+    resp, r, err := apiClient.ContributorsServiceAPI.NewPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).RepoIds(repoIds).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContributorsServiceAPI.NewPullRequestContributors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -280,6 +287,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repoIds** | **string** |  | 
 
 ### Return type
@@ -302,7 +310,7 @@ No authorization required
 
 ## SearchAllPullRequestContributors
 
-> SearchAllPullRequestContributors200Response SearchAllPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Filter(filter).Topic(topic).Repo(repo).RepoIds(repoIds).Execute()
+> SearchAllPullRequestContributors200Response SearchAllPullRequestContributors(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Filter(filter).Topic(topic).Repo(repo).RepoIds(repoIds).Execute()
 
 Searches contributors from pull requests using filters and paginates them
 
@@ -323,6 +331,7 @@ func main() {
     limit := int32(56) // int32 |  (optional) (default to 10)
     orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     filter := openapiclient.InsightFilterFieldsEnum("recent") // InsightFilterFieldsEnum |  (optional)
     topic := "javascript" // string |  (optional)
     repo := "open-sauced/insights" // string |  (optional)
@@ -330,7 +339,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ContributorsServiceAPI.SearchAllPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).Filter(filter).Topic(topic).Repo(repo).RepoIds(repoIds).Execute()
+    resp, r, err := apiClient.ContributorsServiceAPI.SearchAllPullRequestContributors(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Filter(filter).Topic(topic).Repo(repo).RepoIds(repoIds).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ContributorsServiceAPI.SearchAllPullRequestContributors``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -355,6 +364,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** |  | [default to 10]
  **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
  **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **filter** | [**InsightFilterFieldsEnum**](InsightFilterFieldsEnum.md) |  | 
  **topic** | **string** |  | 
  **repo** | **string** |  | 

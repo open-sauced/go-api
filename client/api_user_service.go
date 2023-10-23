@@ -24,13 +24,14 @@ import (
 type UserServiceAPIService service
 
 type ApiFindAllHighlightsByUsernameRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserServiceAPIService
+	username          string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllHighlightsByUsernameRequest) Page(page int32) ApiFindAllHighlightsByUsernameRequest {
@@ -51,6 +52,12 @@ func (r ApiFindAllHighlightsByUsernameRequest) OrderDirection(orderDirection Ord
 // Range in days
 func (r ApiFindAllHighlightsByUsernameRequest) Range_(range_ int32) ApiFindAllHighlightsByUsernameRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllHighlightsByUsernameRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllHighlightsByUsernameRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -108,6 +115,9 @@ func (a *UserServiceAPIService) FindAllHighlightsByUsernameExecute(r ApiFindAllH
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -163,13 +173,14 @@ func (a *UserServiceAPIService) FindAllHighlightsByUsernameExecute(r ApiFindAllH
 }
 
 type ApiFindAllTopReposByUsernameRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserServiceAPIService
+	username          string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindAllTopReposByUsernameRequest) Page(page int32) ApiFindAllTopReposByUsernameRequest {
@@ -190,6 +201,12 @@ func (r ApiFindAllTopReposByUsernameRequest) OrderDirection(orderDirection Order
 // Range in days
 func (r ApiFindAllTopReposByUsernameRequest) Range_(range_ int32) ApiFindAllTopReposByUsernameRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllTopReposByUsernameRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllTopReposByUsernameRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -247,6 +264,9 @@ func (a *UserServiceAPIService) FindAllTopReposByUsernameExecute(r ApiFindAllTop
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -302,13 +322,14 @@ func (a *UserServiceAPIService) FindAllTopReposByUsernameExecute(r ApiFindAllTop
 }
 
 type ApiFindContributorPullRequestsRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	username       string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserServiceAPIService
+	username          string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiFindContributorPullRequestsRequest) Page(page int32) ApiFindContributorPullRequestsRequest {
@@ -329,6 +350,12 @@ func (r ApiFindContributorPullRequestsRequest) OrderDirection(orderDirection Ord
 // Range in days
 func (r ApiFindContributorPullRequestsRequest) Range_(range_ int32) ApiFindContributorPullRequestsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindContributorPullRequestsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindContributorPullRequestsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -385,6 +412,9 @@ func (a *UserServiceAPIService) FindContributorPullRequestsExecute(r ApiFindCont
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -873,12 +903,13 @@ func (a *UserServiceAPIService) GetTop10HighlightsExecute(r ApiGetTop10Highlight
 }
 
 type ApiGetUserNotificationsRequest struct {
-	ctx            context.Context
-	ApiService     *UserServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiGetUserNotificationsRequest) Page(page int32) ApiGetUserNotificationsRequest {
@@ -899,6 +930,12 @@ func (r ApiGetUserNotificationsRequest) OrderDirection(orderDirection OrderDirec
 // Range in days
 func (r ApiGetUserNotificationsRequest) Range_(range_ int32) ApiGetUserNotificationsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetUserNotificationsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetUserNotificationsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -952,6 +989,9 @@ func (a *UserServiceAPIService) GetUserNotificationsExecute(r ApiGetUserNotifica
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

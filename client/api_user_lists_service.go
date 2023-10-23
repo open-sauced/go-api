@@ -17,6 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -316,14 +317,371 @@ func (a *UserListsServiceAPIService) DeleteUserListContributorExecute(r ApiDelet
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetContributorsRequest struct {
+type ApiGetContributionsByProjectRequest struct {
 	ctx        context.Context
 	ApiService *UserListsServiceAPIService
-	page       *int32
-	limit      *int32
-	location   *string
-	timezone   *string
-	prVelocity *int32
+	id         string
+	range_     *int32
+}
+
+// Range in days
+func (r ApiGetContributionsByProjectRequest) Range_(range_ int32) ApiGetContributionsByProjectRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiGetContributionsByProjectRequest) Execute() (*DbContributionsProjects, *http.Response, error) {
+	return r.ApiService.GetContributionsByProjectExecute(r)
+}
+
+/*
+GetContributionsByProject Gets contributions in a given timeframe
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetContributionsByProjectRequest
+*/
+func (a *UserListsServiceAPIService) GetContributionsByProject(ctx context.Context, id string) ApiGetContributionsByProjectRequest {
+	return ApiGetContributionsByProjectRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbContributionsProjects
+func (a *UserListsServiceAPIService) GetContributionsByProjectExecute(r ApiGetContributionsByProjectRequest) (*DbContributionsProjects, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbContributionsProjects
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetContributionsByProject")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/stats/contributions-by-project"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetContributionsByTimeFrameRequest struct {
+	ctx             context.Context
+	ApiService      *UserListsServiceAPIService
+	id              string
+	range_          *int32
+	contributorType *UserListContributorStatsTypeEnum
+}
+
+// Range in days
+func (r ApiGetContributionsByTimeFrameRequest) Range_(range_ int32) ApiGetContributionsByTimeFrameRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiGetContributionsByTimeFrameRequest) ContributorType(contributorType UserListContributorStatsTypeEnum) ApiGetContributionsByTimeFrameRequest {
+	r.contributorType = &contributorType
+	return r
+}
+
+func (r ApiGetContributionsByTimeFrameRequest) Execute() (*DbContributionStatTimeframe, *http.Response, error) {
+	return r.ApiService.GetContributionsByTimeFrameExecute(r)
+}
+
+/*
+GetContributionsByTimeFrame Gets contributions in a given timeframe
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetContributionsByTimeFrameRequest
+*/
+func (a *UserListsServiceAPIService) GetContributionsByTimeFrame(ctx context.Context, id string) ApiGetContributionsByTimeFrameRequest {
+	return ApiGetContributionsByTimeFrameRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbContributionStatTimeframe
+func (a *UserListsServiceAPIService) GetContributionsByTimeFrameExecute(r ApiGetContributionsByTimeFrameRequest) (*DbContributionStatTimeframe, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbContributionStatTimeframe
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetContributionsByTimeFrame")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/stats/contributions-evolution-by-type"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.contributorType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contributorType", r.contributorType, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetContributorContributionsByProjectRequest struct {
+	ctx        context.Context
+	ApiService *UserListsServiceAPIService
+	id         string
+	repoId     *int32
+	range_     *int32
+}
+
+// Repo ID
+func (r ApiGetContributorContributionsByProjectRequest) RepoId(repoId int32) ApiGetContributorContributionsByProjectRequest {
+	r.repoId = &repoId
+	return r
+}
+
+// Range in days
+func (r ApiGetContributorContributionsByProjectRequest) Range_(range_ int32) ApiGetContributorContributionsByProjectRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiGetContributorContributionsByProjectRequest) Execute() (*DbUserListContributorStat, *http.Response, error) {
+	return r.ApiService.GetContributorContributionsByProjectExecute(r)
+}
+
+/*
+GetContributorContributionsByProject Gets top 20 contributor stats in a list by a given project
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetContributorContributionsByProjectRequest
+*/
+func (a *UserListsServiceAPIService) GetContributorContributionsByProject(ctx context.Context, id string) ApiGetContributorContributionsByProjectRequest {
+	return ApiGetContributorContributionsByProjectRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbUserListContributorStat
+func (a *UserListsServiceAPIService) GetContributorContributionsByProjectExecute(r ApiGetContributorContributionsByProjectRequest) (*DbUserListContributorStat, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserListContributorStat
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetContributorContributionsByProject")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/stats/top-project-contributions-by-contributor"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.repoId == nil {
+		return localVarReturnValue, nil, reportError("repoId is required and must be specified")
+	}
+
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "repo_id", r.repoId, "")
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetContributorsRequest struct {
+	ctx         context.Context
+	ApiService  *UserListsServiceAPIService
+	page        *int32
+	limit       *int32
+	location    *[]string
+	contributor *string
+	timezone    *[]string
+	prVelocity  *int32
 }
 
 func (r ApiGetContributorsRequest) Page(page int32) ApiGetContributorsRequest {
@@ -336,12 +694,17 @@ func (r ApiGetContributorsRequest) Limit(limit int32) ApiGetContributorsRequest 
 	return r
 }
 
-func (r ApiGetContributorsRequest) Location(location string) ApiGetContributorsRequest {
+func (r ApiGetContributorsRequest) Location(location []string) ApiGetContributorsRequest {
 	r.location = &location
 	return r
 }
 
-func (r ApiGetContributorsRequest) Timezone(timezone string) ApiGetContributorsRequest {
+func (r ApiGetContributorsRequest) Contributor(contributor string) ApiGetContributorsRequest {
+	r.contributor = &contributor
+	return r
+}
+
+func (r ApiGetContributorsRequest) Timezone(timezone []string) ApiGetContributorsRequest {
 	r.timezone = &timezone
 	return r
 }
@@ -398,10 +761,29 @@ func (a *UserListsServiceAPIService) GetContributorsExecute(r ApiGetContributors
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
 	}
 	if r.location != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "location", r.location, "")
+		t := *r.location
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "location", s.Index(i).Interface(), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "location", t, "multi")
+		}
+	}
+	if r.contributor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contributor", r.contributor, "")
 	}
 	if r.timezone != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "timezone", r.timezone, "")
+		t := *r.timezone
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "timezone", s.Index(i).Interface(), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "timezone", t, "multi")
+		}
 	}
 	if r.prVelocity != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pr_velocity", r.prVelocity, "")
@@ -460,13 +842,135 @@ func (a *UserListsServiceAPIService) GetContributorsExecute(r ApiGetContributors
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetContributorsByTimeframeRequest struct {
+	ctx             context.Context
+	ApiService      *UserListsServiceAPIService
+	id              string
+	range_          *int32
+	contributorType *UserListContributorStatsTypeEnum
+}
+
+// Range in days
+func (r ApiGetContributorsByTimeframeRequest) Range_(range_ int32) ApiGetContributorsByTimeframeRequest {
+	r.range_ = &range_
+	return r
+}
+
+func (r ApiGetContributorsByTimeframeRequest) ContributorType(contributorType UserListContributorStatsTypeEnum) ApiGetContributorsByTimeframeRequest {
+	r.contributorType = &contributorType
+	return r
+}
+
+func (r ApiGetContributorsByTimeframeRequest) Execute() (*DbContributorCategoryTimeframe, *http.Response, error) {
+	return r.ApiService.GetContributorsByTimeframeExecute(r)
+}
+
+/*
+GetContributorsByTimeframe Gets contributions by category within timeframe
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetContributorsByTimeframeRequest
+*/
+func (a *UserListsServiceAPIService) GetContributorsByTimeframe(ctx context.Context, id string) ApiGetContributorsByTimeframeRequest {
+	return ApiGetContributorsByTimeframeRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbContributorCategoryTimeframe
+func (a *UserListsServiceAPIService) GetContributorsByTimeframeExecute(r ApiGetContributorsByTimeframeRequest) (*DbContributorCategoryTimeframe, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbContributorCategoryTimeframe
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetContributorsByTimeframe")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/stats/contributions-evolution-by-contributor-type"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.contributorType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contributorType", r.contributorType, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetListsForUserRequest struct {
-	ctx            context.Context
-	ApiService     *UserListsServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserListsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiGetListsForUserRequest) Page(page int32) ApiGetListsForUserRequest {
@@ -487,6 +991,12 @@ func (r ApiGetListsForUserRequest) OrderDirection(orderDirection OrderDirectionE
 // Range in days
 func (r ApiGetListsForUserRequest) Range_(range_ int32) ApiGetListsForUserRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetListsForUserRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetListsForUserRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -541,6 +1051,274 @@ func (a *UserListsServiceAPIService) GetListsForUserExecute(r ApiGetListsForUser
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetMostActiveContributorsRequest struct {
+	ctx               context.Context
+	ApiService        *UserListsServiceAPIService
+	id                string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	contributorType   *UserListContributorStatsTypeEnum
+	orderBy           *UserListContributorStatsOrderEnum
+}
+
+func (r ApiGetMostActiveContributorsRequest) Page(page int32) ApiGetMostActiveContributorsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetMostActiveContributorsRequest) Limit(limit int32) ApiGetMostActiveContributorsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetMostActiveContributorsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetMostActiveContributorsRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiGetMostActiveContributorsRequest) Range_(range_ int32) ApiGetMostActiveContributorsRequest {
+	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetMostActiveContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetMostActiveContributorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
+	return r
+}
+
+func (r ApiGetMostActiveContributorsRequest) ContributorType(contributorType UserListContributorStatsTypeEnum) ApiGetMostActiveContributorsRequest {
+	r.contributorType = &contributorType
+	return r
+}
+
+func (r ApiGetMostActiveContributorsRequest) OrderBy(orderBy UserListContributorStatsOrderEnum) ApiGetMostActiveContributorsRequest {
+	r.orderBy = &orderBy
+	return r
+}
+
+func (r ApiGetMostActiveContributorsRequest) Execute() (*GetMostActiveContributors200Response, *http.Response, error) {
+	return r.ApiService.GetMostActiveContributorsExecute(r)
+}
+
+/*
+GetMostActiveContributors Gets most active contributors for a given list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetMostActiveContributorsRequest
+*/
+func (a *UserListsServiceAPIService) GetMostActiveContributors(ctx context.Context, id string) ApiGetMostActiveContributorsRequest {
+	return ApiGetMostActiveContributorsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetMostActiveContributors200Response
+func (a *UserListsServiceAPIService) GetMostActiveContributorsExecute(r ApiGetMostActiveContributorsRequest) (*GetMostActiveContributors200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetMostActiveContributors200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetMostActiveContributors")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/{id}/stats/most-active-contributors"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
+	if r.contributorType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contributorType", r.contributorType, "")
+	}
+	if r.orderBy != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetTimezonesRequest struct {
+	ctx        context.Context
+	ApiService *UserListsServiceAPIService
+}
+
+func (r ApiGetTimezonesRequest) Execute() (*DbTimezone, *http.Response, error) {
+	return r.ApiService.GetTimezonesExecute(r)
+}
+
+/*
+GetTimezones Retrieves all users timezones
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTimezonesRequest
+*/
+func (a *UserListsServiceAPIService) GetTimezones(ctx context.Context) ApiGetTimezonesRequest {
+	return ApiGetTimezonesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbTimezone
+func (a *UserListsServiceAPIService) GetTimezonesExecute(r ApiGetTimezonesRequest) (*DbTimezone, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbTimezone
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetTimezones")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/lists/timezones"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -698,13 +1476,14 @@ func (a *UserListsServiceAPIService) GetUserListExecute(r ApiGetUserListRequest)
 }
 
 type ApiGetUserListContributorsRequest struct {
-	ctx            context.Context
-	ApiService     *UserListsServiceAPIService
-	id             string
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
+	ctx               context.Context
+	ApiService        *UserListsServiceAPIService
+	id                string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
 }
 
 func (r ApiGetUserListContributorsRequest) Page(page int32) ApiGetUserListContributorsRequest {
@@ -725,6 +1504,12 @@ func (r ApiGetUserListContributorsRequest) OrderDirection(orderDirection OrderDi
 // Range in days
 func (r ApiGetUserListContributorsRequest) Range_(range_ int32) ApiGetUserListContributorsRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetUserListContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetUserListContributorsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -781,6 +1566,9 @@ func (a *UserListsServiceAPIService) GetUserListContributorsExecute(r ApiGetUser
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

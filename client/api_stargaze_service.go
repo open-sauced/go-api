@@ -232,13 +232,14 @@ func (a *StargazeServiceAPIService) DownStargazeOneByOwnerAndRepoExecute(r ApiDo
 }
 
 type ApiFindAllUserStargazedRequest struct {
-	ctx            context.Context
-	ApiService     *StargazeServiceAPIService
-	page           *int32
-	limit          *int32
-	orderDirection *OrderDirectionEnum
-	range_         *int32
-	orderBy        *RepoOrderFieldsEnum
+	ctx               context.Context
+	ApiService        *StargazeServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	orderBy           *RepoOrderFieldsEnum
 }
 
 func (r ApiFindAllUserStargazedRequest) Page(page int32) ApiFindAllUserStargazedRequest {
@@ -259,6 +260,12 @@ func (r ApiFindAllUserStargazedRequest) OrderDirection(orderDirection OrderDirec
 // Range in days
 func (r ApiFindAllUserStargazedRequest) Range_(range_ int32) ApiFindAllUserStargazedRequest {
 	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindAllUserStargazedRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllUserStargazedRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
@@ -317,6 +324,9 @@ func (a *StargazeServiceAPIService) FindAllUserStargazedExecute(r ApiFindAllUser
 	}
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	if r.orderBy != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "orderBy", r.orderBy, "")

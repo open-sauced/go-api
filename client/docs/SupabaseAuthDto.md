@@ -26,6 +26,8 @@ Name | Type | Description | Notes
 **GithubSponsorsUrl** | Pointer to **string** | GitHub Sponsors URL | [optional] 
 **DiscordUrl** | Pointer to **string** | Discord URL | [optional] 
 **NotificationCount** | Pointer to **int32** | Unread User Notification Count | [optional] 
+**InsightsCount** | Pointer to **int32** | Unread Insight Pagees Count | [optional] 
+**CouponCode** | Pointer to **string** | Coupon Code | [optional] 
 
 ## Methods
 
@@ -590,6 +592,56 @@ SetNotificationCount sets NotificationCount field to given value.
 `func (o *SupabaseAuthDto) HasNotificationCount() bool`
 
 HasNotificationCount returns a boolean if a field has been set.
+
+### GetInsightsCount
+
+`func (o *SupabaseAuthDto) GetInsightsCount() int32`
+
+GetInsightsCount returns the InsightsCount field if non-nil, zero value otherwise.
+
+### GetInsightsCountOk
+
+`func (o *SupabaseAuthDto) GetInsightsCountOk() (*int32, bool)`
+
+GetInsightsCountOk returns a tuple with the InsightsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInsightsCount
+
+`func (o *SupabaseAuthDto) SetInsightsCount(v int32)`
+
+SetInsightsCount sets InsightsCount field to given value.
+
+### HasInsightsCount
+
+`func (o *SupabaseAuthDto) HasInsightsCount() bool`
+
+HasInsightsCount returns a boolean if a field has been set.
+
+### GetCouponCode
+
+`func (o *SupabaseAuthDto) GetCouponCode() string`
+
+GetCouponCode returns the CouponCode field if non-nil, zero value otherwise.
+
+### GetCouponCodeOk
+
+`func (o *SupabaseAuthDto) GetCouponCodeOk() (*string, bool)`
+
+GetCouponCodeOk returns a tuple with the CouponCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCouponCode
+
+`func (o *SupabaseAuthDto) SetCouponCode(v string)`
+
+SetCouponCode sets CouponCode field to given value.
+
+### HasCouponCode
+
+`func (o *SupabaseAuthDto) HasCouponCode() bool`
+
+HasCouponCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -119,6 +119,7 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AuthenticationServiceAPI* | [**ApplyCouponForUser**](docs/AuthenticationServiceAPI.md#applycouponforuser) | **Patch** /v1/auth/profile/coupon | Applies a coupon for the authenticated user
 *AuthenticationServiceAPI* | [**CheckAuthSession**](docs/AuthenticationServiceAPI.md#checkauthsession) | **Get** /v1/auth/session | Get authenticated session information
 *AuthenticationServiceAPI* | [**PostCreateCheckoutSession**](docs/AuthenticationServiceAPI.md#postcreatecheckoutsession) | **Post** /v1/auth/checkout/session | Creates a new checkout session for the user
 *AuthenticationServiceAPI* | [**PostOnboarding**](docs/AuthenticationServiceAPI.md#postonboarding) | **Post** /v1/auth/onboarding | Updates onboarding information for user
@@ -128,6 +129,7 @@ Class | Method | HTTP request | Description
 *AuthenticationServiceAPI* | [**UpdateProfileForUser**](docs/AuthenticationServiceAPI.md#updateprofileforuser) | **Patch** /v1/auth/profile | Updates the profile for the authenticated user
 *BlogSummaryServiceAPI* | [**GenerateBlogSummary**](docs/BlogSummaryServiceAPI.md#generateblogsummary) | **Post** /v1/blogs/summary/generate | Generate a summary for a markdown supported blog
 *ContributionServiceAPI* | [**FindAllByOwnerAndRepo**](docs/ContributionServiceAPI.md#findallbyownerandrepo) | **Get** /v1/repos/{owner}/{repo}/contributions | Finds a repo by :owner and :repo listing all contributions and paginating them
+*ContributionServiceAPI* | [**FindAllByOwnerRepoAndContributorLogin**](docs/ContributionServiceAPI.md#findallbyownerrepoandcontributorlogin) | **Get** /v1/repos/{owner}/{repo}/{login}/contributions | Finds a repo by :owner and :repo listing all contributions for a given :login and paginating them
 *ContributionServiceAPI* | [**FindAllByRepoId**](docs/ContributionServiceAPI.md#findallbyrepoid) | **Get** /v1/repos/{id}/contributions | Find a repo by :id listing all contributions and paginating them
 *ContributorsServiceAPI* | [**FindAllChurnPullRequestContributors**](docs/ContributorsServiceAPI.md#findallchurnpullrequestcontributors) | **Get** /v1/contributors/insights/churn | Gets all recent churned contributors for the last 30 days based on repo IDs
 *ContributorsServiceAPI* | [**FindAllRecentPullRequestContributors**](docs/ContributorsServiceAPI.md#findallrecentpullrequestcontributors) | **Get** /v1/contributors/insights/recent | Gets all recent contributors for the last 30 days based on repo IDs
@@ -177,10 +179,12 @@ Class | Method | HTTP request | Description
 *PullRequestsServiceAPI* | [**GenerateCodeTest**](docs/PullRequestsServiceAPI.md#generatecodetest) | **Post** /v1/prs/test/generate | Generates a test for the provided code
 *PullRequestsServiceAPI* | [**GeneratePRDescription**](docs/PullRequestsServiceAPI.md#generateprdescription) | **Post** /v1/prs/description/generate | Generates a PR description based on the provided information
 *PullRequestsServiceAPI* | [**GetPullRequestInsights**](docs/PullRequestsServiceAPI.md#getpullrequestinsights) | **Get** /v1/prs/insights | Find pull request insights over the last 2 months
+*PullRequestsServiceAPI* | [**GetPullRequestReviews**](docs/PullRequestsServiceAPI.md#getpullrequestreviews) | **Get** /v1/prs/{id}/reviews | Find all pull request reviews by pull request ID
 *PullRequestsServiceAPI* | [**ListAllPullRequests**](docs/PullRequestsServiceAPI.md#listallpullrequests) | **Get** /v1/prs/list | Finds all pull requests and paginates them
 *PullRequestsServiceAPI* | [**SearchAllPullRequests**](docs/PullRequestsServiceAPI.md#searchallpullrequests) | **Get** /v1/prs/search | Searches pull requests using filters and paginates them
 *RepositoryServiceAPI* | [**FindAll**](docs/RepositoryServiceAPI.md#findall) | **Get** /v1/repos/list | Finds all repos and paginates them
 *RepositoryServiceAPI* | [**FindAllByOwnerAndRepo**](docs/RepositoryServiceAPI.md#findallbyownerandrepo) | **Get** /v1/repos/{owner}/{repo}/contributions | Finds a repo by :owner and :repo listing all contributions and paginating them
+*RepositoryServiceAPI* | [**FindAllByOwnerRepoAndContributorLogin**](docs/RepositoryServiceAPI.md#findallbyownerrepoandcontributorlogin) | **Get** /v1/repos/{owner}/{repo}/{login}/contributions | Finds a repo by :owner and :repo listing all contributions for a given :login and paginating them
 *RepositoryServiceAPI* | [**FindAllByRepoId**](docs/RepositoryServiceAPI.md#findallbyrepoid) | **Get** /v1/repos/{id}/contributions | Find a repo by :id listing all contributions and paginating them
 *RepositoryServiceAPI* | [**FindAllReposWithFilters**](docs/RepositoryServiceAPI.md#findallreposwithfilters) | **Get** /v1/repos/search | Finds all repos using filters and paginates them
 *RepositoryServiceAPI* | [**FindOneById**](docs/RepositoryServiceAPI.md#findonebyid) | **Get** /v1/repos/{id} | Finds a repo by :id
@@ -238,8 +242,14 @@ Class | Method | HTTP request | Description
 *UserListsServiceAPI* | [**AddListForUser**](docs/UserListsServiceAPI.md#addlistforuser) | **Post** /v1/lists | Adds a new list for the authenticated user
 *UserListsServiceAPI* | [**DeleteListForUser**](docs/UserListsServiceAPI.md#deletelistforuser) | **Delete** /v1/lists/{id} | Deletes the list for the authenticated user
 *UserListsServiceAPI* | [**DeleteUserListContributor**](docs/UserListsServiceAPI.md#deleteuserlistcontributor) | **Delete** /v1/lists/{id}/contributors/{userListContributorId} | Delete contributor from an individual user list
+*UserListsServiceAPI* | [**GetContributionsByProject**](docs/UserListsServiceAPI.md#getcontributionsbyproject) | **Get** /v1/lists/{id}/stats/contributions-by-project | Gets contributions in a given timeframe
+*UserListsServiceAPI* | [**GetContributionsByTimeFrame**](docs/UserListsServiceAPI.md#getcontributionsbytimeframe) | **Get** /v1/lists/{id}/stats/contributions-evolution-by-type | Gets contributions in a given timeframe
+*UserListsServiceAPI* | [**GetContributorContributionsByProject**](docs/UserListsServiceAPI.md#getcontributorcontributionsbyproject) | **Get** /v1/lists/{id}/stats/top-project-contributions-by-contributor | Gets top 20 contributor stats in a list by a given project
 *UserListsServiceAPI* | [**GetContributors**](docs/UserListsServiceAPI.md#getcontributors) | **Get** /v1/lists/contributors | Retrieves paginated contributors
+*UserListsServiceAPI* | [**GetContributorsByTimeframe**](docs/UserListsServiceAPI.md#getcontributorsbytimeframe) | **Get** /v1/lists/{id}/stats/contributions-evolution-by-contributor-type | Gets contributions by category within timeframe
 *UserListsServiceAPI* | [**GetListsForUser**](docs/UserListsServiceAPI.md#getlistsforuser) | **Get** /v1/lists | Gets lists for the authenticated user
+*UserListsServiceAPI* | [**GetMostActiveContributors**](docs/UserListsServiceAPI.md#getmostactivecontributors) | **Get** /v1/lists/{id}/stats/most-active-contributors | Gets most active contributors for a given list
+*UserListsServiceAPI* | [**GetTimezones**](docs/UserListsServiceAPI.md#gettimezones) | **Get** /v1/lists/timezones | Retrieves all users timezones
 *UserListsServiceAPI* | [**GetUserList**](docs/UserListsServiceAPI.md#getuserlist) | **Get** /v1/lists/{id} | Retrieves an individual user list
 *UserListsServiceAPI* | [**GetUserListContributors**](docs/UserListsServiceAPI.md#getuserlistcontributors) | **Get** /v1/lists/{id}/contributors | Retrieves contributors for an individual user list
 *UserListsServiceAPI* | [**PostUserListContributors**](docs/UserListsServiceAPI.md#postuserlistcontributors) | **Post** /v1/lists/{id}/contributors | Add new contributors to an individual user list
@@ -266,6 +276,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ApplyUserCouponDto](docs/ApplyUserCouponDto.md)
  - [BakeRepoDto](docs/BakeRepoDto.md)
  - [CollaboratorsDto](docs/CollaboratorsDto.md)
  - [CreateBlogSummaryDto](docs/CreateBlogSummaryDto.md)
@@ -280,6 +291,9 @@ Class | Method | HTTP request | Description
  - [DbCommitAuthors](docs/DbCommitAuthors.md)
  - [DbCommits](docs/DbCommits.md)
  - [DbContribution](docs/DbContribution.md)
+ - [DbContributionStatTimeframe](docs/DbContributionStatTimeframe.md)
+ - [DbContributionsProjects](docs/DbContributionsProjects.md)
+ - [DbContributorCategoryTimeframe](docs/DbContributorCategoryTimeframe.md)
  - [DbEmoji](docs/DbEmoji.md)
  - [DbEndorsement](docs/DbEndorsement.md)
  - [DbFilteredUser](docs/DbFilteredUser.md)
@@ -288,11 +302,14 @@ Class | Method | HTTP request | Description
  - [DbPRInsight](docs/DbPRInsight.md)
  - [DbPullRequest](docs/DbPullRequest.md)
  - [DbPullRequestContributor](docs/DbPullRequestContributor.md)
+ - [DbPullRequestReview](docs/DbPullRequestReview.md)
  - [DbRepo](docs/DbRepo.md)
+ - [DbRepoLoginContributions](docs/DbRepoLoginContributions.md)
  - [DbRepoToUserStargazers](docs/DbRepoToUserStargazers.md)
  - [DbRepoToUserStars](docs/DbRepoToUserStars.md)
  - [DbRepoToUserSubmissions](docs/DbRepoToUserSubmissions.md)
  - [DbRepoToUserVotes](docs/DbRepoToUserVotes.md)
+ - [DbTimezone](docs/DbTimezone.md)
  - [DbTopUser](docs/DbTopUser.md)
  - [DbUser](docs/DbUser.md)
  - [DbUserCollaboration](docs/DbUserCollaboration.md)
@@ -302,6 +319,7 @@ Class | Method | HTTP request | Description
  - [DbUserHighlightRepo](docs/DbUserHighlightRepo.md)
  - [DbUserList](docs/DbUserList.md)
  - [DbUserListContributor](docs/DbUserListContributor.md)
+ - [DbUserListContributorStat](docs/DbUserListContributorStat.md)
  - [DbUserToUserFollows](docs/DbUserToUserFollows.md)
  - [FindAllByRepoId200Response](docs/FindAllByRepoId200Response.md)
  - [FindAllEmojis200Response](docs/FindAllEmojis200Response.md)
@@ -318,6 +336,7 @@ Class | Method | HTTP request | Description
  - [GenerateCodeTestSuggestionDto](docs/GenerateCodeTestSuggestionDto.md)
  - [GeneratePullRequestDescriptionDto](docs/GeneratePullRequestDescriptionDto.md)
  - [GetContributors200Response](docs/GetContributors200Response.md)
+ - [GetMostActiveContributors200Response](docs/GetMostActiveContributors200Response.md)
  - [GetUserListContributors200Response](docs/GetUserListContributors200Response.md)
  - [HealthStatusService200Response](docs/HealthStatusService200Response.md)
  - [HealthStatusService200ResponseInfoValue](docs/HealthStatusService200ResponseInfoValue.md)
@@ -342,6 +361,8 @@ Class | Method | HTTP request | Description
  - [UpdateUserDto](docs/UpdateUserDto.md)
  - [UpdateUserEmailPreferencesDto](docs/UpdateUserEmailPreferencesDto.md)
  - [UpdateUserProfileInterestsDto](docs/UpdateUserProfileInterestsDto.md)
+ - [UserListContributorStatsOrderEnum](docs/UserListContributorStatsOrderEnum.md)
+ - [UserListContributorStatsTypeEnum](docs/UserListContributorStatsTypeEnum.md)
  - [UserOnboardingDto](docs/UserOnboardingDto.md)
  - [VotedRepoDto](docs/VotedRepoDto.md)
 

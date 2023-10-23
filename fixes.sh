@@ -7,7 +7,7 @@ CURRENT_DIR="."
 rm client/api_contribution_service.go
 
 # Apply all the patch files
-for patch in "${CURRENT_DIR}"/*.patch; do
+for patch in "${CURRENT_DIR}"/patches/*; do
     echo "Applying patch: $patch"
     git apply "$patch"
     if [[ $? -ne 0 ]]; then
