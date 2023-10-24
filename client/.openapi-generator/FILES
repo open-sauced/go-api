@@ -87,6 +87,7 @@ docs/FindAllTopReposByUsername200Response.md
 docs/FindAllUserCollaborations200Response.md
 docs/FindAllUserCreatedEndorsements200Response.md
 docs/FindContributorPullRequests200Response.md
+docs/FollowManyUsersDto.md
 docs/GenerateCodeExplanationDto.md
 docs/GenerateCodeRefactorSuggestionDto.md
 docs/GenerateCodeTestSuggestionDto.md
@@ -193,6 +194,7 @@ model_find_all_top_repos_by_username_200_response.go
 model_find_all_user_collaborations_200_response.go
 model_find_all_user_created_endorsements_200_response.go
 model_find_contributor_pull_requests_200_response.go
+model_follow_many_users_dto.go
 model_generate_code_explanation_dto.go
 model_generate_code_refactor_suggestion_dto.go
 model_generate_code_test_suggestion_dto.go

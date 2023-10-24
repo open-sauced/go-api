@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
 *ContributionServiceAPI* | [**FindAllByOwnerAndRepo**](docs/ContributionServiceAPI.md#findallbyownerandrepo) | **Get** /v1/repos/{owner}/{repo}/contributions | Finds a repo by :owner and :repo listing all contributions and paginating them
 *ContributionServiceAPI* | [**FindAllByOwnerRepoAndContributorLogin**](docs/ContributionServiceAPI.md#findallbyownerrepoandcontributorlogin) | **Get** /v1/repos/{owner}/{repo}/{login}/contributions | Finds a repo by :owner and :repo listing all contributions for a given :login and paginating them
 *ContributionServiceAPI* | [**FindAllByRepoId**](docs/ContributionServiceAPI.md#findallbyrepoid) | **Get** /v1/repos/{id}/contributions | Find a repo by :id listing all contributions and paginating them
+*ContributionServiceAPI* | [**FindAllContributorsByRepoId**](docs/ContributionServiceAPI.md#findallcontributorsbyrepoid) | **Get** /v1/repos/{owner}/{repo}/contributions/contributors | Finds a repo by :owner and :repo listing all contributions by their user login
 *ContributorsServiceAPI* | [**FindAllChurnPullRequestContributors**](docs/ContributorsServiceAPI.md#findallchurnpullrequestcontributors) | **Get** /v1/contributors/insights/churn | Gets all recent churned contributors for the last 30 days based on repo IDs
 *ContributorsServiceAPI* | [**FindAllRecentPullRequestContributors**](docs/ContributorsServiceAPI.md#findallrecentpullrequestcontributors) | **Get** /v1/contributors/insights/recent | Gets all recent contributors for the last 30 days based on repo IDs
 *ContributorsServiceAPI* | [**FindAllRepeatPullRequestContributors**](docs/ContributorsServiceAPI.md#findallrepeatpullrequestcontributors) | **Get** /v1/contributors/insights/repeat | Gets all recent repeat contributors for the last 30 days based on repo IDs
@@ -186,6 +187,7 @@ Class | Method | HTTP request | Description
 *RepositoryServiceAPI* | [**FindAllByOwnerAndRepo**](docs/RepositoryServiceAPI.md#findallbyownerandrepo) | **Get** /v1/repos/{owner}/{repo}/contributions | Finds a repo by :owner and :repo listing all contributions and paginating them
 *RepositoryServiceAPI* | [**FindAllByOwnerRepoAndContributorLogin**](docs/RepositoryServiceAPI.md#findallbyownerrepoandcontributorlogin) | **Get** /v1/repos/{owner}/{repo}/{login}/contributions | Finds a repo by :owner and :repo listing all contributions for a given :login and paginating them
 *RepositoryServiceAPI* | [**FindAllByRepoId**](docs/RepositoryServiceAPI.md#findallbyrepoid) | **Get** /v1/repos/{id}/contributions | Find a repo by :id listing all contributions and paginating them
+*RepositoryServiceAPI* | [**FindAllContributorsByRepoId**](docs/RepositoryServiceAPI.md#findallcontributorsbyrepoid) | **Get** /v1/repos/{owner}/{repo}/contributions/contributors | Finds a repo by :owner and :repo listing all contributions by their user login
 *RepositoryServiceAPI* | [**FindAllReposWithFilters**](docs/RepositoryServiceAPI.md#findallreposwithfilters) | **Get** /v1/repos/search | Finds all repos using filters and paginates them
 *RepositoryServiceAPI* | [**FindOneById**](docs/RepositoryServiceAPI.md#findonebyid) | **Get** /v1/repos/{id} | Finds a repo by :id
 *RepositoryServiceAPI* | [**FindOneByOwnerAndRepo**](docs/RepositoryServiceAPI.md#findonebyownerandrepo) | **Get** /v1/repos/{owner}/{repo} | Finds a repo by :owner and :repo
@@ -261,7 +263,9 @@ Class | Method | HTTP request | Description
 *UserServiceAPI* | [**FindContributorPullRequests**](docs/UserServiceAPI.md#findcontributorpullrequests) | **Get** /v1/users/{username}/prs | Finds pull requests by :username
 *UserServiceAPI* | [**FindOneUserByUserame**](docs/UserServiceAPI.md#findoneuserbyuserame) | **Get** /v1/users/{username} | Finds a user by :username
 *UserServiceAPI* | [**FollowUserById**](docs/UserServiceAPI.md#followuserbyid) | **Put** /v1/users/{username}/follow | Follows a user by username
+*UserServiceAPI* | [**FollowUsersByUsernames**](docs/UserServiceAPI.md#followusersbyusernames) | **Put** /v1/users/{username}/follows | Follows a number of users by username
 *UserServiceAPI* | [**GetFollowStatusByUsername**](docs/UserServiceAPI.md#getfollowstatusbyusername) | **Get** /v1/users/{username}/follow | Checks if the authenticated user follows the provided username
+*UserServiceAPI* | [**GetFollowingListByUsername**](docs/UserServiceAPI.md#getfollowinglistbyusername) | **Get** /v1/users/{username}/following | Get list of following users by the provided username
 *UserServiceAPI* | [**GetTop10Highlights**](docs/UserServiceAPI.md#gettop10highlights) | **Get** /v1/users/top | List top users
 *UserServiceAPI* | [**GetUserNotifications**](docs/UserServiceAPI.md#getusernotifications) | **Get** /v1/user/notifications | Retrieves notifications for the authenticated user
 *UserServiceAPI* | [**GetUsersByFilter**](docs/UserServiceAPI.md#getusersbyfilter) | **Get** /v1/users/search | Search users
@@ -331,6 +335,7 @@ Class | Method | HTTP request | Description
  - [FindAllUserCollaborations200Response](docs/FindAllUserCollaborations200Response.md)
  - [FindAllUserCreatedEndorsements200Response](docs/FindAllUserCreatedEndorsements200Response.md)
  - [FindContributorPullRequests200Response](docs/FindContributorPullRequests200Response.md)
+ - [FollowManyUsersDto](docs/FollowManyUsersDto.md)
  - [GenerateCodeExplanationDto](docs/GenerateCodeExplanationDto.md)
  - [GenerateCodeRefactorSuggestionDto](docs/GenerateCodeRefactorSuggestionDto.md)
  - [GenerateCodeTestSuggestionDto](docs/GenerateCodeTestSuggestionDto.md)

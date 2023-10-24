@@ -674,6 +674,103 @@ func (a *UserServiceAPIService) FollowUserByIdExecute(r ApiFollowUserByIdRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiFollowUsersByUsernamesRequest struct {
+	ctx                context.Context
+	ApiService         *UserServiceAPIService
+	followManyUsersDto *FollowManyUsersDto
+}
+
+func (r ApiFollowUsersByUsernamesRequest) FollowManyUsersDto(followManyUsersDto FollowManyUsersDto) ApiFollowUsersByUsernamesRequest {
+	r.followManyUsersDto = &followManyUsersDto
+	return r
+}
+
+func (r ApiFollowUsersByUsernamesRequest) Execute() (*http.Response, error) {
+	return r.ApiService.FollowUsersByUsernamesExecute(r)
+}
+
+/*
+FollowUsersByUsernames Follows a number of users by username
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiFollowUsersByUsernamesRequest
+*/
+func (a *UserServiceAPIService) FollowUsersByUsernames(ctx context.Context) ApiFollowUsersByUsernamesRequest {
+	return ApiFollowUsersByUsernamesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+func (a *UserServiceAPIService) FollowUsersByUsernamesExecute(r ApiFollowUsersByUsernamesRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.FollowUsersByUsernames")
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/users/{username}/follows"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.followManyUsersDto == nil {
+		return nil, reportError("followManyUsersDto is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.followManyUsersDto
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
 type ApiGetFollowStatusByUsernameRequest struct {
 	ctx        context.Context
 	ApiService *UserServiceAPIService
@@ -716,6 +813,108 @@ func (a *UserServiceAPIService) GetFollowStatusByUsernameExecute(r ApiGetFollowS
 	}
 
 	localVarPath := localBasePath + "/v1/users/{username}/follow"
+	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFollowingListByUsernameRequest struct {
+	ctx        context.Context
+	ApiService *UserServiceAPIService
+	username   string
+}
+
+func (r ApiGetFollowingListByUsernameRequest) Execute() ([]DbUserToUserFollows, *http.Response, error) {
+	return r.ApiService.GetFollowingListByUsernameExecute(r)
+}
+
+/*
+GetFollowingListByUsername Get list of following users by the provided username
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param username
+	@return ApiGetFollowingListByUsernameRequest
+*/
+func (a *UserServiceAPIService) GetFollowingListByUsername(ctx context.Context, username string) ApiGetFollowingListByUsernameRequest {
+	return ApiGetFollowingListByUsernameRequest{
+		ApiService: a,
+		ctx:        ctx,
+		username:   username,
+	}
+}
+
+// Execute executes the request
+//
+//	@return []DbUserToUserFollows
+func (a *UserServiceAPIService) GetFollowingListByUsernameExecute(r ApiGetFollowingListByUsernameRequest) ([]DbUserToUserFollows, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue []DbUserToUserFollows
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserServiceAPIService.GetFollowingListByUsername")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/users/{username}/following"
 	localVarPath = strings.Replace(localVarPath, "{"+"username"+"}", url.PathEscape(parameterValueToString(r.username, "username")), -1)
 
 	localVarHeaderParams := make(map[string]string)

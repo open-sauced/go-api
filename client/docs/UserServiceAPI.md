@@ -9,7 +9,9 @@ Method | HTTP request | Description
 [**FindContributorPullRequests**](UserServiceAPI.md#FindContributorPullRequests) | **Get** /v1/users/{username}/prs | Finds pull requests by :username
 [**FindOneUserByUserame**](UserServiceAPI.md#FindOneUserByUserame) | **Get** /v1/users/{username} | Finds a user by :username
 [**FollowUserById**](UserServiceAPI.md#FollowUserById) | **Put** /v1/users/{username}/follow | Follows a user by username
+[**FollowUsersByUsernames**](UserServiceAPI.md#FollowUsersByUsernames) | **Put** /v1/users/{username}/follows | Follows a number of users by username
 [**GetFollowStatusByUsername**](UserServiceAPI.md#GetFollowStatusByUsername) | **Get** /v1/users/{username}/follow | Checks if the authenticated user follows the provided username
+[**GetFollowingListByUsername**](UserServiceAPI.md#GetFollowingListByUsername) | **Get** /v1/users/{username}/following | Get list of following users by the provided username
 [**GetTop10Highlights**](UserServiceAPI.md#GetTop10Highlights) | **Get** /v1/users/top | List top users
 [**GetUserNotifications**](UserServiceAPI.md#GetUserNotifications) | **Get** /v1/user/notifications | Retrieves notifications for the authenticated user
 [**GetUsersByFilter**](UserServiceAPI.md#GetUsersByFilter) | **Get** /v1/users/search | Search users
@@ -387,6 +389,68 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## FollowUsersByUsernames
+
+> FollowUsersByUsernames(ctx).FollowManyUsersDto(followManyUsersDto).Execute()
+
+Follows a number of users by username
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    followManyUsersDto := *openapiclient.NewFollowManyUsersDto([]string{"Usernames_example"}) // FollowManyUsersDto | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.UserServiceAPI.FollowUsersByUsernames(context.Background()).FollowManyUsersDto(followManyUsersDto).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.FollowUsersByUsernames``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFollowUsersByUsernamesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **followManyUsersDto** | [**FollowManyUsersDto**](FollowManyUsersDto.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetFollowStatusByUsername
 
 > DbUserToUserFollows GetFollowStatusByUsername(ctx, username).Execute()
@@ -444,6 +508,74 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetFollowingListByUsername
+
+> []DbUserToUserFollows GetFollowingListByUsername(ctx, username).Execute()
+
+Get list of following users by the provided username
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    username := "username_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserServiceAPI.GetFollowingListByUsername(context.Background(), username).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.GetFollowingListByUsername``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetFollowingListByUsername`: []DbUserToUserFollows
+    fmt.Fprintf(os.Stdout, "Response from `UserServiceAPI.GetFollowingListByUsername`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**username** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetFollowingListByUsernameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]DbUserToUserFollows**](DbUserToUserFollows.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

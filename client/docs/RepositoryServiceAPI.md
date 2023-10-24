@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**FindAllByOwnerAndRepo**](RepositoryServiceAPI.md#FindAllByOwnerAndRepo) | **Get** /v1/repos/{owner}/{repo}/contributions | Finds a repo by :owner and :repo listing all contributions and paginating them
 [**FindAllByOwnerRepoAndContributorLogin**](RepositoryServiceAPI.md#FindAllByOwnerRepoAndContributorLogin) | **Get** /v1/repos/{owner}/{repo}/{login}/contributions | Finds a repo by :owner and :repo listing all contributions for a given :login and paginating them
 [**FindAllByRepoId**](RepositoryServiceAPI.md#FindAllByRepoId) | **Get** /v1/repos/{id}/contributions | Find a repo by :id listing all contributions and paginating them
+[**FindAllContributorsByRepoId**](RepositoryServiceAPI.md#FindAllContributorsByRepoId) | **Get** /v1/repos/{owner}/{repo}/contributions/contributors | Finds a repo by :owner and :repo listing all contributions by their user login
 [**FindAllReposWithFilters**](RepositoryServiceAPI.md#FindAllReposWithFilters) | **Get** /v1/repos/search | Finds all repos using filters and paginates them
 [**FindOneById**](RepositoryServiceAPI.md#FindOneById) | **Get** /v1/repos/{id} | Finds a repo by :id
 [**FindOneByOwnerAndRepo**](RepositoryServiceAPI.md#FindOneByOwnerAndRepo) | **Get** /v1/repos/{owner}/{repo} | Finds a repo by :owner and :repo
@@ -314,6 +315,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FindAllByRepoId200Response**](FindAllByRepoId200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## FindAllContributorsByRepoId
+
+> DbRepoLoginContributions FindAllContributorsByRepoId(ctx, owner, repo).PrevDaysStartDate(prevDaysStartDate).Range_(range_).Execute()
+
+Finds a repo by :owner and :repo listing all contributions by their user login
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    owner := "owner_example" // string | 
+    repo := "repo_example" // string | 
+    prevDaysStartDate := int32(56) // int32 | Previous number of days to go back to start date range (optional)
+    range_ := int32(56) // int32 | Range in days (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.RepositoryServiceAPI.FindAllContributorsByRepoId(context.Background(), owner, repo).PrevDaysStartDate(prevDaysStartDate).Range_(range_).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RepositoryServiceAPI.FindAllContributorsByRepoId``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FindAllContributorsByRepoId`: DbRepoLoginContributions
+    fmt.Fprintf(os.Stdout, "Response from `RepositoryServiceAPI.FindAllContributorsByRepoId`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**owner** | **string** |  | 
+**repo** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFindAllContributorsByRepoIdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **prevDaysStartDate** | **int32** | Previous number of days to go back to start date range | 
+ **range_** | **int32** | Range in days | 
+
+### Return type
+
+[**DbRepoLoginContributions**](DbRepoLoginContributions.md)
 
 ### Authorization
 
