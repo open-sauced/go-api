@@ -332,7 +332,7 @@ No authorization required
 
 ## FindAllContributorsByRepoId
 
-> DbRepoLoginContributions FindAllContributorsByRepoId(ctx, owner, repo).PrevDaysStartDate(prevDaysStartDate).Range_(range_).Execute()
+> []DbRepoLoginContributions FindAllContributorsByRepoId(ctx, owner, repo).PrevDaysStartDate(prevDaysStartDate).Range_(range_).Execute()
 
 Finds a repo by :owner and :repo listing all contributions by their user login
 
@@ -361,7 +361,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RepositoryServiceAPI.FindAllContributorsByRepoId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FindAllContributorsByRepoId`: DbRepoLoginContributions
+    // response from `FindAllContributorsByRepoId`: []DbRepoLoginContributions
     fmt.Fprintf(os.Stdout, "Response from `RepositoryServiceAPI.FindAllContributorsByRepoId`: %v\n", resp)
 }
 ```
@@ -389,7 +389,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DbRepoLoginContributions**](DbRepoLoginContributions.md)
+[**[]DbRepoLoginContributions**](DbRepoLoginContributions.md)
 
 ### Authorization
 

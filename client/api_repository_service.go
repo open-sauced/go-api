@@ -648,7 +648,7 @@ func (r ApiFindAllContributorsByRepoIdRequest) Range_(range_ int32) ApiFindAllCo
 	return r
 }
 
-func (r ApiFindAllContributorsByRepoIdRequest) Execute() (*DbRepoLoginContributions, *http.Response, error) {
+func (r ApiFindAllContributorsByRepoIdRequest) Execute() ([]DbRepoLoginContributions, *http.Response, error) {
 	return r.ApiService.FindAllContributorsByRepoIdExecute(r)
 }
 
@@ -671,13 +671,13 @@ func (a *RepositoryServiceAPIService) FindAllContributorsByRepoId(ctx context.Co
 
 // Execute executes the request
 //
-//	@return DbRepoLoginContributions
-func (a *RepositoryServiceAPIService) FindAllContributorsByRepoIdExecute(r ApiFindAllContributorsByRepoIdRequest) (*DbRepoLoginContributions, *http.Response, error) {
+//	@return []DbRepoLoginContributions
+func (a *RepositoryServiceAPIService) FindAllContributorsByRepoIdExecute(r ApiFindAllContributorsByRepoIdRequest) ([]DbRepoLoginContributions, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DbRepoLoginContributions
+		localVarReturnValue []DbRepoLoginContributions
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindAllContributorsByRepoId")

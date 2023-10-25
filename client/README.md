@@ -259,6 +259,7 @@ Class | Method | HTTP request | Description
 *UserRecommendationsServiceAPI* | [**FindUserOrgsRepoRecommendations**](docs/UserRecommendationsServiceAPI.md#finduserorgsreporecommendations) | **Get** /v1/user/recommendations/orgs | Listing recommended repos for the authenticated user based on their orgs
 *UserRecommendationsServiceAPI* | [**FindUserRepoRecommendations**](docs/UserRecommendationsServiceAPI.md#finduserreporecommendations) | **Get** /v1/user/recommendations/repos | Listing recommended repos for the authenticated user
 *UserServiceAPI* | [**FindAllHighlightsByUsername**](docs/UserServiceAPI.md#findallhighlightsbyusername) | **Get** /v1/users/{username}/highlights | Listing all Highlights for a user and paginate them
+*UserServiceAPI* | [**FindAllOrgsByUsername**](docs/UserServiceAPI.md#findallorgsbyusername) | **Get** /v1/users/{username}/organizations | Listing public orgs for a user and paginate them
 *UserServiceAPI* | [**FindAllTopReposByUsername**](docs/UserServiceAPI.md#findalltopreposbyusername) | **Get** /v1/users/{username}/top-repos | Listing all Top Repos for a user and paginate them
 *UserServiceAPI* | [**FindContributorPullRequests**](docs/UserServiceAPI.md#findcontributorpullrequests) | **Get** /v1/users/{username}/prs | Finds pull requests by :username
 *UserServiceAPI* | [**FindOneUserByUserame**](docs/UserServiceAPI.md#findoneuserbyuserame) | **Get** /v1/users/{username} | Finds a user by :username
@@ -324,6 +325,7 @@ Class | Method | HTTP request | Description
  - [DbUserList](docs/DbUserList.md)
  - [DbUserListContributor](docs/DbUserListContributor.md)
  - [DbUserListContributorStat](docs/DbUserListContributorStat.md)
+ - [DbUserOrganization](docs/DbUserOrganization.md)
  - [DbUserToUserFollows](docs/DbUserToUserFollows.md)
  - [FindAllByRepoId200Response](docs/FindAllByRepoId200Response.md)
  - [FindAllEmojis200Response](docs/FindAllEmojis200Response.md)
@@ -331,6 +333,7 @@ Class | Method | HTTP request | Description
  - [FindAllHighlightsByUsername200Response](docs/FindAllHighlightsByUsername200Response.md)
  - [FindAllInsightMembers200Response](docs/FindAllInsightMembers200Response.md)
  - [FindAllInsightsByUserId200Response](docs/FindAllInsightsByUserId200Response.md)
+ - [FindAllOrgsByUsername200Response](docs/FindAllOrgsByUsername200Response.md)
  - [FindAllTopReposByUsername200Response](docs/FindAllTopReposByUsername200Response.md)
  - [FindAllUserCollaborations200Response](docs/FindAllUserCollaborations200Response.md)
  - [FindAllUserCreatedEndorsements200Response](docs/FindAllUserCreatedEndorsements200Response.md)

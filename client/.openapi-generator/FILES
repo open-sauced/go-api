@@ -74,6 +74,7 @@ docs/DbUserHighlightRepo.md
 docs/DbUserList.md
 docs/DbUserListContributor.md
 docs/DbUserListContributorStat.md
+docs/DbUserOrganization.md
 docs/DbUserToUserFollows.md
 docs/EmojisServiceAPI.md
 docs/EndorsementsServiceAPI.md
@@ -83,6 +84,7 @@ docs/FindAllHighlightRepos200Response.md
 docs/FindAllHighlightsByUsername200Response.md
 docs/FindAllInsightMembers200Response.md
 docs/FindAllInsightsByUserId200Response.md
+docs/FindAllOrgsByUsername200Response.md
 docs/FindAllTopReposByUsername200Response.md
 docs/FindAllUserCollaborations200Response.md
 docs/FindAllUserCreatedEndorsements200Response.md
@@ -183,6 +185,7 @@ model_db_user_highlight_repo.go
 model_db_user_list.go
 model_db_user_list_contributor.go
 model_db_user_list_contributor_stat.go
+model_db_user_organization.go
 model_db_user_to_user_follows.go
 model_find_all_by_repo_id_200_response.go
 model_find_all_emojis_200_response.go
@@ -190,6 +193,7 @@ model_find_all_highlight_repos_200_response.go
 model_find_all_highlights_by_username_200_response.go
 model_find_all_insight_members_200_response.go
 model_find_all_insights_by_user_id_200_response.go
+model_find_all_orgs_by_username_200_response.go
 model_find_all_top_repos_by_username_200_response.go
 model_find_all_user_collaborations_200_response.go
 model_find_all_user_created_endorsements_200_response.go

@@ -5,6 +5,7 @@ All URIs are relative to *https://api.opensauced.pizza*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**FindAllHighlightsByUsername**](UserServiceAPI.md#FindAllHighlightsByUsername) | **Get** /v1/users/{username}/highlights | Listing all Highlights for a user and paginate them
+[**FindAllOrgsByUsername**](UserServiceAPI.md#FindAllOrgsByUsername) | **Get** /v1/users/{username}/organizations | Listing public orgs for a user and paginate them
 [**FindAllTopReposByUsername**](UserServiceAPI.md#FindAllTopReposByUsername) | **Get** /v1/users/{username}/top-repos | Listing all Top Repos for a user and paginate them
 [**FindContributorPullRequests**](UserServiceAPI.md#FindContributorPullRequests) | **Get** /v1/users/{username}/prs | Finds pull requests by :username
 [**FindOneUserByUserame**](UserServiceAPI.md#FindOneUserByUserame) | **Get** /v1/users/{username} | Finds a user by :username
@@ -82,6 +83,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**FindAllHighlightsByUsername200Response**](FindAllHighlightsByUsername200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## FindAllOrgsByUsername
+
+> FindAllOrgsByUsername200Response FindAllOrgsByUsername(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
+
+Listing public orgs for a user and paginate them
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+    username := "username_example" // string | 
+    page := int32(56) // int32 |  (optional) (default to 1)
+    limit := int32(56) // int32 |  (optional) (default to 10)
+    orderDirection := openapiclient.OrderDirectionEnum("ASC") // OrderDirectionEnum |  (optional)
+    range_ := int32(56) // int32 | Range in days (optional) (default to 30)
+    prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.UserServiceAPI.FindAllOrgsByUsername(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.FindAllOrgsByUsername``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `FindAllOrgsByUsername`: FindAllOrgsByUsername200Response
+    fmt.Fprintf(os.Stdout, "Response from `UserServiceAPI.FindAllOrgsByUsername`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**username** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiFindAllOrgsByUsernameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **page** | **int32** |  | [default to 1]
+ **limit** | **int32** |  | [default to 10]
+ **orderDirection** | [**OrderDirectionEnum**](OrderDirectionEnum.md) |  | 
+ **range_** | **int32** | Range in days | [default to 30]
+ **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
+
+### Return type
+
+[**FindAllOrgsByUsername200Response**](FindAllOrgsByUsername200Response.md)
 
 ### Authorization
 
