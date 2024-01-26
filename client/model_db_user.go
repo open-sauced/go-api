@@ -3,7 +3,7 @@
 
  ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
-API version: 1
+API version: 2
 Contact: hello@opensauced.pizza
 */
 
@@ -35,6 +35,8 @@ type DbUser struct {
 	FirstPushedCommitAt *time.Time `json:"first_pushed_commit_at,omitempty"`
 	// Timestamp representing user logging in to open sauced for the first time
 	ConnectedAt *time.Time `json:"connected_at,omitempty"`
+	// Timestamp representing user email campaign start date
+	CampaignStartDate *time.Time `json:"campaign_start_date,omitempty"`
 	// User GitHub node id
 	NodeId string `json:"node_id"`
 	// User GitHub avatar URL
@@ -95,6 +97,8 @@ type DbUser struct {
 	DisplayEmail *bool `json:"display_email,omitempty"`
 	// User receives collaboration requests
 	ReceiveCollaboration *bool `json:"receive_collaboration,omitempty"`
+	// User receives product updates through email
+	ReceiveProductUpdates *bool `json:"receive_product_updates,omitempty"`
 	// User timezone in UTC
 	Timezone *string `json:"timezone,omitempty"`
 	// Coupon Code
@@ -379,6 +383,38 @@ func (o *DbUser) HasConnectedAt() bool {
 // SetConnectedAt gets a reference to the given time.Time and assigns it to the ConnectedAt field.
 func (o *DbUser) SetConnectedAt(v time.Time) {
 	o.ConnectedAt = &v
+}
+
+// GetCampaignStartDate returns the CampaignStartDate field value if set, zero value otherwise.
+func (o *DbUser) GetCampaignStartDate() time.Time {
+	if o == nil || IsNil(o.CampaignStartDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.CampaignStartDate
+}
+
+// GetCampaignStartDateOk returns a tuple with the CampaignStartDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DbUser) GetCampaignStartDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.CampaignStartDate) {
+		return nil, false
+	}
+	return o.CampaignStartDate, true
+}
+
+// HasCampaignStartDate returns a boolean if a field has been set.
+func (o *DbUser) HasCampaignStartDate() bool {
+	if o != nil && !IsNil(o.CampaignStartDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetCampaignStartDate gets a reference to the given time.Time and assigns it to the CampaignStartDate field.
+func (o *DbUser) SetCampaignStartDate(v time.Time) {
+	o.CampaignStartDate = &v
 }
 
 // GetNodeId returns the NodeId field value
@@ -1229,6 +1265,38 @@ func (o *DbUser) SetReceiveCollaboration(v bool) {
 	o.ReceiveCollaboration = &v
 }
 
+// GetReceiveProductUpdates returns the ReceiveProductUpdates field value if set, zero value otherwise.
+func (o *DbUser) GetReceiveProductUpdates() bool {
+	if o == nil || IsNil(o.ReceiveProductUpdates) {
+		var ret bool
+		return ret
+	}
+	return *o.ReceiveProductUpdates
+}
+
+// GetReceiveProductUpdatesOk returns a tuple with the ReceiveProductUpdates field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DbUser) GetReceiveProductUpdatesOk() (*bool, bool) {
+	if o == nil || IsNil(o.ReceiveProductUpdates) {
+		return nil, false
+	}
+	return o.ReceiveProductUpdates, true
+}
+
+// HasReceiveProductUpdates returns a boolean if a field has been set.
+func (o *DbUser) HasReceiveProductUpdates() bool {
+	if o != nil && !IsNil(o.ReceiveProductUpdates) {
+		return true
+	}
+
+	return false
+}
+
+// SetReceiveProductUpdates gets a reference to the given bool and assigns it to the ReceiveProductUpdates field.
+func (o *DbUser) SetReceiveProductUpdates(v bool) {
+	o.ReceiveProductUpdates = &v
+}
+
 // GetTimezone returns the Timezone field value if set, zero value otherwise.
 func (o *DbUser) GetTimezone() string {
 	if o == nil || IsNil(o.Timezone) {
@@ -1536,6 +1604,9 @@ func (o DbUser) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConnectedAt) {
 		toSerialize["connected_at"] = o.ConnectedAt
 	}
+	if !IsNil(o.CampaignStartDate) {
+		toSerialize["campaign_start_date"] = o.CampaignStartDate
+	}
 	toSerialize["node_id"] = o.NodeId
 	toSerialize["avatar_url"] = o.AvatarUrl
 	if !IsNil(o.GravatarId) {
@@ -1597,6 +1668,9 @@ func (o DbUser) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReceiveCollaboration) {
 		toSerialize["receive_collaboration"] = o.ReceiveCollaboration
+	}
+	if !IsNil(o.ReceiveProductUpdates) {
+		toSerialize["receive_product_updates"] = o.ReceiveProductUpdates
 	}
 	if !IsNil(o.Timezone) {
 		toSerialize["timezone"] = o.Timezone

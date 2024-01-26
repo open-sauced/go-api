@@ -5,17 +5,21 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Login** | Pointer to **string** | User list collaborator&#39;s login | [optional] 
-**Commits** | **int32** | Number of commits associated with a user login | 
-**PrsCreated** | **int32** | Number of PRs created associated with a user login | 
-**PrsReviewed** | **int32** | Number of PRs reviewed by a user login | 
-**IssuesCreated** | **int32** | Number of issues created by a user login | 
-**Comments** | **int32** | Number of comments associated with a user login | 
+**Commits** | **int32** | Number of commits for login within the time range | 
+**PrsCreated** | **int32** | Number of PRs created for login within the time range | 
+**PrsReviewed** | **int32** | Number of PRs reviewed for login within the time range | 
+**IssuesCreated** | **int32** | Number of issues created for login within the time range | 
+**CommitComments** | **int32** | Number of commit comments for login within the time range | 
+**IssueComments** | **int32** | Number of issue comments for login within the time range | 
+**PrReviewComments** | **int32** | Number of pr review comments for login within the time range | 
+**Comments** | **int32** | Number of total comments for login within the time range | 
+**TotalContributions** | **int32** | Number of total contributions for a login within the time range | 
 
 ## Methods
 
 ### NewDbUserListContributorStat
 
-`func NewDbUserListContributorStat(commits int32, prsCreated int32, prsReviewed int32, issuesCreated int32, comments int32, ) *DbUserListContributorStat`
+`func NewDbUserListContributorStat(commits int32, prsCreated int32, prsReviewed int32, issuesCreated int32, commitComments int32, issueComments int32, prReviewComments int32, comments int32, totalContributions int32, ) *DbUserListContributorStat`
 
 NewDbUserListContributorStat instantiates a new DbUserListContributorStat object
 This constructor will assign default values to properties that have it defined,
@@ -135,6 +139,66 @@ and a boolean to check if the value has been set.
 SetIssuesCreated sets IssuesCreated field to given value.
 
 
+### GetCommitComments
+
+`func (o *DbUserListContributorStat) GetCommitComments() int32`
+
+GetCommitComments returns the CommitComments field if non-nil, zero value otherwise.
+
+### GetCommitCommentsOk
+
+`func (o *DbUserListContributorStat) GetCommitCommentsOk() (*int32, bool)`
+
+GetCommitCommentsOk returns a tuple with the CommitComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommitComments
+
+`func (o *DbUserListContributorStat) SetCommitComments(v int32)`
+
+SetCommitComments sets CommitComments field to given value.
+
+
+### GetIssueComments
+
+`func (o *DbUserListContributorStat) GetIssueComments() int32`
+
+GetIssueComments returns the IssueComments field if non-nil, zero value otherwise.
+
+### GetIssueCommentsOk
+
+`func (o *DbUserListContributorStat) GetIssueCommentsOk() (*int32, bool)`
+
+GetIssueCommentsOk returns a tuple with the IssueComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIssueComments
+
+`func (o *DbUserListContributorStat) SetIssueComments(v int32)`
+
+SetIssueComments sets IssueComments field to given value.
+
+
+### GetPrReviewComments
+
+`func (o *DbUserListContributorStat) GetPrReviewComments() int32`
+
+GetPrReviewComments returns the PrReviewComments field if non-nil, zero value otherwise.
+
+### GetPrReviewCommentsOk
+
+`func (o *DbUserListContributorStat) GetPrReviewCommentsOk() (*int32, bool)`
+
+GetPrReviewCommentsOk returns a tuple with the PrReviewComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrReviewComments
+
+`func (o *DbUserListContributorStat) SetPrReviewComments(v int32)`
+
+SetPrReviewComments sets PrReviewComments field to given value.
+
+
 ### GetComments
 
 `func (o *DbUserListContributorStat) GetComments() int32`
@@ -153,6 +217,26 @@ and a boolean to check if the value has been set.
 `func (o *DbUserListContributorStat) SetComments(v int32)`
 
 SetComments sets Comments field to given value.
+
+
+### GetTotalContributions
+
+`func (o *DbUserListContributorStat) GetTotalContributions() int32`
+
+GetTotalContributions returns the TotalContributions field if non-nil, zero value otherwise.
+
+### GetTotalContributionsOk
+
+`func (o *DbUserListContributorStat) GetTotalContributionsOk() (*int32, bool)`
+
+GetTotalContributionsOk returns a tuple with the TotalContributions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalContributions
+
+`func (o *DbUserListContributorStat) SetTotalContributions(v int32)`
+
+SetTotalContributions sets TotalContributions field to given value.
 
 
 

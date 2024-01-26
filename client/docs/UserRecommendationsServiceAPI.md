@@ -4,8 +4,8 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FindUserOrgsRepoRecommendations**](UserRecommendationsServiceAPI.md#FindUserOrgsRepoRecommendations) | **Get** /v1/user/recommendations/orgs | Listing recommended repos for the authenticated user based on their orgs
-[**FindUserRepoRecommendations**](UserRecommendationsServiceAPI.md#FindUserRepoRecommendations) | **Get** /v1/user/recommendations/repos | Listing recommended repos for the authenticated user
+[**FindUserOrgsRepoRecommendations**](UserRecommendationsServiceAPI.md#FindUserOrgsRepoRecommendations) | **Get** /v2/user/recommendations/orgs | Listing recommended repos for the authenticated user based on their orgs
+[**FindUserRepoRecommendations**](UserRecommendationsServiceAPI.md#FindUserRepoRecommendations) | **Get** /v2/user/recommendations/repos | Listing recommended repos for the authenticated user
 
 
 

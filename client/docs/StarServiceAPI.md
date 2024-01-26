@@ -4,11 +4,11 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownStarOneById**](StarServiceAPI.md#DownStarOneById) | **Delete** /v1/repos/{id}/star | Finds a repo by :id and removes existing star
-[**DownStarOneByOwnerAndRepo**](StarServiceAPI.md#DownStarOneByOwnerAndRepo) | **Delete** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and removes existing star
-[**FindAllUserStarred**](StarServiceAPI.md#FindAllUserStarred) | **Get** /v1/repos/listUserStarred | Finds all repos starred by authenticated user and paginates them
-[**StarOneById**](StarServiceAPI.md#StarOneById) | **Put** /v1/repos/{id}/star | Finds a repo by :id and adds a star
-[**StarOneByOwnerAndRepo**](StarServiceAPI.md#StarOneByOwnerAndRepo) | **Put** /v1/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and adds a star
+[**DownStarOneById**](StarServiceAPI.md#DownStarOneById) | **Delete** /v2/repos/{id}/star | Finds a repo by :id and removes existing star
+[**DownStarOneByOwnerAndRepo**](StarServiceAPI.md#DownStarOneByOwnerAndRepo) | **Delete** /v2/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and removes existing star
+[**FindAllUserStarred**](StarServiceAPI.md#FindAllUserStarred) | **Get** /v2/repos/listUserStarred | Finds all repos starred by authenticated user and paginates them
+[**StarOneById**](StarServiceAPI.md#StarOneById) | **Put** /v2/repos/{id}/star | Finds a repo by :id and adds a star
+[**StarOneByOwnerAndRepo**](StarServiceAPI.md#StarOneByOwnerAndRepo) | **Put** /v2/repos/{owner}/{repo}/star | Finds a repo by :owner and :repo and adds a star
 
 
 

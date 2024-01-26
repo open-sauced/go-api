@@ -4,15 +4,15 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddHighlightForUser**](UserHighlightsServiceAPI.md#AddHighlightForUser) | **Post** /v1/user/highlights | Adds a new highlight for the authenticated user
-[**AddHighlightReactionForUser**](UserHighlightsServiceAPI.md#AddHighlightReactionForUser) | **Post** /v1/user/highlights/{id}/reactions/{emojiId} | Adds a new highlight reaction for the authenticated user
-[**DeleteHighlightForUser**](UserHighlightsServiceAPI.md#DeleteHighlightForUser) | **Delete** /v1/user/highlights/{id} | Deletes the highlight for the authenticated user
-[**DeleteHighlightReactionForUser**](UserHighlightsServiceAPI.md#DeleteHighlightReactionForUser) | **Delete** /v1/user/highlights/{id}/reactions/{emojiId} | Deletes the highlight reaction for the authenticated user
-[**GetAllHighlightUserReactions**](UserHighlightsServiceAPI.md#GetAllHighlightUserReactions) | **Get** /v1/user/highlights/{id}/reactions | Retrieves a highlight reactions for the authenticated user
-[**GetFollowingHighlightRepos**](UserHighlightsServiceAPI.md#GetFollowingHighlightRepos) | **Get** /v1/user/highlights/following/repos | Fetches highlight repos for users the authenticated user follows
-[**GetFollowingHighlights**](UserHighlightsServiceAPI.md#GetFollowingHighlights) | **Get** /v1/user/highlights/following | Fetches highlights for users the authenticated user follows
-[**GetUserHighlight**](UserHighlightsServiceAPI.md#GetUserHighlight) | **Get** /v1/user/highlights/{id} | Retrieves a highlight
-[**UpdateHighlightForUser**](UserHighlightsServiceAPI.md#UpdateHighlightForUser) | **Patch** /v1/user/highlights/{id} | Updates the highlight for the authenticated user
+[**AddHighlightForUser**](UserHighlightsServiceAPI.md#AddHighlightForUser) | **Post** /v2/user/highlights | Adds a new highlight for the authenticated user
+[**AddHighlightReactionForUser**](UserHighlightsServiceAPI.md#AddHighlightReactionForUser) | **Post** /v2/user/highlights/{id}/reactions/{emojiId} | Adds a new highlight reaction for the authenticated user
+[**DeleteHighlightForUser**](UserHighlightsServiceAPI.md#DeleteHighlightForUser) | **Delete** /v2/user/highlights/{id} | Deletes the highlight for the authenticated user
+[**DeleteHighlightReactionForUser**](UserHighlightsServiceAPI.md#DeleteHighlightReactionForUser) | **Delete** /v2/user/highlights/{id}/reactions/{emojiId} | Deletes the highlight reaction for the authenticated user
+[**GetAllHighlightUserReactions**](UserHighlightsServiceAPI.md#GetAllHighlightUserReactions) | **Get** /v2/user/highlights/{id}/reactions | Retrieves a highlight reactions for the authenticated user
+[**GetFollowingHighlightRepos**](UserHighlightsServiceAPI.md#GetFollowingHighlightRepos) | **Get** /v2/user/highlights/following/repos | Fetches highlight repos for users the authenticated user follows
+[**GetFollowingHighlights**](UserHighlightsServiceAPI.md#GetFollowingHighlights) | **Get** /v2/user/highlights/following | Fetches highlights for users the authenticated user follows
+[**GetUserHighlight**](UserHighlightsServiceAPI.md#GetUserHighlight) | **Get** /v2/user/highlights/{id} | Retrieves a highlight
+[**UpdateHighlightForUser**](UserHighlightsServiceAPI.md#UpdateHighlightForUser) | **Patch** /v2/user/highlights/{id} | Updates the highlight for the authenticated user
 
 
 
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 ## GetFollowingHighlightRepos
 
-> DbUserHighlightRepo GetFollowingHighlightRepos(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
+> DbUserHighlightRepo GetFollowingHighlightRepos(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Contributor(contributor).Execute()
 
 Fetches highlight repos for users the authenticated user follows
 
@@ -379,10 +379,11 @@ func main() {
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
     prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repo := "open-sauced/insights" // string | Highlight Repo Filter (optional)
+    contributor := "RitaDee" // string | Highlight User Filter (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlightRepos(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
+    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlightRepos(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Contributor(contributor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserHighlightsServiceAPI.GetFollowingHighlightRepos``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -409,6 +410,7 @@ Name | Type | Description  | Notes
  **range_** | **int32** | Range in days | [default to 30]
  **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repo** | **string** | Highlight Repo Filter | 
+ **contributor** | **string** | Highlight User Filter | 
 
 ### Return type
 
@@ -430,7 +432,7 @@ Name | Type | Description  | Notes
 
 ## GetFollowingHighlights
 
-> DbUserHighlight GetFollowingHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
+> DbUserHighlight GetFollowingHighlights(ctx).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Contributor(contributor).Execute()
 
 Fetches highlights for users the authenticated user follows
 
@@ -453,10 +455,11 @@ func main() {
     range_ := int32(56) // int32 | Range in days (optional) (default to 30)
     prevDaysStartDate := int32(56) // int32 | Number of days in the past to start range block (optional) (default to 0)
     repo := "open-sauced/insights" // string | Highlight Repo Filter (optional)
+    contributor := "RitaDee" // string | Highlight User Filter (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Execute()
+    resp, r, err := apiClient.UserHighlightsServiceAPI.GetFollowingHighlights(context.Background()).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Repo(repo).Contributor(contributor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UserHighlightsServiceAPI.GetFollowingHighlights``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -483,6 +486,7 @@ Name | Type | Description  | Notes
  **range_** | **int32** | Range in days | [default to 30]
  **prevDaysStartDate** | **int32** | Number of days in the past to start range block | [default to 0]
  **repo** | **string** | Highlight Repo Filter | 
+ **contributor** | **string** | Highlight User Filter | 
 
 ### Return type
 

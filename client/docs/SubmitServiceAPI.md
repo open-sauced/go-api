@@ -4,11 +4,11 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownSubmitOneById**](SubmitServiceAPI.md#DownSubmitOneById) | **Delete** /v1/repos/{id}/submit | Finds a repo by :id and removes existing submission
-[**DownSubmitOneByOwnerAndRepo**](SubmitServiceAPI.md#DownSubmitOneByOwnerAndRepo) | **Delete** /v1/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and removes existing submission
-[**FindAllUserSubmitted**](SubmitServiceAPI.md#FindAllUserSubmitted) | **Get** /v1/repos/listUserSubmitted | Finds all repos submitted by authenticated user and paginates them
-[**SubmitOneById**](SubmitServiceAPI.md#SubmitOneById) | **Put** /v1/repos/{id}/submit | Finds a repo by :id and adds a submission
-[**SubmitOneByOwnerAndRepo**](SubmitServiceAPI.md#SubmitOneByOwnerAndRepo) | **Put** /v1/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and adds a submission
+[**DownSubmitOneById**](SubmitServiceAPI.md#DownSubmitOneById) | **Delete** /v2/repos/{id}/submit | Finds a repo by :id and removes existing submission
+[**DownSubmitOneByOwnerAndRepo**](SubmitServiceAPI.md#DownSubmitOneByOwnerAndRepo) | **Delete** /v2/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and removes existing submission
+[**FindAllUserSubmitted**](SubmitServiceAPI.md#FindAllUserSubmitted) | **Get** /v2/repos/listUserSubmitted | Finds all repos submitted by authenticated user and paginates them
+[**SubmitOneById**](SubmitServiceAPI.md#SubmitOneById) | **Put** /v2/repos/{id}/submit | Finds a repo by :id and adds a submission
+[**SubmitOneByOwnerAndRepo**](SubmitServiceAPI.md#SubmitOneByOwnerAndRepo) | **Put** /v2/repos/{owner}/{repo}/submit | Finds a repo by :owner and :repo and adds a submission
 
 
 

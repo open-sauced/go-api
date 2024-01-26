@@ -4,19 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**TimeStart** | **string** | The ISO timestamp for the start of the time frame | 
-**TimeEnd** | **string** | The ISO timestamp for the end of the time frame | 
-**Commits** | **int32** | Number of commits associated with a user login | 
-**PrsCreated** | **int32** | Number of PRs created associated with a user login | 
-**PrsReviewed** | **int32** | Number of PRs reviewed by a user login | 
-**IssuesCreated** | **int32** | Number of issues created by a user login | 
-**Comments** | **int32** | Number of comments associated with a user login | 
+**Bucket** | **string** | The ISO timestamp for the given time bucket | 
+**Commits** | **int32** | Number of commits within the time range | 
+**PrsCreated** | **int32** | Number of PRs created within the time range | 
+**PrsReviewed** | **int32** | Number of PRs reviewed within the time range | 
+**IssuesCreated** | **int32** | Number of issues within the time range | 
+**CommitComments** | **int32** | Number of commit comments within the time range | 
+**IssueComments** | **int32** | Number of issue comments within the time range | 
+**PrReviewComments** | **int32** | Number of pr review comments within the time range | 
+**Comments** | **int32** | Number of total comments within the time range | 
+**TotalContributions** | **int32** | Number of total contributions for a user login | 
 
 ## Methods
 
 ### NewDbContributionStatTimeframe
 
-`func NewDbContributionStatTimeframe(timeStart string, timeEnd string, commits int32, prsCreated int32, prsReviewed int32, issuesCreated int32, comments int32, ) *DbContributionStatTimeframe`
+`func NewDbContributionStatTimeframe(bucket string, commits int32, prsCreated int32, prsReviewed int32, issuesCreated int32, commitComments int32, issueComments int32, prReviewComments int32, comments int32, totalContributions int32, ) *DbContributionStatTimeframe`
 
 NewDbContributionStatTimeframe instantiates a new DbContributionStatTimeframe object
 This constructor will assign default values to properties that have it defined,
@@ -31,44 +34,24 @@ NewDbContributionStatTimeframeWithDefaults instantiates a new DbContributionStat
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetTimeStart
+### GetBucket
 
-`func (o *DbContributionStatTimeframe) GetTimeStart() string`
+`func (o *DbContributionStatTimeframe) GetBucket() string`
 
-GetTimeStart returns the TimeStart field if non-nil, zero value otherwise.
+GetBucket returns the Bucket field if non-nil, zero value otherwise.
 
-### GetTimeStartOk
+### GetBucketOk
 
-`func (o *DbContributionStatTimeframe) GetTimeStartOk() (*string, bool)`
+`func (o *DbContributionStatTimeframe) GetBucketOk() (*string, bool)`
 
-GetTimeStartOk returns a tuple with the TimeStart field if it's non-nil, zero value otherwise
+GetBucketOk returns a tuple with the Bucket field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTimeStart
+### SetBucket
 
-`func (o *DbContributionStatTimeframe) SetTimeStart(v string)`
+`func (o *DbContributionStatTimeframe) SetBucket(v string)`
 
-SetTimeStart sets TimeStart field to given value.
-
-
-### GetTimeEnd
-
-`func (o *DbContributionStatTimeframe) GetTimeEnd() string`
-
-GetTimeEnd returns the TimeEnd field if non-nil, zero value otherwise.
-
-### GetTimeEndOk
-
-`func (o *DbContributionStatTimeframe) GetTimeEndOk() (*string, bool)`
-
-GetTimeEndOk returns a tuple with the TimeEnd field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimeEnd
-
-`func (o *DbContributionStatTimeframe) SetTimeEnd(v string)`
-
-SetTimeEnd sets TimeEnd field to given value.
+SetBucket sets Bucket field to given value.
 
 
 ### GetCommits
@@ -151,6 +134,66 @@ and a boolean to check if the value has been set.
 SetIssuesCreated sets IssuesCreated field to given value.
 
 
+### GetCommitComments
+
+`func (o *DbContributionStatTimeframe) GetCommitComments() int32`
+
+GetCommitComments returns the CommitComments field if non-nil, zero value otherwise.
+
+### GetCommitCommentsOk
+
+`func (o *DbContributionStatTimeframe) GetCommitCommentsOk() (*int32, bool)`
+
+GetCommitCommentsOk returns a tuple with the CommitComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommitComments
+
+`func (o *DbContributionStatTimeframe) SetCommitComments(v int32)`
+
+SetCommitComments sets CommitComments field to given value.
+
+
+### GetIssueComments
+
+`func (o *DbContributionStatTimeframe) GetIssueComments() int32`
+
+GetIssueComments returns the IssueComments field if non-nil, zero value otherwise.
+
+### GetIssueCommentsOk
+
+`func (o *DbContributionStatTimeframe) GetIssueCommentsOk() (*int32, bool)`
+
+GetIssueCommentsOk returns a tuple with the IssueComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIssueComments
+
+`func (o *DbContributionStatTimeframe) SetIssueComments(v int32)`
+
+SetIssueComments sets IssueComments field to given value.
+
+
+### GetPrReviewComments
+
+`func (o *DbContributionStatTimeframe) GetPrReviewComments() int32`
+
+GetPrReviewComments returns the PrReviewComments field if non-nil, zero value otherwise.
+
+### GetPrReviewCommentsOk
+
+`func (o *DbContributionStatTimeframe) GetPrReviewCommentsOk() (*int32, bool)`
+
+GetPrReviewCommentsOk returns a tuple with the PrReviewComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrReviewComments
+
+`func (o *DbContributionStatTimeframe) SetPrReviewComments(v int32)`
+
+SetPrReviewComments sets PrReviewComments field to given value.
+
+
 ### GetComments
 
 `func (o *DbContributionStatTimeframe) GetComments() int32`
@@ -169,6 +212,26 @@ and a boolean to check if the value has been set.
 `func (o *DbContributionStatTimeframe) SetComments(v int32)`
 
 SetComments sets Comments field to given value.
+
+
+### GetTotalContributions
+
+`func (o *DbContributionStatTimeframe) GetTotalContributions() int32`
+
+GetTotalContributions returns the TotalContributions field if non-nil, zero value otherwise.
+
+### GetTotalContributionsOk
+
+`func (o *DbContributionStatTimeframe) GetTotalContributionsOk() (*int32, bool)`
+
+GetTotalContributionsOk returns a tuple with the TotalContributions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalContributions
+
+`func (o *DbContributionStatTimeframe) SetTotalContributions(v int32)`
+
+SetTotalContributions sets TotalContributions field to given value.
 
 
 

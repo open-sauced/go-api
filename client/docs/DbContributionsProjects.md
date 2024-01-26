@@ -4,16 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrgId** | **string** | The org name of the repo | 
-**ProjectId** | **string** | The project name of the repo | 
-**RepoId** | **int32** | The ID of the associated repo in the OpenSauced API context | 
-**Contributions** | **int32** | The number of contributions associated with a org/repo | 
+**RepoName** | **string** | The org/repo name | 
+**Commits** | **int32** | Number of commits within the time range | 
+**PrsCreated** | **int32** | Number of PRs created for the project within the time range | 
+**PrsReviewed** | **int32** | Number of PRs reviewed for the project within the time range | 
+**IssuesCreated** | **int32** | Number of issues for the project within the time range | 
+**CommitComments** | **int32** | Number of commit comments for the project within the time range | 
+**IssueComments** | **int32** | Number of issue comments for the project within the time range | 
+**PrReviewComments** | **int32** | Number of pr review comments for the project within the time range | 
+**Comments** | **int32** | Number of total comments for the project within the time range | 
+**TotalContributions** | **int32** | Number of total contributions for the project within the time range | 
 
 ## Methods
 
 ### NewDbContributionsProjects
 
-`func NewDbContributionsProjects(orgId string, projectId string, repoId int32, contributions int32, ) *DbContributionsProjects`
+`func NewDbContributionsProjects(repoName string, commits int32, prsCreated int32, prsReviewed int32, issuesCreated int32, commitComments int32, issueComments int32, prReviewComments int32, comments int32, totalContributions int32, ) *DbContributionsProjects`
 
 NewDbContributionsProjects instantiates a new DbContributionsProjects object
 This constructor will assign default values to properties that have it defined,
@@ -28,84 +34,204 @@ NewDbContributionsProjectsWithDefaults instantiates a new DbContributionsProject
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetOrgId
+### GetRepoName
 
-`func (o *DbContributionsProjects) GetOrgId() string`
+`func (o *DbContributionsProjects) GetRepoName() string`
 
-GetOrgId returns the OrgId field if non-nil, zero value otherwise.
+GetRepoName returns the RepoName field if non-nil, zero value otherwise.
 
-### GetOrgIdOk
+### GetRepoNameOk
 
-`func (o *DbContributionsProjects) GetOrgIdOk() (*string, bool)`
+`func (o *DbContributionsProjects) GetRepoNameOk() (*string, bool)`
 
-GetOrgIdOk returns a tuple with the OrgId field if it's non-nil, zero value otherwise
+GetRepoNameOk returns a tuple with the RepoName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrgId
+### SetRepoName
 
-`func (o *DbContributionsProjects) SetOrgId(v string)`
+`func (o *DbContributionsProjects) SetRepoName(v string)`
 
-SetOrgId sets OrgId field to given value.
+SetRepoName sets RepoName field to given value.
 
 
-### GetProjectId
+### GetCommits
 
-`func (o *DbContributionsProjects) GetProjectId() string`
+`func (o *DbContributionsProjects) GetCommits() int32`
 
-GetProjectId returns the ProjectId field if non-nil, zero value otherwise.
+GetCommits returns the Commits field if non-nil, zero value otherwise.
 
-### GetProjectIdOk
+### GetCommitsOk
 
-`func (o *DbContributionsProjects) GetProjectIdOk() (*string, bool)`
+`func (o *DbContributionsProjects) GetCommitsOk() (*int32, bool)`
 
-GetProjectIdOk returns a tuple with the ProjectId field if it's non-nil, zero value otherwise
+GetCommitsOk returns a tuple with the Commits field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetProjectId
+### SetCommits
 
-`func (o *DbContributionsProjects) SetProjectId(v string)`
+`func (o *DbContributionsProjects) SetCommits(v int32)`
 
-SetProjectId sets ProjectId field to given value.
+SetCommits sets Commits field to given value.
 
 
-### GetRepoId
+### GetPrsCreated
 
-`func (o *DbContributionsProjects) GetRepoId() int32`
+`func (o *DbContributionsProjects) GetPrsCreated() int32`
 
-GetRepoId returns the RepoId field if non-nil, zero value otherwise.
+GetPrsCreated returns the PrsCreated field if non-nil, zero value otherwise.
 
-### GetRepoIdOk
+### GetPrsCreatedOk
 
-`func (o *DbContributionsProjects) GetRepoIdOk() (*int32, bool)`
+`func (o *DbContributionsProjects) GetPrsCreatedOk() (*int32, bool)`
 
-GetRepoIdOk returns a tuple with the RepoId field if it's non-nil, zero value otherwise
+GetPrsCreatedOk returns a tuple with the PrsCreated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRepoId
+### SetPrsCreated
 
-`func (o *DbContributionsProjects) SetRepoId(v int32)`
+`func (o *DbContributionsProjects) SetPrsCreated(v int32)`
 
-SetRepoId sets RepoId field to given value.
+SetPrsCreated sets PrsCreated field to given value.
 
 
-### GetContributions
+### GetPrsReviewed
 
-`func (o *DbContributionsProjects) GetContributions() int32`
+`func (o *DbContributionsProjects) GetPrsReviewed() int32`
 
-GetContributions returns the Contributions field if non-nil, zero value otherwise.
+GetPrsReviewed returns the PrsReviewed field if non-nil, zero value otherwise.
 
-### GetContributionsOk
+### GetPrsReviewedOk
 
-`func (o *DbContributionsProjects) GetContributionsOk() (*int32, bool)`
+`func (o *DbContributionsProjects) GetPrsReviewedOk() (*int32, bool)`
 
-GetContributionsOk returns a tuple with the Contributions field if it's non-nil, zero value otherwise
+GetPrsReviewedOk returns a tuple with the PrsReviewed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetContributions
+### SetPrsReviewed
 
-`func (o *DbContributionsProjects) SetContributions(v int32)`
+`func (o *DbContributionsProjects) SetPrsReviewed(v int32)`
 
-SetContributions sets Contributions field to given value.
+SetPrsReviewed sets PrsReviewed field to given value.
+
+
+### GetIssuesCreated
+
+`func (o *DbContributionsProjects) GetIssuesCreated() int32`
+
+GetIssuesCreated returns the IssuesCreated field if non-nil, zero value otherwise.
+
+### GetIssuesCreatedOk
+
+`func (o *DbContributionsProjects) GetIssuesCreatedOk() (*int32, bool)`
+
+GetIssuesCreatedOk returns a tuple with the IssuesCreated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIssuesCreated
+
+`func (o *DbContributionsProjects) SetIssuesCreated(v int32)`
+
+SetIssuesCreated sets IssuesCreated field to given value.
+
+
+### GetCommitComments
+
+`func (o *DbContributionsProjects) GetCommitComments() int32`
+
+GetCommitComments returns the CommitComments field if non-nil, zero value otherwise.
+
+### GetCommitCommentsOk
+
+`func (o *DbContributionsProjects) GetCommitCommentsOk() (*int32, bool)`
+
+GetCommitCommentsOk returns a tuple with the CommitComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCommitComments
+
+`func (o *DbContributionsProjects) SetCommitComments(v int32)`
+
+SetCommitComments sets CommitComments field to given value.
+
+
+### GetIssueComments
+
+`func (o *DbContributionsProjects) GetIssueComments() int32`
+
+GetIssueComments returns the IssueComments field if non-nil, zero value otherwise.
+
+### GetIssueCommentsOk
+
+`func (o *DbContributionsProjects) GetIssueCommentsOk() (*int32, bool)`
+
+GetIssueCommentsOk returns a tuple with the IssueComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIssueComments
+
+`func (o *DbContributionsProjects) SetIssueComments(v int32)`
+
+SetIssueComments sets IssueComments field to given value.
+
+
+### GetPrReviewComments
+
+`func (o *DbContributionsProjects) GetPrReviewComments() int32`
+
+GetPrReviewComments returns the PrReviewComments field if non-nil, zero value otherwise.
+
+### GetPrReviewCommentsOk
+
+`func (o *DbContributionsProjects) GetPrReviewCommentsOk() (*int32, bool)`
+
+GetPrReviewCommentsOk returns a tuple with the PrReviewComments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrReviewComments
+
+`func (o *DbContributionsProjects) SetPrReviewComments(v int32)`
+
+SetPrReviewComments sets PrReviewComments field to given value.
+
+
+### GetComments
+
+`func (o *DbContributionsProjects) GetComments() int32`
+
+GetComments returns the Comments field if non-nil, zero value otherwise.
+
+### GetCommentsOk
+
+`func (o *DbContributionsProjects) GetCommentsOk() (*int32, bool)`
+
+GetCommentsOk returns a tuple with the Comments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComments
+
+`func (o *DbContributionsProjects) SetComments(v int32)`
+
+SetComments sets Comments field to given value.
+
+
+### GetTotalContributions
+
+`func (o *DbContributionsProjects) GetTotalContributions() int32`
+
+GetTotalContributions returns the TotalContributions field if non-nil, zero value otherwise.
+
+### GetTotalContributionsOk
+
+`func (o *DbContributionsProjects) GetTotalContributionsOk() (*int32, bool)`
+
+GetTotalContributionsOk returns a tuple with the TotalContributions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalContributions
+
+`func (o *DbContributionsProjects) SetTotalContributions(v int32)`
+
+SetTotalContributions sets TotalContributions field to given value.
 
 
 

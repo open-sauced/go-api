@@ -4,7 +4,7 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**HandleStripeWebhook**](StripeServiceAPI.md#HandleStripeWebhook) | **Post** /v1/stripe/webhooks | 
+[**HandleStripeWebhook**](StripeServiceAPI.md#HandleStripeWebhook) | **Post** /v2/stripe/webhooks | 
 
 
 

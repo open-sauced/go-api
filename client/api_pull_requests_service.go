@@ -3,7 +3,7 @@
 
  ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
-API version: 1
+API version: 2
 Contact: hello@opensauced.pizza
 */
 
@@ -17,7 +17,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 )
 
 // PullRequestsServiceAPIService PullRequestsServiceAPI service
@@ -64,7 +63,7 @@ func (a *PullRequestsServiceAPIService) GenerateCodeExplanationExecute(r ApiGene
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/prs/explanation/generate"
+	localVarPath := localBasePath + "/v2/prs/explanation/generate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -161,7 +160,7 @@ func (a *PullRequestsServiceAPIService) GenerateCodeRefactorExecute(r ApiGenerat
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/prs/suggestion/generate"
+	localVarPath := localBasePath + "/v2/prs/suggestion/generate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -258,7 +257,7 @@ func (a *PullRequestsServiceAPIService) GenerateCodeTestExecute(r ApiGenerateCod
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/prs/test/generate"
+	localVarPath := localBasePath + "/v2/prs/test/generate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -355,7 +354,7 @@ func (a *PullRequestsServiceAPIService) GeneratePRDescriptionExecute(r ApiGenera
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/prs/description/generate"
+	localVarPath := localBasePath + "/v2/prs/description/generate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -411,435 +410,7 @@ func (a *PullRequestsServiceAPIService) GeneratePRDescriptionExecute(r ApiGenera
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetPullRequestInsightsRequest struct {
-	ctx               context.Context
-	ApiService        *PullRequestsServiceAPIService
-	page              *int32
-	limit             *int32
-	orderDirection    *OrderDirectionEnum
-	range_            *int32
-	prevDaysStartDate *int32
-	filter            *InsightFilterFieldsEnum
-	topic             *string
-	repo              *string
-	repoIds           *string
-}
-
-func (r ApiGetPullRequestInsightsRequest) Page(page int32) ApiGetPullRequestInsightsRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiGetPullRequestInsightsRequest) Limit(limit int32) ApiGetPullRequestInsightsRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiGetPullRequestInsightsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetPullRequestInsightsRequest {
-	r.orderDirection = &orderDirection
-	return r
-}
-
-// Range in days
-func (r ApiGetPullRequestInsightsRequest) Range_(range_ int32) ApiGetPullRequestInsightsRequest {
-	r.range_ = &range_
-	return r
-}
-
-// Number of days in the past to start range block
-func (r ApiGetPullRequestInsightsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetPullRequestInsightsRequest {
-	r.prevDaysStartDate = &prevDaysStartDate
-	return r
-}
-
-func (r ApiGetPullRequestInsightsRequest) Filter(filter InsightFilterFieldsEnum) ApiGetPullRequestInsightsRequest {
-	r.filter = &filter
-	return r
-}
-
-func (r ApiGetPullRequestInsightsRequest) Topic(topic string) ApiGetPullRequestInsightsRequest {
-	r.topic = &topic
-	return r
-}
-
-func (r ApiGetPullRequestInsightsRequest) Repo(repo string) ApiGetPullRequestInsightsRequest {
-	r.repo = &repo
-	return r
-}
-
-func (r ApiGetPullRequestInsightsRequest) RepoIds(repoIds string) ApiGetPullRequestInsightsRequest {
-	r.repoIds = &repoIds
-	return r
-}
-
-func (r ApiGetPullRequestInsightsRequest) Execute() ([]DbPRInsight, *http.Response, error) {
-	return r.ApiService.GetPullRequestInsightsExecute(r)
-}
-
-/*
-GetPullRequestInsights Find pull request insights over the last 2 months
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetPullRequestInsightsRequest
-*/
-func (a *PullRequestsServiceAPIService) GetPullRequestInsights(ctx context.Context) ApiGetPullRequestInsightsRequest {
-	return ApiGetPullRequestInsightsRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return []DbPRInsight
-func (a *PullRequestsServiceAPIService) GetPullRequestInsightsExecute(r ApiGetPullRequestInsightsRequest) ([]DbPRInsight, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []DbPRInsight
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GetPullRequestInsights")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/prs/insights"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
-	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
-	}
-	if r.prevDaysStartDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
-	}
-	if r.filter != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
-	}
-	if r.topic != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "topic", r.topic, "")
-	}
-	if r.repo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repo", r.repo, "")
-	}
-	if r.repoIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetPullRequestReviewsRequest struct {
-	ctx        context.Context
-	ApiService *PullRequestsServiceAPIService
-	id         string
-}
-
-func (r ApiGetPullRequestReviewsRequest) Execute() ([]DbPullRequestReview, *http.Response, error) {
-	return r.ApiService.GetPullRequestReviewsExecute(r)
-}
-
-/*
-GetPullRequestReviews Find all pull request reviews by pull request ID
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id
-	@return ApiGetPullRequestReviewsRequest
-*/
-func (a *PullRequestsServiceAPIService) GetPullRequestReviews(ctx context.Context, id string) ApiGetPullRequestReviewsRequest {
-	return ApiGetPullRequestReviewsRequest{
-		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return []DbPullRequestReview
-func (a *PullRequestsServiceAPIService) GetPullRequestReviewsExecute(r ApiGetPullRequestReviewsRequest) ([]DbPullRequestReview, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []DbPullRequestReview
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.GetPullRequestReviews")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/prs/{id}/reviews"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiListAllPullRequestsRequest struct {
-	ctx               context.Context
-	ApiService        *PullRequestsServiceAPIService
-	page              *int32
-	limit             *int32
-	orderDirection    *OrderDirectionEnum
-	range_            *int32
-	prevDaysStartDate *int32
-}
-
-func (r ApiListAllPullRequestsRequest) Page(page int32) ApiListAllPullRequestsRequest {
-	r.page = &page
-	return r
-}
-
-func (r ApiListAllPullRequestsRequest) Limit(limit int32) ApiListAllPullRequestsRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiListAllPullRequestsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiListAllPullRequestsRequest {
-	r.orderDirection = &orderDirection
-	return r
-}
-
-// Range in days
-func (r ApiListAllPullRequestsRequest) Range_(range_ int32) ApiListAllPullRequestsRequest {
-	r.range_ = &range_
-	return r
-}
-
-// Number of days in the past to start range block
-func (r ApiListAllPullRequestsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiListAllPullRequestsRequest {
-	r.prevDaysStartDate = &prevDaysStartDate
-	return r
-}
-
-func (r ApiListAllPullRequestsRequest) Execute() (*FindContributorPullRequests200Response, *http.Response, error) {
-	return r.ApiService.ListAllPullRequestsExecute(r)
-}
-
-/*
-ListAllPullRequests Finds all pull requests and paginates them
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListAllPullRequestsRequest
-*/
-func (a *PullRequestsServiceAPIService) ListAllPullRequests(ctx context.Context) ApiListAllPullRequestsRequest {
-	return ApiListAllPullRequestsRequest{
-		ApiService: a,
-		ctx:        ctx,
-	}
-}
-
-// Execute executes the request
-//
-//	@return FindContributorPullRequests200Response
-func (a *PullRequestsServiceAPIService) ListAllPullRequestsExecute(r ApiListAllPullRequestsRequest) (*FindContributorPullRequests200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *FindContributorPullRequests200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.ListAllPullRequests")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/prs/list"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
-	}
-	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
-	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
-	}
-	if r.prevDaysStartDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSearchAllPullRequestsRequest struct {
+type ApiSearchAllPullRequestEventsRequest struct {
 	ctx               context.Context
 	ApiService        *PullRequestsServiceAPIService
 	page              *int32
@@ -855,87 +426,93 @@ type ApiSearchAllPullRequestsRequest struct {
 	status            *PullRequestStatusEnum
 	contributor       *string
 	listId            *string
+	distinctAuthors   *string
 }
 
-func (r ApiSearchAllPullRequestsRequest) Page(page int32) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Page(page int32) ApiSearchAllPullRequestEventsRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Limit(limit int32) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Limit(limit int32) ApiSearchAllPullRequestEventsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiSearchAllPullRequestEventsRequest {
 	r.orderDirection = &orderDirection
 	return r
 }
 
 // Range in days
-func (r ApiSearchAllPullRequestsRequest) Range_(range_ int32) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Range_(range_ int32) ApiSearchAllPullRequestEventsRequest {
 	r.range_ = &range_
 	return r
 }
 
 // Number of days in the past to start range block
-func (r ApiSearchAllPullRequestsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiSearchAllPullRequestEventsRequest {
 	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) OrderBy(orderBy PullRequestOrderFieldsEnum) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) OrderBy(orderBy PullRequestOrderFieldsEnum) ApiSearchAllPullRequestEventsRequest {
 	r.orderBy = &orderBy
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Filter(filter InsightFilterFieldsEnum) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Filter(filter InsightFilterFieldsEnum) ApiSearchAllPullRequestEventsRequest {
 	r.filter = &filter
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Topic(topic string) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Topic(topic string) ApiSearchAllPullRequestEventsRequest {
 	r.topic = &topic
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Repo(repo string) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Repo(repo string) ApiSearchAllPullRequestEventsRequest {
 	r.repo = &repo
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) RepoIds(repoIds string) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) RepoIds(repoIds string) ApiSearchAllPullRequestEventsRequest {
 	r.repoIds = &repoIds
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Status(status PullRequestStatusEnum) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Status(status PullRequestStatusEnum) ApiSearchAllPullRequestEventsRequest {
 	r.status = &status
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Contributor(contributor string) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) Contributor(contributor string) ApiSearchAllPullRequestEventsRequest {
 	r.contributor = &contributor
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) ListId(listId string) ApiSearchAllPullRequestsRequest {
+func (r ApiSearchAllPullRequestEventsRequest) ListId(listId string) ApiSearchAllPullRequestEventsRequest {
 	r.listId = &listId
 	return r
 }
 
-func (r ApiSearchAllPullRequestsRequest) Execute() (*FindContributorPullRequests200Response, *http.Response, error) {
-	return r.ApiService.SearchAllPullRequestsExecute(r)
+func (r ApiSearchAllPullRequestEventsRequest) DistinctAuthors(distinctAuthors string) ApiSearchAllPullRequestEventsRequest {
+	r.distinctAuthors = &distinctAuthors
+	return r
+}
+
+func (r ApiSearchAllPullRequestEventsRequest) Execute() (*FindContributorPullRequestGitHubEvents200Response, *http.Response, error) {
+	return r.ApiService.SearchAllPullRequestEventsExecute(r)
 }
 
 /*
-SearchAllPullRequests Searches pull requests using filters and paginates them
+SearchAllPullRequestEvents Searches pull request events using filters and paginates them
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSearchAllPullRequestsRequest
+	@return ApiSearchAllPullRequestEventsRequest
 */
-func (a *PullRequestsServiceAPIService) SearchAllPullRequests(ctx context.Context) ApiSearchAllPullRequestsRequest {
-	return ApiSearchAllPullRequestsRequest{
+func (a *PullRequestsServiceAPIService) SearchAllPullRequestEvents(ctx context.Context) ApiSearchAllPullRequestEventsRequest {
+	return ApiSearchAllPullRequestEventsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -943,21 +520,21 @@ func (a *PullRequestsServiceAPIService) SearchAllPullRequests(ctx context.Contex
 
 // Execute executes the request
 //
-//	@return FindContributorPullRequests200Response
-func (a *PullRequestsServiceAPIService) SearchAllPullRequestsExecute(r ApiSearchAllPullRequestsRequest) (*FindContributorPullRequests200Response, *http.Response, error) {
+//	@return FindContributorPullRequestGitHubEvents200Response
+func (a *PullRequestsServiceAPIService) SearchAllPullRequestEventsExecute(r ApiSearchAllPullRequestEventsRequest) (*FindContributorPullRequestGitHubEvents200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *FindContributorPullRequests200Response
+		localVarReturnValue *FindContributorPullRequestGitHubEvents200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.SearchAllPullRequests")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PullRequestsServiceAPIService.SearchAllPullRequestEvents")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/prs/search"
+	localVarPath := localBasePath + "/v2/prs/search"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1001,6 +578,9 @@ func (a *PullRequestsServiceAPIService) SearchAllPullRequestsExecute(r ApiSearch
 	}
 	if r.listId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "listId", r.listId, "")
+	}
+	if r.distinctAuthors != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "distinctAuthors", r.distinctAuthors, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

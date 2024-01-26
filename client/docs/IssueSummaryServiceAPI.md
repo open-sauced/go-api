@@ -4,7 +4,7 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GenerateIssueSummary**](IssueSummaryServiceAPI.md#GenerateIssueSummary) | **Post** /v1/issues/summary/generate | Generate a summary for an issue
+[**GenerateIssueSummary**](IssueSummaryServiceAPI.md#GenerateIssueSummary) | **Post** /v2/issues/summary/generate | Generate a summary for an issue
 
 
 

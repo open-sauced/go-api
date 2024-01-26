@@ -3,7 +3,7 @@
 
  ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
-API version: 1
+API version: 2
 Contact: hello@opensauced.pizza
 */
 
@@ -25,12 +25,17 @@ type ContributorsServiceAPIService service
 type ApiFindAllChurnPullRequestContributorsRequest struct {
 	ctx               context.Context
 	ApiService        *ContributorsServiceAPIService
+	repos             *string
 	page              *int32
 	limit             *int32
 	orderDirection    *OrderDirectionEnum
 	range_            *int32
 	prevDaysStartDate *int32
-	repoIds           *string
+}
+
+func (r ApiFindAllChurnPullRequestContributorsRequest) Repos(repos string) ApiFindAllChurnPullRequestContributorsRequest {
+	r.repos = &repos
+	return r
 }
 
 func (r ApiFindAllChurnPullRequestContributorsRequest) Page(page int32) ApiFindAllChurnPullRequestContributorsRequest {
@@ -57,11 +62,6 @@ func (r ApiFindAllChurnPullRequestContributorsRequest) Range_(range_ int32) ApiF
 // Number of days in the past to start range block
 func (r ApiFindAllChurnPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllChurnPullRequestContributorsRequest {
 	r.prevDaysStartDate = &prevDaysStartDate
-	return r
-}
-
-func (r ApiFindAllChurnPullRequestContributorsRequest) RepoIds(repoIds string) ApiFindAllChurnPullRequestContributorsRequest {
-	r.repoIds = &repoIds
 	return r
 }
 
@@ -98,11 +98,14 @@ func (a *ContributorsServiceAPIService) FindAllChurnPullRequestContributorsExecu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/contributors/insights/churn"
+	localVarPath := localBasePath + "/v2/contributors/insights/alumni"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.repos == nil {
+		return localVarReturnValue, nil, reportError("repos is required and must be specified")
+	}
 
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
@@ -119,9 +122,7 @@ func (a *ContributorsServiceAPIService) FindAllChurnPullRequestContributorsExecu
 	if r.prevDaysStartDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
-	if r.repoIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
-	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "repos", r.repos, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -179,12 +180,17 @@ func (a *ContributorsServiceAPIService) FindAllChurnPullRequestContributorsExecu
 type ApiFindAllRecentPullRequestContributorsRequest struct {
 	ctx               context.Context
 	ApiService        *ContributorsServiceAPIService
+	repos             *string
 	page              *int32
 	limit             *int32
 	orderDirection    *OrderDirectionEnum
 	range_            *int32
 	prevDaysStartDate *int32
-	repoIds           *string
+}
+
+func (r ApiFindAllRecentPullRequestContributorsRequest) Repos(repos string) ApiFindAllRecentPullRequestContributorsRequest {
+	r.repos = &repos
+	return r
 }
 
 func (r ApiFindAllRecentPullRequestContributorsRequest) Page(page int32) ApiFindAllRecentPullRequestContributorsRequest {
@@ -211,11 +217,6 @@ func (r ApiFindAllRecentPullRequestContributorsRequest) Range_(range_ int32) Api
 // Number of days in the past to start range block
 func (r ApiFindAllRecentPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllRecentPullRequestContributorsRequest {
 	r.prevDaysStartDate = &prevDaysStartDate
-	return r
-}
-
-func (r ApiFindAllRecentPullRequestContributorsRequest) RepoIds(repoIds string) ApiFindAllRecentPullRequestContributorsRequest {
-	r.repoIds = &repoIds
 	return r
 }
 
@@ -252,11 +253,14 @@ func (a *ContributorsServiceAPIService) FindAllRecentPullRequestContributorsExec
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/contributors/insights/recent"
+	localVarPath := localBasePath + "/v2/contributors/insights/recent"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.repos == nil {
+		return localVarReturnValue, nil, reportError("repos is required and must be specified")
+	}
 
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
@@ -273,9 +277,7 @@ func (a *ContributorsServiceAPIService) FindAllRecentPullRequestContributorsExec
 	if r.prevDaysStartDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
-	if r.repoIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
-	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "repos", r.repos, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -333,12 +335,17 @@ func (a *ContributorsServiceAPIService) FindAllRecentPullRequestContributorsExec
 type ApiFindAllRepeatPullRequestContributorsRequest struct {
 	ctx               context.Context
 	ApiService        *ContributorsServiceAPIService
+	repos             *string
 	page              *int32
 	limit             *int32
 	orderDirection    *OrderDirectionEnum
 	range_            *int32
 	prevDaysStartDate *int32
-	repoIds           *string
+}
+
+func (r ApiFindAllRepeatPullRequestContributorsRequest) Repos(repos string) ApiFindAllRepeatPullRequestContributorsRequest {
+	r.repos = &repos
+	return r
 }
 
 func (r ApiFindAllRepeatPullRequestContributorsRequest) Page(page int32) ApiFindAllRepeatPullRequestContributorsRequest {
@@ -365,11 +372,6 @@ func (r ApiFindAllRepeatPullRequestContributorsRequest) Range_(range_ int32) Api
 // Number of days in the past to start range block
 func (r ApiFindAllRepeatPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindAllRepeatPullRequestContributorsRequest {
 	r.prevDaysStartDate = &prevDaysStartDate
-	return r
-}
-
-func (r ApiFindAllRepeatPullRequestContributorsRequest) RepoIds(repoIds string) ApiFindAllRepeatPullRequestContributorsRequest {
-	r.repoIds = &repoIds
 	return r
 }
 
@@ -406,11 +408,14 @@ func (a *ContributorsServiceAPIService) FindAllRepeatPullRequestContributorsExec
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/contributors/insights/repeat"
+	localVarPath := localBasePath + "/v2/contributors/insights/repeat"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.repos == nil {
+		return localVarReturnValue, nil, reportError("repos is required and must be specified")
+	}
 
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
@@ -427,9 +432,7 @@ func (a *ContributorsServiceAPIService) FindAllRepeatPullRequestContributorsExec
 	if r.prevDaysStartDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
-	if r.repoIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
-	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "repos", r.repos, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -487,12 +490,17 @@ func (a *ContributorsServiceAPIService) FindAllRepeatPullRequestContributorsExec
 type ApiNewPullRequestContributorsRequest struct {
 	ctx               context.Context
 	ApiService        *ContributorsServiceAPIService
+	repos             *string
 	page              *int32
 	limit             *int32
 	orderDirection    *OrderDirectionEnum
 	range_            *int32
 	prevDaysStartDate *int32
-	repoIds           *string
+}
+
+func (r ApiNewPullRequestContributorsRequest) Repos(repos string) ApiNewPullRequestContributorsRequest {
+	r.repos = &repos
+	return r
 }
 
 func (r ApiNewPullRequestContributorsRequest) Page(page int32) ApiNewPullRequestContributorsRequest {
@@ -519,11 +527,6 @@ func (r ApiNewPullRequestContributorsRequest) Range_(range_ int32) ApiNewPullReq
 // Number of days in the past to start range block
 func (r ApiNewPullRequestContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiNewPullRequestContributorsRequest {
 	r.prevDaysStartDate = &prevDaysStartDate
-	return r
-}
-
-func (r ApiNewPullRequestContributorsRequest) RepoIds(repoIds string) ApiNewPullRequestContributorsRequest {
-	r.repoIds = &repoIds
 	return r
 }
 
@@ -560,11 +563,14 @@ func (a *ContributorsServiceAPIService) NewPullRequestContributorsExecute(r ApiN
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/contributors/insights/new"
+	localVarPath := localBasePath + "/v2/contributors/insights/new"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.repos == nil {
+		return localVarReturnValue, nil, reportError("repos is required and must be specified")
+	}
 
 	if r.page != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
@@ -581,9 +587,7 @@ func (a *ContributorsServiceAPIService) NewPullRequestContributorsExecute(r ApiN
 	if r.prevDaysStartDate != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
-	if r.repoIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")
-	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "repos", r.repos, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -648,7 +652,7 @@ type ApiSearchAllPullRequestContributorsRequest struct {
 	prevDaysStartDate *int32
 	filter            *InsightFilterFieldsEnum
 	topic             *string
-	repo              *string
+	repos             *string
 	repoIds           *string
 }
 
@@ -689,8 +693,9 @@ func (r ApiSearchAllPullRequestContributorsRequest) Topic(topic string) ApiSearc
 	return r
 }
 
-func (r ApiSearchAllPullRequestContributorsRequest) Repo(repo string) ApiSearchAllPullRequestContributorsRequest {
-	r.repo = &repo
+// A comma separated list of repos to filter on
+func (r ApiSearchAllPullRequestContributorsRequest) Repos(repos string) ApiSearchAllPullRequestContributorsRequest {
+	r.repos = &repos
 	return r
 }
 
@@ -732,7 +737,7 @@ func (a *ContributorsServiceAPIService) SearchAllPullRequestContributorsExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/contributors/search"
+	localVarPath := localBasePath + "/v2/contributors/search"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -759,8 +764,8 @@ func (a *ContributorsServiceAPIService) SearchAllPullRequestContributorsExecute(
 	if r.topic != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "topic", r.topic, "")
 	}
-	if r.repo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "repo", r.repo, "")
+	if r.repos != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "repos", r.repos, "")
 	}
 	if r.repoIds != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "repoIds", r.repoIds, "")

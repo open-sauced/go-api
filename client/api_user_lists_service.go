@@ -3,7 +3,7 @@
 
  ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
-API version: 1
+API version: 2
 Contact: hello@opensauced.pizza
 */
 
@@ -68,7 +68,7 @@ func (a *UserListsServiceAPIService) AddListForUserExecute(r ApiAddListForUserRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists"
+	localVarPath := localBasePath + "/v2/lists"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -171,7 +171,7 @@ func (a *UserListsServiceAPIService) DeleteListForUserExecute(r ApiDeleteListFor
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}"
+	localVarPath := localBasePath + "/v2/lists/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -264,7 +264,7 @@ func (a *UserListsServiceAPIService) DeleteUserListContributorExecute(r ApiDelet
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/contributors/{userListContributorId}"
+	localVarPath := localBasePath + "/v2/lists/{id}/contributors/{userListContributorId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"userListContributorId"+"}", url.PathEscape(parameterValueToString(r.userListContributorId, "userListContributorId")), -1)
 
@@ -365,7 +365,7 @@ func (a *UserListsServiceAPIService) GetContributionsByProjectExecute(r ApiGetCo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/stats/contributions-by-project"
+	localVarPath := localBasePath + "/v2/lists/{id}/stats/contributions-by-project"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -483,7 +483,7 @@ func (a *UserListsServiceAPIService) GetContributionsByTimeFrameExecute(r ApiGet
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/stats/contributions-evolution-by-type"
+	localVarPath := localBasePath + "/v2/lists/{id}/stats/contributions-evolution-by-type"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -554,13 +554,13 @@ type ApiGetContributorContributionsByProjectRequest struct {
 	ctx        context.Context
 	ApiService *UserListsServiceAPIService
 	id         string
-	repoId     *int32
+	repoName   *string
 	range_     *int32
 }
 
-// Repo ID
-func (r ApiGetContributorContributionsByProjectRequest) RepoId(repoId int32) ApiGetContributorContributionsByProjectRequest {
-	r.repoId = &repoId
+// Repo full name
+func (r ApiGetContributorContributionsByProjectRequest) RepoName(repoName string) ApiGetContributorContributionsByProjectRequest {
+	r.repoName = &repoName
 	return r
 }
 
@@ -605,20 +605,20 @@ func (a *UserListsServiceAPIService) GetContributorContributionsByProjectExecute
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/stats/top-project-contributions-by-contributor"
+	localVarPath := localBasePath + "/v2/lists/{id}/stats/top-project-contributions-by-contributor"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.repoId == nil {
-		return localVarReturnValue, nil, reportError("repoId is required and must be specified")
+	if r.repoName == nil {
+		return localVarReturnValue, nil, reportError("repoName is required and must be specified")
 	}
 
 	if r.range_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "repo_id", r.repoId, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "repo_name", r.repoName, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -748,7 +748,7 @@ func (a *UserListsServiceAPIService) GetContributorsExecute(r ApiGetContributors
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/contributors"
+	localVarPath := localBasePath + "/v2/lists/contributors"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -896,7 +896,7 @@ func (a *UserListsServiceAPIService) GetContributorsByTimeframeExecute(r ApiGetC
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/stats/contributions-evolution-by-contributor-type"
+	localVarPath := localBasePath + "/v2/lists/{id}/stats/contributions-evolution-by-contributor-type"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -908,6 +908,151 @@ func (a *UserListsServiceAPIService) GetContributorsByTimeframeExecute(r ApiGetC
 	}
 	if r.contributorType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "contributorType", r.contributorType, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetFeaturedListsRequest struct {
+	ctx               context.Context
+	ApiService        *UserListsServiceAPIService
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+}
+
+func (r ApiGetFeaturedListsRequest) Page(page int32) ApiGetFeaturedListsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetFeaturedListsRequest) Limit(limit int32) ApiGetFeaturedListsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetFeaturedListsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetFeaturedListsRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiGetFeaturedListsRequest) Range_(range_ int32) ApiGetFeaturedListsRequest {
+	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetFeaturedListsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetFeaturedListsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
+	return r
+}
+
+func (r ApiGetFeaturedListsRequest) Execute() (*DbUserList, *http.Response, error) {
+	return r.ApiService.GetFeaturedListsExecute(r)
+}
+
+/*
+GetFeaturedLists Gets public featured lists
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetFeaturedListsRequest
+*/
+func (a *UserListsServiceAPIService) GetFeaturedLists(ctx context.Context) ApiGetFeaturedListsRequest {
+	return ApiGetFeaturedListsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbUserList
+func (a *UserListsServiceAPIService) GetFeaturedListsExecute(r ApiGetFeaturedListsRequest) (*DbUserList, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbUserList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetFeaturedLists")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/lists/featured"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1033,7 +1178,7 @@ func (a *UserListsServiceAPIService) GetListsForUserExecute(r ApiGetListsForUser
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists"
+	localVarPath := localBasePath + "/v2/lists"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1108,7 +1253,7 @@ func (a *UserListsServiceAPIService) GetListsForUserExecute(r ApiGetListsForUser
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetMostActiveContributorsRequest struct {
+type ApiGetMostActiveContributorsV2Request struct {
 	ctx               context.Context
 	ApiService        *UserListsServiceAPIService
 	id                string
@@ -1121,56 +1266,56 @@ type ApiGetMostActiveContributorsRequest struct {
 	orderBy           *UserListContributorStatsOrderEnum
 }
 
-func (r ApiGetMostActiveContributorsRequest) Page(page int32) ApiGetMostActiveContributorsRequest {
+func (r ApiGetMostActiveContributorsV2Request) Page(page int32) ApiGetMostActiveContributorsV2Request {
 	r.page = &page
 	return r
 }
 
-func (r ApiGetMostActiveContributorsRequest) Limit(limit int32) ApiGetMostActiveContributorsRequest {
+func (r ApiGetMostActiveContributorsV2Request) Limit(limit int32) ApiGetMostActiveContributorsV2Request {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetMostActiveContributorsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetMostActiveContributorsRequest {
+func (r ApiGetMostActiveContributorsV2Request) OrderDirection(orderDirection OrderDirectionEnum) ApiGetMostActiveContributorsV2Request {
 	r.orderDirection = &orderDirection
 	return r
 }
 
 // Range in days
-func (r ApiGetMostActiveContributorsRequest) Range_(range_ int32) ApiGetMostActiveContributorsRequest {
+func (r ApiGetMostActiveContributorsV2Request) Range_(range_ int32) ApiGetMostActiveContributorsV2Request {
 	r.range_ = &range_
 	return r
 }
 
 // Number of days in the past to start range block
-func (r ApiGetMostActiveContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetMostActiveContributorsRequest {
+func (r ApiGetMostActiveContributorsV2Request) PrevDaysStartDate(prevDaysStartDate int32) ApiGetMostActiveContributorsV2Request {
 	r.prevDaysStartDate = &prevDaysStartDate
 	return r
 }
 
-func (r ApiGetMostActiveContributorsRequest) ContributorType(contributorType UserListContributorStatsTypeEnum) ApiGetMostActiveContributorsRequest {
+func (r ApiGetMostActiveContributorsV2Request) ContributorType(contributorType UserListContributorStatsTypeEnum) ApiGetMostActiveContributorsV2Request {
 	r.contributorType = &contributorType
 	return r
 }
 
-func (r ApiGetMostActiveContributorsRequest) OrderBy(orderBy UserListContributorStatsOrderEnum) ApiGetMostActiveContributorsRequest {
+func (r ApiGetMostActiveContributorsV2Request) OrderBy(orderBy UserListContributorStatsOrderEnum) ApiGetMostActiveContributorsV2Request {
 	r.orderBy = &orderBy
 	return r
 }
 
-func (r ApiGetMostActiveContributorsRequest) Execute() (*GetMostActiveContributors200Response, *http.Response, error) {
-	return r.ApiService.GetMostActiveContributorsExecute(r)
+func (r ApiGetMostActiveContributorsV2Request) Execute() (*GetMostActiveContributorsV2200Response, *http.Response, error) {
+	return r.ApiService.GetMostActiveContributorsV2Execute(r)
 }
 
 /*
-GetMostActiveContributors Gets most active contributors for a given list
+GetMostActiveContributorsV2 Gets most active contributors for a given list
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id
-	@return ApiGetMostActiveContributorsRequest
+	@return ApiGetMostActiveContributorsV2Request
 */
-func (a *UserListsServiceAPIService) GetMostActiveContributors(ctx context.Context, id string) ApiGetMostActiveContributorsRequest {
-	return ApiGetMostActiveContributorsRequest{
+func (a *UserListsServiceAPIService) GetMostActiveContributorsV2(ctx context.Context, id string) ApiGetMostActiveContributorsV2Request {
+	return ApiGetMostActiveContributorsV2Request{
 		ApiService: a,
 		ctx:        ctx,
 		id:         id,
@@ -1179,21 +1324,21 @@ func (a *UserListsServiceAPIService) GetMostActiveContributors(ctx context.Conte
 
 // Execute executes the request
 //
-//	@return GetMostActiveContributors200Response
-func (a *UserListsServiceAPIService) GetMostActiveContributorsExecute(r ApiGetMostActiveContributorsRequest) (*GetMostActiveContributors200Response, *http.Response, error) {
+//	@return GetMostActiveContributorsV2200Response
+func (a *UserListsServiceAPIService) GetMostActiveContributorsV2Execute(r ApiGetMostActiveContributorsV2Request) (*GetMostActiveContributorsV2200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetMostActiveContributors200Response
+		localVarReturnValue *GetMostActiveContributorsV2200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetMostActiveContributors")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetMostActiveContributorsV2")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/stats/most-active-contributors"
+	localVarPath := localBasePath + "/v2/lists/{id}/stats/most-active-contributors"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1313,7 +1458,7 @@ func (a *UserListsServiceAPIService) GetTimezonesExecute(r ApiGetTimezonesReques
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/timezones"
+	localVarPath := localBasePath + "/v2/lists/timezones"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1414,7 +1559,7 @@ func (a *UserListsServiceAPIService) GetUserListExecute(r ApiGetUserListRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}"
+	localVarPath := localBasePath + "/v2/lists/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1475,7 +1620,7 @@ func (a *UserListsServiceAPIService) GetUserListExecute(r ApiGetUserListRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetUserListContributorsRequest struct {
+type ApiGetUserListContributorHighlightedReposRequest struct {
 	ctx               context.Context
 	ApiService        *UserListsServiceAPIService
 	id                string
@@ -1484,6 +1629,325 @@ type ApiGetUserListContributorsRequest struct {
 	orderDirection    *OrderDirectionEnum
 	range_            *int32
 	prevDaysStartDate *int32
+}
+
+func (r ApiGetUserListContributorHighlightedReposRequest) Page(page int32) ApiGetUserListContributorHighlightedReposRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetUserListContributorHighlightedReposRequest) Limit(limit int32) ApiGetUserListContributorHighlightedReposRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetUserListContributorHighlightedReposRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetUserListContributorHighlightedReposRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiGetUserListContributorHighlightedReposRequest) Range_(range_ int32) ApiGetUserListContributorHighlightedReposRequest {
+	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetUserListContributorHighlightedReposRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetUserListContributorHighlightedReposRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
+	return r
+}
+
+func (r ApiGetUserListContributorHighlightedReposRequest) Execute() (*GetUserListContributorHighlightedRepos200Response, *http.Response, error) {
+	return r.ApiService.GetUserListContributorHighlightedReposExecute(r)
+}
+
+/*
+GetUserListContributorHighlightedRepos Retrieves highlighted repos for contributors for an individual user list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetUserListContributorHighlightedReposRequest
+*/
+func (a *UserListsServiceAPIService) GetUserListContributorHighlightedRepos(ctx context.Context, id string) ApiGetUserListContributorHighlightedReposRequest {
+	return ApiGetUserListContributorHighlightedReposRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetUserListContributorHighlightedRepos200Response
+func (a *UserListsServiceAPIService) GetUserListContributorHighlightedReposExecute(r ApiGetUserListContributorHighlightedReposRequest) (*GetUserListContributorHighlightedRepos200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetUserListContributorHighlightedRepos200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetUserListContributorHighlightedRepos")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/lists/{id}/contributors/highlights/tagged-repos"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserListContributorHighlightsRequest struct {
+	ctx               context.Context
+	ApiService        *UserListsServiceAPIService
+	id                string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+	repo              *string
+	contributor       *string
+}
+
+func (r ApiGetUserListContributorHighlightsRequest) Page(page int32) ApiGetUserListContributorHighlightsRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiGetUserListContributorHighlightsRequest) Limit(limit int32) ApiGetUserListContributorHighlightsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiGetUserListContributorHighlightsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetUserListContributorHighlightsRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiGetUserListContributorHighlightsRequest) Range_(range_ int32) ApiGetUserListContributorHighlightsRequest {
+	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiGetUserListContributorHighlightsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetUserListContributorHighlightsRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
+	return r
+}
+
+// Highlight Repo Filter
+func (r ApiGetUserListContributorHighlightsRequest) Repo(repo string) ApiGetUserListContributorHighlightsRequest {
+	r.repo = &repo
+	return r
+}
+
+// Highlight User Filter
+func (r ApiGetUserListContributorHighlightsRequest) Contributor(contributor string) ApiGetUserListContributorHighlightsRequest {
+	r.contributor = &contributor
+	return r
+}
+
+func (r ApiGetUserListContributorHighlightsRequest) Execute() (*FindAllHighlightsByUsername200Response, *http.Response, error) {
+	return r.ApiService.GetUserListContributorHighlightsExecute(r)
+}
+
+/*
+GetUserListContributorHighlights Retrieves highlights for contributors for an individual user list
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id
+	@return ApiGetUserListContributorHighlightsRequest
+*/
+func (a *UserListsServiceAPIService) GetUserListContributorHighlights(ctx context.Context, id string) ApiGetUserListContributorHighlightsRequest {
+	return ApiGetUserListContributorHighlightsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return FindAllHighlightsByUsername200Response
+func (a *UserListsServiceAPIService) GetUserListContributorHighlightsExecute(r ApiGetUserListContributorHighlightsRequest) (*FindAllHighlightsByUsername200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *FindAllHighlightsByUsername200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserListsServiceAPIService.GetUserListContributorHighlights")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/lists/{id}/contributors/highlights"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
+	if r.repo != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "repo", r.repo, "")
+	}
+	if r.contributor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contributor", r.contributor, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetUserListContributorsRequest struct {
+	ctx         context.Context
+	ApiService  *UserListsServiceAPIService
+	id          string
+	page        *int32
+	limit       *int32
+	location    *[]string
+	contributor *string
+	timezone    *[]string
+	prVelocity  *int32
 }
 
 func (r ApiGetUserListContributorsRequest) Page(page int32) ApiGetUserListContributorsRequest {
@@ -1496,20 +1960,24 @@ func (r ApiGetUserListContributorsRequest) Limit(limit int32) ApiGetUserListCont
 	return r
 }
 
-func (r ApiGetUserListContributorsRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiGetUserListContributorsRequest {
-	r.orderDirection = &orderDirection
+func (r ApiGetUserListContributorsRequest) Location(location []string) ApiGetUserListContributorsRequest {
+	r.location = &location
 	return r
 }
 
-// Range in days
-func (r ApiGetUserListContributorsRequest) Range_(range_ int32) ApiGetUserListContributorsRequest {
-	r.range_ = &range_
+func (r ApiGetUserListContributorsRequest) Contributor(contributor string) ApiGetUserListContributorsRequest {
+	r.contributor = &contributor
 	return r
 }
 
-// Number of days in the past to start range block
-func (r ApiGetUserListContributorsRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiGetUserListContributorsRequest {
-	r.prevDaysStartDate = &prevDaysStartDate
+func (r ApiGetUserListContributorsRequest) Timezone(timezone []string) ApiGetUserListContributorsRequest {
+	r.timezone = &timezone
+	return r
+}
+
+// Less than or equal to the average number of days to merge a PR over the last 30 days
+func (r ApiGetUserListContributorsRequest) PrVelocity(prVelocity int32) ApiGetUserListContributorsRequest {
+	r.prVelocity = &prVelocity
 	return r
 }
 
@@ -1548,7 +2016,7 @@ func (a *UserListsServiceAPIService) GetUserListContributorsExecute(r ApiGetUser
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/contributors"
+	localVarPath := localBasePath + "/v2/lists/{id}/contributors"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1561,14 +2029,33 @@ func (a *UserListsServiceAPIService) GetUserListContributorsExecute(r ApiGetUser
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
 	}
-	if r.orderDirection != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	if r.location != nil {
+		t := *r.location
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "location", s.Index(i).Interface(), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "location", t, "multi")
+		}
 	}
-	if r.range_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	if r.contributor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "contributor", r.contributor, "")
 	}
-	if r.prevDaysStartDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	if r.timezone != nil {
+		t := *r.timezone
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "timezone", s.Index(i).Interface(), "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "timezone", t, "multi")
+		}
+	}
+	if r.prVelocity != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pr_velocity", r.prVelocity, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1671,7 +2158,7 @@ func (a *UserListsServiceAPIService) PostUserListContributorsExecute(r ApiPostUs
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}/contributors"
+	localVarPath := localBasePath + "/v2/lists/{id}/contributors"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1784,7 +2271,7 @@ func (a *UserListsServiceAPIService) UpdateListForUserExecute(r ApiUpdateListFor
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/lists/{id}"
+	localVarPath := localBasePath + "/v2/lists/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)

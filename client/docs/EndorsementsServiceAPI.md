@@ -4,16 +4,16 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateEndorsement**](EndorsementsServiceAPI.md#CreateEndorsement) | **Post** /v1/endorsements | Creates a new endorsement record
-[**DeleteEndoresementById**](EndorsementsServiceAPI.md#DeleteEndoresementById) | **Delete** /v1/endorsements/{id} | Finds ands deletes the endorsement by ID
-[**FindAllByRepoOwnerOrUsername**](EndorsementsServiceAPI.md#FindAllByRepoOwnerOrUsername) | **Get** /v1/endorsements/repos/{repoOwnerOrUser} | Finds all endorsements by repo org or username and paginates them
-[**FindAllEndorsements**](EndorsementsServiceAPI.md#FindAllEndorsements) | **Get** /v1/endorsements | Finds all endorsements and paginates them
-[**FindAllEndorsementsByRepo**](EndorsementsServiceAPI.md#FindAllEndorsementsByRepo) | **Get** /v1/endorsements/repos/{owner}/{repo} | Finds all endorsements by repo owner or username and paginates them
-[**FindAllUserCreatedEndorsements**](EndorsementsServiceAPI.md#FindAllUserCreatedEndorsements) | **Get** /v1/user/endorsements/created | Finds all endorsements created by the authenticated user and paginates them
-[**FindAllUserCreatedEndorsementsByUsername**](EndorsementsServiceAPI.md#FindAllUserCreatedEndorsementsByUsername) | **Get** /v1/endorsements/user/{username}/created | Finds all endorsements received by the user and paginates them
-[**FindAllUserReceivedEndorsements**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsements) | **Get** /v1/user/endorsements/received | Finds all endorsements received by the authenticated user and paginates them
-[**FindAllUserReceivedEndorsementsByUsername**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsementsByUsername) | **Get** /v1/endorsements/user/{username}/received | Finds all endorsements received by the user and paginates them
-[**FindEndorsementById**](EndorsementsServiceAPI.md#FindEndorsementById) | **Get** /v1/endorsements/{id} | Retrieves the endorsement based on ID
+[**CreateEndorsement**](EndorsementsServiceAPI.md#CreateEndorsement) | **Post** /v2/endorsements | Creates a new endorsement record
+[**DeleteEndoresementById**](EndorsementsServiceAPI.md#DeleteEndoresementById) | **Delete** /v2/endorsements/{id} | Finds ands deletes the endorsement by ID
+[**FindAllByRepoOwnerOrUsername**](EndorsementsServiceAPI.md#FindAllByRepoOwnerOrUsername) | **Get** /v2/endorsements/repos/{repoOwnerOrUser} | Finds all endorsements by repo org or username and paginates them
+[**FindAllEndorsements**](EndorsementsServiceAPI.md#FindAllEndorsements) | **Get** /v2/endorsements | Finds all endorsements and paginates them
+[**FindAllEndorsementsByRepo**](EndorsementsServiceAPI.md#FindAllEndorsementsByRepo) | **Get** /v2/endorsements/repos/{owner}/{repo} | Finds all endorsements by repo owner or username and paginates them
+[**FindAllUserCreatedEndorsements**](EndorsementsServiceAPI.md#FindAllUserCreatedEndorsements) | **Get** /v2/user/endorsements/created | Finds all endorsements created by the authenticated user and paginates them
+[**FindAllUserCreatedEndorsementsByUsername**](EndorsementsServiceAPI.md#FindAllUserCreatedEndorsementsByUsername) | **Get** /v2/endorsements/user/{username}/created | Finds all endorsements received by the user and paginates them
+[**FindAllUserReceivedEndorsements**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsements) | **Get** /v2/user/endorsements/received | Finds all endorsements received by the authenticated user and paginates them
+[**FindAllUserReceivedEndorsementsByUsername**](EndorsementsServiceAPI.md#FindAllUserReceivedEndorsementsByUsername) | **Get** /v2/endorsements/user/{username}/received | Finds all endorsements received by the user and paginates them
+[**FindEndorsementById**](EndorsementsServiceAPI.md#FindEndorsementById) | **Get** /v2/endorsements/{id} | Retrieves the endorsement based on ID
 
 
 

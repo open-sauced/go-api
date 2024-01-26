@@ -4,19 +4,19 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FindAllHighlightsByUsername**](UserServiceAPI.md#FindAllHighlightsByUsername) | **Get** /v1/users/{username}/highlights | Listing all Highlights for a user and paginate them
-[**FindAllOrgsByUsername**](UserServiceAPI.md#FindAllOrgsByUsername) | **Get** /v1/users/{username}/organizations | Listing public orgs for a user and paginate them
-[**FindAllTopReposByUsername**](UserServiceAPI.md#FindAllTopReposByUsername) | **Get** /v1/users/{username}/top-repos | Listing all Top Repos for a user and paginate them
-[**FindContributorPullRequests**](UserServiceAPI.md#FindContributorPullRequests) | **Get** /v1/users/{username}/prs | Finds pull requests by :username
-[**FindOneUserByUserame**](UserServiceAPI.md#FindOneUserByUserame) | **Get** /v1/users/{username} | Finds a user by :username
-[**FollowUserById**](UserServiceAPI.md#FollowUserById) | **Put** /v1/users/{username}/follow | Follows a user by username
-[**FollowUsersByUsernames**](UserServiceAPI.md#FollowUsersByUsernames) | **Put** /v1/users/{username}/follows | Follows a number of users by username
-[**GetFollowStatusByUsername**](UserServiceAPI.md#GetFollowStatusByUsername) | **Get** /v1/users/{username}/follow | Checks if the authenticated user follows the provided username
-[**GetFollowingListByUsername**](UserServiceAPI.md#GetFollowingListByUsername) | **Get** /v1/users/{username}/following | Get list of following users by the provided username
-[**GetTop10Highlights**](UserServiceAPI.md#GetTop10Highlights) | **Get** /v1/users/top | List top users
-[**GetUserNotifications**](UserServiceAPI.md#GetUserNotifications) | **Get** /v1/user/notifications | Retrieves notifications for the authenticated user
-[**GetUsersByFilter**](UserServiceAPI.md#GetUsersByFilter) | **Get** /v1/users/search | Search users
-[**UnfollowUserByUsername**](UserServiceAPI.md#UnfollowUserByUsername) | **Delete** /v1/users/{username}/follow | Unfollows a user by username
+[**FindAllHighlightsByUsername**](UserServiceAPI.md#FindAllHighlightsByUsername) | **Get** /v2/users/{username}/highlights | Listing all Highlights for a user and paginate them
+[**FindAllOrgsByUsername**](UserServiceAPI.md#FindAllOrgsByUsername) | **Get** /v2/users/{username}/organizations | Listing public orgs for a user and paginate them
+[**FindAllTopReposByUsername**](UserServiceAPI.md#FindAllTopReposByUsername) | **Get** /v2/users/{username}/top-repos | Listing all Top Repos for a user and paginate them
+[**FindContributorPullRequestGitHubEvents**](UserServiceAPI.md#FindContributorPullRequestGitHubEvents) | **Get** /v2/users/{username}/prs | Finds pull requests by :username
+[**FindOneUserByUserame**](UserServiceAPI.md#FindOneUserByUserame) | **Get** /v2/users/{username} | Finds a user by :username
+[**FollowUserById**](UserServiceAPI.md#FollowUserById) | **Put** /v2/users/{username}/follow | Follows a user by username
+[**FollowUsersByUsernames**](UserServiceAPI.md#FollowUsersByUsernames) | **Put** /v2/users/{username}/follows | Follows a number of users by username
+[**GetFollowStatusByUsername**](UserServiceAPI.md#GetFollowStatusByUsername) | **Get** /v2/users/{username}/follow | Checks if the authenticated user follows the provided username
+[**GetFollowingListByUsername**](UserServiceAPI.md#GetFollowingListByUsername) | **Get** /v2/users/{username}/following | Get list of following users by the provided username
+[**GetTop10Highlights**](UserServiceAPI.md#GetTop10Highlights) | **Get** /v2/users/top | List top users
+[**GetUserNotifications**](UserServiceAPI.md#GetUserNotifications) | **Get** /v2/user/notifications | Retrieves notifications for the authenticated user
+[**GetUsersByFilter**](UserServiceAPI.md#GetUsersByFilter) | **Get** /v2/users/search | Search users
+[**UnfollowUserByUsername**](UserServiceAPI.md#UnfollowUserByUsername) | **Delete** /v2/users/{username}/follow | Unfollows a user by username
 
 
 
@@ -254,9 +254,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## FindContributorPullRequests
+## FindContributorPullRequestGitHubEvents
 
-> FindContributorPullRequests200Response FindContributorPullRequests(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
+> FindContributorPullRequestGitHubEvents200Response FindContributorPullRequestGitHubEvents(ctx, username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds pull requests by :username
 
@@ -282,13 +282,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.UserServiceAPI.FindContributorPullRequests(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
+    resp, r, err := apiClient.UserServiceAPI.FindContributorPullRequestGitHubEvents(context.Background(), username).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.FindContributorPullRequests``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UserServiceAPI.FindContributorPullRequestGitHubEvents``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FindContributorPullRequests`: FindContributorPullRequests200Response
-    fmt.Fprintf(os.Stdout, "Response from `UserServiceAPI.FindContributorPullRequests`: %v\n", resp)
+    // response from `FindContributorPullRequestGitHubEvents`: FindContributorPullRequestGitHubEvents200Response
+    fmt.Fprintf(os.Stdout, "Response from `UserServiceAPI.FindContributorPullRequestGitHubEvents`: %v\n", resp)
 }
 ```
 
@@ -302,7 +302,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiFindContributorPullRequestsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiFindContributorPullRequestGitHubEventsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FindContributorPullRequests200Response**](FindContributorPullRequests200Response.md)
+[**FindContributorPullRequestGitHubEvents200Response**](FindContributorPullRequestGitHubEvents200Response.md)
 
 ### Authorization
 

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **UserId** | **int32** | User ID | 
 **Name** | **string** | List Name | 
 **IsPublic** | **bool** | Flag indicating insight visibility | 
+**IsFeatured** | **bool** | Flag indicating featured list | 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing insight creation | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Timestamp representing insight last updated | [optional] 
 **DeletedAt** | Pointer to **time.Time** | Timestamp representing insight deletion | [optional] 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewDbUserList
 
-`func NewDbUserList(id string, userId int32, name string, isPublic bool, ) *DbUserList`
+`func NewDbUserList(id string, userId int32, name string, isPublic bool, isFeatured bool, ) *DbUserList`
 
 NewDbUserList instantiates a new DbUserList object
 This constructor will assign default values to properties that have it defined,
@@ -109,6 +110,26 @@ and a boolean to check if the value has been set.
 `func (o *DbUserList) SetIsPublic(v bool)`
 
 SetIsPublic sets IsPublic field to given value.
+
+
+### GetIsFeatured
+
+`func (o *DbUserList) GetIsFeatured() bool`
+
+GetIsFeatured returns the IsFeatured field if non-nil, zero value otherwise.
+
+### GetIsFeaturedOk
+
+`func (o *DbUserList) GetIsFeaturedOk() (*bool, bool)`
+
+GetIsFeaturedOk returns a tuple with the IsFeatured field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsFeatured
+
+`func (o *DbUserList) SetIsFeatured(v bool)`
+
+SetIsFeatured sets IsFeatured field to given value.
 
 
 ### GetCreatedAt

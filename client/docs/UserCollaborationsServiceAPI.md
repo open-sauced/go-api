@@ -4,10 +4,10 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddUserCollaboration**](UserCollaborationsServiceAPI.md#AddUserCollaboration) | **Post** /v1/user/collaborations | Adds a new collaboration request for the user
-[**FindAllUserCollaborations**](UserCollaborationsServiceAPI.md#FindAllUserCollaborations) | **Get** /v1/user/collaborations | Listing all collaborations for the authenticated user
-[**RemoveUserCollaborationById**](UserCollaborationsServiceAPI.md#RemoveUserCollaborationById) | **Delete** /v1/user/collaborations/{id} | Removes the user collaboration request
-[**UpdateUserCollaboration**](UserCollaborationsServiceAPI.md#UpdateUserCollaboration) | **Patch** /v1/user/collaborations/{id} | Updates a user collaboration
+[**AddUserCollaboration**](UserCollaborationsServiceAPI.md#AddUserCollaboration) | **Post** /v2/user/collaborations | Adds a new collaboration request for the user
+[**FindAllUserCollaborations**](UserCollaborationsServiceAPI.md#FindAllUserCollaborations) | **Get** /v2/user/collaborations | Listing all collaborations for the authenticated user
+[**RemoveUserCollaborationById**](UserCollaborationsServiceAPI.md#RemoveUserCollaborationById) | **Delete** /v2/user/collaborations/{id} | Removes the user collaboration request
+[**UpdateUserCollaboration**](UserCollaborationsServiceAPI.md#UpdateUserCollaboration) | **Patch** /v2/user/collaborations/{id} | Updates a user collaboration
 
 
 

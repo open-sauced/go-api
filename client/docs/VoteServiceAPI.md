@@ -4,12 +4,12 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownVoteOneById**](VoteServiceAPI.md#DownVoteOneById) | **Delete** /v1/repos/{id}/vote | Finds a repo by :id and removes existing vote
-[**DownVoteOneByOwnerAndRepo**](VoteServiceAPI.md#DownVoteOneByOwnerAndRepo) | **Delete** /v1/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and removes existing vote
-[**FindAllUserVoted**](VoteServiceAPI.md#FindAllUserVoted) | **Get** /v1/repos/listUserVoted | Finds all repos voted by authenticated user and paginates them
-[**FindOneByRepoId**](VoteServiceAPI.md#FindOneByRepoId) | **Get** /v1/repos/{repoId}/vote | Finds a repo by :repoId and returns if authenticated user has voted for it
-[**VoteOneById**](VoteServiceAPI.md#VoteOneById) | **Put** /v1/repos/{id}/vote | Finds a repo by :id and adds a vote
-[**VoteOneByOwnerAndRepo**](VoteServiceAPI.md#VoteOneByOwnerAndRepo) | **Put** /v1/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and adds a vote
+[**DownVoteOneById**](VoteServiceAPI.md#DownVoteOneById) | **Delete** /v2/repos/{id}/vote | Finds a repo by :id and removes existing vote
+[**DownVoteOneByOwnerAndRepo**](VoteServiceAPI.md#DownVoteOneByOwnerAndRepo) | **Delete** /v2/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and removes existing vote
+[**FindAllUserVoted**](VoteServiceAPI.md#FindAllUserVoted) | **Get** /v2/repos/listUserVoted | Finds all repos voted by authenticated user and paginates them
+[**FindOneByRepoId**](VoteServiceAPI.md#FindOneByRepoId) | **Get** /v2/repos/{repoId}/vote | Finds a repo by :repoId and returns if authenticated user has voted for it
+[**VoteOneById**](VoteServiceAPI.md#VoteOneById) | **Put** /v2/repos/{id}/vote | Finds a repo by :id and adds a vote
+[**VoteOneByOwnerAndRepo**](VoteServiceAPI.md#VoteOneByOwnerAndRepo) | **Put** /v2/repos/{owner}/{repo}/vote | Finds a repo by :owner and :repo and adds a vote
 
 
 

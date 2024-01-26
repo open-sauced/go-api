@@ -51,20 +51,6 @@ func Test_openapi_UserServiceAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test UserServiceAPIService FindContributorPullRequests", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var username string
-
-		resp, httpRes, err := apiClient.UserServiceAPI.FindContributorPullRequests(context.Background(), username).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
 	t.Run("Test UserServiceAPIService FindOneUserByUserame", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
