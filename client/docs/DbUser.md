@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **FirstOpenedPrAt** | Pointer to **time.Time** | Timestamp representing user first open PR | [optional] 
 **FirstPushedCommitAt** | Pointer to **time.Time** | Timestamp representing user first commit push | [optional] 
 **ConnectedAt** | Pointer to **time.Time** | Timestamp representing user logging in to open sauced for the first time | [optional] 
+**CampaignStartDate** | Pointer to **time.Time** | Timestamp representing user email campaign start date | [optional] 
 **NodeId** | **string** | User GitHub node id | 
 **AvatarUrl** | **string** | User GitHub avatar URL | 
 **GravatarId** | Pointer to **string** | User GitHub gravatar URL | [optional] 
@@ -41,6 +42,7 @@ Name | Type | Description | Notes
 **Type** | **string** | GitHub user type | [default to "User"]
 **DisplayEmail** | Pointer to **bool** | User display public email | [optional] 
 **ReceiveCollaboration** | Pointer to **bool** | User receives collaboration requests | [optional] 
+**ReceiveProductUpdates** | Pointer to **bool** | User receives product updates through email | [optional] 
 **Timezone** | Pointer to **string** | User timezone in UTC | [optional] 
 **CouponCode** | Pointer to **string** | Coupon Code | [optional] 
 **Languages** | **map[string]interface{}** | GitHub top languages | [default to {}]
@@ -236,6 +238,31 @@ SetConnectedAt sets ConnectedAt field to given value.
 `func (o *DbUser) HasConnectedAt() bool`
 
 HasConnectedAt returns a boolean if a field has been set.
+
+### GetCampaignStartDate
+
+`func (o *DbUser) GetCampaignStartDate() time.Time`
+
+GetCampaignStartDate returns the CampaignStartDate field if non-nil, zero value otherwise.
+
+### GetCampaignStartDateOk
+
+`func (o *DbUser) GetCampaignStartDateOk() (*time.Time, bool)`
+
+GetCampaignStartDateOk returns a tuple with the CampaignStartDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCampaignStartDate
+
+`func (o *DbUser) SetCampaignStartDate(v time.Time)`
+
+SetCampaignStartDate sets CampaignStartDate field to given value.
+
+### HasCampaignStartDate
+
+`func (o *DbUser) HasCampaignStartDate() bool`
+
+HasCampaignStartDate returns a boolean if a field has been set.
 
 ### GetNodeId
 
@@ -916,6 +943,31 @@ SetReceiveCollaboration sets ReceiveCollaboration field to given value.
 `func (o *DbUser) HasReceiveCollaboration() bool`
 
 HasReceiveCollaboration returns a boolean if a field has been set.
+
+### GetReceiveProductUpdates
+
+`func (o *DbUser) GetReceiveProductUpdates() bool`
+
+GetReceiveProductUpdates returns the ReceiveProductUpdates field if non-nil, zero value otherwise.
+
+### GetReceiveProductUpdatesOk
+
+`func (o *DbUser) GetReceiveProductUpdatesOk() (*bool, bool)`
+
+GetReceiveProductUpdatesOk returns a tuple with the ReceiveProductUpdates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReceiveProductUpdates
+
+`func (o *DbUser) SetReceiveProductUpdates(v bool)`
+
+SetReceiveProductUpdates sets ReceiveProductUpdates field to given value.
+
+### HasReceiveProductUpdates
+
+`func (o *DbUser) HasReceiveProductUpdates() bool`
+
+HasReceiveProductUpdates returns a boolean if a field has been set.
 
 ### GetTimezone
 

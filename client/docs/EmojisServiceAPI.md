@@ -4,7 +4,7 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**FindAllEmojis**](EmojisServiceAPI.md#FindAllEmojis) | **Get** /v1/emojis | Listing all emojis and paginates them
+[**FindAllEmojis**](EmojisServiceAPI.md#FindAllEmojis) | **Get** /v2/emojis | Listing all emojis and paginates them
 
 
 

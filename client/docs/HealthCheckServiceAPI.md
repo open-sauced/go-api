@@ -4,8 +4,8 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**HealthStatusService**](HealthCheckServiceAPI.md#HealthStatusService) | **Get** /v1/health/service | Check the health of Open Sauced service endpoints
-[**HealthStatusWeb**](HealthCheckServiceAPI.md#HealthStatusWeb) | **Get** /v1/health/web | Check the health of Open Sauced web endpoints
+[**HealthStatusService**](HealthCheckServiceAPI.md#HealthStatusService) | **Get** /v2/health/service | Check the health of Open Sauced service endpoints
+[**HealthStatusWeb**](HealthCheckServiceAPI.md#HealthStatusWeb) | **Get** /v2/health/web | Check the health of Open Sauced web endpoints
 
 
 

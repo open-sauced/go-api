@@ -3,7 +3,7 @@
 
  ## Swagger-UI API Documentation  This REST API can be used to create, read, update or delete data from the Open Sauced community platform. The Swagger-UI provides useful information to get started and an overview of all available resources. Each API route is clickable and has their own detailed description on how to use it. The base URL for the API is [api.opensauced.pizza](https://api.opensauced.pizza).  [comment]: # (TODO: add bearer auth information)  ## Rate limiting  Every IP address is allowed to perform 5000 requests per hour. This is measured by saving the date of the initial request and counting all requests in the next hour. When an IP address goes over the limit, HTTP status code 429 is returned. The returned HTTP headers of any API request show the current rate limit status:  header | description --- | --- `X-RateLimit-Limit` | The maximum number of requests allowed per hour `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window `X-RateLimit-Reset` | The date and time at which the current rate limit window resets in [UTC epoch seconds](https://en.wikipedia.org/wiki/Unix_time)  [comment]: # (TODO: add pagination information)  ## Common response codes  Each route shows for each method which data they expect and which they will respond when the call succeeds. The table below shows most common response codes you can receive from our endpoints.  code | condition --- | --- [`200`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200) | The [`GET`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request was handled successfully. The response provides the requested data. [`201`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201) | The [`POST`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request was handled successfully. The response provides the created data. [`204`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204) | The [`PATCH`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH) or [`DELETE`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE) request was handled successfully. The response provides no data, generally. [`400`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) | The server will not process the request due to something that is perceived to be a client error. Check the provided error for mote information. [`401`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401) | The request requires user authentication. Check the provided error for more information. [`403`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403) | The request was valid, but the server is refusing user access. Check the provided error for more information. [`404`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) | The requested resource could not be found. Check the provided error for more information. [`429`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) | The current API Key made too many requests in the last hour. Check [Rate limiting](#ratelimiting) for more information.  ## Additional links
 
-API version: 1
+API version: 2
 Contact: hello@opensauced.pizza
 */
 
@@ -20,35 +20,44 @@ var _ MappedNullable = &DbContributionStatTimeframe{}
 
 // DbContributionStatTimeframe struct for DbContributionStatTimeframe
 type DbContributionStatTimeframe struct {
-	// The ISO timestamp for the start of the time frame
-	TimeStart string `json:"time_start"`
-	// The ISO timestamp for the end of the time frame
-	TimeEnd string `json:"time_end"`
-	// Number of commits associated with a user login
+	// The ISO timestamp for the given time bucket
+	Bucket string `json:"bucket"`
+	// Number of commits within the time range
 	Commits int32 `json:"commits"`
-	// Number of PRs created associated with a user login
+	// Number of PRs created within the time range
 	PrsCreated int32 `json:"prs_created"`
-	// Number of PRs reviewed by a user login
+	// Number of PRs reviewed within the time range
 	PrsReviewed int32 `json:"prs_reviewed"`
-	// Number of issues created by a user login
+	// Number of issues within the time range
 	IssuesCreated int32 `json:"issues_created"`
-	// Number of comments associated with a user login
+	// Number of commit comments within the time range
+	CommitComments int32 `json:"commit_comments"`
+	// Number of issue comments within the time range
+	IssueComments int32 `json:"issue_comments"`
+	// Number of pr review comments within the time range
+	PrReviewComments int32 `json:"pr_review_comments"`
+	// Number of total comments within the time range
 	Comments int32 `json:"comments"`
+	// Number of total contributions for a user login
+	TotalContributions int32 `json:"total_contributions"`
 }
 
 // NewDbContributionStatTimeframe instantiates a new DbContributionStatTimeframe object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDbContributionStatTimeframe(timeStart string, timeEnd string, commits int32, prsCreated int32, prsReviewed int32, issuesCreated int32, comments int32) *DbContributionStatTimeframe {
+func NewDbContributionStatTimeframe(bucket string, commits int32, prsCreated int32, prsReviewed int32, issuesCreated int32, commitComments int32, issueComments int32, prReviewComments int32, comments int32, totalContributions int32) *DbContributionStatTimeframe {
 	this := DbContributionStatTimeframe{}
-	this.TimeStart = timeStart
-	this.TimeEnd = timeEnd
+	this.Bucket = bucket
 	this.Commits = commits
 	this.PrsCreated = prsCreated
 	this.PrsReviewed = prsReviewed
 	this.IssuesCreated = issuesCreated
+	this.CommitComments = commitComments
+	this.IssueComments = issueComments
+	this.PrReviewComments = prReviewComments
 	this.Comments = comments
+	this.TotalContributions = totalContributions
 	return &this
 }
 
@@ -60,52 +69,28 @@ func NewDbContributionStatTimeframeWithDefaults() *DbContributionStatTimeframe {
 	return &this
 }
 
-// GetTimeStart returns the TimeStart field value
-func (o *DbContributionStatTimeframe) GetTimeStart() string {
+// GetBucket returns the Bucket field value
+func (o *DbContributionStatTimeframe) GetBucket() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.TimeStart
+	return o.Bucket
 }
 
-// GetTimeStartOk returns a tuple with the TimeStart field value
+// GetBucketOk returns a tuple with the Bucket field value
 // and a boolean to check if the value has been set.
-func (o *DbContributionStatTimeframe) GetTimeStartOk() (*string, bool) {
+func (o *DbContributionStatTimeframe) GetBucketOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.TimeStart, true
+	return &o.Bucket, true
 }
 
-// SetTimeStart sets field value
-func (o *DbContributionStatTimeframe) SetTimeStart(v string) {
-	o.TimeStart = v
-}
-
-// GetTimeEnd returns the TimeEnd field value
-func (o *DbContributionStatTimeframe) GetTimeEnd() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.TimeEnd
-}
-
-// GetTimeEndOk returns a tuple with the TimeEnd field value
-// and a boolean to check if the value has been set.
-func (o *DbContributionStatTimeframe) GetTimeEndOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TimeEnd, true
-}
-
-// SetTimeEnd sets field value
-func (o *DbContributionStatTimeframe) SetTimeEnd(v string) {
-	o.TimeEnd = v
+// SetBucket sets field value
+func (o *DbContributionStatTimeframe) SetBucket(v string) {
+	o.Bucket = v
 }
 
 // GetCommits returns the Commits field value
@@ -204,6 +189,78 @@ func (o *DbContributionStatTimeframe) SetIssuesCreated(v int32) {
 	o.IssuesCreated = v
 }
 
+// GetCommitComments returns the CommitComments field value
+func (o *DbContributionStatTimeframe) GetCommitComments() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.CommitComments
+}
+
+// GetCommitCommentsOk returns a tuple with the CommitComments field value
+// and a boolean to check if the value has been set.
+func (o *DbContributionStatTimeframe) GetCommitCommentsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CommitComments, true
+}
+
+// SetCommitComments sets field value
+func (o *DbContributionStatTimeframe) SetCommitComments(v int32) {
+	o.CommitComments = v
+}
+
+// GetIssueComments returns the IssueComments field value
+func (o *DbContributionStatTimeframe) GetIssueComments() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.IssueComments
+}
+
+// GetIssueCommentsOk returns a tuple with the IssueComments field value
+// and a boolean to check if the value has been set.
+func (o *DbContributionStatTimeframe) GetIssueCommentsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IssueComments, true
+}
+
+// SetIssueComments sets field value
+func (o *DbContributionStatTimeframe) SetIssueComments(v int32) {
+	o.IssueComments = v
+}
+
+// GetPrReviewComments returns the PrReviewComments field value
+func (o *DbContributionStatTimeframe) GetPrReviewComments() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.PrReviewComments
+}
+
+// GetPrReviewCommentsOk returns a tuple with the PrReviewComments field value
+// and a boolean to check if the value has been set.
+func (o *DbContributionStatTimeframe) GetPrReviewCommentsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.PrReviewComments, true
+}
+
+// SetPrReviewComments sets field value
+func (o *DbContributionStatTimeframe) SetPrReviewComments(v int32) {
+	o.PrReviewComments = v
+}
+
 // GetComments returns the Comments field value
 func (o *DbContributionStatTimeframe) GetComments() int32 {
 	if o == nil {
@@ -228,6 +285,30 @@ func (o *DbContributionStatTimeframe) SetComments(v int32) {
 	o.Comments = v
 }
 
+// GetTotalContributions returns the TotalContributions field value
+func (o *DbContributionStatTimeframe) GetTotalContributions() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.TotalContributions
+}
+
+// GetTotalContributionsOk returns a tuple with the TotalContributions field value
+// and a boolean to check if the value has been set.
+func (o *DbContributionStatTimeframe) GetTotalContributionsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.TotalContributions, true
+}
+
+// SetTotalContributions sets field value
+func (o *DbContributionStatTimeframe) SetTotalContributions(v int32) {
+	o.TotalContributions = v
+}
+
 func (o DbContributionStatTimeframe) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -238,13 +319,16 @@ func (o DbContributionStatTimeframe) MarshalJSON() ([]byte, error) {
 
 func (o DbContributionStatTimeframe) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["time_start"] = o.TimeStart
-	toSerialize["time_end"] = o.TimeEnd
+	toSerialize["bucket"] = o.Bucket
 	toSerialize["commits"] = o.Commits
 	toSerialize["prs_created"] = o.PrsCreated
 	toSerialize["prs_reviewed"] = o.PrsReviewed
 	toSerialize["issues_created"] = o.IssuesCreated
+	toSerialize["commit_comments"] = o.CommitComments
+	toSerialize["issue_comments"] = o.IssueComments
+	toSerialize["pr_review_comments"] = o.PrReviewComments
 	toSerialize["comments"] = o.Comments
+	toSerialize["total_contributions"] = o.TotalContributions
 	return toSerialize, nil
 }
 

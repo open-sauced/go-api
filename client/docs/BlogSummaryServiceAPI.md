@@ -4,7 +4,7 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GenerateBlogSummary**](BlogSummaryServiceAPI.md#GenerateBlogSummary) | **Post** /v1/blogs/summary/generate | Generate a summary for a markdown supported blog
+[**GenerateBlogSummary**](BlogSummaryServiceAPI.md#GenerateBlogSummary) | **Post** /v2/blogs/summary/generate | Generate a summary for a markdown supported blog
 
 
 

@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** | Insight identifier | 
-**UserId** | **int32** | User ID | 
 **Name** | **string** | Insight Page Name | 
 **IsPublic** | **bool** | Flag indicating insight visibility | 
 **IsFavorite** | **bool** | Flag indicating insight favorite | 
@@ -19,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewDbInsight
 
-`func NewDbInsight(id int32, userId int32, name string, isPublic bool, isFavorite bool, isFeatured bool, shortCode string, ) *DbInsight`
+`func NewDbInsight(id int32, name string, isPublic bool, isFavorite bool, isFeatured bool, shortCode string, ) *DbInsight`
 
 NewDbInsight instantiates a new DbInsight object
 This constructor will assign default values to properties that have it defined,
@@ -52,26 +51,6 @@ and a boolean to check if the value has been set.
 `func (o *DbInsight) SetId(v int32)`
 
 SetId sets Id field to given value.
-
-
-### GetUserId
-
-`func (o *DbInsight) GetUserId() int32`
-
-GetUserId returns the UserId field if non-nil, zero value otherwise.
-
-### GetUserIdOk
-
-`func (o *DbInsight) GetUserIdOk() (*int32, bool)`
-
-GetUserIdOk returns a tuple with the UserId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUserId
-
-`func (o *DbInsight) SetUserId(v int32)`
-
-SetUserId sets UserId field to given value.
 
 
 ### GetName

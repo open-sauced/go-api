@@ -4,11 +4,11 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DownStargazeOneById**](StargazeServiceAPI.md#DownStargazeOneById) | **Delete** /v1/repos/{id}/stargaze | Finds a repo by :id and unfollows
-[**DownStargazeOneByOwnerAndRepo**](StargazeServiceAPI.md#DownStargazeOneByOwnerAndRepo) | **Delete** /v1/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and unfollows
-[**FindAllUserStargazed**](StargazeServiceAPI.md#FindAllUserStargazed) | **Get** /v1/repos/listUserStargazed | Finds all repos followed by authenticated user and paginates them
-[**StargazeOneById**](StargazeServiceAPI.md#StargazeOneById) | **Put** /v1/repos/{id}/stargaze | Finds a repo by :id and follows
-[**StargazeOneByOwnerAndRepo**](StargazeServiceAPI.md#StargazeOneByOwnerAndRepo) | **Put** /v1/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and follows
+[**DownStargazeOneById**](StargazeServiceAPI.md#DownStargazeOneById) | **Delete** /v2/repos/{id}/stargaze | Finds a repo by :id and unfollows
+[**DownStargazeOneByOwnerAndRepo**](StargazeServiceAPI.md#DownStargazeOneByOwnerAndRepo) | **Delete** /v2/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and unfollows
+[**FindAllUserStargazed**](StargazeServiceAPI.md#FindAllUserStargazed) | **Get** /v2/repos/listUserStargazed | Finds all repos followed by authenticated user and paginates them
+[**StargazeOneById**](StargazeServiceAPI.md#StargazeOneById) | **Put** /v2/repos/{id}/stargaze | Finds a repo by :id and follows
+[**StargazeOneByOwnerAndRepo**](StargazeServiceAPI.md#StargazeOneByOwnerAndRepo) | **Put** /v2/repos/{owner}/{repo}/stargaze | Finds a repo by :owner and :repo and follows
 
 
 

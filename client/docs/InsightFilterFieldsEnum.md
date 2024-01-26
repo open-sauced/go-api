@@ -7,6 +7,8 @@
 
 * `TOP_100_REPOS` (value: `"top-100-repos"`)
 
+* `TOP_REPOS` (value: `"top-repos"`)
+
 * `MINIMUM_5_CONTRIBUTORS` (value: `"minimum-5-contributors"`)
 
 * `MOST_ACTIVE` (value: `"most-active"`)

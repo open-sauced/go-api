@@ -4,14 +4,14 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**BakeARepositoryWithThePizzaOvenMicroservice**](PizzaOvenServiceAPI.md#BakeARepositoryWithThePizzaOvenMicroservice) | **Post** /v1/bake | postToPizzaOvenService
-[**FindBakedRepoById**](PizzaOvenServiceAPI.md#FindBakedRepoById) | **Get** /v1/bake/repos/{id} | Finds a baked repo by :id
-[**FindCommitAuthorById**](PizzaOvenServiceAPI.md#FindCommitAuthorById) | **Get** /v1/bake/commit-authors/{id} | Finds a commit author by :id
-[**FindCommitById**](PizzaOvenServiceAPI.md#FindCommitById) | **Get** /v1/bake/commits/{id} | Finds a commit by :id
-[**ListAllBakedRepos**](PizzaOvenServiceAPI.md#ListAllBakedRepos) | **Get** /v1/bake/repos/list | Finds all baked repos and paginates them
-[**ListAllCommitAuthors**](PizzaOvenServiceAPI.md#ListAllCommitAuthors) | **Get** /v1/bake/commit-authors/list | Finds all commit authors and paginates them
-[**ListAllCommitsByBakedRepoId**](PizzaOvenServiceAPI.md#ListAllCommitsByBakedRepoId) | **Get** /v1/bake/commits/list/repo/{id} | Finds all commits by baked repo :id and paginates them
-[**ListAllCommitsByCommitAuthorId**](PizzaOvenServiceAPI.md#ListAllCommitsByCommitAuthorId) | **Get** /v1/bake/commits/list/commit-author/{id} | Finds all commits by commit author :id and paginates them
+[**BakeARepositoryWithThePizzaOvenMicroservice**](PizzaOvenServiceAPI.md#BakeARepositoryWithThePizzaOvenMicroservice) | **Post** /v2/bake | postToPizzaOvenService
+[**FindBakedRepoById**](PizzaOvenServiceAPI.md#FindBakedRepoById) | **Get** /v2/bake/repos/{id} | Finds a baked repo by :id
+[**FindCommitAuthorById**](PizzaOvenServiceAPI.md#FindCommitAuthorById) | **Get** /v2/bake/commit-authors/{id} | Finds a commit author by :id
+[**FindCommitById**](PizzaOvenServiceAPI.md#FindCommitById) | **Get** /v2/bake/commits/{id} | Finds a commit by :id
+[**ListAllBakedRepos**](PizzaOvenServiceAPI.md#ListAllBakedRepos) | **Get** /v2/bake/repos/list | Finds all baked repos and paginates them
+[**ListAllCommitAuthors**](PizzaOvenServiceAPI.md#ListAllCommitAuthors) | **Get** /v2/bake/commit-authors/list | Finds all commit authors and paginates them
+[**ListAllCommitsByBakedRepoId**](PizzaOvenServiceAPI.md#ListAllCommitsByBakedRepoId) | **Get** /v2/bake/commits/list/repo/{id} | Finds all commits by baked repo :id and paginates them
+[**ListAllCommitsByCommitAuthorId**](PizzaOvenServiceAPI.md#ListAllCommitsByCommitAuthorId) | **Get** /v2/bake/commits/list/commit-author/{id} | Finds all commits by commit author :id and paginates them
 
 
 

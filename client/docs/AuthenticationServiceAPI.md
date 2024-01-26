@@ -4,14 +4,15 @@ All URIs are relative to *https://api.opensauced.pizza*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ApplyCouponForUser**](AuthenticationServiceAPI.md#ApplyCouponForUser) | **Patch** /v1/auth/profile/coupon | Applies a coupon for the authenticated user
-[**CheckAuthSession**](AuthenticationServiceAPI.md#CheckAuthSession) | **Get** /v1/auth/session | Get authenticated session information
-[**PostCreateCheckoutSession**](AuthenticationServiceAPI.md#PostCreateCheckoutSession) | **Post** /v1/auth/checkout/session | Creates a new checkout session for the user
-[**PostOnboarding**](AuthenticationServiceAPI.md#PostOnboarding) | **Post** /v1/auth/onboarding | Updates onboarding information for user
-[**PostWaitlist**](AuthenticationServiceAPI.md#PostWaitlist) | **Post** /v1/auth/waitlist | Updates waitlist information for user
-[**UpdateEmailPreferencesForUserProfile**](AuthenticationServiceAPI.md#UpdateEmailPreferencesForUserProfile) | **Patch** /v1/auth/profile/email | Updates the email preferences for the authenticated user profile
-[**UpdateInterestsForUserProfile**](AuthenticationServiceAPI.md#UpdateInterestsForUserProfile) | **Patch** /v1/auth/profile/interests | Updates the interests for the authenticated user profile
-[**UpdateProfileForUser**](AuthenticationServiceAPI.md#UpdateProfileForUser) | **Patch** /v1/auth/profile | Updates the profile for the authenticated user
+[**ApplyCouponForUser**](AuthenticationServiceAPI.md#ApplyCouponForUser) | **Patch** /v2/auth/profile/coupon | Applies a coupon for the authenticated user
+[**CheckAuthSession**](AuthenticationServiceAPI.md#CheckAuthSession) | **Get** /v2/auth/session | Get authenticated session information
+[**DeleteUserAccount**](AuthenticationServiceAPI.md#DeleteUserAccount) | **Delete** /v2/auth/profile | Deletes the authenticated user&#39;s account
+[**PostCreateCheckoutSession**](AuthenticationServiceAPI.md#PostCreateCheckoutSession) | **Post** /v2/auth/checkout/session | Creates a new checkout session for the user
+[**PostOnboarding**](AuthenticationServiceAPI.md#PostOnboarding) | **Post** /v2/auth/onboarding | Updates onboarding information for user
+[**PostWaitlist**](AuthenticationServiceAPI.md#PostWaitlist) | **Post** /v2/auth/waitlist | Updates waitlist information for user
+[**UpdateEmailPreferencesForUserProfile**](AuthenticationServiceAPI.md#UpdateEmailPreferencesForUserProfile) | **Patch** /v2/auth/profile/email | Updates the email preferences for the authenticated user profile
+[**UpdateInterestsForUserProfile**](AuthenticationServiceAPI.md#UpdateInterestsForUserProfile) | **Patch** /v2/auth/profile/interests | Updates the interests for the authenticated user profile
+[**UpdateProfileForUser**](AuthenticationServiceAPI.md#UpdateProfileForUser) | **Patch** /v2/auth/profile | Updates the profile for the authenticated user
 
 
 
@@ -123,6 +124,65 @@ Other parameters are passed through a pointer to a apiCheckAuthSessionRequest st
 ### Return type
 
 [**SupabaseAuthDto**](SupabaseAuthDto.md)
+
+### Authorization
+
+[bearer](../README.md#bearer)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteUserAccount
+
+> DbUser DeleteUserAccount(ctx).Execute()
+
+Deletes the authenticated user's account
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/open-sauced/go-api"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AuthenticationServiceAPI.DeleteUserAccount(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AuthenticationServiceAPI.DeleteUserAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `DeleteUserAccount`: DbUser
+    fmt.Fprintf(os.Stdout, "Response from `AuthenticationServiceAPI.DeleteUserAccount`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteUserAccountRequest struct via the builder pattern
+
+
+### Return type
+
+[**DbUser**](DbUser.md)
 
 ### Authorization
 
@@ -339,7 +399,7 @@ import (
 )
 
 func main() {
-    updateUserEmailPreferencesDto := *openapiclient.NewUpdateUserEmailPreferencesDto(false, false) // UpdateUserEmailPreferencesDto | 
+    updateUserEmailPreferencesDto := *openapiclient.NewUpdateUserEmailPreferencesDto(false, false, false) // UpdateUserEmailPreferencesDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

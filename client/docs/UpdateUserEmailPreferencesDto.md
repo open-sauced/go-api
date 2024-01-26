@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayEmail** | **bool** | User Display Public Email | 
 **ReceiveCollaboration** | **bool** | User Recieve Collaboration Requests | 
+**ReceiveProductUpdates** | **bool** | User Recieve Email Product Updates | 
 
 ## Methods
 
 ### NewUpdateUserEmailPreferencesDto
 
-`func NewUpdateUserEmailPreferencesDto(displayEmail bool, receiveCollaboration bool, ) *UpdateUserEmailPreferencesDto`
+`func NewUpdateUserEmailPreferencesDto(displayEmail bool, receiveCollaboration bool, receiveProductUpdates bool, ) *UpdateUserEmailPreferencesDto`
 
 NewUpdateUserEmailPreferencesDto instantiates a new UpdateUserEmailPreferencesDto object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *UpdateUserEmailPreferencesDto) SetReceiveCollaboration(v bool)`
 
 SetReceiveCollaboration sets ReceiveCollaboration field to given value.
+
+
+### GetReceiveProductUpdates
+
+`func (o *UpdateUserEmailPreferencesDto) GetReceiveProductUpdates() bool`
+
+GetReceiveProductUpdates returns the ReceiveProductUpdates field if non-nil, zero value otherwise.
+
+### GetReceiveProductUpdatesOk
+
+`func (o *UpdateUserEmailPreferencesDto) GetReceiveProductUpdatesOk() (*bool, bool)`
+
+GetReceiveProductUpdatesOk returns a tuple with the ReceiveProductUpdates field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReceiveProductUpdates
+
+`func (o *UpdateUserEmailPreferencesDto) SetReceiveProductUpdates(v bool)`
+
+SetReceiveProductUpdates sets ReceiveProductUpdates field to given value.
 
 
 
