@@ -30,6 +30,7 @@ api_workspace_members_service.go
 api_workspace_orgs_service.go
 api_workspace_repos_service.go
 api_workspaces_service.go
+api_workspaces_stats_service.go
 client.go
 configuration.go
 docs/ApplyUserCouponDto.md
@@ -65,6 +66,7 @@ docs/DbPullRequestGitHubEventsHistogram.md
 docs/DbPullRequestReviewGitHubEvents.md
 docs/DbPushGitHubEventsHistogram.md
 docs/DbRepo.md
+docs/DbRepoContributor.md
 docs/DbRepoToUserStargazers.md
 docs/DbRepoToUserStars.md
 docs/DbRepoToUserSubmissions.md
@@ -85,9 +87,13 @@ docs/DbUserToUserFollows.md
 docs/DbWatchGitHubEventsHistogram.md
 docs/DbWorkspace.md
 docs/DbWorkspaceContributor.md
+docs/DbWorkspaceIssueStats.md
 docs/DbWorkspaceMember.md
 docs/DbWorkspaceOrg.md
+docs/DbWorkspacePrStats.md
 docs/DbWorkspaceRepo.md
+docs/DbWorkspaceRepoStats.md
+docs/DbWorkspaceStats.md
 docs/DeleteWorkspaceContributorsDto.md
 docs/DeleteWorkspaceMembersDto.md
 docs/DeleteWorkspaceOrgsDto.md
@@ -171,6 +177,7 @@ docs/WorkspaceMembersServiceAPI.md
 docs/WorkspaceOrgsServiceAPI.md
 docs/WorkspaceReposServiceAPI.md
 docs/WorkspacesServiceAPI.md
+docs/WorkspacesStatsServiceAPI.md
 model_apply_user_coupon_dto.go
 model_bake_repo_dto.go
 model_collaborators_dto.go
@@ -201,6 +208,7 @@ model_db_pull_request_git_hub_events_histogram.go
 model_db_pull_request_review_git_hub_events.go
 model_db_push_git_hub_events_histogram.go
 model_db_repo.go
+model_db_repo_contributor.go
 model_db_repo_to_user_stargazers.go
 model_db_repo_to_user_stars.go
 model_db_repo_to_user_submissions.go
@@ -221,9 +229,13 @@ model_db_user_to_user_follows.go
 model_db_watch_git_hub_events_histogram.go
 model_db_workspace.go
 model_db_workspace_contributor.go
+model_db_workspace_issue_stats.go
 model_db_workspace_member.go
 model_db_workspace_org.go
+model_db_workspace_pr_stats.go
 model_db_workspace_repo.go
+model_db_workspace_repo_stats.go
+model_db_workspace_stats.go
 model_delete_workspace_contributors_dto.go
 model_delete_workspace_members_dto.go
 model_delete_workspace_orgs_dto.go
@@ -282,11 +294,5 @@ model_user_onboarding_dto.go
 model_voted_repo_dto.go
 model_workspace_member_role_enum.go
 response.go
-test/api_histogram_generation_service_test.go
-test/api_pull_requests_reviews_service_test.go
-test/api_workspace_contributors_service_test.go
-test/api_workspace_members_service_test.go
-test/api_workspace_orgs_service_test.go
-test/api_workspace_repos_service_test.go
-test/api_workspaces_service_test.go
+test/api_workspaces_stats_service_test.go
 utils.go

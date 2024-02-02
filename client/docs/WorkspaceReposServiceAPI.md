@@ -106,7 +106,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    updateWorkspaceReposDto := *openapiclient.NewUpdateWorkspaceReposDto([]Array{"TODO"}) // UpdateWorkspaceReposDto | 
+    updateWorkspaceReposDto := *openapiclient.NewUpdateWorkspaceReposDto([]interface{}{"TODO"}) // UpdateWorkspaceReposDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -250,7 +250,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    deleteWorkspaceReposDto := *openapiclient.NewDeleteWorkspaceReposDto([]Array{"TODO"}) // DeleteWorkspaceReposDto | 
+    deleteWorkspaceReposDto := *openapiclient.NewDeleteWorkspaceReposDto([]interface{}{"TODO"}) // DeleteWorkspaceReposDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

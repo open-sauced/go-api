@@ -367,6 +367,159 @@ func (a *RepositoryServiceAPIService) FindAllReposWithFiltersExecute(r ApiFindAl
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiFindContributorsByOwnerAndRepoRequest struct {
+	ctx               context.Context
+	ApiService        *RepositoryServiceAPIService
+	owner             string
+	repo              string
+	page              *int32
+	limit             *int32
+	orderDirection    *OrderDirectionEnum
+	range_            *int32
+	prevDaysStartDate *int32
+}
+
+func (r ApiFindContributorsByOwnerAndRepoRequest) Page(page int32) ApiFindContributorsByOwnerAndRepoRequest {
+	r.page = &page
+	return r
+}
+
+func (r ApiFindContributorsByOwnerAndRepoRequest) Limit(limit int32) ApiFindContributorsByOwnerAndRepoRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiFindContributorsByOwnerAndRepoRequest) OrderDirection(orderDirection OrderDirectionEnum) ApiFindContributorsByOwnerAndRepoRequest {
+	r.orderDirection = &orderDirection
+	return r
+}
+
+// Range in days
+func (r ApiFindContributorsByOwnerAndRepoRequest) Range_(range_ int32) ApiFindContributorsByOwnerAndRepoRequest {
+	r.range_ = &range_
+	return r
+}
+
+// Number of days in the past to start range block
+func (r ApiFindContributorsByOwnerAndRepoRequest) PrevDaysStartDate(prevDaysStartDate int32) ApiFindContributorsByOwnerAndRepoRequest {
+	r.prevDaysStartDate = &prevDaysStartDate
+	return r
+}
+
+func (r ApiFindContributorsByOwnerAndRepoRequest) Execute() (*DbRepoContributor, *http.Response, error) {
+	return r.ApiService.FindContributorsByOwnerAndRepoExecute(r)
+}
+
+/*
+FindContributorsByOwnerAndRepo Finds a repo by :owner and :repo and gets the contributors
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param owner
+	@param repo
+	@return ApiFindContributorsByOwnerAndRepoRequest
+*/
+func (a *RepositoryServiceAPIService) FindContributorsByOwnerAndRepo(ctx context.Context, owner string, repo string) ApiFindContributorsByOwnerAndRepoRequest {
+	return ApiFindContributorsByOwnerAndRepoRequest{
+		ApiService: a,
+		ctx:        ctx,
+		owner:      owner,
+		repo:       repo,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DbRepoContributor
+func (a *RepositoryServiceAPIService) FindContributorsByOwnerAndRepoExecute(r ApiFindContributorsByOwnerAndRepoRequest) (*DbRepoContributor, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DbRepoContributor
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindContributorsByOwnerAndRepo")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/repos/{owner}/{repo}/contributors"
+	localVarPath = strings.Replace(localVarPath, "{"+"owner"+"}", url.PathEscape(parameterValueToString(r.owner, "owner")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"repo"+"}", url.PathEscape(parameterValueToString(r.repo, "repo")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.page != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.orderDirection != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderDirection", r.orderDirection, "")
+	}
+	if r.range_ != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "range", r.range_, "")
+	}
+	if r.prevDaysStartDate != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "prev_days_start_date", r.prevDaysStartDate, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiFindOneByIdRequest struct {
 	ctx        context.Context
 	ApiService *RepositoryServiceAPIService

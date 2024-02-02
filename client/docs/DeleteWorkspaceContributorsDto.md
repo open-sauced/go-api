@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Contributors** | [**[]Array**](Array.md) | An array of contributor objects to delete from the workspace | 
+**Contributors** | [**[]interface{}**](Array.md) | An array of contributor objects to delete from the workspace | 
 
 ## Methods
 
 ### NewDeleteWorkspaceContributorsDto
 
-`func NewDeleteWorkspaceContributorsDto(contributors []Array, ) *DeleteWorkspaceContributorsDto`
+`func NewDeleteWorkspaceContributorsDto(contributors []interface{}, ) *DeleteWorkspaceContributorsDto`
 
 NewDeleteWorkspaceContributorsDto instantiates a new DeleteWorkspaceContributorsDto object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetContributors
 
-`func (o *DeleteWorkspaceContributorsDto) GetContributors() []Array`
+`func (o *DeleteWorkspaceContributorsDto) GetContributors() []interface{}`
 
 GetContributors returns the Contributors field if non-nil, zero value otherwise.
 
 ### GetContributorsOk
 
-`func (o *DeleteWorkspaceContributorsDto) GetContributorsOk() (*[]Array, bool)`
+`func (o *DeleteWorkspaceContributorsDto) GetContributorsOk() (*[]interface{}, bool)`
 
 GetContributorsOk returns a tuple with the Contributors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContributors
 
-`func (o *DeleteWorkspaceContributorsDto) SetContributors(v []Array)`
+`func (o *DeleteWorkspaceContributorsDto) SetContributors(v []interface{})`
 
 SetContributors sets Contributors field to given value.
 

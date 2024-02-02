@@ -106,6 +106,8 @@ type APIClient struct {
 	WorkspaceReposServiceAPI *WorkspaceReposServiceAPIService
 
 	WorkspacesServiceAPI *WorkspacesServiceAPIService
+
+	WorkspacesStatsServiceAPI *WorkspacesStatsServiceAPIService
 }
 
 type service struct {
@@ -153,6 +155,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.WorkspaceOrgsServiceAPI = (*WorkspaceOrgsServiceAPIService)(&c.common)
 	c.WorkspaceReposServiceAPI = (*WorkspaceReposServiceAPIService)(&c.common)
 	c.WorkspacesServiceAPI = (*WorkspacesServiceAPIService)(&c.common)
+	c.WorkspacesStatsServiceAPI = (*WorkspacesStatsServiceAPIService)(&c.common)
 
 	return c
 }

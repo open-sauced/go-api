@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Workspace name | 
 **Description** | **string** | Workspace description | 
-**Members** | [**[]Array**](Array.md) | An array of new member objects | 
-**Repos** | [**[]Array**](Array.md) | An array of repo objects to be added to the workspace | 
+**Members** | [**[]interface{}**](Array.md) | An array of new member objects | 
+**Repos** | [**[]interface{}**](Array.md) | An array of repo objects to be added to the workspace | 
 
 ## Methods
 
 ### NewCreateWorkspaceDto
 
-`func NewCreateWorkspaceDto(name string, description string, members []Array, repos []Array, ) *CreateWorkspaceDto`
+`func NewCreateWorkspaceDto(name string, description string, members []interface{}, repos []interface{}, ) *CreateWorkspaceDto`
 
 NewCreateWorkspaceDto instantiates a new CreateWorkspaceDto object
 This constructor will assign default values to properties that have it defined,
@@ -70,40 +70,40 @@ SetDescription sets Description field to given value.
 
 ### GetMembers
 
-`func (o *CreateWorkspaceDto) GetMembers() []Array`
+`func (o *CreateWorkspaceDto) GetMembers() []interface{}`
 
 GetMembers returns the Members field if non-nil, zero value otherwise.
 
 ### GetMembersOk
 
-`func (o *CreateWorkspaceDto) GetMembersOk() (*[]Array, bool)`
+`func (o *CreateWorkspaceDto) GetMembersOk() (*[]interface{}, bool)`
 
 GetMembersOk returns a tuple with the Members field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMembers
 
-`func (o *CreateWorkspaceDto) SetMembers(v []Array)`
+`func (o *CreateWorkspaceDto) SetMembers(v []interface{})`
 
 SetMembers sets Members field to given value.
 
 
 ### GetRepos
 
-`func (o *CreateWorkspaceDto) GetRepos() []Array`
+`func (o *CreateWorkspaceDto) GetRepos() []interface{}`
 
 GetRepos returns the Repos field if non-nil, zero value otherwise.
 
 ### GetReposOk
 
-`func (o *CreateWorkspaceDto) GetReposOk() (*[]Array, bool)`
+`func (o *CreateWorkspaceDto) GetReposOk() (*[]interface{}, bool)`
 
 GetReposOk returns a tuple with the Repos field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRepos
 
-`func (o *CreateWorkspaceDto) SetRepos(v []Array)`
+`func (o *CreateWorkspaceDto) SetRepos(v []interface{})`
 
 SetRepos sets Repos field to given value.
 

@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Members** | [**[]Array**](Array.md) | An array of member objects and their associated role | 
+**Members** | [**[]interface{}**](Array.md) | An array of member objects and their associated role | 
 
 ## Methods
 
 ### NewUpdateWorkspaceMembersDto
 
-`func NewUpdateWorkspaceMembersDto(members []Array, ) *UpdateWorkspaceMembersDto`
+`func NewUpdateWorkspaceMembersDto(members []interface{}, ) *UpdateWorkspaceMembersDto`
 
 NewUpdateWorkspaceMembersDto instantiates a new UpdateWorkspaceMembersDto object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMembers
 
-`func (o *UpdateWorkspaceMembersDto) GetMembers() []Array`
+`func (o *UpdateWorkspaceMembersDto) GetMembers() []interface{}`
 
 GetMembers returns the Members field if non-nil, zero value otherwise.
 
 ### GetMembersOk
 
-`func (o *UpdateWorkspaceMembersDto) GetMembersOk() (*[]Array, bool)`
+`func (o *UpdateWorkspaceMembersDto) GetMembersOk() (*[]interface{}, bool)`
 
 GetMembersOk returns a tuple with the Members field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMembers
 
-`func (o *UpdateWorkspaceMembersDto) SetMembers(v []Array)`
+`func (o *UpdateWorkspaceMembersDto) SetMembers(v []interface{})`
 
 SetMembers sets Members field to given value.
 

@@ -44,7 +44,7 @@ import (
 )
 
 func main() {
-    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []Array{"TODO"}) // CreateUserListDto | 
+    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []interface{}{"TODO"}) // CreateUserListDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -1267,7 +1267,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []Array{"TODO"}) // CreateUserListDto | 
+    createUserListDto := *openapiclient.NewCreateUserListDto("My List", false, []interface{}{"TODO"}) // CreateUserListDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

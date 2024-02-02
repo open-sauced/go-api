@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | [**[]Array**](Array.md) |  | 
+**Data** | [**[]interface{}**](Array.md) |  | 
 **Meta** | [**PageMetaDto**](PageMetaDto.md) |  | 
 
 ## Methods
 
 ### NewPageDto
 
-`func NewPageDto(data []Array, meta PageMetaDto, ) *PageDto`
+`func NewPageDto(data []interface{}, meta PageMetaDto, ) *PageDto`
 
 NewPageDto instantiates a new PageDto object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetData
 
-`func (o *PageDto) GetData() []Array`
+`func (o *PageDto) GetData() []interface{}`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *PageDto) GetDataOk() (*[]Array, bool)`
+`func (o *PageDto) GetDataOk() (*[]interface{}, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *PageDto) SetData(v []Array)`
+`func (o *PageDto) SetData(v []interface{})`
 
 SetData sets Data field to given value.
 

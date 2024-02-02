@@ -1916,6 +1916,80 @@ paths:
       summary: Finds a repo by :owner and :repo
       tags:
       - Repository service
+  /v2/repos/{owner}/{repo}/contributors:
+    get:
+      operationId: findContributorsByOwnerAndRepo
+      parameters:
+      - explode: false
+        in: path
+        name: owner
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: repo
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          maximum: 1000
+          minimum: 1
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderDirection
+        required: false
+        schema:
+          $ref: '#/components/schemas/OrderDirectionEnum'
+        style: form
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      - description: Number of days in the past to start range block
+        explode: true
+        in: query
+        name: prev_days_start_date
+        required: false
+        schema:
+          default: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbRepoContributor'
+          description: ""
+        "404":
+          description: Repository not found
+      summary: Finds a repo by :owner and :repo and gets the contributors
+      tags:
+      - Repository service
   /v2/repos/list:
     get:
       operationId: findAll
@@ -6410,6 +6484,51 @@ paths:
       summary: Adds one workspace org for the authenticated user
       tags:
       - Workspace orgs service
+  /v2/workspaces/{id}/stats:
+    get:
+      operationId: getWorkspaceStatsForUser
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Range in days
+        explode: true
+        in: query
+        name: range
+        required: false
+        schema:
+          default: 30
+          type: integer
+        style: form
+      - description: Number of days in the past to start range block
+        explode: true
+        in: query
+        name: prev_days_start_date
+        required: false
+        schema:
+          default: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DbWorkspaceStats'
+          description: ""
+        "400":
+          description: Invalid request
+        "404":
+          description: Unable to get user workspace stats
+      security:
+      - bearer: []
+      summary: Gets workspace stats for the authenticated user
+      tags:
+      - Workspaces stats service
   /v2/workspaces/{id}/repos:
     delete:
       operationId: deleteWorkspaceReposForUser
@@ -9249,6 +9368,77 @@ components:
       - pr_updated_at
       - repo_name
       type: object
+    DbRepoContributor:
+      example:
+        comments: 0
+        prs_created: 0
+        prs_reviewed: 0
+        pr_review_comments: 0
+        issue_comments: 0
+        commits: 0
+        total_contributions: 0
+        login: bdougie
+        issues_created: 0
+        commit_comments: 0
+      properties:
+        login:
+          description: Repo contributor login
+          example: bdougie
+          type: string
+        commits:
+          description: Number of commits for login in repo within the time range
+          example: 0
+          type: integer
+        prs_created:
+          description: Number of PRs created for login in repo within the time range
+          example: 0
+          type: integer
+        prs_reviewed:
+          description: Number of PRs reviewed for login in repo within the time range
+          example: 0
+          type: integer
+        issues_created:
+          description: Number of issues created for login in repo within the time
+            range
+          example: 0
+          type: integer
+        commit_comments:
+          description: Number of commit comments for login in repo within the time
+            range
+          example: 0
+          type: integer
+        issue_comments:
+          description: Number of issue comments for login in repo within the time
+            range
+          example: 0
+          type: integer
+        pr_review_comments:
+          description: Number of pr review comments for login in repo within the time
+            range
+          example: 0
+          type: integer
+        comments:
+          description: Number of total comments for login in repo within the time
+            range
+          example: 0
+          type: integer
+        total_contributions:
+          description: Number of total contributions for a login in repo within the
+            time range
+          example: 0
+          type: integer
+      required:
+      - comments
+      - commit_comments
+      - commits
+      - issue_comments
+      - issues_created
+      - login
+      - pr_review_comments
+      - prs_created
+      - prs_reviewed
+      - total_contributions
+      type: object
     RepoOrderFieldsEnum:
       enum:
       - issues
@@ -9349,7 +9539,6 @@ components:
         user_id: 237133
         created_at: 2000-01-23T04:56:07.000+00:00
         id: uuid-v4
-        login: bdougie
         username: sauceduser
       properties:
         id:
@@ -9371,10 +9560,6 @@ components:
         created_at:
           description: Timestamp representing top repo first index
           format: date-time
-          type: string
-        login:
-          description: User list collaborator's login
-          example: bdougie
           type: string
       required:
       - id
@@ -10579,6 +10764,95 @@ components:
           type: array
       required:
       - orgs
+      type: object
+    DbWorkspacePrStats:
+      properties:
+        opened:
+          default: 0
+          description: Number of PRs opened in a time range
+          example: 4
+          type: integer
+        merged:
+          default: 0
+          description: Number of PRs closed in a time range
+          example: 1
+          type: integer
+        velocity:
+          default: 0
+          description: Repository average open/close time for PRs
+          example: 2
+          type: integer
+      required:
+      - merged
+      - opened
+      - velocity
+      type: object
+    DbWorkspaceIssueStats:
+      properties:
+        opened:
+          default: 0
+          description: Number of issues opened in a time range
+          example: 4
+          type: integer
+        closed:
+          default: 0
+          description: Number of issues closed in a time range
+          example: 1
+          type: integer
+        velocity:
+          default: 0
+          description: Repository average open/close time for issues
+          example: 2
+          type: integer
+      required:
+      - closed
+      - opened
+      - velocity
+      type: object
+    DbWorkspaceRepoStats:
+      properties:
+        stars:
+          default: 0
+          description: Number of stars for workspace repos
+          example: 1234
+          type: integer
+        forks:
+          default: 0
+          description: Number of forks for repos
+          example: 987
+          type: integer
+        health:
+          default: 0
+          description: Repository average health
+          example: 9
+          type: integer
+      required:
+      - forks
+      - health
+      - stars
+      type: object
+    DbWorkspaceStats:
+      example:
+        pull_requests: ""
+        repos: ""
+        issues: ""
+      properties:
+        pull_requests:
+          allOf:
+          - $ref: '#/components/schemas/DbWorkspacePrStats'
+          description: Pull Request stats for workspace repos
+        issues:
+          allOf:
+          - $ref: '#/components/schemas/DbWorkspaceIssueStats'
+          description: Issue stats for workspace repos
+        repos:
+          allOf:
+          - $ref: '#/components/schemas/DbWorkspaceRepoStats'
+          description: Repo stats for workspace repos
+      required:
+      - issues
+      - pull_requests
+      - repos
       type: object
     DbWorkspaceRepo:
       example:

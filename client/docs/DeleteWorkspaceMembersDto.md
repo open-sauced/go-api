@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Members** | [**[]Array**](Array.md) | An array of member objects to delete from the workspace | 
+**Members** | [**[]interface{}**](Array.md) | An array of member objects to delete from the workspace | 
 
 ## Methods
 
 ### NewDeleteWorkspaceMembersDto
 
-`func NewDeleteWorkspaceMembersDto(members []Array, ) *DeleteWorkspaceMembersDto`
+`func NewDeleteWorkspaceMembersDto(members []interface{}, ) *DeleteWorkspaceMembersDto`
 
 NewDeleteWorkspaceMembersDto instantiates a new DeleteWorkspaceMembersDto object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetMembers
 
-`func (o *DeleteWorkspaceMembersDto) GetMembers() []Array`
+`func (o *DeleteWorkspaceMembersDto) GetMembers() []interface{}`
 
 GetMembers returns the Members field if non-nil, zero value otherwise.
 
 ### GetMembersOk
 
-`func (o *DeleteWorkspaceMembersDto) GetMembersOk() (*[]Array, bool)`
+`func (o *DeleteWorkspaceMembersDto) GetMembersOk() (*[]interface{}, bool)`
 
 GetMembersOk returns a tuple with the Members field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMembers
 
-`func (o *DeleteWorkspaceMembersDto) SetMembers(v []Array)`
+`func (o *DeleteWorkspaceMembersDto) SetMembers(v []interface{})`
 
 SetMembers sets Members field to given value.
 

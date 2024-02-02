@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | List Name | 
 **IsPublic** | **bool** | List Visibility | 
-**Contributors** | [**[]Array**](Array.md) | An array of contributor objects | 
+**Contributors** | [**[]interface{}**](Array.md) | An array of contributor objects | 
 
 ## Methods
 
 ### NewCreateUserListDto
 
-`func NewCreateUserListDto(name string, isPublic bool, contributors []Array, ) *CreateUserListDto`
+`func NewCreateUserListDto(name string, isPublic bool, contributors []interface{}, ) *CreateUserListDto`
 
 NewCreateUserListDto instantiates a new CreateUserListDto object
 This constructor will assign default values to properties that have it defined,
@@ -69,20 +69,20 @@ SetIsPublic sets IsPublic field to given value.
 
 ### GetContributors
 
-`func (o *CreateUserListDto) GetContributors() []Array`
+`func (o *CreateUserListDto) GetContributors() []interface{}`
 
 GetContributors returns the Contributors field if non-nil, zero value otherwise.
 
 ### GetContributorsOk
 
-`func (o *CreateUserListDto) GetContributorsOk() (*[]Array, bool)`
+`func (o *CreateUserListDto) GetContributorsOk() (*[]interface{}, bool)`
 
 GetContributorsOk returns a tuple with the Contributors field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContributors
 
-`func (o *CreateUserListDto) SetContributors(v []Array)`
+`func (o *CreateUserListDto) SetContributors(v []interface{})`
 
 SetContributors sets Contributors field to given value.
 

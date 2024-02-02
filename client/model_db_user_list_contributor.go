@@ -31,8 +31,6 @@ type DbUserListContributor struct {
 	Username *string `json:"username,omitempty"`
 	// Timestamp representing top repo first index
 	CreatedAt *time.Time `json:"created_at,omitempty"`
-	// User list collaborator's login
-	Login *string `json:"login,omitempty"`
 }
 
 // NewDbUserListContributor instantiates a new DbUserListContributor object
@@ -191,38 +189,6 @@ func (o *DbUserListContributor) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetLogin returns the Login field value if set, zero value otherwise.
-func (o *DbUserListContributor) GetLogin() string {
-	if o == nil || IsNil(o.Login) {
-		var ret string
-		return ret
-	}
-	return *o.Login
-}
-
-// GetLoginOk returns a tuple with the Login field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DbUserListContributor) GetLoginOk() (*string, bool) {
-	if o == nil || IsNil(o.Login) {
-		return nil, false
-	}
-	return o.Login, true
-}
-
-// HasLogin returns a boolean if a field has been set.
-func (o *DbUserListContributor) HasLogin() bool {
-	if o != nil && !IsNil(o.Login) {
-		return true
-	}
-
-	return false
-}
-
-// SetLogin gets a reference to the given string and assigns it to the Login field.
-func (o *DbUserListContributor) SetLogin(v string) {
-	o.Login = &v
-}
-
 func (o DbUserListContributor) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -241,9 +207,6 @@ func (o DbUserListContributor) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CreatedAt) {
 		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.Login) {
-		toSerialize["login"] = o.Login
 	}
 	return toSerialize, nil
 }

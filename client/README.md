@@ -189,6 +189,7 @@ Class | Method | HTTP request | Description
 *PullRequestsServiceAPI* | [**SearchAllPullRequestEvents**](docs/PullRequestsServiceAPI.md#searchallpullrequestevents) | **Get** /v2/prs/search | Searches pull request events using filters and paginates them
 *RepositoryServiceAPI* | [**FindAll**](docs/RepositoryServiceAPI.md#findall) | **Get** /v2/repos/list | Finds all repos and paginates them
 *RepositoryServiceAPI* | [**FindAllReposWithFilters**](docs/RepositoryServiceAPI.md#findallreposwithfilters) | **Get** /v2/repos/search | Finds all repos using filters and paginates them
+*RepositoryServiceAPI* | [**FindContributorsByOwnerAndRepo**](docs/RepositoryServiceAPI.md#findcontributorsbyownerandrepo) | **Get** /v2/repos/{owner}/{repo}/contributors | Finds a repo by :owner and :repo and gets the contributors
 *RepositoryServiceAPI* | [**FindOneById**](docs/RepositoryServiceAPI.md#findonebyid) | **Get** /v2/repos/{id} | Finds a repo by :id
 *RepositoryServiceAPI* | [**FindOneByOwnerAndRepo**](docs/RepositoryServiceAPI.md#findonebyownerandrepo) | **Get** /v2/repos/{owner}/{repo} | Finds a repo by :owner and :repo
 *RepositoryServiceGuardedAPI* | [**DownStarOneById**](docs/RepositoryServiceGuardedAPI.md#downstaronebyid) | **Delete** /v2/repos/{id}/star | Finds a repo by :id and removes existing star
@@ -305,6 +306,7 @@ Class | Method | HTTP request | Description
 *WorkspacesServiceAPI* | [**GetWorkspaceByIdForUser**](docs/WorkspacesServiceAPI.md#getworkspacebyidforuser) | **Get** /v2/workspaces/{id} | Gets a workspace for the authenticated user
 *WorkspacesServiceAPI* | [**GetWorkspaceForUser**](docs/WorkspacesServiceAPI.md#getworkspaceforuser) | **Get** /v2/workspaces | Gets workspaces for the authenticated user
 *WorkspacesServiceAPI* | [**UpdateWorkspaceForUser**](docs/WorkspacesServiceAPI.md#updateworkspaceforuser) | **Patch** /v2/workspaces/{id} | Updates a workspace for the authenticated user
+*WorkspacesStatsServiceAPI* | [**GetWorkspaceStatsForUser**](docs/WorkspacesStatsServiceAPI.md#getworkspacestatsforuser) | **Get** /v2/workspaces/{id}/stats | Gets workspace stats for the authenticated user
 
 
 ## Documentation For Models
@@ -339,6 +341,7 @@ Class | Method | HTTP request | Description
  - [DbPullRequestReviewGitHubEvents](docs/DbPullRequestReviewGitHubEvents.md)
  - [DbPushGitHubEventsHistogram](docs/DbPushGitHubEventsHistogram.md)
  - [DbRepo](docs/DbRepo.md)
+ - [DbRepoContributor](docs/DbRepoContributor.md)
  - [DbRepoToUserStargazers](docs/DbRepoToUserStargazers.md)
  - [DbRepoToUserStars](docs/DbRepoToUserStars.md)
  - [DbRepoToUserSubmissions](docs/DbRepoToUserSubmissions.md)
@@ -359,9 +362,13 @@ Class | Method | HTTP request | Description
  - [DbWatchGitHubEventsHistogram](docs/DbWatchGitHubEventsHistogram.md)
  - [DbWorkspace](docs/DbWorkspace.md)
  - [DbWorkspaceContributor](docs/DbWorkspaceContributor.md)
+ - [DbWorkspaceIssueStats](docs/DbWorkspaceIssueStats.md)
  - [DbWorkspaceMember](docs/DbWorkspaceMember.md)
  - [DbWorkspaceOrg](docs/DbWorkspaceOrg.md)
+ - [DbWorkspacePrStats](docs/DbWorkspacePrStats.md)
  - [DbWorkspaceRepo](docs/DbWorkspaceRepo.md)
+ - [DbWorkspaceRepoStats](docs/DbWorkspaceRepoStats.md)
+ - [DbWorkspaceStats](docs/DbWorkspaceStats.md)
  - [DeleteWorkspaceContributorsDto](docs/DeleteWorkspaceContributorsDto.md)
  - [DeleteWorkspaceMembersDto](docs/DeleteWorkspaceMembersDto.md)
  - [DeleteWorkspaceOrgsDto](docs/DeleteWorkspaceOrgsDto.md)
