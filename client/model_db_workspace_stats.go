@@ -15,112 +15,109 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateUserListDto type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateUserListDto{}
+// checks if the DbWorkspaceStats type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DbWorkspaceStats{}
 
-// CreateUserListDto struct for CreateUserListDto
-type CreateUserListDto struct {
-	// List Name
-	Name string `json:"name"`
-	// List Visibility
-	IsPublic bool `json:"is_public"`
-	// An array of contributor objects
-	Contributors []interface{} `json:"contributors"`
+// DbWorkspaceStats struct for DbWorkspaceStats
+type DbWorkspaceStats struct {
+	PullRequests DbWorkspacePrStats    `json:"pull_requests"`
+	Issues       DbWorkspaceIssueStats `json:"issues"`
+	Repos        DbWorkspaceRepoStats  `json:"repos"`
 }
 
-// NewCreateUserListDto instantiates a new CreateUserListDto object
+// NewDbWorkspaceStats instantiates a new DbWorkspaceStats object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateUserListDto(name string, isPublic bool, contributors []interface{}) *CreateUserListDto {
-	this := CreateUserListDto{}
-	this.Name = name
-	this.IsPublic = isPublic
-	this.Contributors = contributors
+func NewDbWorkspaceStats(pullRequests DbWorkspacePrStats, issues DbWorkspaceIssueStats, repos DbWorkspaceRepoStats) *DbWorkspaceStats {
+	this := DbWorkspaceStats{}
+	this.PullRequests = pullRequests
+	this.Issues = issues
+	this.Repos = repos
 	return &this
 }
 
-// NewCreateUserListDtoWithDefaults instantiates a new CreateUserListDto object
+// NewDbWorkspaceStatsWithDefaults instantiates a new DbWorkspaceStats object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateUserListDtoWithDefaults() *CreateUserListDto {
-	this := CreateUserListDto{}
+func NewDbWorkspaceStatsWithDefaults() *DbWorkspaceStats {
+	this := DbWorkspaceStats{}
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *CreateUserListDto) GetName() string {
+// GetPullRequests returns the PullRequests field value
+func (o *DbWorkspaceStats) GetPullRequests() DbWorkspacePrStats {
 	if o == nil {
-		var ret string
+		var ret DbWorkspacePrStats
 		return ret
 	}
 
-	return o.Name
+	return o.PullRequests
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetPullRequestsOk returns a tuple with the PullRequests field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetNameOk() (*string, bool) {
+func (o *DbWorkspaceStats) GetPullRequestsOk() (*DbWorkspacePrStats, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.PullRequests, true
 }
 
-// SetName sets field value
-func (o *CreateUserListDto) SetName(v string) {
-	o.Name = v
+// SetPullRequests sets field value
+func (o *DbWorkspaceStats) SetPullRequests(v DbWorkspacePrStats) {
+	o.PullRequests = v
 }
 
-// GetIsPublic returns the IsPublic field value
-func (o *CreateUserListDto) GetIsPublic() bool {
+// GetIssues returns the Issues field value
+func (o *DbWorkspaceStats) GetIssues() DbWorkspaceIssueStats {
 	if o == nil {
-		var ret bool
+		var ret DbWorkspaceIssueStats
 		return ret
 	}
 
-	return o.IsPublic
+	return o.Issues
 }
 
-// GetIsPublicOk returns a tuple with the IsPublic field value
+// GetIssuesOk returns a tuple with the Issues field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetIsPublicOk() (*bool, bool) {
+func (o *DbWorkspaceStats) GetIssuesOk() (*DbWorkspaceIssueStats, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.IsPublic, true
+	return &o.Issues, true
 }
 
-// SetIsPublic sets field value
-func (o *CreateUserListDto) SetIsPublic(v bool) {
-	o.IsPublic = v
+// SetIssues sets field value
+func (o *DbWorkspaceStats) SetIssues(v DbWorkspaceIssueStats) {
+	o.Issues = v
 }
 
-// GetContributors returns the Contributors field value
-func (o *CreateUserListDto) GetContributors() []interface{} {
+// GetRepos returns the Repos field value
+func (o *DbWorkspaceStats) GetRepos() DbWorkspaceRepoStats {
 	if o == nil {
-		var ret []interface{}
+		var ret DbWorkspaceRepoStats
 		return ret
 	}
 
-	return o.Contributors
+	return o.Repos
 }
 
-// GetContributorsOk returns a tuple with the Contributors field value
+// GetReposOk returns a tuple with the Repos field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetContributorsOk() ([]interface{}, bool) {
+func (o *DbWorkspaceStats) GetReposOk() (*DbWorkspaceRepoStats, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Contributors, true
+	return &o.Repos, true
 }
 
-// SetContributors sets field value
-func (o *CreateUserListDto) SetContributors(v []interface{}) {
-	o.Contributors = v
+// SetRepos sets field value
+func (o *DbWorkspaceStats) SetRepos(v DbWorkspaceRepoStats) {
+	o.Repos = v
 }
 
-func (o CreateUserListDto) MarshalJSON() ([]byte, error) {
+func (o DbWorkspaceStats) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -128,46 +125,46 @@ func (o CreateUserListDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateUserListDto) ToMap() (map[string]interface{}, error) {
+func (o DbWorkspaceStats) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["is_public"] = o.IsPublic
-	toSerialize["contributors"] = o.Contributors
+	toSerialize["pull_requests"] = o.PullRequests
+	toSerialize["issues"] = o.Issues
+	toSerialize["repos"] = o.Repos
 	return toSerialize, nil
 }
 
-type NullableCreateUserListDto struct {
-	value *CreateUserListDto
+type NullableDbWorkspaceStats struct {
+	value *DbWorkspaceStats
 	isSet bool
 }
 
-func (v NullableCreateUserListDto) Get() *CreateUserListDto {
+func (v NullableDbWorkspaceStats) Get() *DbWorkspaceStats {
 	return v.value
 }
 
-func (v *NullableCreateUserListDto) Set(val *CreateUserListDto) {
+func (v *NullableDbWorkspaceStats) Set(val *DbWorkspaceStats) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateUserListDto) IsSet() bool {
+func (v NullableDbWorkspaceStats) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateUserListDto) Unset() {
+func (v *NullableDbWorkspaceStats) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateUserListDto(val *CreateUserListDto) *NullableCreateUserListDto {
-	return &NullableCreateUserListDto{value: val, isSet: true}
+func NewNullableDbWorkspaceStats(val *DbWorkspaceStats) *NullableDbWorkspaceStats {
+	return &NullableDbWorkspaceStats{value: val, isSet: true}
 }
 
-func (v NullableCreateUserListDto) MarshalJSON() ([]byte, error) {
+func (v NullableDbWorkspaceStats) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateUserListDto) UnmarshalJSON(src []byte) error {
+func (v *NullableDbWorkspaceStats) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -103,7 +103,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    updateWorkspaceContributorsDto := *openapiclient.NewUpdateWorkspaceContributorsDto([]Array{"TODO"}) // UpdateWorkspaceContributorsDto | 
+    updateWorkspaceContributorsDto := *openapiclient.NewUpdateWorkspaceContributorsDto([]interface{}{"TODO"}) // UpdateWorkspaceContributorsDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -244,7 +244,7 @@ import (
 
 func main() {
     id := "id_example" // string | 
-    deleteWorkspaceContributorsDto := *openapiclient.NewDeleteWorkspaceContributorsDto([]Array{"TODO"}) // DeleteWorkspaceContributorsDto | 
+    deleteWorkspaceContributorsDto := *openapiclient.NewDeleteWorkspaceContributorsDto([]interface{}{"TODO"}) // DeleteWorkspaceContributorsDto | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

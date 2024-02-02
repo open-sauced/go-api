@@ -3,7 +3,7 @@
 # This script will generate the OpenAPI Go client code for the OpenSauced API
 # - Requires Docker to run
 
-API_VERSION="v2.5.0-beta.2"
+API_VERSION="beta"
 
 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli:v7.0.0 generate \
     --additional-properties packageName=client \

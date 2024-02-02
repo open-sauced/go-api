@@ -15,112 +15,118 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateUserListDto type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateUserListDto{}
+// checks if the DbWorkspacePrStats type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DbWorkspacePrStats{}
 
-// CreateUserListDto struct for CreateUserListDto
-type CreateUserListDto struct {
-	// List Name
-	Name string `json:"name"`
-	// List Visibility
-	IsPublic bool `json:"is_public"`
-	// An array of contributor objects
-	Contributors []interface{} `json:"contributors"`
+// DbWorkspacePrStats struct for DbWorkspacePrStats
+type DbWorkspacePrStats struct {
+	// Number of PRs opened in a time range
+	Opened int32 `json:"opened"`
+	// Number of PRs closed in a time range
+	Merged int32 `json:"merged"`
+	// Repository average open/close time for PRs
+	Velocity int32 `json:"velocity"`
 }
 
-// NewCreateUserListDto instantiates a new CreateUserListDto object
+// NewDbWorkspacePrStats instantiates a new DbWorkspacePrStats object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateUserListDto(name string, isPublic bool, contributors []interface{}) *CreateUserListDto {
-	this := CreateUserListDto{}
-	this.Name = name
-	this.IsPublic = isPublic
-	this.Contributors = contributors
+func NewDbWorkspacePrStats(opened int32, merged int32, velocity int32) *DbWorkspacePrStats {
+	this := DbWorkspacePrStats{}
+	this.Opened = opened
+	this.Merged = merged
+	this.Velocity = velocity
 	return &this
 }
 
-// NewCreateUserListDtoWithDefaults instantiates a new CreateUserListDto object
+// NewDbWorkspacePrStatsWithDefaults instantiates a new DbWorkspacePrStats object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateUserListDtoWithDefaults() *CreateUserListDto {
-	this := CreateUserListDto{}
+func NewDbWorkspacePrStatsWithDefaults() *DbWorkspacePrStats {
+	this := DbWorkspacePrStats{}
+	var opened int32 = 0
+	this.Opened = opened
+	var merged int32 = 0
+	this.Merged = merged
+	var velocity int32 = 0
+	this.Velocity = velocity
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *CreateUserListDto) GetName() string {
+// GetOpened returns the Opened field value
+func (o *DbWorkspacePrStats) GetOpened() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.Name
+	return o.Opened
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetOpenedOk returns a tuple with the Opened field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetNameOk() (*string, bool) {
+func (o *DbWorkspacePrStats) GetOpenedOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.Opened, true
 }
 
-// SetName sets field value
-func (o *CreateUserListDto) SetName(v string) {
-	o.Name = v
+// SetOpened sets field value
+func (o *DbWorkspacePrStats) SetOpened(v int32) {
+	o.Opened = v
 }
 
-// GetIsPublic returns the IsPublic field value
-func (o *CreateUserListDto) GetIsPublic() bool {
+// GetMerged returns the Merged field value
+func (o *DbWorkspacePrStats) GetMerged() int32 {
 	if o == nil {
-		var ret bool
+		var ret int32
 		return ret
 	}
 
-	return o.IsPublic
+	return o.Merged
 }
 
-// GetIsPublicOk returns a tuple with the IsPublic field value
+// GetMergedOk returns a tuple with the Merged field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetIsPublicOk() (*bool, bool) {
+func (o *DbWorkspacePrStats) GetMergedOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.IsPublic, true
+	return &o.Merged, true
 }
 
-// SetIsPublic sets field value
-func (o *CreateUserListDto) SetIsPublic(v bool) {
-	o.IsPublic = v
+// SetMerged sets field value
+func (o *DbWorkspacePrStats) SetMerged(v int32) {
+	o.Merged = v
 }
 
-// GetContributors returns the Contributors field value
-func (o *CreateUserListDto) GetContributors() []interface{} {
+// GetVelocity returns the Velocity field value
+func (o *DbWorkspacePrStats) GetVelocity() int32 {
 	if o == nil {
-		var ret []interface{}
+		var ret int32
 		return ret
 	}
 
-	return o.Contributors
+	return o.Velocity
 }
 
-// GetContributorsOk returns a tuple with the Contributors field value
+// GetVelocityOk returns a tuple with the Velocity field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetContributorsOk() ([]interface{}, bool) {
+func (o *DbWorkspacePrStats) GetVelocityOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Contributors, true
+	return &o.Velocity, true
 }
 
-// SetContributors sets field value
-func (o *CreateUserListDto) SetContributors(v []interface{}) {
-	o.Contributors = v
+// SetVelocity sets field value
+func (o *DbWorkspacePrStats) SetVelocity(v int32) {
+	o.Velocity = v
 }
 
-func (o CreateUserListDto) MarshalJSON() ([]byte, error) {
+func (o DbWorkspacePrStats) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -128,46 +134,46 @@ func (o CreateUserListDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateUserListDto) ToMap() (map[string]interface{}, error) {
+func (o DbWorkspacePrStats) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["is_public"] = o.IsPublic
-	toSerialize["contributors"] = o.Contributors
+	toSerialize["opened"] = o.Opened
+	toSerialize["merged"] = o.Merged
+	toSerialize["velocity"] = o.Velocity
 	return toSerialize, nil
 }
 
-type NullableCreateUserListDto struct {
-	value *CreateUserListDto
+type NullableDbWorkspacePrStats struct {
+	value *DbWorkspacePrStats
 	isSet bool
 }
 
-func (v NullableCreateUserListDto) Get() *CreateUserListDto {
+func (v NullableDbWorkspacePrStats) Get() *DbWorkspacePrStats {
 	return v.value
 }
 
-func (v *NullableCreateUserListDto) Set(val *CreateUserListDto) {
+func (v *NullableDbWorkspacePrStats) Set(val *DbWorkspacePrStats) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateUserListDto) IsSet() bool {
+func (v NullableDbWorkspacePrStats) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateUserListDto) Unset() {
+func (v *NullableDbWorkspacePrStats) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateUserListDto(val *CreateUserListDto) *NullableCreateUserListDto {
-	return &NullableCreateUserListDto{value: val, isSet: true}
+func NewNullableDbWorkspacePrStats(val *DbWorkspacePrStats) *NullableDbWorkspacePrStats {
+	return &NullableDbWorkspacePrStats{value: val, isSet: true}
 }
 
-func (v NullableCreateUserListDto) MarshalJSON() ([]byte, error) {
+func (v NullableDbWorkspacePrStats) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateUserListDto) UnmarshalJSON(src []byte) error {
+func (v *NullableDbWorkspacePrStats) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -20,8 +20,8 @@ var _ MappedNullable = &PageDto{}
 
 // PageDto struct for PageDto
 type PageDto struct {
-	Data []interface{}     `json:"data"`
-	Meta PageMetaDto `json:"meta"`
+	Data []interface{} `json:"data"`
+	Meta PageMetaDto   `json:"meta"`
 }
 
 // NewPageDto instantiates a new PageDto object

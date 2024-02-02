@@ -15,112 +15,118 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateUserListDto type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateUserListDto{}
+// checks if the DbWorkspaceRepoStats type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DbWorkspaceRepoStats{}
 
-// CreateUserListDto struct for CreateUserListDto
-type CreateUserListDto struct {
-	// List Name
-	Name string `json:"name"`
-	// List Visibility
-	IsPublic bool `json:"is_public"`
-	// An array of contributor objects
-	Contributors []interface{} `json:"contributors"`
+// DbWorkspaceRepoStats struct for DbWorkspaceRepoStats
+type DbWorkspaceRepoStats struct {
+	// Number of stars for workspace repos
+	Stars int32 `json:"stars"`
+	// Number of forks for repos
+	Forks int32 `json:"forks"`
+	// Repository average health
+	Health int32 `json:"health"`
 }
 
-// NewCreateUserListDto instantiates a new CreateUserListDto object
+// NewDbWorkspaceRepoStats instantiates a new DbWorkspaceRepoStats object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateUserListDto(name string, isPublic bool, contributors []interface{}) *CreateUserListDto {
-	this := CreateUserListDto{}
-	this.Name = name
-	this.IsPublic = isPublic
-	this.Contributors = contributors
+func NewDbWorkspaceRepoStats(stars int32, forks int32, health int32) *DbWorkspaceRepoStats {
+	this := DbWorkspaceRepoStats{}
+	this.Stars = stars
+	this.Forks = forks
+	this.Health = health
 	return &this
 }
 
-// NewCreateUserListDtoWithDefaults instantiates a new CreateUserListDto object
+// NewDbWorkspaceRepoStatsWithDefaults instantiates a new DbWorkspaceRepoStats object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateUserListDtoWithDefaults() *CreateUserListDto {
-	this := CreateUserListDto{}
+func NewDbWorkspaceRepoStatsWithDefaults() *DbWorkspaceRepoStats {
+	this := DbWorkspaceRepoStats{}
+	var stars int32 = 0
+	this.Stars = stars
+	var forks int32 = 0
+	this.Forks = forks
+	var health int32 = 0
+	this.Health = health
 	return &this
 }
 
-// GetName returns the Name field value
-func (o *CreateUserListDto) GetName() string {
+// GetStars returns the Stars field value
+func (o *DbWorkspaceRepoStats) GetStars() int32 {
 	if o == nil {
-		var ret string
+		var ret int32
 		return ret
 	}
 
-	return o.Name
+	return o.Stars
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetStarsOk returns a tuple with the Stars field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetNameOk() (*string, bool) {
+func (o *DbWorkspaceRepoStats) GetStarsOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Name, true
+	return &o.Stars, true
 }
 
-// SetName sets field value
-func (o *CreateUserListDto) SetName(v string) {
-	o.Name = v
+// SetStars sets field value
+func (o *DbWorkspaceRepoStats) SetStars(v int32) {
+	o.Stars = v
 }
 
-// GetIsPublic returns the IsPublic field value
-func (o *CreateUserListDto) GetIsPublic() bool {
+// GetForks returns the Forks field value
+func (o *DbWorkspaceRepoStats) GetForks() int32 {
 	if o == nil {
-		var ret bool
+		var ret int32
 		return ret
 	}
 
-	return o.IsPublic
+	return o.Forks
 }
 
-// GetIsPublicOk returns a tuple with the IsPublic field value
+// GetForksOk returns a tuple with the Forks field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetIsPublicOk() (*bool, bool) {
+func (o *DbWorkspaceRepoStats) GetForksOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.IsPublic, true
+	return &o.Forks, true
 }
 
-// SetIsPublic sets field value
-func (o *CreateUserListDto) SetIsPublic(v bool) {
-	o.IsPublic = v
+// SetForks sets field value
+func (o *DbWorkspaceRepoStats) SetForks(v int32) {
+	o.Forks = v
 }
 
-// GetContributors returns the Contributors field value
-func (o *CreateUserListDto) GetContributors() []interface{} {
+// GetHealth returns the Health field value
+func (o *DbWorkspaceRepoStats) GetHealth() int32 {
 	if o == nil {
-		var ret []interface{}
+		var ret int32
 		return ret
 	}
 
-	return o.Contributors
+	return o.Health
 }
 
-// GetContributorsOk returns a tuple with the Contributors field value
+// GetHealthOk returns a tuple with the Health field value
 // and a boolean to check if the value has been set.
-func (o *CreateUserListDto) GetContributorsOk() ([]interface{}, bool) {
+func (o *DbWorkspaceRepoStats) GetHealthOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Contributors, true
+	return &o.Health, true
 }
 
-// SetContributors sets field value
-func (o *CreateUserListDto) SetContributors(v []interface{}) {
-	o.Contributors = v
+// SetHealth sets field value
+func (o *DbWorkspaceRepoStats) SetHealth(v int32) {
+	o.Health = v
 }
 
-func (o CreateUserListDto) MarshalJSON() ([]byte, error) {
+func (o DbWorkspaceRepoStats) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -128,46 +134,46 @@ func (o CreateUserListDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateUserListDto) ToMap() (map[string]interface{}, error) {
+func (o DbWorkspaceRepoStats) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["is_public"] = o.IsPublic
-	toSerialize["contributors"] = o.Contributors
+	toSerialize["stars"] = o.Stars
+	toSerialize["forks"] = o.Forks
+	toSerialize["health"] = o.Health
 	return toSerialize, nil
 }
 
-type NullableCreateUserListDto struct {
-	value *CreateUserListDto
+type NullableDbWorkspaceRepoStats struct {
+	value *DbWorkspaceRepoStats
 	isSet bool
 }
 
-func (v NullableCreateUserListDto) Get() *CreateUserListDto {
+func (v NullableDbWorkspaceRepoStats) Get() *DbWorkspaceRepoStats {
 	return v.value
 }
 
-func (v *NullableCreateUserListDto) Set(val *CreateUserListDto) {
+func (v *NullableDbWorkspaceRepoStats) Set(val *DbWorkspaceRepoStats) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateUserListDto) IsSet() bool {
+func (v NullableDbWorkspaceRepoStats) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateUserListDto) Unset() {
+func (v *NullableDbWorkspaceRepoStats) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateUserListDto(val *CreateUserListDto) *NullableCreateUserListDto {
-	return &NullableCreateUserListDto{value: val, isSet: true}
+func NewNullableDbWorkspaceRepoStats(val *DbWorkspaceRepoStats) *NullableDbWorkspaceRepoStats {
+	return &NullableDbWorkspaceRepoStats{value: val, isSet: true}
 }
 
-func (v NullableCreateUserListDto) MarshalJSON() ([]byte, error) {
+func (v NullableDbWorkspaceRepoStats) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateUserListDto) UnmarshalJSON(src []byte) error {
+func (v *NullableDbWorkspaceRepoStats) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

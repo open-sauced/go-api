@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **ListId** | **string** | List identifier | 
 **Username** | Pointer to **string** | List user source username | [optional] 
 **CreatedAt** | Pointer to **time.Time** | Timestamp representing top repo first index | [optional] 
-**Login** | Pointer to **string** | User list collaborator&#39;s login | [optional] 
 
 ## Methods
 
@@ -139,31 +138,6 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *DbUserListContributor) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
-
-### GetLogin
-
-`func (o *DbUserListContributor) GetLogin() string`
-
-GetLogin returns the Login field if non-nil, zero value otherwise.
-
-### GetLoginOk
-
-`func (o *DbUserListContributor) GetLoginOk() (*string, bool)`
-
-GetLoginOk returns a tuple with the Login field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLogin
-
-`func (o *DbUserListContributor) SetLogin(v string)`
-
-SetLogin sets Login field to given value.
-
-### HasLogin
-
-`func (o *DbUserListContributor) HasLogin() bool`
-
-HasLogin returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

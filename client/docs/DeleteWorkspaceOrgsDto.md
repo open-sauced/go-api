@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Orgs** | [**[]Array**](Array.md) | An array of org objects to delete from the workspace | 
+**Orgs** | [**[]interface{}**](Array.md) | An array of org objects to delete from the workspace | 
 
 ## Methods
 
 ### NewDeleteWorkspaceOrgsDto
 
-`func NewDeleteWorkspaceOrgsDto(orgs []Array, ) *DeleteWorkspaceOrgsDto`
+`func NewDeleteWorkspaceOrgsDto(orgs []interface{}, ) *DeleteWorkspaceOrgsDto`
 
 NewDeleteWorkspaceOrgsDto instantiates a new DeleteWorkspaceOrgsDto object
 This constructor will assign default values to properties that have it defined,
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOrgs
 
-`func (o *DeleteWorkspaceOrgsDto) GetOrgs() []Array`
+`func (o *DeleteWorkspaceOrgsDto) GetOrgs() []interface{}`
 
 GetOrgs returns the Orgs field if non-nil, zero value otherwise.
 
 ### GetOrgsOk
 
-`func (o *DeleteWorkspaceOrgsDto) GetOrgsOk() (*[]Array, bool)`
+`func (o *DeleteWorkspaceOrgsDto) GetOrgsOk() (*[]interface{}, bool)`
 
 GetOrgsOk returns a tuple with the Orgs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrgs
 
-`func (o *DeleteWorkspaceOrgsDto) SetOrgs(v []Array)`
+`func (o *DeleteWorkspaceOrgsDto) SetOrgs(v []interface{})`
 
 SetOrgs sets Orgs field to given value.
 
