@@ -382,6 +382,7 @@ Class | Method | HTTP request | Description
  - [FindAllUserCollaborations200Response](docs/FindAllUserCollaborations200Response.md)
  - [FindAllUserCreatedEndorsements200Response](docs/FindAllUserCreatedEndorsements200Response.md)
  - [FindContributorPullRequestGitHubEvents200Response](docs/FindContributorPullRequestGitHubEvents200Response.md)
+ - [FindContributorsByOwnerAndRepo200Response](docs/FindContributorsByOwnerAndRepo200Response.md)
  - [FollowManyUsersDto](docs/FollowManyUsersDto.md)
  - [GenerateCodeExplanationDto](docs/GenerateCodeExplanationDto.md)
  - [GenerateCodeRefactorSuggestionDto](docs/GenerateCodeRefactorSuggestionDto.md)

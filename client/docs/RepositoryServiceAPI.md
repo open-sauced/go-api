@@ -170,7 +170,7 @@ No authorization required
 
 ## FindContributorsByOwnerAndRepo
 
-> DbRepoContributor FindContributorsByOwnerAndRepo(ctx, owner, repo).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
+> FindContributorsByOwnerAndRepo200Response FindContributorsByOwnerAndRepo(ctx, owner, repo).Page(page).Limit(limit).OrderDirection(orderDirection).Range_(range_).PrevDaysStartDate(prevDaysStartDate).Execute()
 
 Finds a repo by :owner and :repo and gets the contributors
 
@@ -202,7 +202,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `RepositoryServiceAPI.FindContributorsByOwnerAndRepo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `FindContributorsByOwnerAndRepo`: DbRepoContributor
+    // response from `FindContributorsByOwnerAndRepo`: FindContributorsByOwnerAndRepo200Response
     fmt.Fprintf(os.Stdout, "Response from `RepositoryServiceAPI.FindContributorsByOwnerAndRepo`: %v\n", resp)
 }
 ```
@@ -233,7 +233,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DbRepoContributor**](DbRepoContributor.md)
+[**FindContributorsByOwnerAndRepo200Response**](FindContributorsByOwnerAndRepo200Response.md)
 
 ### Authorization
 
