@@ -406,7 +406,7 @@ func (r ApiFindContributorsByOwnerAndRepoRequest) PrevDaysStartDate(prevDaysStar
 	return r
 }
 
-func (r ApiFindContributorsByOwnerAndRepoRequest) Execute() (*DbRepoContributor, *http.Response, error) {
+func (r ApiFindContributorsByOwnerAndRepoRequest) Execute() (*FindContributorsByOwnerAndRepo200Response, *http.Response, error) {
 	return r.ApiService.FindContributorsByOwnerAndRepoExecute(r)
 }
 
@@ -429,13 +429,13 @@ func (a *RepositoryServiceAPIService) FindContributorsByOwnerAndRepo(ctx context
 
 // Execute executes the request
 //
-//	@return DbRepoContributor
-func (a *RepositoryServiceAPIService) FindContributorsByOwnerAndRepoExecute(r ApiFindContributorsByOwnerAndRepoRequest) (*DbRepoContributor, *http.Response, error) {
+//	@return FindContributorsByOwnerAndRepo200Response
+func (a *RepositoryServiceAPIService) FindContributorsByOwnerAndRepoExecute(r ApiFindContributorsByOwnerAndRepoRequest) (*FindContributorsByOwnerAndRepo200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DbRepoContributor
+		localVarReturnValue *FindContributorsByOwnerAndRepo200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RepositoryServiceAPIService.FindContributorsByOwnerAndRepo")

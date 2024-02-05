@@ -1983,8 +1983,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DbRepoContributor'
-          description: ""
+                $ref: '#/components/schemas/findContributorsByOwnerAndRepo_200_response'
+          description: Successfully received model list
         "404":
           description: Repository not found
       summary: Finds a repo by :owner and :repo and gets the contributors
@@ -9369,17 +9369,6 @@ components:
       - repo_name
       type: object
     DbRepoContributor:
-      example:
-        comments: 0
-        prs_created: 0
-        prs_reviewed: 0
-        pr_review_comments: 0
-        issue_comments: 0
-        commits: 0
-        total_contributions: 0
-        login: bdougie
-        issues_created: 0
-        commit_comments: 0
       properties:
         login:
           description: Repo contributor login
@@ -11144,6 +11133,14 @@ components:
           data:
             items:
               $ref: '#/components/schemas/DbPullRequestReviewGitHubEvents'
+            type: array
+    findContributorsByOwnerAndRepo_200_response:
+      allOf:
+      - $ref: '#/components/schemas/PageDto'
+      - properties:
+          data:
+            items:
+              $ref: '#/components/schemas/DbRepoContributor'
             type: array
     getContributors_200_response:
       allOf:

@@ -109,6 +109,7 @@ docs/FindAllTopReposByUsername200Response.md
 docs/FindAllUserCollaborations200Response.md
 docs/FindAllUserCreatedEndorsements200Response.md
 docs/FindContributorPullRequestGitHubEvents200Response.md
+docs/FindContributorsByOwnerAndRepo200Response.md
 docs/FollowManyUsersDto.md
 docs/GenerateCodeExplanationDto.md
 docs/GenerateCodeRefactorSuggestionDto.md
@@ -249,6 +250,7 @@ model_find_all_top_repos_by_username_200_response.go
 model_find_all_user_collaborations_200_response.go
 model_find_all_user_created_endorsements_200_response.go
 model_find_contributor_pull_request_git_hub_events_200_response.go
+model_find_contributors_by_owner_and_repo_200_response.go
 model_follow_many_users_dto.go
 model_generate_code_explanation_dto.go
 model_generate_code_refactor_suggestion_dto.go
@@ -294,5 +296,4 @@ model_user_onboarding_dto.go
 model_voted_repo_dto.go
 model_workspace_member_role_enum.go
 response.go
-test/api_workspaces_stats_service_test.go
 utils.go
